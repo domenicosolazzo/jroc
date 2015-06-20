@@ -146,16 +146,19 @@ It will return all the data from the obt tagger, entities and tags for a given t
       
 ## Endpoint: /demo/analyze
 **Method**: GET
+
 Test endpoint to demostrate the **analyze** endpoint
 
 
 ## Endpoint: /demo/tags
 **Method**: GET
+
 Test endpoint to demostrate the **tags** endpoint
 
 
 ## Endpoint: /demo/entities
 **Method**: GET
+
 Test endpoint to demostrate the **entities** endpoint
 
 
