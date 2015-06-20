@@ -30,7 +30,7 @@ def saveContent(json_data):
     except:
         raise
 
-def analyze_text(filename):
+def analyze_text(filename, delete_files=True):
     output_filename = "%s_OUTPUT" % (filename,)
 
     os.system('The-Oslo-Bergen-Tagger/tag-bm.sh %s > %s' % (filename, output_filename))
@@ -58,9 +58,9 @@ def analyze_text(filename):
            new_obj["is_subst"] = True if len([tag for tag in tagging if tag == 'subst']) > 0 else False
            new_obj["is_prop"] = True if len([tag for tag in tagging if tag == 'prop']) > 0 else False
            new_obj["is_number"] = isNumber(tagging)
-
-    deleteFile(filename)
-    deleteFile(output_filename)
+    if delete_files:
+        deleteFile(filename)
+        deleteFile(output_filename)
     return result
 
 def deleteFile(filename):
@@ -70,7 +70,7 @@ def deleteFile(filename):
     except:
         raise
 
-def fetchEntities(data):
+def findEntities(data):
     entities = []
     last_entity = ""
     for entity in data:
@@ -84,6 +84,11 @@ def fetchEntities(data):
             last_entity = ""
     entities = list(set(entities))
     return entities
+
+def findTags(obt_data):
+    unique_tags = set([tag.get("word") for tag in obt_data if tag.get("is_prop") == True and tag.get("is_subst") == True])
+    return list(unique_tags)
+
 def isNumber(tagging):
     is_quantity =  True if len([tag for tag in tagging if tag == 'kvant']) > 0 else False
     is_ordinal = True if len([tag for tag in tagging if tag == '<ordenstall>']) > 0 else False
@@ -108,18 +113,20 @@ def analyze():
         json_result = json.loads(request.data)
         filename = saveContent(json_result)
         obt_result = analyze_text(filename)
-        obt_json_result = json.dumps(obt_result)
+        tags = findTags(obt_result)
+        entities = findEntities(obt_result)
+
+        data_result = {
+            "obt": obt_result,
+            "tags": tags,
+            "entities": entities
+        }
+
+        obt_json_result = json.dumps(data_result)
         return Response(obt_json_result, mimetype="application/json")
     except Exception as e:
         ex_value = traceback.format_exception(*sys.exc_info())
         return jsonify(errors = ex_value)
-
-
-@app.route('/demo')
-def demo():
-    obt_result = analyze_text("TEXTFILE")
-    obt_json_result = json.dumps(obt_result)
-    return Response(obt_json_result, mimetype="application/json")
 
 @app.route('/tags', methods=["POST"])
 def tags():
@@ -127,8 +134,68 @@ def tags():
       json_result = json.loads(request.data)
       filename = saveContent(json_result)
       obt_result = analyze_text(filename)
-      unique_tags = set([tag.get("word") for tag in obt_result if tag.get("is_prop") == True and tag.get("is_subst") == True])
-      data_result = {"tags": list(unique_tags), "entities":fetchEntities(obt_result)}
+
+      tags = findTags(obt_result)
+      data_result = {"tags": tags}
+
+      obt_json_result = json.dumps(data_result)
+      return Response(obt_json_result, mimetype="application/json")
+    except Exception as e:
+        ex_value = traceback.format_exception(*sys.exc_info())
+        return jsonify(errors = ex_value)
+
+@app.route('/entities', methods=["POST"])
+def entities():
+    try:
+      json_result = json.loads(request.data)
+      filename = saveContent(json_result)
+      obt_result = analyze_text(filename)
+
+      entities = findEntities(obt_result)
+      data_result = {"entities": entities}
+
+      obt_json_result = json.dumps(data_result)
+      return Response(obt_json_result, mimetype="application/json")
+    except Exception as e:
+        ex_value = traceback.format_exception(*sys.exc_info())
+        return jsonify(errors = ex_value)
+
+@app.route('/demo/analyze')
+def demo_analyze():
+    obt_result = analyze_text("TEXTFILE", delete_files=False)
+    tags = findTags(obt_result)
+    entities = findEntities(obt_result)
+
+    data_result = {
+        "obt": obt_result,
+        "tags": tags,
+        "entities": entities
+    }
+    obt_json_result = json.dumps(data_result)
+    return Response(obt_json_result, mimetype="application/json")
+
+@app.route('/demo/tags')
+def demo_tags():
+    try:
+      obt_result = analyze_text("TEXTFILE", delete_files=False)
+
+      tags = findTags(obt_result)
+      data_result = {"tags": tags}
+
+      obt_json_result = json.dumps(data_result)
+      return Response(obt_json_result, mimetype="application/json")
+    except Exception as e:
+        ex_value = traceback.format_exception(*sys.exc_info())
+        return jsonify(errors = ex_value)
+
+@app.route('/demo/entities')
+def demo_entities():
+    try:
+      obt_result = analyze_text("TEXTFILE", delete_files=False)
+
+      entities = findEntities(obt_result)
+      data_result = {"entities": entities}
+
       obt_json_result = json.dumps(data_result)
       return Response(obt_json_result, mimetype="application/json")
     except Exception as e:
