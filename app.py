@@ -160,6 +160,16 @@ def entities():
         ex_value = traceback.format_exception(*sys.exc_info())
         return jsonify(errors = ex_value)
 
+@app.route('/demo')
+def demo():
+    result = {
+        "text": "/demo/text",
+        "analyze": "/demo/analyze",
+        "entities": "/demo/entities",
+        "tags": "/demo/tags"
+    }
+    return jsonify(result)
+
 @app.route('/demo/analyze')
 def demo_analyze():
     obt_result = analyze_text("TEXTFILE", delete_files=False)
@@ -198,6 +208,17 @@ def demo_entities():
 
       obt_json_result = json.dumps(data_result)
       return Response(obt_json_result, mimetype="application/json")
+    except Exception as e:
+        ex_value = traceback.format_exception(*sys.exc_info())
+        return jsonify(errors = ex_value)
+
+@app.route('/demo/text')
+def demo_text():
+    try:
+      file_object = open('TEXTFILE', 'r')
+      text = file_object.read().decode('utf8')
+      file_object.close()
+      return Response(text)
     except Exception as e:
         ex_value = traceback.format_exception(*sys.exc_info())
         return jsonify(errors = ex_value)
