@@ -167,6 +167,11 @@ Test endpoint to demostrate the **entities** endpoint
 Test endpoint to demostrate the **text** endpoint
 
 #### Example
-      Ivar Aasen ble født på gården Åsen i Hovdebygda på Sunnmøre som sønn av småbrukeren Ivar Jonsson. Han ble døpt Iver      Andreas, formen «Ivar» kom i bruk omkring 1845. Gården han vokste opp på var isolert, så han hadde ingen kamerater. Dette førte til at han leste mye i de få bøkene familien hadde, deriblant Bibelen. Faren døde i 1826. Det var åtte søsken, og de mistet begge foreldrene tidlig. I foreldrenes fravær ble broren det nye familieoverhodet; han satte Ivar til gårdsarbeid og lot ham ikke utvikle de intellektuelle evnene sine, men Ivar utmerket seg likevel ved konfirmasjonen, og presten skrev rosende om ham i kirkeboken. Gården Ekset med Sivert og Rasmus Aarflots boksamling var bare 3 kilometer frå Åsen-garden. Aarflot hadde selv gjort observasjoner om slektskap mellom sunnmørsdialekten og gammelnorsk, og dette kan ha inspirert den unge Aasen. Aasen lærte seg norrønt, engelsk, fransk og latin.
+      Ivar Aasen ble født på gården Åsen i Hovdebygda på Sunnmøre som sønn av småbrukeren Ivar Jonsson. 
+      Han ble døpt Iver Andreas, formen «Ivar» kom i bruk omkring 1845. Gården han vokste opp på var isolert, så han hadde ingen kamerater. 
+      Dette førte til at han leste mye i de få bøkene familien hadde, deriblant Bibelen. Faren døde i 1826. Det var åtte søsken, og de mistet begge foreldrene tidlig. 
+      I foreldrenes fravær ble broren det nye familieoverhodet; han satte Ivar til gårdsarbeid og lot ham ikke utvikle de intellektuelle evnene sine, men Ivar utmerket seg likevel ved konfirmasjonen, og presten skrev rosende om ham i kirkeboken.
+      Gården Ekset med Sivert og Rasmus Aarflots boksamling var bare 3 kilometer frå Åsen-garden. Aarflot hadde selv gjort observasjoner om slektskap mellom sunnmørsdialekten og gammelnorsk, og dette kan ha inspirert den unge Aasen. 
+      Aasen lærte seg norrønt, engelsk, fransk og latin.
 
 [Read more](https://github.com/domenicosolazzo/obt-api/blob/master/TEXTFILE)
