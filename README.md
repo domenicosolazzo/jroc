@@ -29,16 +29,136 @@ An api for using the Oslo-Bergen tagger
 # Endpoints
 These are the endpoints for the API
 
-## Endpoint: /analyze
-
 ## Endpoint: /entities
+**Method**: POST
+It will return all the entities for a given text
+
+#### Example 
+      entities :[
+          "USA" ,
+          "Thoresen" ,
+          "Ivar Aasen" ,
+          "Herøy" ,
+          "Iver Andreas" ,
+          "Thoresen" ,
+          "Ivar Jonsson" ,
+          "Hans Conrad Thoresen" ,
+          "Rasmus Aarflots" ,
+          "Ludvig Daae" ,
+          "Norway" ,
+          "Aasen" ,
+          "Sweden" ,
+          "Stephen Walton" 
+      ]
 
 ## Endpoint: /tags
+It will return all the tags for a given text
+
+#### Example 
+      tags :[
+          "Andreas" ,
+          "USA" ,
+          "Thoresen" ,
+          "Denmark" ,
+          "Daae" ,
+          "Skodjestrømmen" ,
+          ...
+          "Aasen" ,
+          "Sweden" 
+      ]
+
+## Endpoint: /analyze
+**Method**: POST
+It will return all the data from the obt tagger, entities and tags for a given text
+
+#### Example
+
+      entities: [
+          "USA" ,
+          "Thoresen" ,
+          "Ivar Aasen" ,
+          "Herøy" ,
+          "Iver Andreas" ,
+          "Thoresen" ,
+          "Ivar Jonsson" ,
+          "Hans Conrad Thoresen" ,
+          "Rasmus Aarflots" ,
+          "Ludvig Daae" ,
+          "Norway" ,
+          "Aasen" ,
+          "Sweden" ,
+          "Stephen Walton"
+      ],
+      obt: [
+          {               
+               word: "Ivar",
+               is_verb: false,
+               is_number: {
+                    ordinal: false,
+                    is_number: false,
+                    roman: false,
+                    quantity: false
+               },
+               tagging: [
+                    "Ivar",
+                    "subst",
+                    "prop",
+                    "mask"
+               ],
+               options: "Ivar subst prop mask",
+               is_subst: true,
+               is_prop: true
+           },
+           {
+                word: "Aasen",
+                is_verb: false,
+                is_number: {
+                    ordinal: false,
+                    is_number: false,
+                    roman: false,
+                    quantity: false
+                },
+                tagging: [
+                    "Aasen",
+                    "subst",
+                    "prop",
+                    "<*sen>",
+                    "<*>"
+                ],
+                options: "Aasen subst prop <*sen> <*>",
+                is_subst: true,
+                is_prop: true
+          },
+      ...
+      ...
+      ],
+      tags: [
+          "Andreas" ,
+          "USA" ,
+          "Thoresen" ,
+          "Denmark" ,
+          "Daae" ,
+          "Skodjestrømmen" ,
+          ...
+          "Aasen" ,
+          "Sweden" 
+      ]
+      
+## Endpoint: /demo/analyze
+**Method**: GET
+Test endpoint to demostrate the **analyze** endpoint
 
 
-# DEMO URL
-- [Demo URL](http://localhost:5000/demo)
-- [Demo - Analyze URL](http://localhost:5000/demo/analyze)
-- [Demo - Tags URL](http://localhost:5000/demo/tags)
-- [Demo - Entities URL](http://localhost:5000/demo/entities)
-- [Demo - Text URL](http://localhost:5000/demo/text)
+## Endpoint: /demo/tags
+**Method**: GET
+Test endpoint to demostrate the **tags** endpoint
+
+
+## Endpoint: /demo/entities
+**Method**: GET
+Test endpoint to demostrate the **entities** endpoint
+
+
+## Endpoint: /demo/text
+**Method**: GET
+Test endpoint to demostrate the **text** endpoint
