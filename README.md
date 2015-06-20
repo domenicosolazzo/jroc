@@ -188,3 +188,10 @@ Test endpoint to demostrate the **text** endpoint
       Aasen lærte seg norrønt, engelsk, fransk og latin.
 
 [Read more](https://github.com/domenicosolazzo/obt-api/blob/master/TEXTFILE)
+
+# Dependencies
+- [The Oslo-Bergen tagger](https://github.com/noklesta/The-Oslo-Bergen-Tagger): morphosyntactic tagger for Norwegian bokmål and nynorsk
+- [OBT-Stat](https://github.com/andrely/OBT-Stat): Statistical disambiguator for the Oslo-Bergen Part of Speech tagger
+- [VISL CG-3](http://beta.visl.sdu.dk/constraint_grammar.html): CG compiler. 3rd version of the CG formalism variant
+- [Multitagger](http://www.tekstlab.uio.no/mtag/osx64/mtag-osx64): Multitagger with lexicon for Norwegian Bokmål and Nynorsk.
+- HusPos
