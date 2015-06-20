@@ -1,15 +1,28 @@
-from flask import Flask
+from flask import Flask, Response, request
 import os
 import json
 import re
-from flask import Response
+
 
 regex = re.compile("<word>(?P<w>(.*?))</word>")
 regex2 = re.compile("\"<(?P<w>[\w+]*)>\"")
+
+# Flask app
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
+def index():
+    return Response(json.dump({"welcome":"Welcome to OBT Api"}), mimetype="application/json")
+
+@app.route('/analyze', methods=["POST"])
+def analyze():
+    json_result = request.get_json()
+    print(json_result)
+    response = Response(json_result, mimetype="application/json")
+    return response
+
+@app.route('/last')
+def last():
     os.system('The-Oslo-Bergen-Tagger/tag-bm.sh TEXTFILE > OUTPUT')
     file_object = open('OUTPUT', 'r')
     text = file_object.read()
