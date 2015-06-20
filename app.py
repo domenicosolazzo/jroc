@@ -115,9 +115,9 @@ def analyze():
         return jsonify(errors = ex_value)
 
 
-@app.route('/last')
-def last():
-    result = analyze_text("TEXTFILE")
+@app.route('/demo')
+def demo():
+    obt_result = analyze_text("TEXTFILE")
     obt_json_result = json.dumps(obt_result)
     return Response(obt_json_result, mimetype="application/json")
 
