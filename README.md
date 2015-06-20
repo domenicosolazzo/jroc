@@ -27,12 +27,15 @@ An api for using the Oslo-Bergen tagger
   
 # Usage
 How to use the **analyze** endpoint
+
       curl -H "Content-Type: application/json" -X POST -d '{"data":"text_here"}' http://localhost:5000/analyze
 
 How to use the **entities** endpoint
+
       curl -H "Content-Type: application/json" -X POST -d '{"data":"text_here"}' http://localhost:5000/entities
 
 How to use the **tags** endpoint
+
       curl -H "Content-Type: application/json" -X POST -d '{"data":"text_here"}' http://localhost:5000/tags
 
 
