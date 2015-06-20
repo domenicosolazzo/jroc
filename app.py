@@ -68,6 +68,7 @@ def deleteFile(filename):
     except:
         raise
 
+
 @app.route('/')
 def index():
     return jsonify({"welcome":"Welcome to OBT Api"})
@@ -91,6 +92,19 @@ def last():
     obt_json_result = json.dumps(obt_result)
     return Response(obt_json_result, mimetype="application/json")
 
+@app.route('/tags', methods=["POST"])
+def tags():
+    try:
+      json_result = json.loads(request.data)
+      filename = saveContent(json_result)
+      obt_result = analyze_text(filename)
+      unique_tags = set([tag.get("word") for tag in obt_result if tag.get("is_prop") == True and tag.get("is_subst") == True])
+      tags = list(unique_tags)
+      obt_json_result = json.dumps(tags)
+      return Response(obt_json_result, mimetype="application/json")
+    except Exception as e:
+        ex_value = traceback.format_exception(*sys.exc_info())
+        return jsonify(errors = ex_value)
 
 if __name__ == '__main__':
    app.debug = True
