@@ -10,6 +10,7 @@ import time
 regex = re.compile("<word>(?P<w>(.*?))</word>")
 regex2 = re.compile("\"<(?P<w>[\w+]*)>\"")
 
+
 # Flask app
 app = Flask(__name__)
 
@@ -43,8 +44,8 @@ def analyze_text(filename):
            continue
         is_match = regex.match(word)
         if regex.match(word):
-	   new_obj = {"word": is_match.groups(0)[0]}
-           result.append(new_obj)
+            new_obj = {"word": is_match.groups(0)[0]}
+            result.append(new_obj)
         elif regex2.match(word.lower()):
            continue
         else:
@@ -56,6 +57,7 @@ def analyze_text(filename):
            new_obj["is_verb"] = True if len([tag for tag in tagging if tag == 'verb']) > 0 else False
            new_obj["is_subst"] = True if len([tag for tag in tagging if tag == 'subst']) > 0 else False
            new_obj["is_prop"] = True if len([tag for tag in tagging if tag == 'prop']) > 0 else False
+           new_obj["is_number"] = isNumber(tagging)
 
     deleteFile(filename)
     deleteFile(output_filename)
@@ -67,6 +69,33 @@ def deleteFile(filename):
         return True
     except:
         raise
+
+def fetchEntities(data):
+    entities = []
+    last_entity = ""
+    for entity in data:
+        if (entity.get("is_prop") == True and entity.get("is_subst") == True) or (entity.get("is_number").get('roman') == True):
+            if last_entity is "":
+                last_entity = entity.get("word")
+            else:
+                last_entity = "%s %s" % (last_entity, entity.get("word"))
+        elif last_entity is not "":
+            entities.append(last_entity)
+            last_entity = ""
+    entities = list(set(entities))
+    return entities
+def isNumber(tagging):
+    is_quantity =  True if len([tag for tag in tagging if tag == 'kvant']) > 0 else False
+    is_ordinal = True if len([tag for tag in tagging if tag == '<ordenstall>']) > 0 else False
+    is_roman = True if len([tag for tag in tagging if tag == '<romertall>']) > 0 else False
+    is_number  = True if is_quantity or is_ordinal or is_roman else False
+    return {
+        "is_number": is_number,
+        "quantity": is_quantity,
+        "ordinal": is_ordinal,
+        "roman": is_roman
+    }
+
 
 
 @app.route('/')
@@ -99,8 +128,8 @@ def tags():
       filename = saveContent(json_result)
       obt_result = analyze_text(filename)
       unique_tags = set([tag.get("word") for tag in obt_result if tag.get("is_prop") == True and tag.get("is_subst") == True])
-      tags = list(unique_tags)
-      obt_json_result = json.dumps(tags)
+      data_result = {"tags": list(unique_tags), "entities":fetchEntities(obt_result)}
+      obt_json_result = json.dumps(data_result)
       return Response(obt_json_result, mimetype="application/json")
     except Exception as e:
         ex_value = traceback.format_exception(*sys.exc_info())
