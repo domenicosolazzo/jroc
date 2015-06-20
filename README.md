@@ -25,3 +25,20 @@ An api for using the Oslo-Bergen tagger
      # Clone OBT-Stat
      git clone git://github.com/andrely/OBT-Stat.git
   
+  
+# Endpoints
+These are the endpoints for the API
+
+## Endpoint: /analyze
+
+## Endpoint: /entities
+
+## Endpoint: /tags
+
+
+# DEMO URL
+- [Demo URL](http://localhost:5000/demo)
+- [Demo - Analyze URL](http://localhost:5000/demo/analyze)
+- [Demo - Tags URL](http://localhost:5000/demo/tags)
+- [Demo - Entities URL](http://localhost:5000/demo/entities)
+- [Demo - Text URL](http://localhost:5000/demo/text)
