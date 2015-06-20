@@ -1,4 +1,4 @@
-# obt-api
+# OBT API
 A REST API for using the Oslo-Bergen tagger
 
 #### About Oslo-Bergen Tagger
