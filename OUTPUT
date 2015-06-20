@@ -1,0 +1,2655 @@
+<word>Ivar</word>
+"<ivar>"
+	"Ivar" subst prop mask
+<word>Aasen</word>
+"<aasen>"
+	"Aasen" subst prop <*sen> <*>
+<word>ble</word>
+"<ble>"
+	"bli" verb pret i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>født</word>
+"<født>"
+	"føde" verb perf-part tr1 i1
+<word>på</word>
+"<på>"
+	"på" prep
+<word>gården</word>
+"<gården>"
+	"gård" subst appell mask be ent
+<word>Åsen</word>
+"<åsen>"
+	"Åsen" subst prop <*sen> <*>
+<word>i</word>
+"<i>"
+	"i" prep
+<word>Hovdebygda</word>
+"<hovdebygda>"
+	"Hovdebygda" subst prop <*>
+<word>på</word>
+"<på>"
+	"på" prep
+<word>Sunnmøre</word>
+"<sunnmøre>"
+	"Sunnmøre" subst prop <*>
+<word>som</word>
+"<som>"
+	"som" prep
+<word>sønn</word>
+"<sønn>"
+	"sønn" subst appell mask ub ent
+<word>av</word>
+"<av>"
+	"av" prep
+<word>småbrukeren</word>
+"<småbrukeren>"
+	"småbruker" subst appell mask be ent
+<word>Ivar</word>
+"<ivar>"
+	"Ivar" subst prop mask <*>
+<word>Jonsson</word>
+"<jonsson>"
+	"Jonsson" subst prop <*son> <*>
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Han</word>
+"<han>"
+	"han" pron mask ent pers hum 3 nom
+<word>ble</word>
+"<ble>"
+	"bli" verb pret i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>døpt</word>
+"<døpt>"
+	"døpe" verb perf-part tr1
+<word>Iver</word>
+"<iver>"
+	"Iver" subst prop mask <*>
+<word>Andreas</word>
+"<andreas>"
+	"Andreas" subst prop mask <*as> <*>
+<word>,</word>
+"<,>"
+	"$," clb <komma>
+<word>formen</word>
+"<formen>"
+	"form" subst appell mask be ent
+<word>«Ivar»</word>
+"<«Ivar»>"
+	"Ivar" subst prop mask
+<word>kom</word>
+"<kom>"
+	"komme" verb pret i1 i2 tr11 a3 pa4 rl5 pa5 tr12 a4 rl15 tr21 tr22
+<word>i</word>
+"<i>"
+	"i" prep
+<word>bruk</word>
+"<bruk>"
+	"bruk" subst appell nøyt ub ent
+<word>omkring</word>
+"<omkring>"
+	"omkring" prep
+<word>1845</word>
+"<1845>"
+	"1845" det fl kvant
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Gården</word>
+"<gården>"
+	"gård" subst appell mask be ent
+<word>han</word>
+"<han>"
+	"han" pron mask ent pers hum 3 nom
+<word>vokste</word>
+"<vokste>"
+	"vokse" verb pret i2 pa4 tr12 rl14 pa4/til pr6
+<word>opp</word>
+"<opp>"
+	"opp" prep
+<word>på</word>
+"<på>"
+	"på" prep
+<word>var</word>
+"<var>"
+	"være" verb pret a5 pr1 pr2 <aux1/perf_part>
+<word>isolert</word>
+"<isolert>"
+	"isolere" verb perf-part tr1 rl4
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>så</word>
+"<så>"
+	"så" konj clb
+<word>han</word>
+"<han>"
+	"han" pron mask ent pers hum 3 nom
+<word>hadde</word>
+"<hadde>"
+	"ha" verb pret pa1 d5 a6 tr12 rl6 pa3 tr6 d6/til <aux1/perf_part> pa6
+<word>ingen</word>
+"<ingen>"
+	"ingen" det fl kvant
+<word>kamerater</word>
+"<kamerater>"
+	"kamerat" subst appell mask ub fl
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Dette</word>
+"<dette>"
+	"dette" pron nøyt ent pers 3
+<word>førte</word>
+"<førte>"
+	"føre" verb pret tr1 pa1 rl4 a6 a7 a12 pa3 tr12/til a2
+<word>til</word>
+"<til>"
+	"til" prep
+<word>at</word>
+"<at>"
+	"at" sbu
+<word>han</word>
+"<han>"
+	"han" pron mask ent pers hum 3 nom
+<word>leste</word>
+"<leste>"
+	"lese" verb pret tr1 i1 tr11 pa1
+<word>mye</word>
+"<mye>"
+	"mye" adj nøyt ub ent pos
+<word>i</word>
+"<i>"
+	"i" prep
+<word>de</word>
+"<de>"
+	"de" det dem fl
+<word>få</word>
+"<få>"
+	"få" adj fl pos
+<word>bøkene</word>
+"<bøkene>"
+	"bok" subst appell fem be fl
+<word>familien</word>
+"<familien>"
+	"familie" subst appell mask be ent
+<word>hadde</word>
+"<hadde>"
+	"ha" verb pret pa1 d5 a6 tr12 rl6 pa3 tr6 d6/til <aux1/perf_part> pa6
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>deriblant</word>
+"<deriblant>"
+	"deriblant" prep
+<word>Bibelen</word>
+"<bibelen>"
+	"Bibelen" subst prop <*>
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Faren</word>
+"<faren>"
+	"far" subst appell mask be ent
+<word>døde</word>
+"<døde>"
+	"dø" verb pret i2 tr6
+<word>i</word>
+"<i>"
+	"i" prep
+<word>1826</word>
+"<1826>"
+	"1826" det fl kvant
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Det</word>
+"<det>"
+	"det" pron nøyt ent pers 3
+<word>var</word>
+"<var>"
+	"være" verb pret a5 pr1 pr2 <aux1/perf_part>
+<word>åtte</word>
+"<åtte>"
+	"åtte" det fl kvant
+<word>søsken</word>
+"<søsken>"
+	"søsken" subst appell nøyt ub fl
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>og</word>
+"<og>"
+	"og" konj clb
+<word>de</word>
+"<de>"
+	"de" pron fl pers 3 nom
+<word>mistet</word>
+"<mistet>"
+	"miste" verb pret tr5
+<word>begge</word>
+"<begge>"
+	"begge" det fl kvant
+<word>foreldrene</word>
+"<foreldrene>"
+	"forelder" subst appell mask be fl
+<word>tidlig</word>
+"<tidlig>"
+	"tidlig" adj ub m/f ent pos
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>I</word>
+"<i>"
+	"i" prep
+<word>foreldrenes</word>
+"<foreldrenes>"
+	"forelder" subst appell mask be fl gen
+<word>fravær</word>
+"<fravær>"
+	"fravær" subst appell nøyt ub ent
+<word>ble</word>
+"<ble>"
+	"bli" verb pret i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>broren</word>
+"<broren>"
+	"bror" subst appell mask be ent
+<word>det</word>
+"<det>"
+	"det" det dem nøyt ent
+<word>nye</word>
+"<nye>"
+	"ny" adj be ent pos
+<word>familieoverhodet</word>
+"<familieoverhodet>"
+	"familieoverhodet" interj
+<word>;</word>
+"<;>"
+	"$;" clb <semi>
+<word>han</word>
+"<han>"
+	"han" pron mask ent pers hum 3 nom
+<word>satte</word>
+"<satte>"
+	"sette" verb pret tr1 pa1 rl4 pa2 a6 pa5 rl6 pa1/til pa3 a9 tr23
+<word>Ivar</word>
+"<ivar>"
+	"Ivar" subst prop mask <*>
+<word>til</word>
+"<til>"
+	"til" prep
+<word>gårdsarbeid</word>
+"<gårdsarbeid>"
+	"gårdsarbeid" subst appell nøyt ub ent
+<word>og</word>
+"<og>"
+	"og" konj clb
+<word>lot</word>
+"<lot>"
+	"late" verb pret tr1 tr21/til tr22/til a16 rl20 a17
+<word>ham</word>
+"<ham>"
+	"han" pron mask ent pers hum 3 akk
+<word>ikke</word>
+"<ikke>"
+	"ikke" adv
+<word>utvikle</word>
+"<utvikle>"
+	"utvikle" verb inf tr1 rl5 rl10/til
+<word>de</word>
+"<de>"
+	"de" det dem fl
+<word>intellektuelle</word>
+"<intellektuelle>"
+	"intellektuell" adj fl pos
+<word>evnene</word>
+"<evnene>"
+	"evne" subst appell fem be fl
+<word>sine</word>
+"<sine>"
+	"sin" det fl poss
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>men</word>
+"<men>"
+	"men" konj clb
+<word>Ivar</word>
+"<ivar>"
+	"Ivar" subst prop mask <*>
+<word>utmerket</word>
+"<utmerket>"
+	"utmerke" verb pret rl4 pr9
+<word>seg</word>
+"<seg>"
+	"seg" pron akk refl
+<word>likevel</word>
+"<likevel>"
+	"likevel" adv
+<word>ved</word>
+"<ved>"
+	"ved" prep
+<word>konfirmasjonen</word>
+"<konfirmasjonen>"
+	"konfirmasjon" subst appell mask be ent
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>og</word>
+"<og>"
+	"og" konj clb
+<word>presten</word>
+"<presten>"
+	"prest" subst appell mask be ent
+<word>skrev</word>
+"<skrev>"
+	"skrive" verb pret tr1 i1 tr11 pa1 d1 pa5 pa3
+<word>rosende</word>
+"<rosende>"
+	"rose" adj <pres-part> tr1 d5 rl9
+<word>om</word>
+"<om>"
+	"om" prep
+<word>ham</word>
+"<ham>"
+	"han" pron mask ent pers hum 3 akk
+<word>i</word>
+"<i>"
+	"i" prep
+<word>kirkeboken</word>
+"<kirkeboken>"
+	"kirkebok" subst appell mask be ent <*bok>
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Gården</word>
+"<gården>"
+	"gård" subst appell mask be ent
+<word>Ekset</word>
+"<ekset>"
+	"Ekset" subst prop <*>
+<word>med</word>
+"<med>"
+	"med" prep
+<word>Sivert</word>
+"<sivert>"
+	"Sivert" subst prop mask <*>
+<word>og</word>
+"<og>"
+	"og" konj
+<word>Rasmus</word>
+"<rasmus>"
+	"Rasmus" subst prop mask <*>
+<word>Aarflots</word>
+"<aarflots>"
+	"Aarflot" subst prop gen <*>
+<word>boksamling</word>
+"<boksamling>"
+	"boksamling" subst appell fem ub ent
+<word>var</word>
+"<var>"
+	"være" verb pret a5 pr1 pr2 <aux1/perf_part>
+<word>bare</word>
+"<bare>"
+	"bare" adv
+<word>3</word>
+"<3>"
+	"3" det fl kvant
+<word>kilometer</word>
+"<kilometer>"
+	"kilometer" subst appell mask ub fl
+<word>frå</word>
+"<frå>"
+	"frå" prep
+<word>Åsen-garden</word>
+"<åsen-garden>"
+	"Åsen-garde" subst appell mask be ent samset <*>
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Aarflot</word>
+"<aarflot>"
+	"Aarflot" subst prop
+<word>hadde</word>
+"<hadde>"
+	"ha" verb pret pa1 d5 a6 tr12 rl6 pa3 tr6 d6/til <aux1/perf_part> pa6
+<word>selv</word>
+"<selv>"
+	"selv" det <adj> forst <*elv>
+<word>gjort</word>
+"<gjort>"
+	"gjøre" verb perf-part tr1 rl9 pr3
+<word>observasjoner</word>
+"<observasjoner>"
+	"observasjon" subst appell mask ub fl
+<word>om</word>
+"<om>"
+	"om" prep
+<word>slektskap</word>
+"<slektskap>"
+	"slektskap" subst appell nøyt ub ent
+<word>mellom</word>
+"<mellom>"
+	"mellom" prep
+<word>sunnmørsdialekten</word>
+"<sunnmørsdialekten>"
+	"sunnmørsdialekt" subst appell mask be ent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>gammelnorsk</word>
+"<gammelnorsk>"
+	"gammelnorsk" subst appell mask ub ent
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>og</word>
+"<og>"
+	"og" konj clb
+<word>dette</word>
+"<dette>"
+	"dette" pron nøyt ent pers 3
+<word>kan</word>
+"<kan>"
+	"kunne" verb pres tr1 tr3 <aux1/infinitiv>
+<word>ha</word>
+"<ha>"
+	"ha" verb inf pa1 d5 a6 tr12 rl6 pa3 tr6 d6/til <aux1/perf_part> pa6
+<word>inspirert</word>
+"<inspirert>"
+	"inspirere" verb perf-part tr1
+<word>den</word>
+"<den>"
+	"den" det dem mask ent
+<word>unge</word>
+"<unge>"
+	"unge" subst appell mask ub ent
+<word>Aasen.[2</word>
+"<aasen.[2>"
+	"Aasen.[2" subst prop <*>
+<word>]</word>
+"<]>"
+	"$]" <parentes-slutt>
+<word>Aasen</word>
+"<aasen>"
+	"Aasen" subst prop <*sen> <*>
+<word>lærte</word>
+"<lærte>"
+	"lære" verb pret tr1 tr11 pa1 d5 tr2 d1 tr3 d3
+<word>seg</word>
+"<seg>"
+	"seg" pron akk refl
+<word>norrønt</word>
+"<norrønt>"
+	"norrøn" adj nøyt ub ent pos
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>engelsk</word>
+"<engelsk>"
+	"engelsk" subst appell mask ub ent
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>fransk</word>
+"<fransk>"
+	"fransk" subst appell mask ub ent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>latin</word>
+"<latin>"
+	"latin" subst appell mask ub ent
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>I</word>
+"<i>"
+	"i" subst appell mask ub ent
+<word>1831</word>
+"<1831>"
+	"1831" det fl kvant
+<word>begynte</word>
+"<begynte>"
+	"begynne" verb pret tr1 i1 tr11 tr3
+<word>han</word>
+"<han>"
+	"han" pron mask ent pers hum 3 nom
+<word>som</word>
+"<som>"
+	"som" prep
+<word>omgangsskolelærer</word>
+"<omgangsskolelærer>"
+	"omgangsskolelære" subst appell fem ub fl samset
+<word>og</word>
+"<og>"
+	"og" konj clb
+<word>ble</word>
+"<ble>"
+	"bli" verb pret i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>etterhvert</word>
+"<etterhvert>"
+	"etterhvert" adv
+<word>huslærer</word>
+"<huslærer>"
+	"huslærer" subst appell mask ub ent
+<word>hos</word>
+"<hos>"
+	"hos" prep
+<word>prost</word>
+"<prost>"
+	"prost" subst appell mask ub ent
+<word>Hans</word>
+"<hans>"
+	"Hans" subst prop mask <*>
+<word>Conrad</word>
+"<conrad>"
+	"Conrad" subst prop <*>
+<word>Thoresen</word>
+"<thoresen>"
+	"Thoresen" subst prop <*sen> <*>
+<word>i</word>
+"<i>"
+	"i" prep
+<word>Herøy</word>
+"<herøy>"
+	"Herøy" subst prop <*øy> <*>
+<word>,</word>
+"<,>"
+	"$," clb <komma>
+<word>der</word>
+"<der>"
+	"der" prep
+<word>fikk</word>
+"<fikk>"
+	"få" verb pret tr11 pa1 d5 d5/til rl6 pa1/til rl14 d6/til rl3/til pr7 tr20 tr14 <aux1/perf_part> pa6 <aux1/inf>
+<word>Aasen</word>
+"<aasen>"
+	"Aasen" subst prop <*sen> <*>
+<word>selv</word>
+"<selv>"
+	"selv" det <adj> forst <*elv>
+<word>opplæring</word>
+"<opplæring>"
+	"opplæring" subst appell fem ub ent
+<word>av</word>
+"<av>"
+	"av" prep
+<word>prosten</word>
+"<prosten>"
+	"prost" subst appell mask be ent
+<word>og</word>
+"<og>"
+	"og" konj clb
+<word>Aasen</word>
+"<aasen>"
+	"Aasen" subst prop <*sen> <*>
+<word>begynte</word>
+"<begynte>"
+	"begynne" verb pret tr1 i1 tr11 tr3
+<word>blant annet</word>
+"<blant annet>"
+	"blant annet" adv prep+adj @adv
+<word>å</word>
+"<å>"
+	"å" inf-merke
+<word>lære</word>
+"<lære>"
+	"lære" verb inf tr1 tr11 pa1 d5 tr2 d1 tr3 d3
+<word>seg</word>
+"<seg>"
+	"seg" pron akk refl
+<word>tysk</word>
+"<tysk>"
+	"tysk" subst appell mask ub ent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>latin</word>
+"<latin>"
+	"latin" subst appell mask ub ent
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Thoresen</word>
+"<thoresen>"
+	"Thoresen" subst prop <*sen>
+<word>ble</word>
+"<ble>"
+	"bli" verb pret i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>i</word>
+"<i>"
+	"i" prep
+<word>1843</word>
+"<1843>"
+	"1843" det fl kvant
+<word>sogneprest</word>
+"<sogneprest>"
+	"sogneprest" subst appell mask ub ent
+<word>i</word>
+"<i>"
+	"i" prep
+<word>Korskirken</word>
+"<korskirken>"
+	"Korskirken" subst prop <*>
+<word>i</word>
+"<i>"
+	"i" prep
+<word>Bergen</word>
+"<bergen>"
+	"Bergen" subst prop <*>
+<word>under</word>
+"<under>"
+	"under" prep
+<word>Neumann</word>
+"<neumann>"
+	"Neumann" subst prop <*>
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Deretter</word>
+"<deretter>"
+	"deretter" adv
+<word>var</word>
+"<var>"
+	"være" verb pret a5 pr1 pr2 <aux1/perf_part>
+<word>Aasen</word>
+"<aasen>"
+	"Aasen" subst prop <*sen> <*>
+<word>privatlærer</word>
+"<privatlærer>"
+	"privatlærer" subst appell mask ub ent
+<word>hos</word>
+"<hos>"
+	"hos" prep
+<word>kaptein</word>
+"<kaptein>"
+	"kaptein" subst appell mask ub ent
+<word>Ludvig</word>
+"<ludvig>"
+	"Ludvig" subst prop mask <*>
+<word>Daae</word>
+"<daae>"
+	"Daae" subst prop <*>
+<word>(</word>
+"<(>"
+	"$(" <parentes-beg>
+<word>Thoresens</word>
+"<thoresens>"
+	"Thoresen" subst prop gen <*sen> <*>
+<word>svoger</word>
+"<svoger>"
+	"svoger" subst appell mask ub ent
+<word>)</word>
+"<)>"
+	"$)" <parentes-slutt>
+<word>på</word>
+"<på>"
+	"på" prep
+<word>Solnør</word>
+"<solnør>"
+	"Solnør" subst prop <*>
+<word>i</word>
+"<i>"
+	"i" prep
+<word>Skodje</word>
+"<skodje>"
+	"Skodje" subst prop <*>
+<word>i</word>
+"<i>"
+	"i" prep
+<word>syv</word>
+"<syv>"
+	"syv" det fl kvant
+<word>år</word>
+"<år>"
+	"år" subst appell nøyt ub fl
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>På</word>
+"<på>"
+	"på" prep
+<word>Solnør</word>
+"<solnør>"
+	"Solnør" subst prop <*>
+<word>var</word>
+"<var>"
+	"være" verb pret a5 pr1 pr2 <aux1/perf_part>
+<word>han</word>
+"<han>"
+	"han" pron mask ent pers hum 3 nom
+<word>blant annet</word>
+"<blant annet>"
+	"blant annet" adv prep+adj @adv
+<word>lærer</word>
+"<lærer>"
+	"lære" subst appell fem ub fl
+<word>for</word>
+"<for>"
+	"for" prep
+<word>kapteinens</word>
+"<kapteinens>"
+	"kaptein" subst appell mask be ent gen
+<word>sønn</word>
+"<sønn>"
+	"sønn" subst appell mask ub ent
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>den</word>
+"<den>"
+	"den" det dem mask ent
+<word>unge</word>
+"<unge>"
+	"ung" adj be ent pos
+<word>Ludvig</word>
+"<ludvig>"
+	"Ludvig" subst prop mask <*>
+<word>Daae</word>
+"<daae>"
+	"Daae" subst prop <*>
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Ludvig</word>
+"<ludvig>"
+	"Ludvig" subst prop mask
+<word>Daae</word>
+"<daae>"
+	"Daae" subst prop <*>
+<word>jr.</word>
+"<jr.>"
+	"jr." subst fork @<subst
+<word>var</word>
+"<var>"
+	"være" verb pret a5 pr1 pr2 <aux1/perf_part>
+<word>i</word>
+"<i>"
+	"i" prep
+<word>over</word>
+"<over>"
+	"over" prep
+<word>20</word>
+"<20>"
+	"20" det fl kvant
+<word>år</word>
+"<år>"
+	"år" subst appell nøyt ub fl
+<word>stortingsrepresentant</word>
+"<stortingsrepresentant>"
+	"stortingsrepresentant" subst appell mask ub ent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>dessuten</word>
+"<dessuten>"
+	"dessuten" adv
+<word>medlem</word>
+"<medlem>"
+	"medlem" subst appell nøyt ub ent
+<word>av</word>
+"<av>"
+	"av" prep
+<word>Johan</word>
+"<johan>"
+	"Johan" subst prop mask <*>
+<word>Sverdrups</word>
+"<sverdrups>"
+	"Sverdrup" subst prop gen <*>
+<word>regjering</word>
+"<regjering>"
+	"regjering" subst appell fem ub ent
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Aasen</word>
+"<aasen>"
+	"Aasen" subst prop <*sen>
+<word>fikk</word>
+"<fikk>"
+	"få" verb pret tr11 pa1 d5 d5/til rl6 pa1/til rl14 d6/til rl3/til pr7 tr20 tr14 <aux1/perf_part> pa6 <aux1/inf>
+<word>tre</word>
+"<tre>"
+	"tre" det fl kvant
+<word>ganger</word>
+"<ganger>"
+	"gang" subst appell mask ub fl
+<word>innkalling</word>
+"<innkalling>"
+	"innkalling" subst appell fem ub ent
+<word>til</word>
+"<til>"
+	"til" sbu
+<word>militærtjeneste</word>
+"<militærtjeneste>"
+	"militærtjeneste" subst appell mask ub ent
+<word>uten</word>
+"<uten>"
+	"uten" prep
+<word>å</word>
+"<å>"
+	"å" inf-merke
+<word>møte</word>
+"<møte>"
+	"møte" verb inf tr1 tr11 pa5
+<word>,</word>
+"<,>"
+	"$," clb <komma>
+<word>boten</word>
+"<boten>"
+	"bot" subst appell mask be ent
+<word>han</word>
+"<han>"
+	"han" pron mask ent pers hum 3 nom
+<word>fikk</word>
+"<fikk>"
+	"få" verb pret tr11 pa1 d5 d5/til rl6 pa1/til rl14 d6/til rl3/til pr7 tr20 tr14 <aux1/perf_part> pa6 <aux1/inf>
+<word>for</word>
+"<for>"
+	"for" konj clb
+<word>dette</word>
+"<dette>"
+	"dette" pron nøyt ent pers 3
+<word>ble</word>
+"<ble>"
+	"bli" verb pret i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>betalt</word>
+"<betalt>"
+	"betale" verb perf-part tr1 i1 tr11 d5 rl5 d1
+<word>av</word>
+"<av>"
+	"av" prep
+<word>kaptein</word>
+"<kaptein>"
+	"kaptein" subst appell mask ub ent
+<word>Daae</word>
+"<daae>"
+	"Daae" subst prop <*>
+<word>,</word>
+"<,>"
+	"$," clb <komma>
+<word>deretter</word>
+"<deretter>"
+	"deretter" adv
+<word>ble</word>
+"<ble>"
+	"bli" verb pret i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>Aasen</word>
+"<aasen>"
+	"Aasen" subst prop <*sen> <*>
+<word>strøket</word>
+"<strøket>"
+	"stryke" verb perf-part tr1 tr11 a11 rl14 rl15
+<word>fra</word>
+"<fra>"
+	"fra" prep
+<word>rullene.[3</word>
+"<rullene.[3>"
+	"rullene.[3" ukjent
+<word>]</word>
+"<]>"
+	"$]" <parentes-slutt>
+<word>|</word>
+"<|>"
+	"$|" clb <overskrift> <<< <<<
+<word>Ivar</word>
+"<ivar>"
+	"Ivar" subst prop mask
+<word>Aasen</word>
+"<aasen>"
+	"Aasen" subst prop <*sen> <*>
+<word>begynte</word>
+"<begynte>"
+	"begynne" verb pret tr1 i1 tr11 tr3
+<word>å</word>
+"<å>"
+	"å" inf-merke
+<word>granske</word>
+"<granske>"
+	"granske" verb inf tr1
+<word>sin</word>
+"<sin>"
+	"sin" det mask ent poss
+<word>egen</word>
+"<egen>"
+	"egen" det mask ub ent <adj> forst
+<word>sunnmørske</word>
+"<sunnmørske>"
+	"sunnmørsk" adj be ent pos
+<word>dialekt</word>
+"<dialekt>"
+	"dialekt" subst appell mask ub ent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>plantelivet</word>
+"<plantelivet>"
+	"planteliv" subst appell nøyt be ent
+<word>i</word>
+"<i>"
+	"i" prep
+<word>distriktet</word>
+"<distriktet>"
+	"distrikt" subst appell nøyt be ent
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>I</word>
+"<i>"
+	"i" subst appell mask ub ent
+<word>1836</word>
+"<1836>"
+	"1836" det fl kvant
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>da</word>
+"<da>"
+	"da" sbu
+<word>han</word>
+"<han>"
+	"han" pron mask ent pers hum 3 nom
+<word>bare</word>
+"<bare>"
+	"bare" adv
+<word>var</word>
+"<var>"
+	"være" verb pret a5 pr1 pr2 <aux1/perf_part>
+<word>22</word>
+"<22>"
+	"22" det fl kvant
+<word>år</word>
+"<år>"
+	"år" subst appell nøyt ub fl
+<word>gammel</word>
+"<gammel>"
+	"gammel" adj ub m/f ent pos
+<word>huslærer</word>
+"<huslærer>"
+	"huslærer" subst appell mask ub ent
+<word>på</word>
+"<på>"
+	"på" prep
+<word>Solnør</word>
+"<solnør>"
+	"Solnør" subst prop <*>
+<word>,</word>
+"<,>"
+	"$," clb <komma>
+<word>skrev</word>
+"<skrev>"
+	"skrive" verb pret tr1 i1 tr11 pa1 d1 pa5 pa3
+<word>han</word>
+"<han>"
+	"han" pron mask ent pers hum 3 nom
+<word>det</word>
+"<det>"
+	"det" det dem nøyt ent
+<word>programmatiske</word>
+"<programmatiske>"
+	"programmatisk" adj be ent pos
+<word>essayet</word>
+"<essayet>"
+	"essay" subst appell nøyt be ent
+<word>«</word>
+"<«>"
+	"$"" <anf>
+<word>Om</word>
+"<om>"
+	"om" prep <*>
+<word>vort</word>
+"<vort>"
+	"vort" ukjent
+<word>Skriftsprog</word>
+"<skriftsprog>"
+	"Skriftsprog" subst prop <*>
+<word>»</word>
+"<»>"
+	"$"" <anf>
+<word>(</word>
+"<(>"
+	"$(" <parentes-beg>
+<word>trykt</word>
+"<trykt>"
+	"trykt" adj nøyt ub ent pos
+<word>første</word>
+"<første>"
+	"første" adj be ent pos <ordenstall>
+<word>gang</word>
+"<gang>"
+	"gang" subst appell mask ub ent
+<word>i</word>
+"<i>"
+	"i" prep
+<word>Syn</word>
+"<syn>"
+	"Syn" subst prop <*>
+<word>og</word>
+"<og>"
+	"og" konj
+<word>Segn</word>
+"<segn>"
+	"Segn" subst prop <*>
+<word>1900</word>
+"<1900>"
+	"1900" det fl kvant
+<word>)</word>
+"<)>"
+	"$)" <parentes-slutt>
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Stephen</word>
+"<stephen>"
+	"Stephen" subst prop
+<word>Walton</word>
+"<walton>"
+	"Walton" subst prop <*>
+<word>kaller</word>
+"<kaller>"
+	"kalle" verb pres i1 tr11 pa1 d5 pr6 pr3 pr4
+<word>dette</word>
+"<dette>"
+	"dette" det dem nøyt ent
+<word>essayet</word>
+"<essayet>"
+	"essay" subst appell nøyt be ent
+<word>en</word>
+"<en>"
+	"en" det mask ent kvant
+<word>«</word>
+"<«>"
+	"$"" <anf>
+<word>retorisk</word>
+"<retorisk>"
+	"retorisk" adj ub m/f ent pos
+<word>kraftprestasjon</word>
+"<kraftprestasjon>"
+	"kraftprestasjon" subst appell mask ub ent
+<word>»</word>
+"<»>"
+	"$"" <anf>
+<word>og</word>
+"<og>"
+	"og" konj
+<word>et</word>
+"<et>"
+	"en" det nøyt ent kvant
+<word>naturlig</word>
+"<naturlig>"
+	"naturlig" adj nøyt ub ent pos
+<word>utgangspunkt</word>
+"<utgangspunkt>"
+	"utgangspunkt" subst appell nøyt ub ent
+<word>for</word>
+"<for>"
+	"for" prep
+<word>drøfting</word>
+"<drøfting>"
+	"drøfting" subst appell fem ub ent
+<word>av</word>
+"<av>"
+	"av" prep
+<word>Aasens</word>
+"<aasens>"
+	"Aasen" subst prop gen <*sen> <*>
+<word>livsverk</word>
+"<livsverk>"
+	"livsverk" subst appell nøyt ub ent <*verk>
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Norsk</word>
+"<norsk>"
+	"norsk" subst appell mask ub ent
+<word>er</word>
+"<er>"
+	"være" verb pres a5 pr1 pr2 <aux1/perf_part>
+<word>et</word>
+"<et>"
+	"en" det nøyt ent kvant
+<word>nordisk</word>
+"<nordisk>"
+	"nordisk" adj nøyt ub ent pos
+<word>språk</word>
+"<språk>"
+	"språk" subst appell nøyt ub ent
+<word>som</word>
+"<som>"
+	"som" sbu
+<word>snakkes</word>
+"<snakkes>"
+	"snakke" verb pres inf pass i1 tr11 tr11/til
+<word>som</word>
+"<som>"
+	"som" prep
+<word>morsmål</word>
+"<morsmål>"
+	"morsmål" subst appell nøyt ub ent
+<word>av</word>
+"<av>"
+	"av" prep
+<word>rundt</word>
+"<rundt>"
+	"rundt" prep
+<word>4,9</word>
+"<4,9>"
+	"4,9" det fl kvant
+<word>millioner</word>
+"<millioner>"
+	"million" subst appell mask ub fl
+<word>mennesker,[1][trenger</word>
+"<mennesker,[1][trenger>"
+	"mennesker,[1][trong" subst appell fem ub fl samset
+<word>bedre</word>
+"<bedre>"
+	"god" adj komp
+<word>kilde</word>
+"<kilde>"
+	"kilde" subst appell mask ub ent
+<word>]</word>
+"<]>"
+	"$]" <parentes-slutt>
+<word>først og fremst</word>
+"<først og fremst>"
+	"først og fremst" adv adj+kon+adj @adv
+<word>i</word>
+"<i>"
+	"i" prep
+<word>Norge</word>
+"<norge>"
+	"Norge" subst prop <*>
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>hvor</word>
+"<hvor>"
+	"hvor" adv
+<word>det</word>
+"<det>"
+	"det" pron nøyt ent pers 3
+<word>er</word>
+"<er>"
+	"være" verb pres a5 pr1 pr2 <aux1/perf_part>
+<word>offisielt</word>
+"<offisielt>"
+	"offisiell" adj nøyt ub ent pos
+<word>språk</word>
+"<språk>"
+	"språk" subst appell nøyt ub ent
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Det</word>
+"<det>"
+	"det" pron nøyt ent pers 3
+<word>snakkes</word>
+"<snakkes>"
+	"snakke" verb pres inf pass i1 tr11 tr11/til
+<word>også</word>
+"<også>"
+	"også" adv
+<word>av</word>
+"<av>"
+	"av" prep
+<word>over</word>
+"<over>"
+	"over" prep
+<word>50 000</word>
+"<50 000>"
+	"50 000" det fl kvant
+<word>norsk-amerikanere</word>
+"<norsk-amerikanere>"
+	"norsk-amerikaner" subst appell mask ub fl samset
+<word>i</word>
+"<i>"
+	"i" prep
+<word>USA</word>
+"<uSA>"
+	"USA" subst prop fork <*>
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>spesielt</word>
+"<spesielt>"
+	"spesiell" adj nøyt ub ent pos
+<word>i</word>
+"<i>"
+	"i" prep
+<word>Midtvesten</word>
+"<midtvesten>"
+	"Midtvesten" subst prop <*>
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Norsk</word>
+"<norsk>"
+	"norsk" subst appell mask ub ent
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>svensk</word>
+"<svensk>"
+	"svensk" subst appell mask ub ent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>dansk</word>
+"<dansk>"
+	"dansk" subst appell mask ub ent
+<word>utgjør</word>
+"<utgjør>"
+	"utgjøre" verb pres tr5 pr1
+<word>sammen</word>
+"<sammen>"
+	"sammen" adv
+<word>de</word>
+"<de>"
+	"de" det dem fl
+<word>fastlandsnordiske</word>
+"<fastlandsnordiske>"
+	"fastlandsnordisk" adj fl pos samset
+<word>språkene</word>
+"<språkene>"
+	"språk" subst appell nøyt be fl
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>et</word>
+"<et>"
+	"en" det nøyt ent kvant
+<word>kontinuum</word>
+"<kontinuum>"
+	"kontinuum" subst appell nøyt ub ent
+<word>av</word>
+"<av>"
+	"av" prep
+<word>mer</word>
+"<mer>"
+	"mye" adj komp
+<word>eller</word>
+"<eller>"
+	"eller" konj
+<word>mindre</word>
+"<mindre>"
+	"liten" adj komp
+<word>innbyrdes</word>
+"<innbyrdes>"
+	"innbyrdes" adj nøyt ub ent pos
+<word>forståelige</word>
+"<forståelige>"
+	"forståelig" adj fl pos
+<word>dialekter</word>
+"<dialekter>"
+	"dialekt" subst appell mask ub fl
+<word>i</word>
+"<i>"
+	"i" prep
+<word>Skandinavia.[2</word>
+"<skandinavia.[2>"
+	"Skandinavia.[2" subst prop <*>
+<word>]</word>
+"<]>"
+	"$]" <parentes-slutt>
+<word>Norsk</word>
+"<norsk>"
+	"Norsk" subst prop <*>
+<word>kan</word>
+"<kan>"
+	"kunne" verb pres tr1 tr3 <aux1/infinitiv>
+<word>føres</word>
+"<føres>"
+	"føre" verb pres inf pass tr1 pa1 rl4 a6 a7 a12 pa3 tr12/til a2
+<word>tilbake</word>
+"<tilbake>"
+	"tilbake" prep
+<word>til</word>
+"<til>"
+	"til" prep
+<word>de</word>
+"<de>"
+	"de" det dem fl
+<word>vestnordiske</word>
+"<vestnordiske>"
+	"vestnordisk" adj fl pos
+<word>dialektene</word>
+"<dialektene>"
+	"dialekt" subst appell mask be fl
+<word>av</word>
+"<av>"
+	"av" prep
+<word>norrønt</word>
+"<norrønt>"
+	"norrønt" subst appell nøyt ubøy
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>som</word>
+"<som>"
+	"som" sbu
+<word>også</word>
+"<også>"
+	"også" adv
+<word>islandsk</word>
+"<islandsk>"
+	"islandsk" subst appell mask ub ent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>færøysk</word>
+"<færøysk>"
+	"færøysk" subst appell mask ub ent
+<word>har</word>
+"<har>"
+	"ha" verb pres pa1 d5 a6 tr12 rl6 pa3 tr6 d6/til <aux1/perf_part> pa6
+<word>utgått</word>
+"<utgått>"
+	"utgå" verb perf-part i2 tr12
+<word>fra</word>
+"<fra>"
+	"fra" prep
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>men</word>
+"<men>"
+	"men" konj clb
+<word>avstanden</word>
+"<avstanden>"
+	"avstand" subst appell mask be ent <*stand>
+<word>til</word>
+"<til>"
+	"til" prep
+<word>disse</word>
+"<disse>"
+	"disse" det dem fl
+<word>øynordiske</word>
+"<øynordiske>"
+	"øynordisk" adj fl pos samset
+<word>språkene</word>
+"<språkene>"
+	"språk" subst appell nøyt be fl
+<word>er</word>
+"<er>"
+	"være" verb pres a5 pr1 pr2 <aux1/perf_part>
+<word>i</word>
+"<i>"
+	"i" prep
+<word>dag</word>
+"<dag>"
+	"dag" subst appell mask ub ent
+<word>langt</word>
+"<langt>"
+	"lang" adj nøyt ub ent pos
+<word>større</word>
+"<større>"
+	"stor" adj komp
+<word>enn</word>
+"<enn>"
+	"enn" prep
+<word>avstanden</word>
+"<avstanden>"
+	"avstand" subst appell mask be ent <*stand>
+<word>til</word>
+"<til>"
+	"til" prep
+<word>de</word>
+"<de>"
+	"de" det dem fl
+<word>østnordiske</word>
+"<østnordiske>"
+	"østnordisk" adj fl pos
+<word>språkene</word>
+"<språkene>"
+	"språk" subst appell nøyt be fl
+<word>dansk</word>
+"<dansk>"
+	"dansk" adj nøyt ub ent pos
+<word>og</word>
+"<og>"
+	"og" konj
+<word>svensk</word>
+"<svensk>"
+	"svensk" adj ub m/f ent pos
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Det</word>
+"<det>"
+	"det" pron nøyt ent pers 3
+<word>er</word>
+"<er>"
+	"være" verb pres a5 pr1 pr2 <aux1/perf_part>
+<word>vanskelig</word>
+"<vanskelig>"
+	"vanskelig" adj nøyt ub ent pos
+<word>å</word>
+"<å>"
+	"å" inf-merke
+<word>avgrense</word>
+"<avgrense>"
+	"avgrense" verb inf tr1 rl4
+<word>norsk</word>
+"<norsk>"
+	"norsk" subst appell mask ub ent
+<word>mot</word>
+"<mot>"
+	"mot" prep
+<word>svensk</word>
+"<svensk>"
+	"svensk" subst appell mask ub ent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>dansk</word>
+"<dansk>"
+	"dansk" adj nøyt ub ent pos
+<word>etter</word>
+"<etter>"
+	"etter" prep
+<word>rent</word>
+"<rent>"
+	"ren" adj nøyt ub ent pos
+<word>språklige</word>
+"<språklige>"
+	"språklig" adj fl pos
+<word>kriterier</word>
+"<kriterier>"
+	"kriterium" subst appell nøyt ub fl
+<word>;</word>
+"<;>"
+	"$;" clb <semi>
+<word>i</word>
+"<i>"
+	"i" prep
+<word>praksis</word>
+"<praksis>"
+	"praksis" subst appell mask ub ent
+<word>kan</word>
+"<kan>"
+	"kunne" verb pres tr1 tr3 <aux1/infinitiv>
+<word>moderne</word>
+"<moderne>"
+	"moderne" adj ub m/f ent pos
+<word>norsk</word>
+"<norsk>"
+	"norsk" subst appell mask ub ent
+<word>sies</word>
+"<sies>"
+	"si" verb pres inf pass tr1 tr11 pa1 d5 tr2 d1 d4 pa3
+<word>å</word>
+"<å>"
+	"å" inf-merke
+<word>være</word>
+"<være>"
+	"være" verb inf tr5
+<word>de</word>
+"<de>"
+	"de" det dem fl
+<word>skandinaviske</word>
+"<skandinaviske>"
+	"skandinavisk" adj fl pos
+<word>dialekter</word>
+"<dialekter>"
+	"dialekt" subst appell mask ub fl
+<word>og</word>
+"<og>"
+	"og" konj
+<word>standardspråk</word>
+"<standardspråk>"
+	"standardspråk" subst appell nøyt ub ent
+<word>som</word>
+"<som>"
+	"som" sbu
+<word>har</word>
+"<har>"
+	"ha" verb pres pa1 d5 a6 tr12 rl6 pa3 tr6 d6/til <aux1/perf_part> pa6
+<word>geografisk</word>
+"<geografisk>"
+	"geografisk" adj ub m/f ent pos
+<word>tilknytning</word>
+"<tilknytning>"
+	"tilknytning" subst appell fem ub ent
+<word>til</word>
+"<til>"
+	"til" prep
+<word>Norge</word>
+"<norge>"
+	"Norge" subst prop <*>
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Norsk</word>
+"<norsk>"
+	"norsk" adj ub m/f ent pos
+<word>rettskrivning</word>
+"<rettskrivning>"
+	"rettskrivning" subst appell fem ub ent
+<word>ble</word>
+"<ble>"
+	"bli" verb pret i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>fra</word>
+"<fra>"
+	"fra" prep
+<word>senmiddelalderen</word>
+"<senmiddelalderen>"
+	"senmiddelalder" subst appell mask be ent
+<word>delvis</word>
+"<delvis>"
+	"delvis" adv
+<word>erstattet</word>
+"<erstattet>"
+	"erstatte" verb perf-part tr1 d5 tr5
+<word>av</word>
+"<av>"
+	"av" prep
+<word>dansk</word>
+"<dansk>"
+	"dansk" adj nøyt ub ent pos
+<word>skriftspråk</word>
+"<skriftspråk>"
+	"skriftspråk" subst appell nøyt ub ent
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Sent</word>
+"<sent>"
+	"sen" adj nøyt ub ent pos
+<word>på</word>
+"<på>"
+	"på" prep
+<word>1800-tallet</word>
+"<1800-tallet>"
+	"1800-tall" subst appell nøyt be ent samset
+<word>oppstod</word>
+"<oppstod>"
+	"oppstå" verb pret i2
+<word>landsmål</word>
+"<landsmål>"
+	"landsmål" subst appell nøyt ub ent
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>senere</word>
+"<senere>"
+	"sen" adj komp
+<word>nynorsk</word>
+"<nynorsk>"
+	"nynorsk" subst appell mask ub ent
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>som</word>
+"<som>"
+	"som" prep
+<word>et</word>
+"<et>"
+	"en" det nøyt ent kvant
+<word>alternativt</word>
+"<alternativt>"
+	"alternativ" adj nøyt ub ent pos
+<word>skriftspråk</word>
+"<skriftspråk>"
+	"skriftspråk" subst appell nøyt ub ent
+<word>basert</word>
+"<basert>"
+	"basere" verb perf-part d5 rl9 rl10
+<word>på</word>
+"<på>"
+	"på" prep
+<word>flere</word>
+"<flere>"
+	"mange" adj komp
+<word>norske</word>
+"<norske>"
+	"norsk" adj fl pos
+<word>dialekter</word>
+"<dialekter>"
+	"dialekt" subst appell mask ub fl
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Dette</word>
+"<dette>"
+	"dette" pron nøyt ent pers 3
+<word>gav</word>
+"<gav>"
+	"gi" verb pret tr1 tr11 pa1 rl4 d5 rl9 tr2 pa2 d1 pa5 tr11/til d4 pa3 pa2/til rl3
+<word>støtet</word>
+"<støtet>"
+	"støt" subst appell nøyt be ent
+<word>til</word>
+"<til>"
+	"til" prep
+<word>den</word>
+"<den>"
+	"den" det dem mask ent
+<word>norske</word>
+"<norske>"
+	"norsk" adj be ent pos
+<word>språkstriden</word>
+"<språkstriden>"
+	"språkstrid" subst appell mask be ent
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>en</word>
+"<en>"
+	"en" det mask ent kvant
+<word>langvarig</word>
+"<langvarig>"
+	"langvarig" adj ub m/f ent pos
+<word>strid</word>
+"<strid>"
+	"strid" subst appell mask ub ent
+<word>mellom</word>
+"<mellom>"
+	"mellom" prep
+<word>tilhengere</word>
+"<tilhengere>"
+	"tilhenger" subst appell mask ub fl
+<word>av</word>
+"<av>"
+	"av" prep
+<word>de</word>
+"<de>"
+	"de" det dem fl
+<word>ulike</word>
+"<ulike>"
+	"ulik" adj fl pos
+<word>målformene</word>
+"<målformene>"
+	"målform" subst appell fem be fl
+<word>og</word>
+"<og>"
+	"og" konj
+<word>rettskrivningene</word>
+"<rettskrivningene>"
+	"rettskrivning" subst appell fem be fl
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Rundt</word>
+"<rundt>"
+	"rundt" prep
+<word>87–89</word>
+"<87–89>"
+	"87–89" ukjent
+<word>prosent</word>
+"<prosent>"
+	"prosent" subst appell mask ub ent
+<word>bruker</word>
+"<bruker>"
+	"bruke" verb pres tr1 rl4 rl9 tr3
+<word>i</word>
+"<i>"
+	"i" prep
+<word>dag</word>
+"<dag>"
+	"dag" subst appell mask ub ent
+<word>bokmål</word>
+"<bokmål>"
+	"bokmål" subst appell nøyt ub ent
+<word>som</word>
+"<som>"
+	"som" prep
+<word>sitt</word>
+"<sitt>"
+	"sin" det nøyt ent poss
+<word>viktigste</word>
+"<viktigste>"
+	"viktig" adj be sup
+<word>skriftspråk</word>
+"<skriftspråk>"
+	"skriftspråk" subst appell nøyt ub ent
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>mens</word>
+"<mens>"
+	"mens" sbu
+<word>resten</word>
+"<resten>"
+	"rest" subst appell mask be ent
+<word>bruker</word>
+"<bruker>"
+	"bruke" verb pres tr1 rl4 rl9 tr3
+<word>nynorsk</word>
+"<nynorsk>"
+	"nynorsk" subst appell mask ub ent
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Fra</word>
+"<fra>"
+	"fra" prep
+<word>omkring</word>
+"<omkring>"
+	"omkring" prep
+<word>700</word>
+"<700>"
+	"700" det fl kvant
+<word>kaller</word>
+"<kaller>"
+	"kalle" verb pres i1 tr11 pa1 d5 pr6 pr3 pr4
+<word>vi</word>
+"<vi>"
+	"vi" pron fl pers hum nom 1
+<word>språket</word>
+"<språket>"
+	"språk" subst appell nøyt be ent
+<word>norrønt</word>
+"<norrønt>"
+	"norrøn" adj nøyt ub ent pos
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>I</word>
+"<i>"
+	"i" prep
+<word>norsk</word>
+"<norsk>"
+	"norsk" adj ub m/f ent pos
+<word>språkvitenskap</word>
+"<språkvitenskap>"
+	"språkvitenskap" subst appell mask ub ent
+<word>blir</word>
+"<blir>"
+	"bli" verb pres i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>norrønt</word>
+"<norrønt>"
+	"norrøn" adj nøyt ub ent pos
+<word>først og fremst</word>
+"<først og fremst>"
+	"først og fremst" adv adj+kon+adj @adv
+<word>brukt</word>
+"<brukt>"
+	"bruke" verb perf-part tr1 rl4 rl9 tr3
+<word>om</word>
+"<om>"
+	"om" prep
+<word>språket</word>
+"<språket>"
+	"språk" subst appell nøyt be ent
+<word>i</word>
+"<i>"
+	"i" prep
+<word>Norge</word>
+"<norge>"
+	"Norge" subst prop <*>
+<word>og</word>
+"<og>"
+	"og" konj
+<word>på</word>
+"<på>"
+	"på" prep
+<word>Island</word>
+"<island>"
+	"Island" subst prop <*land> <*>
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>selv</word>
+"<selv>"
+	"selv" adv <*elv>
+<word>om</word>
+"<om>"
+	"om" sbu
+<word>dialektforskjellene</word>
+"<dialektforskjellene>"
+	"dialektforskjell" subst appell mask be fl
+<word>i</word>
+"<i>"
+	"i" prep
+<word>det</word>
+"<det>"
+	"det" det dem nøyt ent
+<word>nordiske</word>
+"<nordiske>"
+	"nordisk" adj be ent pos
+<word>språkområdet</word>
+"<språkområdet>"
+	"språkområde" subst appell nøyt be ent <*område>
+<word>var</word>
+"<var>"
+	"være" verb pret a5 pr1 pr2 <aux1/perf_part>
+<word>minimale</word>
+"<minimale>"
+	"minimal" adj fl pos
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>og</word>
+"<og>"
+	"og" konj clb
+<word>språket</word>
+"<språket>"
+	"språk" subst appell nøyt be ent
+<word>i</word>
+"<i>"
+	"i" prep
+<word>samtiden</word>
+"<samtiden>"
+	"samtid" subst appell mask be ent
+<word>ble</word>
+"<ble>"
+	"bli" verb pret i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>oppfattet</word>
+"<oppfattet>"
+	"oppfatte" verb perf-part tr5 pr8 tr18 pr9
+<word>som</word>
+"<som>"
+	"som" sbu
+<word>ett</word>
+"<ett>"
+	"én" det nøyt ent kvant
+<word>språk</word>
+"<språk>"
+	"språk" subst appell nøyt ub ent
+<word>,</word>
+"<,>"
+	"$," clb <komma>
+<word>kalt</word>
+"<kalt>"
+	"kalle" verb perf-part i1 tr11 pa1 d5 pr6 pr3 pr4
+<word>norrǿna</word>
+"<norrǿna>"
+	"norrǿna" ukjent
+<word>eller</word>
+"<eller>"
+	"eller" konj clb
+<word>dǫnsk</word>
+"<dǫnsk>"
+	"dǫnsk" ukjent
+<word>tunga</word>
+"<tunga>"
+	"tunge" verb pret
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Fra</word>
+"<fra>"
+	"fra" prep
+<word>700-tallet</word>
+"<700-tallet>"
+	"700-tall" subst appell nøyt be ent samset
+<word>oppstod</word>
+"<oppstod>"
+	"oppstå" verb pret i2
+<word>allikevel</word>
+"<allikevel>"
+	"allikevel" adv
+<word>visse</word>
+"<visse>"
+	"viss" adj fl pos
+<word>dialektforskjeller</word>
+"<dialektforskjeller>"
+	"dialektforskjell" subst appell mask ub fl
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>og</word>
+"<og>"
+	"og" konj clb
+<word>det</word>
+"<det>"
+	"det" pron nøyt ent pers 3
+<word>er</word>
+"<er>"
+	"være" verb pres a5 pr1 pr2 <aux1/perf_part>
+<word>vanlig</word>
+"<vanlig>"
+	"vanlig" adj nøyt ub ent pos
+<word>å</word>
+"<å>"
+	"å" inf-merke
+<word>snakke</word>
+"<snakke>"
+	"snakke" verb inf i1 tr11 tr11/til
+<word>om</word>
+"<om>"
+	"om" prep
+<word>en</word>
+"<en>"
+	"en" det mask ent kvant
+<word>vestnordisk</word>
+"<vestnordisk>"
+	"vestnordisk" adj ub m/f ent pos
+<word>dialekt</word>
+"<dialekt>"
+	"dialekt" subst appell mask ub ent
+<word>i</word>
+"<i>"
+	"i" prep
+<word>Norge</word>
+"<norge>"
+	"Norge" subst prop <*>
+<word>og</word>
+"<og>"
+	"og" konj
+<word>på</word>
+"<på>"
+	"på" prep
+<word>Island</word>
+"<island>"
+	"Island" subst prop <*land> <*>
+<word>og</word>
+"<og>"
+	"og" konj
+<word>Færøyene</word>
+"<færøyene>"
+	"Færøyene" subst prop <*>
+<word>og</word>
+"<og>"
+	"og" konj
+<word>en</word>
+"<en>"
+	"en" det mask ent kvant
+<word>østnordisk</word>
+"<østnordisk>"
+	"østnordisk" adj ub m/f ent pos
+<word>dialekt</word>
+"<dialekt>"
+	"dialekt" subst appell mask ub ent
+<word>i</word>
+"<i>"
+	"i" prep
+<word>Sverige</word>
+"<sverige>"
+	"Sverige" subst prop <*>
+<word>og</word>
+"<og>"
+	"og" konj
+<word>Danmark</word>
+"<danmark>"
+	"Danmark" subst prop <*>
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>For eksempel</word>
+"<for eksempel>"
+	"for eksempel" adv prep+subst @adv
+<word>ble</word>
+"<ble>"
+	"bli" verb pret i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>de</word>
+"<de>"
+	"de" det dem fl
+<word>gamle</word>
+"<gamle>"
+	"gammel" adj fl pos
+<word>diftongene</word>
+"<diftongene>"
+	"diftong" subst appell mask be fl
+<word>monoftongert</word>
+"<monoftongert>"
+	"monoftongere" verb perf-part tr1
+<word>i</word>
+"<i>"
+	"i" prep
+<word>øst</word>
+"<øst>"
+	"øst" prep
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>slik</word>
+"<slik>"
+	"slik" adv
+<word>at</word>
+"<at>"
+	"at" sbu
+<word>der</word>
+"<der>"
+	"der" prep
+<word>svensk</word>
+"<svensk>"
+	"svensk" subst appell mask ub ent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>dansk</word>
+"<dansk>"
+	"dansk" subst appell mask ub ent
+<word>i</word>
+"<i>"
+	"i" prep
+<word>dag</word>
+"<dag>"
+	"dag" subst appell mask ub ent
+<word>har</word>
+"<har>"
+	"ha" verb pres pa1 d5 a6 tr12 rl6 pa3 tr6 d6/til <aux1/perf_part> pa6
+<word>sten</word>
+"<sten>"
+	"sten" subst appell mask ub ent
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>røs</word>
+"<røs>"
+	"røs" ukjent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>løs</word>
+"<løs>"
+	"løs" adj ub m/f ent pos
+<word>,</word>
+"<,>"
+	"$," clb <komma>
+<word>har</word>
+"<har>"
+	"ha" verb pres pa1 d5 a6 tr12 rl6 pa3 tr6 d6/til <aux1/perf_part> pa6
+<word>mange</word>
+"<mange>"
+	"mange" adj fl pos
+<word>norske</word>
+"<norske>"
+	"norsk" adj fl pos
+<word>dialekter</word>
+"<dialekter>"
+	"dialekt" subst appell mask ub fl
+<word>stein</word>
+"<stein>"
+	"stein" adj ub m/f ent pos
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>røys</word>
+"<røys>"
+	"røys" subst appell fem ub ent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>laus</word>
+"<laus>"
+	"laus" adj ub m/f ent pos
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Også</word>
+"<også>"
+	"også" adv
+<word>islandsk</word>
+"<islandsk>"
+	"islandsk" subst appell mask ub ent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>færøysk</word>
+"<færøysk>"
+	"færøysk" subst appell mask ub ent
+<word>beholdt</word>
+"<beholdt>"
+	"beholde" verb perf-part tr1
+<word>diftongene.[2</word>
+"<diftongene.[2>"
+	"diftongene.[2" ukjent
+<word>]</word>
+"<]>"
+	"$]" <parentes-slutt>
+<word>|</word>
+"<|>"
+	"$|" clb <overskrift> <<< <<<
+<word>Norrønt</word>
+"<norrønt>"
+	"norrøn" adj nøyt ub ent pos
+<word>språk</word>
+"<språk>"
+	"språk" subst appell nøyt ub ent
+<word>hadde</word>
+"<hadde>"
+	"ha" verb pret pa1 d5 a6 tr12 rl6 pa3 tr6 d6/til <aux1/perf_part> pa6
+<word>på</word>
+"<på>"
+	"på" prep
+<word>grunn</word>
+"<grunn>"
+	"grunn" subst appell mask ub ent
+<word>av</word>
+"<av>"
+	"av" prep
+<word>vikingenes</word>
+"<vikingenes>"
+	"viking" subst appell mask be fl gen
+<word>reiser</word>
+"<reiser>"
+	"reise" subst appell fem ub fl
+<word>og</word>
+"<og>"
+	"og" konj
+<word>erobringer</word>
+"<erobringer>"
+	"erobring" subst appell fem ub fl
+<word>sterk</word>
+"<sterk>"
+	"sterk" adj ub m/f ent pos
+<word>innvirkning</word>
+"<innvirkning>"
+	"innvirkning" subst appell fem ub ent
+<word>på</word>
+"<på>"
+	"på" prep
+<word>gammelengelsk</word>
+"<gammelengelsk>"
+	"gammelengelsk" subst appell mask ub ent
+<word>på</word>
+"<på>"
+	"på" prep
+<word>denne</word>
+"<denne>"
+	"denne" det dem fem ent
+<word>tida</word>
+"<tida>"
+	"tid" subst appell fem be ent
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>og</word>
+"<og>"
+	"og" konj clb
+<word>det</word>
+"<det>"
+	"det" pron nøyt ent pers 3
+<word>bidro</word>
+"<bidro>"
+	"bidra" verb pret tr11 tr11/til
+<word>til</word>
+"<til>"
+	"til" prep
+<word>å</word>
+"<å>"
+	"å" inf-merke
+<word>opprettholde</word>
+"<opprettholde>"
+	"opprettholde" verb inf tr1
+<word>den</word>
+"<den>"
+	"den" det dem mask ent
+<word>gjensidige</word>
+"<gjensidige>"
+	"gjensidig" adj be ent pos
+<word>forståeligheten</word>
+"<forståeligheten>"
+	"forståelighet" subst appell mask be ent
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Forskjellen</word>
+"<forskjellen>"
+	"forskjell" subst appell mask be ent
+<word>kan</word>
+"<kan>"
+	"kunne" verb pres tr1 tr3 <aux1/infinitiv>
+<word>ha</word>
+"<ha>"
+	"ha" verb inf pa1 d5 a6 tr12 rl6 pa3 tr6 d6/til <aux1/perf_part> pa6
+<word>vært</word>
+"<vært>"
+	"være" verb perf-part a5 pr1 pr2 <aux1/perf_part>
+<word>omtrent</word>
+"<omtrent>"
+	"omtrent" adv
+<word>som</word>
+"<som>"
+	"som" prep
+<word>forskjellen</word>
+"<forskjellen>"
+	"forskjell" subst appell mask be ent
+<word>mellom</word>
+"<mellom>"
+	"mellom" prep
+<word>norsk</word>
+"<norsk>"
+	"norsk" subst appell mask ub ent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>svensk</word>
+"<svensk>"
+	"svensk" adj ub m/f ent pos
+<word>i</word>
+"<i>"
+	"i" prep
+<word>dag.[7</word>
+"<dag.[7>"
+	"dag.[7" ukjent
+<word>]</word>
+"<]>"
+	"$]" <parentes-slutt>
+<word>|</word>
+"<|>"
+	"$|" clb <overskrift> <<< <<<
+<word>Fra</word>
+"<fra>"
+	"fra" prep
+<word>omkring</word>
+"<omkring>"
+	"omkring" prep
+<word>1200</word>
+"<1200>"
+	"1200" det fl kvant
+<word>skilte</word>
+"<skilte>"
+	"skille" verb pret tr1 pa1 rl4 d5 rl9 pa2
+<word>dansk</word>
+"<dansk>"
+	"dansk" subst appell mask ub ent
+<word>seg</word>
+"<seg>"
+	"seg" pron akk refl
+<word>stadig</word>
+"<stadig>"
+	"stadig" adj nøyt ub ent pos
+<word>mer</word>
+"<mer>"
+	"mye" adj komp
+<word>fra</word>
+"<fra>"
+	"fra" prep
+<word>norsk</word>
+"<norsk>"
+	"norsk" subst appell mask ub ent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>svensk</word>
+"<svensk>"
+	"svensk" subst appell mask ub ent
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Dansk</word>
+"<dansk>"
+	"dansk" subst appell mask ub ent
+<word>mistet</word>
+"<mistet>"
+	"miste" verb pret tr5
+<word>skillet</word>
+"<skillet>"
+	"skille" subst appell nøyt be ent
+<word>mellom</word>
+"<mellom>"
+	"mellom" prep
+<word>ulike</word>
+"<ulike>"
+	"ulik" adj fl pos
+<word>vokaler</word>
+"<vokaler>"
+	"vokal" subst appell mask ub fl
+<word>i</word>
+"<i>"
+	"i" prep
+<word>grammatiske</word>
+"<grammatiske>"
+	"grammatisk" adj fl pos
+<word>endelser</word>
+"<endelser>"
+	"endelse" subst appell mask ub fl
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>slik</word>
+"<slik>"
+	"slik" adv
+<word>at</word>
+"<at>"
+	"at" sbu
+<word>der</word>
+"<der>"
+	"der" prep
+<word>norsk</word>
+"<norsk>"
+	"norsk" subst appell mask ub ent
+<word>og</word>
+"<og>"
+	"og" konj
+<word>svensk</word>
+"<svensk>"
+	"svensk" adj ub m/f ent pos
+<word>veksler</word>
+"<veksler>"
+	"veksle" verb pres tr1 pa1 d5 tr12
+<word>mellom</word>
+"<mellom>"
+	"mellom" prep
+<word>e</word>
+"<e>"
+	"e." adj fork
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>a</word>
+"<a>"
+	"a" interj
+<word>og</word>
+"<og>"
+	"og" konj clb
+<word>o</word>
+"<o>"
+	"o" subst appell mask ub ent
+<word>har</word>
+"<har>"
+	"ha" verb pres pa1 d5 a6 tr12 rl6 pa3 tr6 d6/til <aux1/perf_part> pa6
+<word>dansk</word>
+"<dansk>"
+	"dansk" subst appell mask ub ent
+<word>bare</word>
+"<bare>"
+	"bare" adv
+<word>e.</word>
+"<e.>"
+	"e." adj fork
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Dansk</word>
+"<dansk>"
+	"dansk" subst appell mask ub ent
+<word>fikk</word>
+"<fikk>"
+	"få" verb pret tr11 pa1 d5 d5/til rl6 pa1/til rl14 d6/til rl3/til pr7 tr20 tr14 <aux1/perf_part> pa6 <aux1/inf>
+<word>også</word>
+"<også>"
+	"også" adv
+<word>en</word>
+"<en>"
+	"en" det mask ent kvant
+<word>særegen</word>
+"<særegen>"
+	"særegen" adj ub m/f ent pos
+<word>fonologisk</word>
+"<fonologisk>"
+	"fonologisk" adj ub m/f ent pos
+<word>utvikling</word>
+"<utvikling>"
+	"utvikling" subst appell mask ub ent
+<word>,</word>
+"<,>"
+	"$," clb <komma>
+<word>blant annet</word>
+"<blant annet>"
+	"blant annet" adv prep+adj @adv
+<word>får</word>
+"<får>"
+	"få" verb pres tr11 pa1 d5 d5/til rl6 pa1/til rl14 d6/til rl3/til pr7 tr20 tr14 <aux1/perf_part> pa6 <aux1/inf>
+<word>dansk</word>
+"<dansk>"
+	"dansk" subst appell mask ub ent
+<word>sine</word>
+"<sine>"
+	"sin" det fl poss
+<word>bløde</word>
+"<bløde>"
+	"bløde" verb inf i2 tr5
+<word>konsonanter</word>
+"<konsonanter>"
+	"konsonant" subst appell mask ub fl
+<word>og</word>
+"<og>"
+	"og" konj clb
+<word>det</word>
+"<det>"
+	"det" det dem nøyt ent
+<word>danske</word>
+"<danske>"
+	"danske" subst appell mask ub ent
+<word>stød</word>
+"<stød>"
+	"stød" ukjent
+<word>oppsto</word>
+"<oppsto>"
+	"oppstå" verb pret i2
+<word>på</word>
+"<på>"
+	"på" prep
+<word>denne</word>
+"<denne>"
+	"denne" det dem fem ent
+<word>tida</word>
+"<tida>"
+	"tid" subst appell fem be ent
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Dette</word>
+"<dette>"
+	"dette" det dem nøyt ent
+<word>dialektskillet</word>
+"<dialektskillet>"
+	"dialektskill" subst appell nøyt be ent samset
+<word>er</word>
+"<er>"
+	"være" verb pres a5 pr1 pr2 <aux1/perf_part>
+<word>større</word>
+"<større>"
+	"stor" adj komp
+<word>enn</word>
+"<enn>"
+	"enn" prep
+<word>det</word>
+"<det>"
+	"det" det dem nøyt ent
+<word>eldre</word>
+"<eldre>"
+	"gammel" adj komp
+<word>skillet</word>
+"<skillet>"
+	"skille" subst appell nøyt be ent
+<word>mellom</word>
+"<mellom>"
+	"mellom" prep
+<word>øst</word>
+"<øst>"
+	"øst" prep
+<word>og</word>
+"<og>"
+	"og" konj
+<word>vest</word>
+"<vest>"
+	"vest" prep
+<word>,</word>
+"<,>"
+	"$," <komma>
+<word>og</word>
+"<og>"
+	"og" konj clb
+<word>det</word>
+"<det>"
+	"det" pron nøyt ent pers 3
+<word>er</word>
+"<er>"
+	"være" verb pres a5 pr1 pr2 <aux1/perf_part>
+<word>først og fremst</word>
+"<først og fremst>"
+	"først og fremst" adv adj+kon+adj @adv
+<word>dette</word>
+"<dette>"
+	"dette" pron nøyt ent pers 3
+<word>som</word>
+"<som>"
+	"som" sbu
+<word>gjør</word>
+"<gjør>"
+	"gjøre" verb pres tr1 rl9 pr3
+<word>at</word>
+"<at>"
+	"at" sbu
+<word>nordmenn</word>
+"<nordmenn>"
+	"nordmann" subst appell mask ub fl
+<word>har</word>
+"<har>"
+	"ha" verb pres pa1 d5 a6 tr12 rl6 pa3 tr6 d6/til <aux1/perf_part> pa6
+<word>vanskeligere</word>
+"<vanskeligere>"
+	"vanskelig" adj komp
+<word>for</word>
+"<for>"
+	"for" prep
+<word>å</word>
+"<å>"
+	"å" inf-merke
+<word>forstå</word>
+"<forstå>"
+	"forstå" verb inf tr1 rl9 tr2
+<word>muntlig</word>
+"<muntlig>"
+	"muntlig" adj ub m/f ent pos
+<word>dansk</word>
+"<dansk>"
+	"dansk" subst appell mask ub ent
+<word>enn</word>
+"<enn>"
+	"enn" prep
+<word>svensk.[2</word>
+"<svensk.[2>"
+	"svensk.[2" ukjent
+<word>]</word>
+"<]>"
+	"$]" <parentes-slutt>
+<word>|</word>
+"<|>"
+	"$|" clb <overskrift> <<< <<<
+<word>De</word>
+"<de>"
+	"de" det dem fl
+<word>norske</word>
+"<norske>"
+	"norsk" adj fl pos
+<word>norrøne</word>
+"<norrøne>"
+	"norrøn" adj fl pos
+<word>dialektene</word>
+"<dialektene>"
+	"dialekt" subst appell mask be fl
+<word>fram</word>
+"<fram>"
+	"fram" prep
+<word>til</word>
+"<til>"
+	"til" prep
+<word>rundt</word>
+"<rundt>"
+	"rundt" prep
+<word>1350</word>
+"<1350>"
+	"1350" det fl kvant
+<word>kalles</word>
+"<kalles>"
+	"kalle" verb pres inf pass i1 tr11 pa1 d5 pr6 pr3 pr4
+<word>gammelnorsk</word>
+"<gammelnorsk>"
+	"gammelnorsk" subst appell mask ub ent
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Gammelnorsk</word>
+"<gammelnorsk>"
+	"gammelnorsk" subst appell mask ub ent
+<word>ble</word>
+"<ble>"
+	"bli" verb pret i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>skrevet</word>
+"<skrevet>"
+	"skrive" verb perf-part tr1 i1 tr11 pa1 d1 pa5 pa3
+<word>både</word>
+"<både>"
+	"både" konj <adv>
+<word>med</word>
+"<med>"
+	"med" prep
+<word>runer</word>
+"<runer>"
+	"rune" subst appell fem ub fl
+<word>og</word>
+"<og>"
+	"og" konj
+<word>med</word>
+"<med>"
+	"med" prep
+<word>det</word>
+"<det>"
+	"det" det dem nøyt ent
+<word>latinske</word>
+"<latinske>"
+	"latinsk" adj be ent pos
+<word>alfabetet</word>
+"<alfabetet>"
+	"alfabet" subst appell nøyt be ent
+<word>som</word>
+"<som>"
+	"som" sbu
+<word>ble</word>
+"<ble>"
+	"bli" verb pret i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>innført</word>
+"<innført>"
+	"innføre" verb perf-part tr1 d5
+<word>sammen</word>
+"<sammen>"
+	"sammen" adv
+<word>med</word>
+"<med>"
+	"med" prep
+<word>kristendommen</word>
+"<kristendommen>"
+	"kristendom" subst appell mask be ent
+<word>på</word>
+"<på>"
+	"på" prep
+<word>1000-tallet</word>
+"<1000-tallet>"
+	"1000-tall" subst appell nøyt be ent samset
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
+<word>Da</word>
+"<da>"
+	"da" sbu
+<word>mange</word>
+"<mange>"
+	"mange" adj fl pos
+<word>av</word>
+"<av>"
+	"av" prep
+<word>de</word>
+"<de>"
+	"de" det dem fl
+<word>skrivekyndige</word>
+"<skrivekyndige>"
+	"skrivekyndig" adj fl pos
+<word>døde</word>
+"<døde>"
+	"dø" verb pret i2 tr6
+<word>i</word>
+"<i>"
+	"i" prep
+<word>svartedauden</word>
+"<svartedauden>"
+	"svartedauden" subst appell mask be ent
+<word>i</word>
+"<i>"
+	"i" prep
+<word>1349</word>
+"<1349>"
+	"1349" det fl kvant
+<word>ble</word>
+"<ble>"
+	"bli" verb pret i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>det</word>
+"<det>"
+	"det" det dem nøyt ent
+<word>norske</word>
+"<norske>"
+	"norsk" adj be ent pos
+<word>skriftspråket</word>
+"<skriftspråket>"
+	"skriftspråk" subst appell nøyt be ent
+<word>svekket</word>
+"<svekket>"
+	"svekke" verb perf-part tr1
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
