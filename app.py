@@ -15,6 +15,33 @@ regex2 = re.compile("\"<(?P<w>[\w+]*)>\"")
 # Flask app
 app = Flask(__name__)
 
+def findWikiPageDisambiguates(entity):
+    sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+    sparql.setQuery("""
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX dbo: <http://dbpedia.org/ontology/>
+
+        SELECT ?s ?wpd WHERE {
+          {
+            ?s rdfs:label "%s"@en; dbpedia-owl:wikiPageDisambiguates ?wpd .
+
+          }
+
+        }
+    """ % (entity, ))
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    bindings = results["results"]["bindings"]
+
+    uri = ""
+    if len(bindings) > 0:
+        uri = bindings[0]["s"]["value"]
+    data = {
+        "uri": uri
+    }
+    return data
+
 def findSPARQLUri(entity):
     sparql = SPARQLWrapper("http://dbpedia.org/sparql")
     sparql.setQuery("""
