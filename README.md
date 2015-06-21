@@ -193,8 +193,9 @@ Test endpoint to demostrate the **text** endpoint
 [Read more](https://github.com/domenicosolazzo/obt-api/blob/master/TEXTFILE)
 
 # Dependencies
-- [The Oslo-Bergen tagger](https://github.com/noklesta/The-Oslo-Bergen-Tagger): morphosyntactic tagger for Norwegian bokmål and nynorsk
+- [The Oslo-Bergen tagger](https://github.com/noklesta/The-Oslo-Bergen-Tagger): morphosyntactic tagger for Norwegian bokmål and nynorsk. [More info about the tagger](http://tekstlab.uio.no/obt-ny/index.html).
 - [OBT-Stat](https://github.com/andrely/OBT-Stat): Statistical disambiguator for the Oslo-Bergen Part of Speech tagger
 - [VISL CG-3](http://beta.visl.sdu.dk/constraint_grammar.html): CG compiler. 3rd version of the CG formalism variant
 - [Multitagger](http://www.tekstlab.uio.no/mtag/osx64/mtag-osx64): Multitagger with lexicon for Norwegian Bokmål and Nynorsk.
-- HusPos
+- [HusPos](https://code.google.com/p/hunpos/): Hunpos is an open source reimplementation of TnT, the well known part-of-speech tagger
+
