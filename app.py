@@ -409,6 +409,20 @@ def demo_entities():
         ex_value = traceback.format_exception(*sys.exc_info())
         return jsonify(errors = ex_value)
 
+@app.route('/demo/ee'):
+    try:
+      obt_result = analyze_text("TEXTFILE", delete_files=False)
+
+      entities = findEntities(obt_result)
+      sparqlEntities = entityExtraction(entities);
+
+      data_result = {"entities": entities, "ee": sparqlEntities }
+
+      obt_json_result = json.dumps(data_result)
+      return Response(obt_json_result, mimetype="application/json")
+    except Exception as e:
+        ex_value = traceback.format_exception(*sys.exc_info())
+        return jsonify(errors = ex_value)
 @app.route('/demo/text')
 def demo_text():
     try:
