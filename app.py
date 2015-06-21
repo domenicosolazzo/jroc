@@ -5,6 +5,7 @@ import os
 import json
 import re
 import time
+from SPARQLWrapper import SPARQLWrapper, JSON
 
 
 regex = re.compile("<word>(?P<w>(.*?))</word>")
@@ -13,6 +14,31 @@ regex2 = re.compile("\"<(?P<w>[\w+]*)>\"")
 
 # Flask app
 app = Flask(__name__)
+
+
+def executeSPARQLQuery(entity):
+    name = entity.strip().replace(" ", "_")
+    sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+    sparql.setQuery("""
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        SELECT ?comment, ?label, ?thumbnail, ?abstract, ?name
+        WHERE {
+          <http://dbpedia.org/resource/%s>  rdfs:label ?label; rdfs:comment ?comment; dbpedia-owl:thumbnail ?thumbnail; dbpedia-owl:abstract ?abstract; foaf:name ?name .
+          FILTER(langMatches(lang(?name), "EN"))
+          FILTER(langMatches(lang(?comment), "EN"))
+          FILTER(langMatches(lang(?abstract), "EN"))
+          FILTER(langMatches(lang(?label), "EN"))
+        }
+        LIMIT 5
+    """ %(entity.strip().replace(" ", "_"),))
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    bindings = results["results"]["bindings"]
+
+    data = {
+        name: bindings
+    }
+    return data
 
 def saveContent(json_data):
     try:
@@ -85,6 +111,13 @@ def findEntities(data):
     entities = list(set(entities))
     return entities
 
+def entityExtraction(entities):
+    data = []
+    for entity in entities:
+        sparqlEntity = executeSPARQLQuery(entity)
+        data.append({"name": entity, "sparql": sparqlEntity})
+    return data
+
 def findTags(obt_data):
     unique_tags = set([tag.get("word") for tag in obt_data if tag.get("is_prop") == True and tag.get("is_subst") == True])
     return list(unique_tags)
@@ -153,6 +186,24 @@ def entities():
 
       entities = findEntities(obt_result)
       data_result = {"entities": entities}
+
+      obt_json_result = json.dumps(data_result)
+      return Response(obt_json_result, mimetype="application/json")
+    except Exception as e:
+        ex_value = traceback.format_exception(*sys.exc_info())
+        return jsonify(errors = ex_value)
+
+@app.route('/ee', methods=["POST"])
+def ee():
+    try:
+      json_result = json.loads(request.data)
+      filename = saveContent(json_result)
+      obt_result = analyze_text(filename)
+
+      entities = findEntities(obt_result)
+      sparqlEntities = entityExtraction(entities);
+
+      data_result = {"entities": entities, "sparql": sparqlEntities }
 
       obt_json_result = json.dumps(data_result)
       return Response(obt_json_result, mimetype="application/json")
