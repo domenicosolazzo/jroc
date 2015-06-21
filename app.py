@@ -15,6 +15,39 @@ regex2 = re.compile("\"<(?P<w>[\w+]*)>\"")
 # Flask app
 app = Flask(__name__)
 
+def fetchAllProperties(entity, fetchValues=False):
+    sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+    if fetchValues:
+        sparql.setQuery("""
+            SELECT ?property ?propValue WHERE {
+                <http://dbpedia.org/resource/%s> ?property ?propValue .
+            }
+        """ % (entity,))
+    else:
+        sparql.setQuery("""
+            SELECT DISTINCT ?property  WHERE {
+            <http://dbpedia.org/resource/%s> ?property ?propValue .
+          }
+        """ % (entity,))
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    bindings = results["results"]["bindings"]
+
+    properties = {}
+    for prop in bindings:
+        propertyName = prop["property"]["value"]
+        if not propertyName in properties:
+            properties[propertyName] = []
+        if fetchValues:
+            propertyValue = prop["propValue"]["value"]
+            properties[propertyName].append(propertyValue)
+
+
+    data = {
+        "properties": properties
+    }
+    return data
+
 def findWikiPageDisambiguates(entity):
     sparql = SPARQLWrapper("http://dbpedia.org/sparql")
     sparql.setQuery("""
@@ -22,26 +55,49 @@ def findWikiPageDisambiguates(entity):
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX dbo: <http://dbpedia.org/ontology/>
 
-        SELECT ?s ?wpd WHERE {
-          {
-            ?s rdfs:label "%s"@en; dbpedia-owl:wikiPageDisambiguates ?wpd .
-
-          }
-
+        SELECT DISTINCT ?syn WHERE {
+        {   ?disPage dbpedia-owl:wikiPageDisambiguates <http://dbpedia.org/resource/%s> .
+            ?disPage dbpedia-owl:wikiPageDisambiguates ?syn .
         }
-    """ % (entity, ))
+        UNION
+        {
+            <http://dbpedia.org/resource/%s> dbpedia-owl:wikiPageDisambiguates ?syn .
+        }
+}
+    """ % (entity, entity))
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
     bindings = results["results"]["bindings"]
 
-    uri = ""
+    uri_list = []
     if len(bindings) > 0:
-        uri = bindings[0]["s"]["value"]
+        uri_list = [binding["syn"]["value"] for binding in bindings]
     data = {
-        "uri": uri
+        "synonyms": uri_list
     }
     return data
 
+
+def fetchThumbnail(entity):
+    name = entity.strip().replace(" ", "_")
+    sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+    sparql.setQuery("""
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        SELECT ?thumbnail
+        WHERE {
+          <http://dbpedia.org/resource/%s> dbpedia-owl:thumbnail ?thumbnail .
+        }
+        LIMIT 5
+    """ %(entity.strip().replace(" ", "_"),))
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    bindings = results["results"]["bindings"]
+
+
+    data = {
+        name: bindings
+    }
+    return data
 def findSPARQLUri(entity):
     sparql = SPARQLWrapper("http://dbpedia.org/sparql")
     sparql.setQuery("""
@@ -60,6 +116,7 @@ def findSPARQLUri(entity):
                      dbo:wikiPageRedirects ?s .
           }
         }
+        LIMIT 5
     """ % (entity, entity))
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
@@ -78,9 +135,9 @@ def executeSPARQLQuery(entity):
     sparql = SPARQLWrapper("http://dbpedia.org/sparql")
     sparql.setQuery("""
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        SELECT ?comment, ?label, ?thumbnail, ?abstract, ?name
+        SELECT ?comment, ?label, ?abstract, ?name
         WHERE {
-          <http://dbpedia.org/resource/%s>  rdfs:label ?label; rdfs:comment ?comment; dbpedia-owl:thumbnail ?thumbnail; dbpedia-owl:abstract ?abstract; foaf:name ?name .
+          <http://dbpedia.org/resource/%s>  rdfs:label ?label; rdfs:comment ?comment; dbpedia-owl:abstract ?abstract; foaf:name ?name .
           FILTER(langMatches(lang(?name), "EN"))
           FILTER(langMatches(lang(?comment), "EN"))
           FILTER(langMatches(lang(?abstract), "EN"))
@@ -172,10 +229,22 @@ def findEntities(data):
 def entityExtraction(entities):
     data = []
     for entity in entities:
-        sparqlEntity = executeSPARQLQuery(entity)
         uri = findSPARQLUri(entity)
-        print(uri)
-        data.append({"name": entity, "sparql": sparqlEntity})
+        if uri.get('uri', None):
+            entityName = uri.get('uri', None).replace("http://dbpedia.org/resource/", "")
+            sparqlEntity = executeSPARQLQuery(entityName)
+            syn = findWikiPageDisambiguates(entityName)
+            properties = fetchAllProperties(entityName, True)
+            entityData = {
+                "uri": uri.get("uri", None),
+                "name": entity,
+                "entityName": entityName,
+                "info": sparqlEntity,
+                "synonyms": syn.get("synonyms",[]),
+                "properties": properties
+            }
+            data.append(entityData)
+
     return data
 
 def findTags(obt_data):
@@ -263,7 +332,7 @@ def ee():
       entities = findEntities(obt_result)
       sparqlEntities = entityExtraction(entities);
 
-      data_result = {"entities": entities, "sparql": sparqlEntities }
+      data_result = {"entities": entities, "ee": sparqlEntities }
 
       obt_json_result = json.dumps(data_result)
       return Response(obt_json_result, mimetype="application/json")
