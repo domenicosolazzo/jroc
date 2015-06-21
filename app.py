@@ -55,10 +55,7 @@ def tags():
     try:
       json_result = json.loads(request.data)
       obtManager = OBTManager(json_result)
-
-      obt_result = obtManager.analyzeText()
       tags = obtManager.findTags()
-
       data_result = {"tags": tags}
 
       obt_json_result = json.dumps(data_result)
@@ -72,7 +69,6 @@ def entities():
     try:
       json_result = json.loads(request.data)
       obtManager = OBTManager(json_result)
-      obt_result = obtManager.analyzeText()
       entities =  obtManager.findEntities()
 
       data_result = {"entities": entities}
@@ -129,7 +125,6 @@ def demo_tags():
       tags = obtManager.findTags()
       data_result = {
         "tags": tags
-
       }
 
       obt_json_result = json.dumps(data_result)
