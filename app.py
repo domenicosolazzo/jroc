@@ -15,6 +15,36 @@ regex2 = re.compile("\"<(?P<w>[\w+]*)>\"")
 # Flask app
 app = Flask(__name__)
 
+def findSPARQLUri(entity):
+    sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+    sparql.setQuery("""
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX dbo: <http://dbpedia.org/ontology/>
+
+        SELECT ?s WHERE {
+          {
+            ?s rdfs:label "%s"@en ;
+               a owl:Thing .
+          }
+          UNION
+          {
+            ?altName rdfs:label "%s"@en ;
+                     dbo:wikiPageRedirects ?s .
+          }
+        }
+    """ % (entity, entity))
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    bindings = results["results"]["bindings"]
+
+    uri = ""
+    if len(bindings) > 0:
+        uri = bindings[0]["s"]["value"]
+    data = {
+        "uri": uri
+    }
+    return data
 
 def executeSPARQLQuery(entity):
     name = entity.strip().replace(" ", "_")
@@ -34,6 +64,7 @@ def executeSPARQLQuery(entity):
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
     bindings = results["results"]["bindings"]
+
 
     data = {
         name: bindings
@@ -115,6 +146,8 @@ def entityExtraction(entities):
     data = []
     for entity in entities:
         sparqlEntity = executeSPARQLQuery(entity)
+        uri = findSPARQLUri(entity)
+        print(uri)
         data.append({"name": entity, "sparql": sparqlEntity})
     return data
 
