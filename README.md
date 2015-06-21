@@ -1,5 +1,5 @@
 # OBT API
-A REST API for using the Oslo-Bergen tagger.
+A REST API for document tagging and entity extraction.
 
 #### About Oslo-Bergen Tagger
 The Oslo-Bergen Tagger is a morphosyntactic tagger for Norwegian bokmål and nynorsk. For general information about the tagger, visit its home page: [Tekstlab.uio.no](http://www.tekstlab.uio.no/obt-ny/).
