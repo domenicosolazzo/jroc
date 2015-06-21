@@ -267,7 +267,24 @@ def isNumber(tagging):
 
 @app.route('/')
 def index():
-    return jsonify({"welcome":"Welcome to OBT Api"})
+    return jsonify({
+        "welcome":"Welcome to OBT Api",
+        "api":{
+            "analyze": "/analyze",
+            "tags": "/tags",
+            "entities": "/entities",
+            "ee": "/ee",
+            "demo":{
+                "base": "/demo",
+                "analyze": "/demo/analyze",
+                "entities": "/demo/entities",
+                "ee": "/demo/ee",
+                "tags": "/demo/tags",
+                "text": "/demo/text"
+            }
+        }
+
+    })
 
 @app.route('/analyze', methods=["POST"])
 def analyze():
