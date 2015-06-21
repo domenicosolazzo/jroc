@@ -1,269 +1,11 @@
 from flask import Flask, Response, request, jsonify
 import traceback
 import sys
-import os
 import json
-import re
-import time
-from SPARQLWrapper import SPARQLWrapper, JSON
-
-
-regex = re.compile("<word>(?P<w>(.*?))</word>")
-regex2 = re.compile("\"<(?P<w>[\w+]*)>\"")
-
+from modules.tagger.Obt import OBTManager
 
 # Flask app
 app = Flask(__name__)
-
-def fetchAllProperties(entity, fetchValues=False):
-    sparql = SPARQLWrapper("http://dbpedia.org/sparql")
-    if fetchValues:
-        sparql.setQuery("""
-            SELECT ?property ?propValue WHERE {
-                <http://dbpedia.org/resource/%s> ?property ?propValue .
-            }
-        """ % (entity,))
-    else:
-        sparql.setQuery("""
-            SELECT DISTINCT ?property  WHERE {
-            <http://dbpedia.org/resource/%s> ?property ?propValue .
-          }
-        """ % (entity,))
-    sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
-    bindings = results["results"]["bindings"]
-
-    properties = {}
-    for prop in bindings:
-        propertyName = prop["property"]["value"]
-        if not propertyName in properties:
-            properties[propertyName] = []
-        if fetchValues:
-            propertyValue = prop["propValue"]["value"]
-            properties[propertyName].append(propertyValue)
-
-
-    data = {
-        "properties": properties
-    }
-    return data
-
-def findWikiPageDisambiguates(entity):
-    sparql = SPARQLWrapper("http://dbpedia.org/sparql")
-    sparql.setQuery("""
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        PREFIX dbo: <http://dbpedia.org/ontology/>
-
-        SELECT DISTINCT ?syn WHERE {
-        {   ?disPage dbpedia-owl:wikiPageDisambiguates <http://dbpedia.org/resource/%s> .
-            ?disPage dbpedia-owl:wikiPageDisambiguates ?syn .
-        }
-        UNION
-        {
-            <http://dbpedia.org/resource/%s> dbpedia-owl:wikiPageDisambiguates ?syn .
-        }
-}
-    """ % (entity, entity))
-    sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
-    bindings = results["results"]["bindings"]
-
-    uri_list = []
-    if len(bindings) > 0:
-        uri_list = [binding["syn"]["value"] for binding in bindings]
-    data = {
-        "synonyms": uri_list
-    }
-    return data
-
-
-def fetchThumbnail(entity):
-    name = entity.strip().replace(" ", "_")
-    sparql = SPARQLWrapper("http://dbpedia.org/sparql")
-    sparql.setQuery("""
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        SELECT ?thumbnail
-        WHERE {
-          <http://dbpedia.org/resource/%s> dbpedia-owl:thumbnail ?thumbnail .
-        }
-        LIMIT 5
-    """ %(entity.strip().replace(" ", "_"),))
-    sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
-    bindings = results["results"]["bindings"]
-
-
-    data = {
-        name: bindings
-    }
-    return data
-def findSPARQLUri(entity):
-    sparql = SPARQLWrapper("http://dbpedia.org/sparql")
-    sparql.setQuery("""
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        PREFIX dbo: <http://dbpedia.org/ontology/>
-
-        SELECT ?s WHERE {
-          {
-            ?s rdfs:label "%s"@en ;
-               a owl:Thing .
-          }
-          UNION
-          {
-            ?altName rdfs:label "%s"@en ;
-                     dbo:wikiPageRedirects ?s .
-          }
-        }
-        LIMIT 5
-    """ % (entity, entity))
-    sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
-    bindings = results["results"]["bindings"]
-
-    uri = ""
-    if len(bindings) > 0:
-        uri = bindings[0]["s"]["value"]
-    data = {
-        "uri": uri
-    }
-    return data
-
-def executeSPARQLQuery(entity):
-    name = entity.strip().replace(" ", "_")
-    sparql = SPARQLWrapper("http://dbpedia.org/sparql")
-    sparql.setQuery("""
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        SELECT ?comment, ?label, ?abstract, ?name
-        WHERE {
-          <http://dbpedia.org/resource/%s>  rdfs:label ?label; rdfs:comment ?comment; dbpedia-owl:abstract ?abstract; foaf:name ?name .
-          FILTER(langMatches(lang(?name), "EN"))
-          FILTER(langMatches(lang(?comment), "EN"))
-          FILTER(langMatches(lang(?abstract), "EN"))
-          FILTER(langMatches(lang(?label), "EN"))
-        }
-        LIMIT 5
-    """ %(entity.strip().replace(" ", "_"),))
-    sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
-    bindings = results["results"]["bindings"]
-
-
-    data = {
-        name: bindings
-    }
-    return data
-
-def saveContent(json_data):
-    try:
-        if not isinstance(json_data, dict) or not 'data' in json_data.keys():
-            raise Exception("Invalid data in input")
-
-        data = json_data.get('data')
-
-        filename = "TEXTFILE_%s" % (int(time.time()), )
-        print(filename)
-        file = open(filename,'w')
-        file.write(data.encode('utf8'))
-        file.close()
-        return filename
-    except:
-        raise
-
-def analyze_text(filename, delete_files=True):
-    output_filename = "%s_OUTPUT" % (filename,)
-
-    os.system('The-Oslo-Bergen-Tagger/tag-bm.sh %s > %s' % (filename, output_filename))
-    file_object = open(output_filename, 'r')
-    text = file_object.read().decode('utf8')
-    text = text.split("\n")
-    result = []
-    new_obj = {}
-    for word in text:
-        if not word:
-           continue
-        is_match = regex.match(word)
-        if regex.match(word):
-            new_obj = {"word": is_match.groups(0)[0]}
-            result.append(new_obj)
-        elif regex2.match(word.lower()):
-           continue
-        else:
-           word = word.replace("\"", "").replace("\t", "")
-           tagging = [w for w in word.split(" ") if w]
-
-           new_obj["tagging"] = tagging
-           new_obj["options"] = word
-           new_obj["is_verb"] = True if len([tag for tag in tagging if tag == 'verb']) > 0 else False
-           new_obj["is_subst"] = True if len([tag for tag in tagging if tag == 'subst']) > 0 else False
-           new_obj["is_prop"] = True if len([tag for tag in tagging if tag == 'prop']) > 0 else False
-           new_obj["is_number"] = isNumber(tagging)
-    if delete_files:
-        deleteFile(filename)
-        deleteFile(output_filename)
-    return result
-
-def deleteFile(filename):
-    try:
-        os.remove(filename)
-        return True
-    except:
-        raise
-
-def findEntities(data):
-    entities = []
-    last_entity = ""
-    for entity in data:
-        if (entity.get("is_prop") == True and entity.get("is_subst") == True) or (entity.get("is_number").get('roman') == True):
-            if last_entity is "":
-                last_entity = entity.get("word")
-            else:
-                last_entity = "%s %s" % (last_entity, entity.get("word"))
-        elif last_entity is not "":
-            entities.append(last_entity)
-            last_entity = ""
-    entities = list(set(entities))
-    return entities
-
-def entityExtraction(entities):
-    data = []
-    for entity in entities:
-        uri = findSPARQLUri(entity)
-        if uri.get('uri', None):
-            entityName = uri.get('uri', None).replace("http://dbpedia.org/resource/", "")
-            sparqlEntity = executeSPARQLQuery(entityName)
-            syn = findWikiPageDisambiguates(entityName)
-            properties = fetchAllProperties(entityName, True)
-            entityData = {
-                "uri": uri.get("uri", None),
-                "name": entity,
-                "entityName": entityName,
-                "info": sparqlEntity,
-                "synonyms": syn.get("synonyms",[]),
-                "properties": properties
-            }
-            data.append(entityData)
-
-    return data
-
-def findTags(obt_data):
-    unique_tags = set([tag.get("word") for tag in obt_data if tag.get("is_prop") == True and tag.get("is_subst") == True])
-    return list(unique_tags)
-
-def isNumber(tagging):
-    is_quantity =  True if len([tag for tag in tagging if tag == 'kvant']) > 0 else False
-    is_ordinal = True if len([tag for tag in tagging if tag == '<ordenstall>']) > 0 else False
-    is_roman = True if len([tag for tag in tagging if tag == '<romertall>']) > 0 else False
-    is_number  = True if is_quantity or is_ordinal or is_roman else False
-    return {
-        "is_number": is_number,
-        "quantity": is_quantity,
-        "ordinal": is_ordinal,
-        "roman": is_roman
-    }
-
-
 
 @app.route('/')
 def index():
@@ -290,10 +32,11 @@ def index():
 def analyze():
     try:
         json_result = json.loads(request.data)
-        filename = saveContent(json_result)
-        obt_result = analyze_text(filename)
-        tags = findTags(obt_result)
-        entities = findEntities(obt_result)
+        obtManager = OBTManager(json_result)
+
+        obt_result = obtManager.analyzeText()
+        tags = obtManager.findTags()
+        entities = obtManager.findEntities()
 
         data_result = {
             "obt": obt_result,
@@ -311,10 +54,11 @@ def analyze():
 def tags():
     try:
       json_result = json.loads(request.data)
-      filename = saveContent(json_result)
-      obt_result = analyze_text(filename)
+      obtManager = OBTManager(json_result)
 
-      tags = findTags(obt_result)
+      obt_result = obtManager.analyzeText()
+      tags = obtManager.findTags()
+
       data_result = {"tags": tags}
 
       obt_json_result = json.dumps(data_result)
@@ -327,10 +71,10 @@ def tags():
 def entities():
     try:
       json_result = json.loads(request.data)
-      filename = saveContent(json_result)
-      obt_result = analyze_text(filename)
+      obtManager = OBTManager(json_result)
+      obt_result = obtManager.analyzeText()
+      entities =  obtManager.findEntities()
 
-      entities = findEntities(obt_result)
       data_result = {"entities": entities}
 
       obt_json_result = json.dumps(data_result)
@@ -343,13 +87,8 @@ def entities():
 def ee():
     try:
       json_result = json.loads(request.data)
-      filename = saveContent(json_result)
-      obt_result = analyze_text(filename)
-
-      entities = findEntities(obt_result)
-      sparqlEntities = entityExtraction(entities);
-
-      data_result = {"entities": entities, "ee": sparqlEntities }
+      obtManager = OBTManager(json_result)
+      data_result = obtManager.entityExtraction();
 
       obt_json_result = json.dumps(data_result)
       return Response(obt_json_result, mimetype="application/json")
@@ -369,25 +108,29 @@ def demo():
 
 @app.route('/demo/analyze')
 def demo_analyze():
-    obt_result = analyze_text("TEXTFILE", delete_files=False)
-    tags = findTags(obt_result)
-    entities = findEntities(obt_result)
+    obtManager = OBTManager(None, filename="TEXTFILE", deleteFiles=False)
+    obt_result = obtManager.analyzeText()
+    tags = obtManager.findTags()
+    entities = obtManager.findEntities()
 
     data_result = {
         "obt": obt_result,
         "tags": tags,
         "entities": entities
     }
+
     obt_json_result = json.dumps(data_result)
     return Response(obt_json_result, mimetype="application/json")
 
 @app.route('/demo/tags')
 def demo_tags():
     try:
-      obt_result = analyze_text("TEXTFILE", delete_files=False)
+      obtManager = OBTManager(None, filename="TEXTFILE", deleteFiles=False)
+      tags = obtManager.findTags()
+      data_result = {
+        "tags": tags
 
-      tags = findTags(obt_result)
-      data_result = {"tags": tags}
+      }
 
       obt_json_result = json.dumps(data_result)
       return Response(obt_json_result, mimetype="application/json")
@@ -398,10 +141,11 @@ def demo_tags():
 @app.route('/demo/entities')
 def demo_entities():
     try:
-      obt_result = analyze_text("TEXTFILE", delete_files=False)
-
-      entities = findEntities(obt_result)
-      data_result = {"entities": entities}
+      obtManager = OBTManager(None, filename="TEXTFILE", deleteFiles=False)
+      entities = obtManager.findEntities()
+      data_result = {
+        "entities": entities
+      }
 
       obt_json_result = json.dumps(data_result)
       return Response(obt_json_result, mimetype="application/json")
@@ -409,20 +153,18 @@ def demo_entities():
         ex_value = traceback.format_exception(*sys.exc_info())
         return jsonify(errors = ex_value)
 
-@app.route('/demo/ee'):
+@app.route('/demo/ee')
+def demo_ee():
     try:
-      obt_result = analyze_text("TEXTFILE", delete_files=False)
-
-      entities = findEntities(obt_result)
-      sparqlEntities = entityExtraction(entities);
-
-      data_result = {"entities": entities, "ee": sparqlEntities }
+      obtManager = OBTManager(None, filename="TEXTFILE", deleteFiles=False)
+      data_result = obtManager.entityExtraction()
 
       obt_json_result = json.dumps(data_result)
       return Response(obt_json_result, mimetype="application/json")
     except Exception as e:
         ex_value = traceback.format_exception(*sys.exc_info())
         return jsonify(errors = ex_value)
+
 @app.route('/demo/text')
 def demo_text():
     try:
@@ -433,6 +175,7 @@ def demo_text():
     except Exception as e:
         ex_value = traceback.format_exception(*sys.exc_info())
         return jsonify(errors = ex_value)
+
 
 if __name__ == '__main__':
    app.debug = True
