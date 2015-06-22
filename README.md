@@ -255,6 +255,11 @@ Test endpoint to demostrate the **tags** endpoint
 
 Test endpoint to demostrate the **entities** endpoint
 
+## Endpoint: /demo/ee
+**Method**: GET
+
+Test endpoint to demostrate the **entity extraction(ee)** endpoint
+
 ## Endpoint: /demo/text
 **Method**: GET
 
