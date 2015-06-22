@@ -74,3 +74,12 @@ class Queries(object):
             }
             LIMIT 5
     """
+
+    # Fetch entity types
+    QUERY_ENTITY_TYPES = """
+        PREFIX yago: <http://dbpedia.org/class/yago/>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        SELECT ?type  WHERE {
+            <http://dbpedia.org/resource/%s> rdf:type ?type.
+        }LIMIT 100
+    """
