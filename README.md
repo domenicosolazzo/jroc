@@ -286,6 +286,4 @@ It will return detailed info for each extracted entity
 [License MIT](https://github.com/domenicosolazzo/obt-api/blob/master/LICENSE)
 
 # Author
-[Domenico Solazzo](http://www.domenicosolazzo.com)
-
-[Twitter](http://twitter.com/domenicosolazzo)
+[Domenico Solazzo](http://www.domenicosolazzo.com) - [Twitter](http://twitter.com/domenicosolazzo)
