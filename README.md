@@ -6,6 +6,12 @@ The Oslo-Bergen Tagger is a morphosyntactic tagger for Norwegian bokmål and nyn
 
 
 # INSTALLATION
+     # Clone the repo
+     git clone git@github.com:domenicosolazzo/obt-api.git
+     
+     # Create the temp folder
+     mkdir <local_folder_repo>/modules/tagger/temp
+     
      # Create a virtual environment
      virtualenv <name_env>
      source <name_env>/bin/activate
