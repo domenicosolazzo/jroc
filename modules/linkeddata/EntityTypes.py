@@ -1,0 +1,5 @@
+PERSON = []
+ORGANIZATION = []
+EVENT = []
+LOCATION = []
+WORK = []
