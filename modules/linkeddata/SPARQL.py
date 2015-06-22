@@ -85,6 +85,17 @@ class SPARQLAdapter(object):
         }
         return data
 
+    def getEntityTypes(self, entityName):
+        query = self.queries.QUERY_ENTITY_TYPES
+        result = self.__prepareAndExecute(query, (entityName, ) )
+
+        entityTypes = [entityType["type"]["value"] for entityType in result]
+
+        data = {
+            "type": entityTypes
+        }
+        return data
+
     def entityExtraction(self, entity):
         uri = self.getUniqueURI(entity)
         if uri.get('uri', None):
