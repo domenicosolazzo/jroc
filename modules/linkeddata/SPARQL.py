@@ -107,6 +107,8 @@ class SPARQLAdapter(object):
         synomyms = self.findDisambiguates(entityName)
         properties = self.getProperties(entityName, fetchValues=True)
         thumbnail = self.getThumbnail(entityName)
+        types = self.getEntityTypes(entityName)
+
         entityData = {
             "uri": uri.get("uri", None),
             "name": entity,
@@ -114,7 +116,8 @@ class SPARQLAdapter(object):
             "info": info,
             "synonyms": synomyms.get("synonyms",[]),
             "properties": properties,
-            "thumbnail": thumbnail.get("thumbnail", "")
+            "thumbnail": thumbnail.get("thumbnail", ""),
+            "types": types.get("type")
         }
 
         return entityData
