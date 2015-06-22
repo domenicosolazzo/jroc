@@ -61,6 +61,15 @@ class Queries(object):
             }
     """
 
+    # Fetch URI of entities which have the label starting with a given string
+    QUERY_SPARQL_URI_STARTWITH = """
+        SELECT ?uri ?label WHERE
+        {
+            ?uri <http://www.w3.org/2000/01/rdf-schema#label> ?label .
+            FILTER regex(str(?uri), "^http://dbpedia.org/resource/%s") .
+        }LIMIT 10
+    """
+
     # Fetch the basic info of a given resource
     QUERY_BASIC_INFO = """
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
