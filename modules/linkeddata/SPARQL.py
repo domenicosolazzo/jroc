@@ -75,6 +75,17 @@ class SPARQLAdapter(object):
         }
         return data
 
+    def getUniqueURIStartWith(self, entityName):
+        query = self.queries.QUERY_SPARQL_URI_STARTWITH
+        result = self.__prepareAndExecute(query, (entityName, entityName))
+
+        uri = [u["uri"]["value"] for u in result]
+
+        data = {
+            "uri": uri
+        }
+        return data
+
     def getBasicInfo(self, entityName):
         entityName = entityName.strip().replace(" ", "_")
         query = self.queries.QUERY_BASIC_INFO
