@@ -54,7 +54,7 @@ How to use the **entity extraction(ee)** endpoint
 
 
 # Endpoints
-These are the endpoints for the API
+Description of the API endpoints
 
 ## Endpoint: /entities
 **Method**: POST
@@ -172,7 +172,69 @@ It will return all the data from the obt tagger, entities and tags for a given t
       ]
    
 ## Endpoint: /ee (BETA)
-**Method**: GET
+**Method**: POST
+It will return detailed info for each extracted entity
+
+#### Example
+      entities:[
+         "Ivar Aasen"
+      ],
+      ee:[
+          {
+                info:{},
+                name: "Ivar Aasen",
+                entityName: "Ivar_Aasen",
+                thumbnail: "http://commons.wikimedia.org/wiki/Special:FilePath/Ivaraasen.jpg?width=300",
+                synonyms: [
+                    "http://dbpedia.org/resource/Ivar_Aasen",
+                    "http://dbpedia.org/resource/Arne_Paasche_Aasen",
+                    "http://dbpedia.org/resource/Augusta_Aasen",
+                    "http://dbpedia.org/resource/Elisabeth_Aasen",
+                    "http://dbpedia.org/resource/Ivar_Aasen-sambandet",
+                    "http://dbpedia.org/resource/John_Aasen",
+                    "http://dbpedia.org/resource/Liv_Aasen",
+                    "http://dbpedia.org/resource/Marianne_Aasen",
+                    "http://dbpedia.org/resource/Mats_Zuccarello",
+                    "http://dbpedia.org/resource/Nils_Waltersen_Aasen",
+                    "http://dbpedia.org/resource/Otto_Aasen"
+                ],
+                properties:{
+                    properties:{
+                         http://dbpedia.org/property/placeOfDeath: [
+                              "Christiania , Norway"
+                         ],
+                         http://dbpedia.org/property/birthDate: [
+                              "1813-08-05+02:00"
+                         ],
+                         http://dbpedia.org/ontology/language: [
+                              "http://dbpedia.org/resource/Old_Norse"
+                         ],
+                         http://dbpedia.org/property/deathDate: [
+                              "1896-09-23+02:00"
+                         ],
+                         http://purl.org/dc/elements/1.1/description: [
+                              "Norwegian philologist, lexicographer, playwright and poet"
+                         ],
+                         [
+                              "http://xmlns.com/foaf/0.1/Person",
+                              "http://schema.org/Person",
+                              "http://dbpedia.org/ontology/Agent",
+                              "http://dbpedia.org/ontology/Artist",
+                              "http://dbpedia.org/ontology/Person",
+                              "http://dbpedia.org/ontology/Writer",
+                              "http://umbel.org/umbel/rc/Artist",
+                              "http://umbel.org/umbel/rc/Writer",
+                              "http://dbpedia.org/class/yago/YagoLegalActorGeo",
+                              "http://dbpedia.org/class/yago/NorwegianLexicographers",
+                              "http://dbpedia.org/class/yago/NorwegianLinguists",
+                              "http://dbpedia.org/class/yago/NorwegianPhilologists",
+                              ....
+                          ],
+                    }
+                }
+          },
+          ...
+      ]
 
 **Description**: It will extract information from DBPedia about the entities
 
