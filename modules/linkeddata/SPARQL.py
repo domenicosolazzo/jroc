@@ -115,7 +115,7 @@ class SPARQLAdapter(object):
             "entityName": entityName,
             "info": info,
             "synonyms": synomyms.get("synonyms",[]),
-            "properties": properties,
+            "properties": properties.get("properties"),
             "thumbnail": thumbnail.get("thumbnail", ""),
             "types": types.get("type")
         }
