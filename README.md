@@ -46,6 +46,11 @@ How to use the **entities** endpoint
 How to use the **tags** endpoint
 
       curl -H "Content-Type: application/json" -X POST -d '{"data":"text_here"}' http://localhost:5000/tags
+     
+How to use the **entity extraction(ee)** endpoint
+
+        curl -H "Content-Type: application/json" -X POST -d '{"data":"text_here"}' http://localhost:5000/ee
+     
 
 
 # Endpoints
