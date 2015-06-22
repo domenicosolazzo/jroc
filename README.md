@@ -241,29 +241,29 @@ It will return detailed info for each extracted entity
 ## Endpoint: /demo/analyze
 **Method**: GET
 
-Test endpoint to demostrate the **analyze** endpoint
+**Description**: Test endpoint to demostrate the **analyze** endpoint
 
 
 ## Endpoint: /demo/tags
 **Method**: GET
 
-Test endpoint to demostrate the **tags** endpoint
+**Description**: Test endpoint to demostrate the **tags** endpoint
 
 
 ## Endpoint: /demo/entities
 **Method**: GET
 
-Test endpoint to demostrate the **entities** endpoint
+**Description**:Test endpoint to demostrate the **entities** endpoint
 
 ## Endpoint: /demo/ee
 **Method**: GET
 
-Test endpoint to demostrate the **entity extraction(ee)** endpoint
+**Description**: Test endpoint to demostrate the **entity extraction(ee)** endpoint
 
 ## Endpoint: /demo/text
 **Method**: GET
 
-Test endpoint to demostrate the **text** endpoint
+**Description**: Test endpoint to demostrate the **text** endpoint
 
 #### Example
       Ivar Aasen ble født på gården Åsen i Hovdebygda på Sunnmøre som sønn av småbrukeren Ivar Jonsson. 
@@ -282,3 +282,10 @@ Test endpoint to demostrate the **text** endpoint
 - [Multitagger](http://www.tekstlab.uio.no/mtag/osx64/mtag-osx64): Multitagger with lexicon for Norwegian Bokmål and Nynorsk.
 - [HusPos](https://code.google.com/p/hunpos/): Hunpos is an open source reimplementation of TnT, the well known part-of-speech tagger
 
+# License
+[License MIT](https://github.com/domenicosolazzo/obt-api/blob/master/LICENSE)
+
+# Author
+[Domenico Solazzo](http://www.domenicosolazzo.com)
+
+[Twitter](http://twitter.com/domenicosolazzo)
