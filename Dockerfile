@@ -1,6 +1,38 @@
 FROM heroku/cedar:14
 
 RUN useradd -d /app -m app
+
+RUN echo "Configuring the container...."
+RUN uname --all
+
+RUN echo "Updating the packages"
+RUN apt-get update
+RUN apt-get -y clean
+
+RUN echo "Installing g++, libicu-dev, subversion cmake libboost-dev build-essential...."
+RUN apt-get -y install g++ libicu-dev subversion cmake libboost-dev build-essential
+
+RUN echo "Installing libgoogle-perftools-dev...."
+RUN apt-get -y install libgoogle-perftools-dev
+
+
+RUN echo "Setting the environmental variables..."
+ENV PATH /app/.apt/usr/bin:$PATH
+ENV LD_LIBRARY_PATH /app/.apt/usr/lib/x86_64-linux-gnu:/app/.apt/usr/lib/i386-linux-gnu:/app/.apt/usr/lib:$LD_LIBRARY_PATH
+ENV LIBRARY_PATH /app/.apt/usr/lib/x86_64-linux-gnu:/app/.apt/usr/lib/i386-linux-gnu:/app/.apt/usr/lib:$LIBRARY_PATH
+ENV INCLUDE_PATH /app/.apt/usr/include:$INCLUDE_PATH
+ENV CPATH $INCLUDE_PATH
+ENV CPPPATH $INCLUDE_PATH
+ENV PKG_CONFIG_PATH /app/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:/app/.apt/usr/lib/i386-linux-gnu/pkgconfig:/app/.apt/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+
+RUN echo "Installing vislcg3...."
+RUN cd /tmp/
+RUN svn co http://visl.sdu.dk/svn/visl/tools/vislcg3/trunk vislcg3
+RUN cd vislcg3/ && ./cmake.sh
+RUN cd vislcg3/ && make -j3
+RUN cd vislcg3/ && ./test/runall.pl && make install && ldconfig
+
+RUN echo "Configuring the heroku container..."
 USER app
 WORKDIR /app/src
 
