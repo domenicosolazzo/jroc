@@ -6,6 +6,12 @@ The Oslo-Bergen Tagger is a morphosyntactic tagger for Norwegian bokmål and nyn
 
 
 # INSTALLATION
+     # Clone the repo
+     git clone git@github.com:domenicosolazzo/obt-api.git
+     
+     # Create the temp folder
+     mkdir <local_folder_repo>/modules/tagger/temp
+     
      # Create a virtual environment
      virtualenv <name_env>
      source <name_env>/bin/activate
@@ -40,10 +46,15 @@ How to use the **entities** endpoint
 How to use the **tags** endpoint
 
       curl -H "Content-Type: application/json" -X POST -d '{"data":"text_here"}' http://localhost:5000/tags
+     
+How to use the **entity extraction(ee)** endpoint
+
+        curl -H "Content-Type: application/json" -X POST -d '{"data":"text_here"}' http://localhost:5000/ee
+     
 
 
 # Endpoints
-These are the endpoints for the API
+Description of the API endpoints
 
 ## Endpoint: /entities
 **Method**: POST
@@ -161,31 +172,98 @@ It will return all the data from the obt tagger, entities and tags for a given t
       ]
    
 ## Endpoint: /ee (BETA)
-**Method**: GET
+**Method**: POST
+It will return detailed info for each extracted entity
+
+#### Example
+      entities:[
+         "Ivar Aasen"
+      ],
+      ee:[
+          {
+                info:{},
+                name: "Ivar Aasen",
+                entityName: "Ivar_Aasen",
+                thumbnail: "http://commons.wikimedia.org/wiki/Special:FilePath/Ivaraasen.jpg?width=300",
+                synonyms: [
+                    "http://dbpedia.org/resource/Ivar_Aasen",
+                    "http://dbpedia.org/resource/Arne_Paasche_Aasen",
+                    "http://dbpedia.org/resource/Augusta_Aasen",
+                    "http://dbpedia.org/resource/Elisabeth_Aasen",
+                    "http://dbpedia.org/resource/Ivar_Aasen-sambandet",
+                    "http://dbpedia.org/resource/John_Aasen",
+                    "http://dbpedia.org/resource/Liv_Aasen",
+                    "http://dbpedia.org/resource/Marianne_Aasen",
+                    "http://dbpedia.org/resource/Mats_Zuccarello",
+                    "http://dbpedia.org/resource/Nils_Waltersen_Aasen",
+                    "http://dbpedia.org/resource/Otto_Aasen"
+                ],
+                properties:{
+                    properties:{
+                         http://dbpedia.org/property/placeOfDeath: [
+                              "Christiania , Norway"
+                         ],
+                         http://dbpedia.org/property/birthDate: [
+                              "1813-08-05+02:00"
+                         ],
+                         http://dbpedia.org/ontology/language: [
+                              "http://dbpedia.org/resource/Old_Norse"
+                         ],
+                         http://dbpedia.org/property/deathDate: [
+                              "1896-09-23+02:00"
+                         ],
+                         http://purl.org/dc/elements/1.1/description: [
+                              "Norwegian philologist, lexicographer, playwright and poet"
+                         ],
+                         [
+                              "http://xmlns.com/foaf/0.1/Person",
+                              "http://schema.org/Person",
+                              "http://dbpedia.org/ontology/Agent",
+                              "http://dbpedia.org/ontology/Artist",
+                              "http://dbpedia.org/ontology/Person",
+                              "http://dbpedia.org/ontology/Writer",
+                              "http://umbel.org/umbel/rc/Artist",
+                              "http://umbel.org/umbel/rc/Writer",
+                              "http://dbpedia.org/class/yago/YagoLegalActorGeo",
+                              "http://dbpedia.org/class/yago/NorwegianLexicographers",
+                              "http://dbpedia.org/class/yago/NorwegianLinguists",
+                              "http://dbpedia.org/class/yago/NorwegianPhilologists",
+                              ....
+                          ],
+                    }
+                }
+          },
+          ...
+      ]
 
 **Description**: It will extract information from DBPedia about the entities
 
 ## Endpoint: /demo/analyze
 **Method**: GET
 
-Test endpoint to demostrate the **analyze** endpoint
+**Description**: Test endpoint to demostrate the **analyze** endpoint
 
 
 ## Endpoint: /demo/tags
 **Method**: GET
 
-Test endpoint to demostrate the **tags** endpoint
+**Description**: Test endpoint to demostrate the **tags** endpoint
 
 
 ## Endpoint: /demo/entities
 **Method**: GET
 
-Test endpoint to demostrate the **entities** endpoint
+**Description**:Test endpoint to demostrate the **entities** endpoint
+
+## Endpoint: /demo/ee
+**Method**: GET
+
+**Description**: Test endpoint to demostrate the **entity extraction(ee)** endpoint
 
 ## Endpoint: /demo/text
 **Method**: GET
 
-Test endpoint to demostrate the **text** endpoint
+**Description**: Test endpoint to demostrate the **text** endpoint
 
 #### Example
       Ivar Aasen ble født på gården Åsen i Hovdebygda på Sunnmøre som sønn av småbrukeren Ivar Jonsson. 
@@ -198,9 +276,14 @@ Test endpoint to demostrate the **text** endpoint
 [Read more](https://github.com/domenicosolazzo/obt-api/blob/master/TEXTFILE)
 
 # Dependencies
-- [The Oslo-Bergen tagger](https://github.com/noklesta/The-Oslo-Bergen-Tagger): morphosyntactic tagger for Norwegian bokmål and nynorsk. [More info about the tagger](http://tekstlab.uio.no/obt-ny/index.html).
+- [The Oslo-Bergen tagger](https://github.com/noklesta/The-Oslo-Bergen-Tagger): morphosyntactic tagger for Norwegian bokmål and nynorsk. [More info about the tagger](http://tekstlab.uio.no/obt-ny/index.html). This is the [output](https://github.com/domenicosolazzo/obt-api/blob/master/OUTPUT) from the tagger.
 - [OBT-Stat](https://github.com/andrely/OBT-Stat): Statistical disambiguator for the Oslo-Bergen Part of Speech tagger
 - [VISL CG-3](http://beta.visl.sdu.dk/constraint_grammar.html): CG compiler. 3rd version of the CG formalism variant
 - [Multitagger](http://www.tekstlab.uio.no/mtag/osx64/mtag-osx64): Multitagger with lexicon for Norwegian Bokmål and Nynorsk.
 - [HusPos](https://code.google.com/p/hunpos/): Hunpos is an open source reimplementation of TnT, the well known part-of-speech tagger
 
+# License
+[License MIT](https://github.com/domenicosolazzo/obt-api/blob/master/LICENSE)
+
+# Author
+[Domenico Solazzo](http://www.domenicosolazzo.com) - [Twitter](http://twitter.com/domenicosolazzo)
