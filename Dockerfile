@@ -15,6 +15,8 @@ RUN apt-get -y install g++ libicu-dev subversion cmake libboost-dev build-essent
 RUN echo "Installing libgoogle-perftools-dev...."
 RUN apt-get -y install libgoogle-perftools-dev
 
+RUN echo "Installing Git..."
+RUN apt-get -y install git
 
 RUN echo "Setting the environmental variables..."
 ENV PATH /app/.apt/usr/bin:$PATH
@@ -31,6 +33,7 @@ RUN svn co http://visl.sdu.dk/svn/visl/tools/vislcg3/trunk vislcg3
 RUN cd vislcg3/ && ./cmake.sh
 RUN cd vislcg3/ && make -j3
 RUN cd vislcg3/ && ./test/runall.pl && make install && ldconfig
+
 
 RUN echo "Configuring the heroku container..."
 USER app
@@ -64,4 +67,10 @@ RUN git clone https://github.com/heroku/heroku-buildpack-python.git /tmp/python-
 ONBUILD RUN bash -l /tmp/python-pack/bin/compile /app /tmp/cache /app/.env
 
 ONBUILD COPY . /app/src/
+
+RUN echo "Cloning Oslo-Bergen-Tagger...."
+RUN git clone https://github.com/domenicosolazzo/The-Oslo-Bergen-Tagger.git
+RUN cd The-Oslo-Bergen-Tagger/ && git clone https://github.com/domenicosolazzo/OBT-Stat.git
+RUN cd The-Oslo-Bergen-Tagger/ && cp ../bin/mtag-linux64 . && mv mtag-linux64 mtag && chmod +x mtag
+
 ONBUILD EXPOSE 3000
