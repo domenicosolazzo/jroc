@@ -1,4 +1,5 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
+from EntityDetector import EntityDetector
 from queries import Queries
 
 class SPARQLAdapter(object):
@@ -106,6 +107,19 @@ class SPARQLAdapter(object):
             "type": entityTypes
         }
         return data
+
+    def getEntityType(self, entityName):
+        uri = self.getUniqueURI(entity)
+        if uri.get('uri', None):
+            entityName = uri.get('uri', None).replace("http://dbpedia.org/resource/", "")
+        else:
+            entityName =  entity.replace(" ", "_")
+        types = self.getEntityTypes(entityName)
+
+        entityDetector = EntityDetector()
+        entityTypeResult = entityDetector.detect(types)
+        
+        return entityTypeResult
 
     def entityExtraction(self, entity):
         uri = self.getUniqueURI(entity)
