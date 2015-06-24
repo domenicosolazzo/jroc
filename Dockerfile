@@ -1,11 +1,10 @@
 FROM heroku/cedar:14
 ENV DEBIAN_FRONTEND noninteractive
-ENV LC_ALL en_US.UTF-8
-ENV LANG en_US.UTF-8
 ENV DISTRO trusty
 
 RUN echo "Setting the environmental variables..."
 ENV PATH /app/.apt/usr/bin:$PATH
+
 ENV LD_LIBRARY_PATH /app/.apt/usr/lib/x86_64-linux-gnu:/app/.apt/usr/lib/i386-linux-gnu:/app/.apt/usr/lib:$LD_LIBRARY_PATH
 ENV LIBRARY_PATH /app/.apt/usr/lib/x86_64-linux-gnu:/app/.apt/usr/lib/i386-linux-gnu:/app/.apt/usr/lib:$LIBRARY_PATH
 ENV INCLUDE_PATH /app/.apt/usr/include:$INCLUDE_PATH
@@ -78,9 +77,15 @@ ONBUILD RUN echo "Retrieving the tagger..."
 ONBUILD RUN cd The-Oslo-Bergen-Tagger/ && cd bin/ && wget http://www.tekstlab.uio.no/mtag/linux64/mtag && chmod +x mtag
 ONBUILD RUN cd The-Oslo-Bergen-Tagger/bin && pwd && ls -la
 
-# ONBUILD RUN ls /app/The-Oslo-Bergen-Tagger/OBT-Stat/hunpos/hunpos-1.0-linux/
-# ONBUILD RUN ./app/The-Oslo-Bergen-Tagger/OBT-Stat/hunpos/hunpos-1.0-linux/hunpos-tag
-# ONBUILD RUN sh /app/The-Oslo-Bergen-Tagger/OBT-Stat/hunpos/hunpos-1.0-linux/hunpos-tag
+ONBUILD RUN mkdir -p /app/.profile.d
+ONBUILD RUN echo "export LC_ALL=\"en_US.UTF-8\"" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export LANG=\"en_US.UTF-8\"" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export PATH=\"/app/.apt/usr/bin:$PATH\"" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export LD_LIBRARY_PATH=\"/app/.apt/usr/lib/x86_64-linux-gnu:/app/.apt/usr/lib/i386-linux-gnu:/app/.apt/usr/lib:$LD_LIBRARY_PATH\"" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export LIBRARY_PATH=\"/app/.apt/usr/lib/x86_64-linux-gnu:/app/.apt/usr/lib/i386-linux-gnu:/app/.apt/usr/lib:$LIBRARY_PATH\"" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export INCLUDE_PATH=\"/app/.apt/usr/include:$INCLUDE_PATH\"" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export CPATH=$INCLUDE_PATH" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export CPPPATH=$INCLUDE_PATH" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export PKG_CONFIG_PATH=\"/app/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:/app/.apt/usr/lib/i386-linux-gnu/pkgconfig:/app/.apt/usr/lib/pkgconfig:$PKG_CONFIG_PATH\"" >> /app/.profile.d/python.sh
 
-RUN echo locale
 ONBUILD EXPOSE 3000
