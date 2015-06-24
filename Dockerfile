@@ -1,5 +1,7 @@
 FROM heroku/cedar:14
 ENV DEBIAN_FRONTEND noninteractive
+ENV LC_ALL en_US.UTF-8  
+ENV LANG en_US.UTF-8
 
 RUN useradd -d /app -m app
 
@@ -11,19 +13,28 @@ RUN apt-get update && apt-get -y install g++ libicu-dev subversion git cmake lib
 
 
 RUN echo "Setting the environmental variables..."
-ENV PATH /app/.apt/usr/bin:$PATH
-ENV LD_LIBRARY_PATH /app/.apt/usr/lib/x86_64-linux-gnu:/app/.apt/usr/lib/i386-linux-gnu:/app/.apt/usr/lib:$LD_LIBRARY_PATH
-ENV LIBRARY_PATH /app/.apt/usr/lib/x86_64-linux-gnu:/app/.apt/usr/lib/i386-linux-gnu:/app/.apt/usr/lib:$LIBRARY_PATH
-ENV INCLUDE_PATH /app/.apt/usr/include:$INCLUDE_PATH
-ENV CPATH $INCLUDE_PATH
-ENV CPPPATH $INCLUDE_PATH
-ENV PKG_CONFIG_PATH /app/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:/app/.apt/usr/lib/i386-linux-gnu/pkgconfig:/app/.apt/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+#ENV PATH /app/.apt/usr/bin:$PATH
+#ENV LD_LIBRARY_PATH /app/.apt/usr/lib/x86_64-linux-gnu:/app/.apt/usr/lib/i386-linux-gnu:/app/.apt/usr/lib:/usr/local/lib/:$LD_LIBRARY_PATH
+#ENV LIBRARY_PATH /app/.apt/usr/lib/x86_64-linux-gnu:/app/.apt/usr/lib/i386-linux-gnu:/app/.apt/usr/lib:$LIBRARY_PATH
+#ENV INCLUDE_PATH /app/.apt/usr/include:$INCLUDE_PATH
+#ENV CPATH $INCLUDE_PATH
+#ENV CPPPATH $INCLUDE_PATH
+#ENV PKG_CONFIG_PATH /app/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:/app/.apt/usr/lib/i386-linux-gnu/pkgconfig:/app/.apt/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 
 RUN echo "Installing vislcg3...."
-RUN cd /tmp/
-RUN svn co http://visl.sdu.dk/svn/visl/tools/vislcg3/trunk vislcg3
-RUN cd vislcg3/ && ./cmake.sh && make -j3 && ./test/runall.pl && make install && ldconfig
+#RUN cd /tmp/ && svn co http://visl.sdu.dk/svn/visl/tools/vislcg3/trunk vislcg3 && cd vislcg3/ && ./cmake.sh && make -j3  && ./test/runall.pl && su && make install && ldconfig
 
+ENV DISTRO trusty
+RUN echo "Installing Apertium GnuPG key to /etc/apt/trusted.gpg.d/apertium.gpg"
+RUN wget -q http://apertium.projectjj.com/apt/apertium-packaging.public.gpg -O /etc/apt/trusted.gpg.d/apertium.gpg
+
+RUN echo "Creating /etc/apt/sources.list.d/apertium-nightly.list"
+RUN echo "deb http://apertium.projectjj.com/apt/nightly $DISTRO main" > /etc/apt/sources.list.d/apertium-nightly.list
+
+RUN echo "Running apt-get update..."
+RUN apt-get update && apt-get -y install cg3
+
+RUN echo "All done - enjoy the packages! If you just want all core tools, do: sudo apt-get install apertium-all-dev"
 
 RUN echo "Configuring the heroku container..."
 USER app
@@ -61,6 +72,14 @@ ONBUILD COPY . /app/src/
 ONBUILD RUN echo "Cloning Oslo-Bergen-Tagger...."
 ONBUILD RUN git clone https://github.com/domenicosolazzo/The-Oslo-Bergen-Tagger.git
 ONBUILD RUN cd The-Oslo-Bergen-Tagger/ && git clone https://github.com/domenicosolazzo/OBT-Stat.git
-ONBUILD RUN cd The-Oslo-Bergen-Tagger/ && cd bin/ && wget http://www.tekstlab.uio.no/mtag/linux64/mtag && mv mtag-linux64 mtag && chmod +x mtag
+ONBUILD RUN echo "Retrieving the tagger..."
+ONBUILD RUN cd The-Oslo-Bergen-Tagger/ && cd bin/ && wget http://www.tekstlab.uio.no/mtag/linux64/mtag && chmod +x mtag
+ONBUILD RUN cd The-Oslo-Bergen-Tagger/bin && pwd && ls -la 
 
+# ONBUILD RUN ls /app/The-Oslo-Bergen-Tagger/OBT-Stat/hunpos/hunpos-1.0-linux/ 
+# ONBUILD RUN ./app/The-Oslo-Bergen-Tagger/OBT-Stat/hunpos/hunpos-1.0-linux/hunpos-tag
+# ONBUILD RUN sh /app/The-Oslo-Bergen-Tagger/OBT-Stat/hunpos/hunpos-1.0-linux/hunpos-tag
+
+RUN echo locale
 ONBUILD EXPOSE 3000
+
