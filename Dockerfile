@@ -61,6 +61,6 @@ ONBUILD COPY . /app/src/
 ONBUILD RUN echo "Cloning Oslo-Bergen-Tagger...."
 ONBUILD RUN git clone https://github.com/domenicosolazzo/The-Oslo-Bergen-Tagger.git
 ONBUILD RUN cd The-Oslo-Bergen-Tagger/ && git clone https://github.com/domenicosolazzo/OBT-Stat.git
-# ONBUILD RUN cd The-Oslo-Bergen-Tagger/ && cd bin/ && wget http://www.tekstlab.uio.no/mtag/linux64/mtag && mv mtag-linux64 mtag && chmod +x mtag
+ONBUILD RUN cd The-Oslo-Bergen-Tagger/ && cd bin/ && wget http://www.tekstlab.uio.no/mtag/linux64/mtag && mv mtag-linux64 mtag && chmod +x mtag
 
 ONBUILD EXPOSE 3000
