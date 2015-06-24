@@ -12,7 +12,7 @@ class EntityDetector(object):
             "is_work": False,
             "is_location": False,
             "other": False,
-            "type": "other"
+            "type": "Other"
         }
 
         if not set(types).isdisjoint(EntityTypes.PERSON):
@@ -20,4 +20,20 @@ class EntityDetector(object):
             entityType["type"] = "Person"
             return entityType
 
-        return None
+        if not set(types).isdisjoint(EntityTypes.ORGANIZATION):
+            entityType["is_org"] = True
+            entityType["type"] = "Organization"
+            return entityType
+
+        if not set(types).isdisjoint(EntityTypes.EVENT):
+            entityType["is_event"] = True
+            entityType["type"] = "Event"
+            return entityType
+
+        if not set(types).isdisjoint(EntityTypes.LOCATION):
+            entityType["is_location"] = True
+            entityType["type"] = "Location"
+            return entityType
+
+        entityType["Other"] = True
+        return entityType
