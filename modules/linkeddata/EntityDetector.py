@@ -4,7 +4,7 @@ class EntityDetector(object):
     def __init__(self):
         pass
 
-    def detect(types):
+    def detect(self, types):
         entityType = {
             "is_person": False,
             "is_org": False,
@@ -14,7 +14,6 @@ class EntityDetector(object):
             "other": False,
             "type": "Other"
         }
-
         if not set(types).isdisjoint(EntityTypes.PERSON):
             entityType["is_person"] = True
             entityType["type"] = "Person"
@@ -35,5 +34,5 @@ class EntityDetector(object):
             entityType["type"] = "Location"
             return entityType
 
-        entityType["Other"] = True
+        entityType["other"] = True
         return entityType

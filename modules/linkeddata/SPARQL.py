@@ -109,40 +109,41 @@ class SPARQLAdapter(object):
         return data
 
     def getEntityType(self, entityName):
-        uri = self.getUniqueURI(entity)
-        if uri.get('uri', None):
-            entityName = uri.get('uri', None).replace("http://dbpedia.org/resource/", "")
-        else:
-            entityName =  entity.replace(" ", "_")
         types = self.getEntityTypes(entityName)
 
         entityDetector = EntityDetector()
-        entityTypeResult = entityDetector.detect(types)
-        
+        entityTypeResult = entityDetector.detect(types.get("type", []))
+
         return entityTypeResult
 
-    def entityExtraction(self, entity):
+    def entityExtraction(self, entity, advancedSearch=True):
         uri = self.getUniqueURI(entity)
         if uri.get('uri', None):
             entityName = uri.get('uri', None).replace("http://dbpedia.org/resource/", "")
         else:
             entityName =  entity.replace(" ", "_")
 
-        info = self.getBasicInfo(entityName)
-        synomyms = self.findDisambiguates(entityName)
-        properties = self.getProperties(entityName, fetchValues=True)
-        thumbnail = self.getThumbnail(entityName)
+        entityData = {}
         types = self.getEntityTypes(entityName)
+        print(entityName)
+        print(types)
+        if advancedSearch:
+            entityData["info"] = self.getBasicInfo(entityName)
+            entityData["synomyms"] = self.findDisambiguates(entityName)
+            entityData["properties"] = self.getProperties(entityName, fetchValues=True)
+            entityData["thumbnail"] = self.getThumbnail(entityName)
+            entityData["types"] = self.getEntityTypes(entityName)
 
-        entityData = {
-            "uri": uri.get("uri", None),
-            "name": entity,
-            "entityName": entityName,
-            "info": info,
-            "synonyms": synomyms.get("synonyms",[]),
-            "properties": properties.get("properties"),
-            "thumbnail": thumbnail.get("thumbnail", ""),
-            "types": types.get("type")
-        }
+        entityType = self.getEntityType(entityName)
+
+        entityData["entityType"] = entityType if advancedSearch and entityType is not None else entityType.get("type", None)
+
+        entityData["name"] = entity
+        if len(types.get("type",[])) == 0:
+            synomyms = entityData.get("synomyms") if entityData.get("synomyms", None) is not None else self.findDisambiguates(entityName)
+            entityData["Did you meant..."] = synomyms
+            entityData["types"] = types
+
+        entityData["entityName"] = entityName
 
         return entityData

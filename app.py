@@ -152,7 +152,7 @@ def demo_entities():
 def demo_ee():
     try:
       obtManager = OBTManager(None, filename="TEXTFILE", deleteFiles=False)
-      data_result = obtManager.entityExtraction()
+      data_result = obtManager.entityExtraction(advancedSearch=False)
 
       obt_json_result = json.dumps(data_result)
       return Response(obt_json_result, mimetype="application/json")
