@@ -1,6 +1,6 @@
 # JRoc
 ### You Know Am I Sayin'?
-A REST API for document tagging and entity extraction of Bokmal and NyNorsk text.
+A REST API for document tagging and entity extraction of bokmål and nynorsk text.
 
 # INSTALLATION
      # Clone the repo
