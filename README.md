@@ -1,10 +1,6 @@
 # JRoc
 ### You Know Am I Sayin'?
-A REST API for document tagging and entity extraction.
-
-#### About Oslo-Bergen Tagger
-The Oslo-Bergen Tagger is a morphosyntactic tagger for Norwegian bokmål and nynorsk. For general information about the tagger, visit its home page: [Tekstlab.uio.no](http://www.tekstlab.uio.no/obt-ny/).
-
+A REST API for document tagging and entity extraction for Bokmal and NyNorsk.
 
 # INSTALLATION
      # Clone the repo
@@ -282,6 +278,9 @@ It will return detailed info for each extracted entity
 - [VISL CG-3](http://beta.visl.sdu.dk/constraint_grammar.html): CG compiler. 3rd version of the CG formalism variant
 - [Multitagger](http://www.tekstlab.uio.no/mtag/osx64/mtag-osx64): Multitagger with lexicon for Norwegian Bokmål and Nynorsk.
 - [HusPos](https://code.google.com/p/hunpos/): Hunpos is an open source reimplementation of TnT, the well known part-of-speech tagger
+
+#### About Oslo-Bergen Tagger
+The Oslo-Bergen Tagger is a morphosyntactic tagger for Norwegian bokmål and nynorsk. For general information about the tagger, visit its home page: [Tekstlab.uio.no](http://www.tekstlab.uio.no/obt-ny/).
 
 # License
 [License MIT](https://github.com/domenicosolazzo/obt-api/blob/master/LICENSE)
