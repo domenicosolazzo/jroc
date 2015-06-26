@@ -1,9 +1,6 @@
-# OBT API
-A REST API for document tagging and entity extraction.
-
-#### About Oslo-Bergen Tagger
-The Oslo-Bergen Tagger is a morphosyntactic tagger for Norwegian bokmål and nynorsk. For general information about the tagger, visit its home page: [Tekstlab.uio.no](http://www.tekstlab.uio.no/obt-ny/).
-
+# JRoc
+## You Know What Am I Sayin'
+A REST API for tagging and entity extraction of documents in Norwegian bokmål and nynorsk.
 
 # INSTALLATION
      # Clone the repo
@@ -40,17 +37,17 @@ The Oslo-Bergen Tagger is a morphosyntactic tagger for Norwegian bokmål and nyn
 - You need to install [Docker](https://www.docker.com/)
 - Install the Heroku plugin for Docker
 
-    heroku plugins:install heroku-docker
+     heroku plugins:install heroku-docker
 
 - Create your heroku app
 
-    heroku create <heroku_app_name>
+     heroku create <heroku_app_name>
 
 ##### Local deployment
-    heroku docker:start
+     heroku docker:start
 
 ##### Remote deployment
-    heroku docker:release [--app=<heroku_app_name>]
+     heroku docker:release [--app=<heroku_app_name>]
 
 # Usage
 How to use the **analyze** endpoint
@@ -299,6 +296,9 @@ It will return detailed info for each extracted entity
 - [VISL CG-3](http://beta.visl.sdu.dk/constraint_grammar.html): CG compiler. 3rd version of the CG formalism variant
 - [Multitagger](http://www.tekstlab.uio.no/mtag/osx64/mtag-osx64): Multitagger with lexicon for Norwegian Bokmål and Nynorsk.
 - [HusPos](https://code.google.com/p/hunpos/): Hunpos is an open source reimplementation of TnT, the well known part-of-speech tagger
+
+#### About Oslo-Bergen Tagger
+The Oslo-Bergen Tagger is a morphosyntactic tagger for Norwegian bokmål and nynorsk. For general information about the tagger, visit its home page: [Tekstlab.uio.no](http://www.tekstlab.uio.no/obt-ny/).
 
 # License
 [License MIT](https://github.com/domenicosolazzo/obt-api/blob/master/LICENSE)
