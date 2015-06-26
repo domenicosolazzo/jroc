@@ -11,7 +11,7 @@ ENV INCLUDE_PATH /app/.apt/usr/include:$INCLUDE_PATH
 ENV CPATH $INCLUDE_PATH
 ENV CPPPATH $INCLUDE_PATH
 ENV PKG_CONFIG_PATH /app/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:/app/.apt/usr/lib/i386-linux-gnu/pkgconfig:/app/.apt/usr/lib/pkgconfig:$PKG_CONFIG_PATH
-
+ENV OBT_TYPE tag-nostat-bm.sh
 
 RUN useradd -d /app -m app
 
@@ -24,7 +24,7 @@ RUN wget -q http://apertium.projectjj.com/apt/apertium-packaging.public.gpg -O /
 RUN echo "Creating /etc/apt/sources.list.d/apertium-nightly.list"
 RUN echo "deb http://apertium.projectjj.com/apt/nightly $DISTRO main" > /etc/apt/sources.list.d/apertium-nightly.list \
     && apt-get update \
-    && apt-get -o dir::cache=/tmp/apt install -y -d g++ libicu-dev subversion git cmake libboost-dev build-essential libgoogle-perftools-dev cg3 \
+    && apt-get -o dir::cache=/tmp/apt install -y -d g++ libicu-dev subversion git cmake libboost-dev build-essential libgoogle-perftools-dev cg3 vim nano \
     && rm -rf /var/lib/apt/lists/* \
     && for DEB in $(ls -1 /tmp/apt/archives/*.deb); do echo "Installing $(basename $DEB)"; dpkg -x $DEB /app/.apt/; done \
     && apt-get -y clean
@@ -87,5 +87,5 @@ ONBUILD RUN echo "export INCLUDE_PATH=\"/app/.apt/usr/include:$INCLUDE_PATH\"" >
 ONBUILD RUN echo "export CPATH=$INCLUDE_PATH" >> /app/.profile.d/python.sh
 ONBUILD RUN echo "export CPPPATH=$INCLUDE_PATH" >> /app/.profile.d/python.sh
 ONBUILD RUN echo "export PKG_CONFIG_PATH=\"/app/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:/app/.apt/usr/lib/i386-linux-gnu/pkgconfig:/app/.apt/usr/lib/pkgconfig:$PKG_CONFIG_PATH\"" >> /app/.profile.d/python.sh
-
+ONBUILD RUN echo "export OBT_TYPE=\"tag-nostat-bm.sh\"" >> /app/.profile.d/python.sh
 ONBUILD EXPOSE 3000

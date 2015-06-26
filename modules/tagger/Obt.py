@@ -79,8 +79,8 @@ class OBTManager(object):
             return self._outputData
         currentDirectory = os.path.dirname(os.path.realpath(__file__))
         output_filename = "%s_OUTPUT" % (self._filename,)
-
-        os.system('%s/../../The-Oslo-Bergen-Tagger/tag-bm.sh %s > %s' % (currentDirectory, self._filename, output_filename))
+        tagger_type = os.environ.get('OBT_TYPE', 'tag-bm.sh')
+        os.system('%s/../../The-Oslo-Bergen-Tagger/%s %s > %s' % (currentDirectory, tagger_type, self._filename, output_filename))
         file_object = open(output_filename, 'r')
 
         text = file_object.read().decode('utf8')
