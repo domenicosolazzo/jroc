@@ -2,6 +2,7 @@
 ## You Know What Am I Sayin'
 A REST API for tagging and entity extraction of documents in Norwegian bokmål and nynorsk.
 
+
 # INSTALLATION
      # Clone the repo
      git clone git@github.com:domenicosolazzo/obt-api.git
