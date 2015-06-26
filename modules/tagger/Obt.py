@@ -58,14 +58,14 @@ class OBTManager(object):
         }
 
 
-    def entityExtraction(self):
+    def entityExtraction(self, advancedSearch=True):
         data = []
 
         textResult = self.analyzeText()
         entities = self.findEntities()
 
         for entity in entities:
-            entityData = self.sparqlAdapter.entityExtraction(entity)
+            entityData = self.sparqlAdapter.entityExtraction(entity, advancedSearch)
             data.append(entityData)
         result = {
             "entities": entities,

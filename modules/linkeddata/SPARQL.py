@@ -1,4 +1,5 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
+from EntityDetector import EntityDetector
 from queries import Queries
 
 class SPARQLAdapter(object):
@@ -75,6 +76,17 @@ class SPARQLAdapter(object):
         }
         return data
 
+    def getUniqueURIStartWith(self, entityName):
+        query = self.queries.QUERY_SPARQL_URI_STARTWITH
+        result = self.__prepareAndExecute(query, (entityName, entityName))
+
+        uri = [u["uri"]["value"] for u in result]
+
+        data = {
+            "uri": uri
+        }
+        return data
+
     def getBasicInfo(self, entityName):
         entityName = entityName.strip().replace(" ", "_")
         query = self.queries.QUERY_BASIC_INFO
@@ -85,25 +97,46 @@ class SPARQLAdapter(object):
         }
         return data
 
-    def entityExtraction(self, entity):
+    def getEntityTypes(self, entityName):
+        query = self.queries.QUERY_ENTITY_TYPES
+        result = self.__prepareAndExecute(query, (entityName, ) )
+
+        entityTypes = [entityType["type"]["value"] for entityType in result]
+
+        data = {
+            "type": entityTypes
+        }
+        return data
+
+    def getEntityType(self, entityName):
+        types = self.getEntityTypes(entityName)
+
+        entityDetector = EntityDetector()
+        entityTypeResult = entityDetector.detect(types.get("type", []))
+
+        return entityTypeResult
+
+    def entityExtraction(self, entity, advancedSearch=True):
         uri = self.getUniqueURI(entity)
         if uri.get('uri', None):
             entityName = uri.get('uri', None).replace("http://dbpedia.org/resource/", "")
         else:
             entityName =  entity.replace(" ", "_")
 
-        info = self.getBasicInfo(entityName)
-        synomyms = self.findDisambiguates(entityName)
-        properties = self.getProperties(entityName, fetchValues=True)
-        thumbnail = self.getThumbnail(entityName)
-        entityData = {
-            "uri": uri.get("uri", None),
-            "name": entity,
-            "entityName": entityName,
-            "info": info,
-            "synonyms": synomyms.get("synonyms",[]),
-            "properties": properties,
-            "thumbnail": thumbnail.get("thumbnail", "")
-        }
+        entityData = {}
+        types = self.getEntityTypes(entityName)
+        if advancedSearch:
+            entityData["info"] = self.getBasicInfo(entityName)
+            entityData["synomyms"] = self.findDisambiguates(entityName)
+            entityData["properties"] = self.getProperties(entityName, fetchValues=True)
+            entityData["thumbnail"] = self.getThumbnail(entityName)
+            entityData["types"] = self.getEntityTypes(entityName)
+
+        entityType = self.getEntityType(entityName)
+
+        entityData["entityType"] = entityType if advancedSearch and entityType is not None else entityType.get("type", None)
+
+        entityData["name"] = entity
+        entityData["entityName"] = entityName
 
         return entityData
