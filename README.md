@@ -1,36 +1,55 @@
 # JRoc
-### You Know Am I Sayin'?
-A REST API for document tagging and entity extraction of bokmål and nynorsk text.
+## You Know What Am I Sayin'
+A REST API for tagging and entity extraction of documents in Norwegian bokmål and nynorsk.
+
 
 # INSTALLATION
      # Clone the repo
      git clone git@github.com:domenicosolazzo/obt-api.git
-     
+
      # Create the temp folder
      mkdir <local_folder_repo>/modules/tagger/temp
-     
+
      # Create a virtual environment
      virtualenv <name_env>
      source <name_env>/bin/activate
-     
+
      # Install the requirements
      pip install -r requirements.txt
-     
+
      # Clone Oslo-Bergen-Tagger
      git clone https://github.com/noklesta/The-Oslo-Bergen-Tagger
-     
+
      # Install the tagger
      cd The-Oslo-Bergen-Tagger/bin
      wget http://www.tekstlab.uio.no/mtag/osx64/mtag-osx64
      mv mtag-osx64 mtag
      chmod +x mtag
-     
-     # Install VISL-G3 
+
+     # Install VISL-G3
      # http://beta.visl.sdu.dk/cg3/chunked/installation.html.
-     
+
      # Clone OBT-Stat
      git clone git://github.com/andrely/OBT-Stat.git
-  
+
+# Deployment
+## Heroku Deployment
+### Heroku
+- You need to install [Docker](https://www.docker.com/)
+- Install the Heroku plugin for Docker
+
+     heroku plugins:install heroku-docker
+
+- Create your heroku app
+
+     heroku create <heroku_app_name>
+
+##### Local deployment
+     heroku docker:start
+
+##### Remote deployment
+     heroku docker:release [--app=<heroku_app_name>]
+
 # Usage
 How to use the **analyze** endpoint
 
@@ -43,11 +62,11 @@ How to use the **entities** endpoint
 How to use the **tags** endpoint
 
       curl -H "Content-Type: application/json" -X POST -d '{"data":"text_here"}' http://localhost:5000/tags
-     
+
 How to use the **entity extraction(ee)** endpoint
 
         curl -H "Content-Type: application/json" -X POST -d '{"data":"text_here"}' http://localhost:5000/ee
-     
+
 
 
 # Endpoints
@@ -57,7 +76,7 @@ Description of the API endpoints
 **Method**: POST
 It will return all the entities for a given text
 
-#### Example 
+#### Example
       entities :[
           "USA" ,
           "Thoresen" ,
@@ -72,13 +91,13 @@ It will return all the entities for a given text
           "Norway" ,
           "Aasen" ,
           "Sweden" ,
-          "Stephen Walton" 
+          "Stephen Walton"
       ]
 
 ## Endpoint: /tags
 It will return all the tags for a given text
 
-#### Example 
+#### Example
       tags :[
           "Andreas" ,
           "USA" ,
@@ -88,7 +107,7 @@ It will return all the tags for a given text
           "Skodjestrømmen" ,
           ...
           "Aasen" ,
-          "Sweden" 
+          "Sweden"
       ]
 
 ## Endpoint: /analyze
@@ -114,7 +133,7 @@ It will return all the data from the obt tagger, entities and tags for a given t
           "Stephen Walton"
       ],
       obt: [
-          {               
+          {
                word: "Ivar",
                is_verb: false,
                is_number: {
@@ -165,9 +184,9 @@ It will return all the data from the obt tagger, entities and tags for a given t
           "Skodjestrømmen" ,
           ...
           "Aasen" ,
-          "Sweden" 
+          "Sweden"
       ]
-   
+
 ## Endpoint: /ee (BETA)
 **Method**: POST
 It will return detailed info for each extracted entity
@@ -263,11 +282,11 @@ It will return detailed info for each extracted entity
 **Description**: Test endpoint to demostrate the **text** endpoint
 
 #### Example
-      Ivar Aasen ble født på gården Åsen i Hovdebygda på Sunnmøre som sønn av småbrukeren Ivar Jonsson. 
-      Han ble døpt Iver Andreas, formen «Ivar» kom i bruk omkring 1845. Gården han vokste opp på var isolert, så han hadde ingen kamerater. 
-      Dette førte til at han leste mye i de få bøkene familien hadde, deriblant Bibelen. Faren døde i 1826. Det var åtte søsken, og de mistet begge foreldrene tidlig. 
+      Ivar Aasen ble født på gården Åsen i Hovdebygda på Sunnmøre som sønn av småbrukeren Ivar Jonsson.
+      Han ble døpt Iver Andreas, formen «Ivar» kom i bruk omkring 1845. Gården han vokste opp på var isolert, så han hadde ingen kamerater.
+      Dette førte til at han leste mye i de få bøkene familien hadde, deriblant Bibelen. Faren døde i 1826. Det var åtte søsken, og de mistet begge foreldrene tidlig.
       I foreldrenes fravær ble broren det nye familieoverhodet; han satte Ivar til gårdsarbeid og lot ham ikke utvikle de intellektuelle evnene sine, men Ivar utmerket seg likevel ved konfirmasjonen, og presten skrev rosende om ham i kirkeboken.
-      Gården Ekset med Sivert og Rasmus Aarflots boksamling var bare 3 kilometer frå Åsen-garden. Aarflot hadde selv gjort observasjoner om slektskap mellom sunnmørsdialekten og gammelnorsk, og dette kan ha inspirert den unge Aasen. 
+      Gården Ekset med Sivert og Rasmus Aarflots boksamling var bare 3 kilometer frå Åsen-garden. Aarflot hadde selv gjort observasjoner om slektskap mellom sunnmørsdialekten og gammelnorsk, og dette kan ha inspirert den unge Aasen.
       Aasen lærte seg norrønt, engelsk, fransk og latin.
 
 [Read more](https://github.com/domenicosolazzo/obt-api/blob/master/TEXTFILE)
