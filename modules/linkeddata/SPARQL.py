@@ -125,8 +125,6 @@ class SPARQLAdapter(object):
 
         entityData = {}
         types = self.getEntityTypes(entityName)
-        print(entityName)
-        print(types)
         if advancedSearch:
             entityData["info"] = self.getBasicInfo(entityName)
             entityData["synomyms"] = self.findDisambiguates(entityName)
@@ -139,11 +137,6 @@ class SPARQLAdapter(object):
         entityData["entityType"] = entityType if advancedSearch and entityType is not None else entityType.get("type", None)
 
         entityData["name"] = entity
-        if len(types.get("type",[])) == 0:
-            synomyms = entityData.get("synomyms") if entityData.get("synomyms", None) is not None else self.findDisambiguates(entityName)
-            entityData["Did you meant..."] = synomyms
-            entityData["types"] = types
-
         entityData["entityName"] = entityName
 
         return entityData
