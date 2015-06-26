@@ -35,12 +35,13 @@ A REST API for tagging and entity extraction of documents in Norwegian bokmål a
 # Deployment
 ## Heroku Deployment
 ### Heroku
-- You need to install [Docker](https://www.docker.com/)
-- Install the Heroku plugin for Docker
+Install [Docker](https://www.docker.com/)
+
+Install the Heroku plugin for Docker
 
      heroku plugins:install heroku-docker
 
-- Create your heroku app
+Create your heroku app
 
      heroku create <heroku_app_name>
 
