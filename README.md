@@ -5,7 +5,7 @@ A REST API for tagging and entity extraction of documents in Norwegian bokmål a
 
 # INSTALLATION
      # Clone the repo
-     git clone git@github.com:domenicosolazzo/obt-api.git
+     git clone git@github.com:domenicosolazzo/jroc.git
 
      # Create the temp folder
      mkdir <local_folder_repo>/modules/tagger/temp
