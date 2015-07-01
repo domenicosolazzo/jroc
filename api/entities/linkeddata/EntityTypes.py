@@ -1,0 +1,4 @@
+PERSON = ["http://xmlns.com/foaf/0.1/Person", "http://schema.org/Person", "http://dbpedia.org/ontology/Person", "http://umbel.org/umbel/rc/Athlete",]
+ORGANIZATION = ["http://schema.org/Organization", "http://schema.org/Organization", "http://dbpedia.org/ontology/Company", "http://dbpedia.org/ontology/Organisation", "http://umbel.org/umbel/rc/Business"]
+EVENT = ["http://umbel.org/umbel/rc/Event", "http://umbel.org/umbel/rc/Festival", "http://dbpedia.org/class/yago/SocialEvent107288639", "http://dbpedia.org/class/yago/Event100029378"]
+LOCATION = ["http://schema.org/Place", "http://schema.org/Country", "http://dbpedia.org/ontology/Country", "http://dbpedia.org/ontology/PopulatedPlace", "http://dbpedia.org/ontology/Settlement", "http://dbpedia.org/ontology/Place", "http://umbel.org/umbel/rc/Village", "http://umbel.org/umbel/rc/PopulatedPlace", "http://umbel.org/umbel/rc/Country", "http://dbpedia.org/ontology/Planet"]
