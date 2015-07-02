@@ -32,6 +32,13 @@ A REST API for tagging and entity extraction of documents in Norwegian bokmål a
      # Clone OBT-Stat
      git clone git://github.com/andrely/OBT-Stat.git
 
+#### Instance folder
+Add an **instance** folder with a **config.py**, if you want to override some of the configuration values in your local installation.
+
+# Environment variables
+- **DEBUG**[True|False]: Enable / Disable debugging for the Flask app (Default: False)
+- **SECRET_KEY**: This is a secret key that is used by Flask to sign cookies. It should be a random value 
+
 # Deployment
 ## Heroku Deployment
 ### Heroku
