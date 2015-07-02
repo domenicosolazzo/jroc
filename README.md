@@ -231,7 +231,7 @@ It will return all the data from the obt tagger, entities and tags for a given t
        }
 
 
-## Endpoint: /entities/<entity_name>/types
+## Endpoint: /entities/[entity_name]/types
 **Method**: GET
 
 **Description**: It will extract the types connected to the entity and try to guess the entity type (person, organization, event, location..)
@@ -263,7 +263,7 @@ It will return all the data from the obt tagger, entities and tags for a given t
       uri: http://<your-app-domain>/entities/Norway/types
 
 
-## Endpoint: /entities/<entity_name>/properties
+## Endpoint: /entities/[entity_name]/properties
 **Method**: GET
 
 **Description**: It will extract all the properties connected to a given entity
