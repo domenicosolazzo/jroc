@@ -9,3 +9,9 @@ DEBUG=os.environ.get("DEBUG", False)
 # You should define this in your instance folder to keep it out of version control. You can read more about instance folders in the next section.
 # This should be a complex random value.
 SECRET_KEY=os.environ.get("SECRET_KEY", "youshouldchangethis")
+
+# Basic auth
+BASIC_AUTH_USERNAME = os.environ.get('BASIC_AUTH_USERNAME','')
+BASIC_AUTH_PASSWORD = os.environ.get('BASIC_AUTH_PASSWORD','')
+# If set to True, makes the whole site require HTTP basic access authentication.
+BASIC_AUTH_FORCE = True
