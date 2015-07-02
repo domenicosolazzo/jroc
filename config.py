@@ -10,8 +10,9 @@ DEBUG=os.environ.get("DEBUG", False)
 # This should be a complex random value.
 SECRET_KEY=os.environ.get("SECRET_KEY", "youshouldchangethis")
 
-# Basic auth
-BASIC_AUTH_USERNAME = os.environ.get('BASIC_AUTH_USERNAME','')
-BASIC_AUTH_PASSWORD = os.environ.get('BASIC_AUTH_PASSWORD','')
-# If set to True, makes the whole site require HTTP basic access authentication.
-BASIC_AUTH_FORCE = True
+# Basic auth (only if both username and password are set)
+if os.environ.get('BASIC_AUTH_USERNAME', None) and os.environ.get('BASIC_AUTH_PASSWORD', None):
+    BASIC_AUTH_USERNAME = os.environ.get('BASIC_AUTH_USERNAME','')
+    BASIC_AUTH_PASSWORD = os.environ.get('BASIC_AUTH_PASSWORD','')
+    # If set to True, makes the whole site require HTTP basic access authentication.
+    BASIC_AUTH_FORCE = True
