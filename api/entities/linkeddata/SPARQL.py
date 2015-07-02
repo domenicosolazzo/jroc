@@ -39,6 +39,26 @@ class SPARQLAdapter(object):
 
         return data
 
+    def getProperty(self, entityName, propertyValue, lang=None):
+        query = self.queries.QUERY_PROPERTIES_VALUES_EXACT_MATCH_WITH_LANG if lang is not None else self.queries.QUERY_PROPERTIES_VALUES_EXACT_MATCH
+        result = self.__prepareAndExecute(query, (entityName, propertyValue, lang)) if lang is not None else self.__prepareAndExecute(query, (entityName, propertyValue))
+
+        properties = {}
+        for prop in result:
+            propertyName = prop["property"]["value"]
+            if not propertyName in properties:
+                properties[propertyName] = []
+            propertyValue = prop["propValue"]["value"]
+
+            properties[propertyName].append(propertyValue)
+
+
+        data = {
+            "properties": properties
+        }
+
+        return data
+
     def findDisambiguates(self, entityName):
         query = self.queries.QUERY_WIKI_PAGE_DISAMBIGUATES
         result = self.__prepareAndExecute(query, (entityName, entityName))
@@ -114,7 +134,11 @@ class SPARQLAdapter(object):
         entityDetector = EntityDetector()
         entityTypeResult = entityDetector.detect(types.get("type", []))
 
-        return entityTypeResult
+        result = {
+            "entity_detection": entityTypeResult,
+            "types": types
+        }
+        return result
 
     def entityExtraction(self, entity, advancedSearch=True):
         uri = self.getUniqueURI(entity)
