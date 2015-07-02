@@ -58,3 +58,6 @@ target/
 The-Oslo-Bergen-Tagger/
 OUTPUT
 TEXTFILE_OUTPUT
+
+# Instance folder
+instance/
