@@ -33,10 +33,13 @@ def entityMain(entity_name):
         entity["redirected_from"] = request.base_url
 
     entity["name"] = entityName
-    entity["uri"] = basic_url
     entity["types_uri"] = "%s/%s" % (basic_url, "types")
     entity["properties_uri"] = "%s/%s" %  (basic_url, "properties")
-    json_response = json.dumps(entity)
+    result = {
+        "data": entity,
+        "uri": basic_url
+    }
+    json_response = json.dumps(result)
     return Response(json_response, mimetype="application/json")
 
 @entities.route("/<entity_name>/types")
