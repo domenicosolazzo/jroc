@@ -16,6 +16,23 @@ class Queries(object):
                 <http://dbpedia.org/resource/%s> ?property ?propValue .
             }
     """
+
+    # Fetch value for a given property
+    QUERY_PROPERTIES_VALUES_EXACT_MATCH = """
+        SELECT ?property ?propValue WHERE {
+            <http://dbpedia.org/resource/%s> ?property ?propValue .
+            FILTER regex(str(?property), "^%s$")
+        }
+    """
+
+    QUERY_PROPERTIES_VALUES_EXACT_MATCH_WITH_LANG = """
+        SELECT ?property ?propValue WHERE {
+            <http://dbpedia.org/resource/%s> ?property ?propValue .
+            FILTER regex(str(?property), "^%s$")
+            FILTER(langMatches(lang(?propValue), "%s"))
+        }
+    """
+
     # Fetch all the page disambiguates
     QUERY_WIKI_PAGE_DISAMBIGUATES = """
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -66,9 +83,10 @@ class Queries(object):
         SELECT ?uri ?label WHERE
         {
             ?uri <http://www.w3.org/2000/01/rdf-schema#label> ?label .
-            FILTER regex(str(?uri), "^http://dbpedia.org/resource/%s") .
+            FILTER regex(str(?uri), "^http://dbpedia.org/resource/%s")
         }LIMIT 10
     """
+
 
     # Fetch the basic info of a given resource
     QUERY_BASIC_INFO = """

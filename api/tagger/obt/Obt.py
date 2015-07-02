@@ -1,4 +1,3 @@
-from ..linkeddata.SPARQL import SPARQLAdapter
 import sys
 import os
 import re
@@ -12,7 +11,6 @@ class OBTManager(object):
     _deleteFiles = True
 
     def __init__(self, data, filename=None, deleteFiles=True):
-        self.sparqlAdapter = SPARQLAdapter()
         self._filename = filename
         self._deleteFiles = deleteFiles
         if not self._filename:
@@ -36,7 +34,7 @@ class OBTManager(object):
             data = data.get('data')
 
             currentDirectory = os.path.dirname(os.path.realpath(__file__))
-            filename = "%s/temp/TEXTFILE_%s" % (currentDirectory, int(time.time()), )
+            filename = "%s/../../../temp/TEXTFILE_%s" % (currentDirectory, int(time.time()), )
             file = open(filename,'w')
             file.write(data.encode('utf8'))
             file.close()
@@ -57,30 +55,13 @@ class OBTManager(object):
             "roman": is_roman
         }
 
-
-    def entityExtraction(self, advancedSearch=True):
-        data = []
-
-        textResult = self.analyzeText()
-        entities = self.findEntities()
-
-        for entity in entities:
-            entityData = self.sparqlAdapter.entityExtraction(entity, advancedSearch)
-            data.append(entityData)
-        result = {
-            "entities": entities,
-            "ee": data
-        }
-
-        return result
-
     def analyzeText(self):
         if self._outputData:
             return self._outputData
         currentDirectory = os.path.dirname(os.path.realpath(__file__))
         output_filename = "%s_OUTPUT" % (self._filename,)
         tagger_type = os.environ.get('OBT_TYPE', 'tag-bm.sh')
-        os.system('%s/../../The-Oslo-Bergen-Tagger/%s %s > %s' % (currentDirectory, tagger_type, self._filename, output_filename))
+        os.system('%s/../../../The-Oslo-Bergen-Tagger/%s %s > %s' % (currentDirectory, tagger_type, self._filename, output_filename))
         file_object = open(output_filename, 'r')
 
         text = file_object.read().decode('utf8')
