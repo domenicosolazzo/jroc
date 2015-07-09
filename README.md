@@ -6,6 +6,9 @@ A REST API for tagging and entity extraction of documents in Norwegian bokmål a
 # INSTALLATION
      # Clone the repo
      git clone git@github.com:domenicosolazzo/jroc.git
+     
+- Install [Docker](https://www.docker.com/)
+- [Deploy](https://github.com/soldotno/jroc/blob/master/README.md#local-deployment) 
 
      
 #### Instance folder
