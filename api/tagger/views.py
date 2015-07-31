@@ -2,6 +2,9 @@ from . import tagger
 from flask import request, Response
 from obt import OBTManager
 import json
+import stopwords
+
+sw = stopwords.getStopWords('api/tagger/stop.txt')
 
 @tagger.route("/")
 def taggerMain():
