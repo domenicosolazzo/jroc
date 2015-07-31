@@ -4,7 +4,7 @@ def readStopWordsFile(file):
     f.close()
     return lines
 
-# Reads the file and reads the stop words into a list.
+# Reads the file and puts the stop words into a list.
 def getStopWords(file_name):
 	return filter(None, map(lambda x: x.split('|')[0].strip(), readStopWordsFile(file_name)))
 
