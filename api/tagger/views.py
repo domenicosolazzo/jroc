@@ -31,7 +31,9 @@ def taggerTags():
 
 @tagger.route("/entities", methods=["POST"])
 def taggerEntities():
-    json_result = json.loads(request.data)
+    data = request.data
+    data = data.replace("'","\"")
+    json_result = json.loads(data)
     obtManager = OBTManager(json_result)
 
     entities = obtManager.findEntities()

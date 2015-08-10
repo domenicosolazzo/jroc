@@ -20,6 +20,7 @@ basic_auth = BasicAuth(app)
 # Puts the API blueprint on api.U2FtIEJsYWNr.com.
 app.register_blueprint(entities, url_prefix='/entities')
 app.register_blueprint(tagger, url_prefix='/tagger')
+app.debug = True
 
 if __name__ == '__main__':
     app.run()
