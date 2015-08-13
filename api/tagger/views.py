@@ -37,8 +37,11 @@ def taggerEntities():
     data = data.replace("'","\"")
     json_result = json.loads(data)
     obtManager = OBTManager(json_result)
+    stopwordManager = StopwordManager()
 
     entities = obtManager.findEntities()
+    entities = stopwordManager.filterStopWords(entities)
+    
     is_advanced = request.args.get("advanced")
     if is_advanced:
         temp = []
