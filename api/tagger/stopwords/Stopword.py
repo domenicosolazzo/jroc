@@ -48,4 +48,5 @@ class StopwordManager(object):
         to_filter - A list of words to be filtered (default=[])
         """
         assert isinstance(to_filter, (list, tuple))
-        return filter(lambda x: not x.lower() in self.stopwords, to_filter)
+        to_filter_lowercase = [filtered_word.lower() for filtered_word in to_filter]
+        return filter(lambda x: not x.lower() in self.stopwords, to_filter_lowercase)
