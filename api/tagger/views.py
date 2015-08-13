@@ -1,10 +1,8 @@
 from . import tagger
 from flask import request, Response
 from obt import OBTManager
+from stopwords import StopwordManager
 import json
-import stopwords
-
-sw = stopwords.getStopWords('api/tagger/stop.txt')
 
 @tagger.route("/")
 def taggerMain():
@@ -19,11 +17,12 @@ def taggerMain():
 def taggerTags():
     tags = {}
 
-
     json_result = json.loads(request.data)
     obtManager = OBTManager(json_result)
+    stopwordManager = StopwordManager()
 
     tags = obtManager.findTags()
+    tags = stopwordManager.filterStopWords(tags)
 
     data = {}
     data["uri"] = "%s" % (request.base_url, )
