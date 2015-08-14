@@ -10,6 +10,11 @@ DEBUG=os.environ.get("DEBUG", False)
 # This should be a complex random value.
 SECRET_KEY=os.environ.get("SECRET_KEY", "youshouldchangethis")
 
+# If true, it will remove stopwords from the POS Tagger
+OBT_STOPWORDS_DISABLE=os.environ.get("OBT_STOPWORDS_DISABLE", False)
+# The filename with the stopwords for the POS TAGGER
+OBT_STOPWORDS_FILENAME=os.environ.get("OBT_STOPWORDS_FILENAME", '')
+
 # Basic auth (only if both username and password are set)
 if os.environ.get('BASIC_AUTH_USERNAME', None) and os.environ.get('BASIC_AUTH_PASSWORD', None):
     BASIC_AUTH_USERNAME = os.environ.get('BASIC_AUTH_USERNAME','')

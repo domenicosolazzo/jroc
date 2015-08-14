@@ -1,6 +1,7 @@
 from . import tagger
 from flask import request, Response
 from obt import OBTManager
+from stopwords import StopwordManager
 import json
 
 @tagger.route("/")
@@ -16,11 +17,12 @@ def taggerMain():
 def taggerTags():
     tags = {}
 
-
     json_result = json.loads(request.data)
     obtManager = OBTManager(json_result)
+    stopwordManager = StopwordManager()
 
     tags = obtManager.findTags()
+    tags = stopwordManager.filterStopWords(tags)
 
     data = {}
     data["uri"] = "%s" % (request.base_url, )
@@ -35,8 +37,11 @@ def taggerEntities():
     data = data.replace("'","\"")
     json_result = json.loads(data)
     obtManager = OBTManager(json_result)
+    stopwordManager = StopwordManager()
 
     entities = obtManager.findEntities()
+    entities = stopwordManager.filterStopWords(entities)
+    
     is_advanced = request.args.get("advanced")
     if is_advanced:
         temp = []
