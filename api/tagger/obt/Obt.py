@@ -35,7 +35,7 @@ class OBTManager(object):
 
             currentDirectory = os.path.dirname(os.path.realpath(__file__))
             filename = "%s/../../../temp/TEXTFILE_%s" % (currentDirectory, int(time.time()), )
-            file = open(filename,'w')
+            file = open(filename,'w+')
             file.write(data.encode('utf8'))
             file.close()
             return filename
@@ -87,7 +87,6 @@ class OBTManager(object):
                new_obj["is_subst"] = True if len([tag for tag in tagging if tag == 'subst']) > 0 else False
                new_obj["is_prop"] = True if len([tag for tag in tagging if tag == 'prop']) > 0 else False
                new_obj["is_number"] = self.__isNumber(tagging)
-        print(self._filename)
         if self._deleteFiles:
             self.__deleteFile(self._filename)
             self.__deleteFile(output_filename)

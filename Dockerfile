@@ -49,7 +49,8 @@ ENV PYTHONHOME /app/.heroku/python
 ENV PYTHONPATH /app/
 ENV DOCKER_BUILD 1
 
-
+RUN mkdir -p /app/temp
+RUN chmod 777 /app/temp
 RUN mkdir -p /app/.heroku
 RUN mkdir -p /tmp/app
 RUN mkdir -p /app/src

@@ -6,32 +6,11 @@ A REST API for tagging and entity extraction of documents in Norwegian bokmål a
 # INSTALLATION
      # Clone the repo
      git clone git@github.com:domenicosolazzo/jroc.git
+     
+- Install [Docker](https://www.docker.com/)
+- [Deploy](https://github.com/soldotno/jroc/blob/master/README.md#local-deployment) 
 
-     # Create the temp folder
-     mkdir <local_folder_repo>/modules/tagger/temp
-
-     # Create a virtual environment
-     virtualenv <name_env>
-     source <name_env>/bin/activate
-
-     # Install the requirements
-     pip install -r requirements.txt
-
-     # Clone Oslo-Bergen-Tagger
-     git clone https://github.com/noklesta/The-Oslo-Bergen-Tagger
-
-     # Install the tagger
-     cd The-Oslo-Bergen-Tagger/bin
-     wget http://www.tekstlab.uio.no/mtag/osx64/mtag-osx64
-     mv mtag-osx64 mtag
-     chmod +x mtag
-
-     # Install VISL-G3
-     # http://beta.visl.sdu.dk/cg3/chunked/installation.html.
-
-     # Clone OBT-Stat
-     git clone git://github.com/andrely/OBT-Stat.git
-
+     
 #### Instance folder
 Add an **instance** folder with a **config.py**, if you want to override some of the configuration values in your local installation.
 
