@@ -325,7 +325,7 @@ It will return all the data from the obt tagger, entities and tags for a given t
 The Oslo-Bergen Tagger is a morphosyntactic tagger for Norwegian bokmål and nynorsk. For general information about the tagger, visit its home page: [Tekstlab.uio.no](http://www.tekstlab.uio.no/obt-ny/).
 
 # License
-[License MIT](https://github.com/domenicosolazzo/obt-api/blob/master/LICENSE)
+[License GPLv3](https://github.com/domenicosolazzo/obt-api/blob/master/LICENSE)
 
 # Author
 [Domenico Solazzo](http://www.domenicosolazzo.com) - [Twitter](http://twitter.com/domenicosolazzo)
