@@ -1,0 +1,5 @@
+{
+  "name": "jroc",
+  "image": "heroku/cedar:14",
+  "addons": []
+}
