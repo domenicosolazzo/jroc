@@ -97,11 +97,10 @@ RUN curl -s https://lang-python.s3.amazonaws.com/cedar-14/runtimes/$PYTHON_VERSI
 
 # Install Pip & Setuptools
 RUN curl -s https://bootstrap.pypa.io/get-pip.py | /app/.heroku/python/bin/python
-ONBUILD RUN curl -s https://bootstrap.pypa.io/get-pip.py | /app/.heroku/python/bin/python
+RUN curl -s https://bootstrap.pypa.io/get-pip.py | /app/.heroku/python/bin/python
 
 # Export the Python environment variables in .profile.d
 RUN echo 'export PATH=$HOME/.heroku/python/bin:$PATH PYTHONUNBUFFERED=true PYTHONHOME=/app/.heroku/python LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LIBRARY_PATH LD_LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LD_LIBRARY_PATH LANG=${LANG:-en_US.UTF-8} PYTHONHASHSEED=${PYTHONHASHSEED:-random} PYTHONPATH=${PYTHONPATH:-/app/user/}' > /app/.profile.d/python.sh
-ONBUILD RUN echo 'export PATH=$HOME/.heroku/python/bin:$PATH PYTHONUNBUFFERED=true PYTHONHOME=/app/.heroku/python LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LIBRARY_PATH LD_LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LD_LIBRARY_PATH LANG=${LANG:-en_US.UTF-8} PYTHONHASHSEED=${PYTHONHASHSEED:-random} PYTHONPATH=${PYTHONPATH:-/app/user/}' > /app/.profile.d/python.sh
 ONBUILD RUN echo 'export PATH=$HOME/.heroku/python/bin:$PATH PYTHONUNBUFFERED=true PYTHONHOME=/app/.heroku/python LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LIBRARY_PATH LD_LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LD_LIBRARY_PATH LANG=${LANG:-en_US.UTF-8} PYTHONHASHSEED=${PYTHONHASHSEED:-random} PYTHONPATH=${PYTHONPATH:-/app/user/}' > /app/.profile.d/python.sh
 ONBUILD RUN echo "export LC_ALL=\"en_US.UTF-8\"" >> /app/.profile.d/python.sh
 ONBUILD RUN echo "export LANG=\"en_US.UTF-8\"" >> /app/.profile.d/python.sh
@@ -115,15 +114,16 @@ ONBUILD RUN echo "export PKG_CONFIG_PATH=\"/app/.apt/usr/lib/x86_64-linux-gnu/pk
 ONBUILD RUN echo "export OBT_TYPE=\"tag-nostat-bm.sh\"" >> /app/.profile.d/python.sh
 
 RUN chmod +x /app/.profile.d/python.sh
-ONBUILD RUN chmod +x /app/.profile.d/python.sh
 
 ADD requirements.txt /app/user/
-ONBUILD RUN /app/.heroku/python/bin/pip install -r requirements.txt
-ONBUILD ADD . /app/user/
+RUN /app/.heroku/python/bin/pip install -r requirements.txt
 
-ONBUILD RUN echo "Cloning Oslo-Bergen-Tagger...."
-ONBUILD RUN git clone https://github.com/domenicosolazzo/The-Oslo-Bergen-Tagger.git
-ONBUILD RUN cd The-Oslo-Bergen-Tagger/ && git clone https://github.com/domenicosolazzo/OBT-Stat.git
-ONBUILD RUN echo "Retrieving the tagger..."
-ONBUILD RUN cd The-Oslo-Bergen-Tagger/ && cd bin/ && wget http://www.tekstlab.uio.no/mtag/linux64/mtag && chmod +x mtag
-ONBUILD RUN cd The-Oslo-Bergen-Tagger/bin && pwd && ls -la
+
+RUN echo "Cloning Oslo-Bergen-Tagger...."
+RUN git clone https://github.com/domenicosolazzo/The-Oslo-Bergen-Tagger.git
+RUN cd The-Oslo-Bergen-Tagger/ && git clone https://github.com/domenicosolazzo/OBT-Stat.git
+RUN echo "Retrieving the tagger..."
+RUN cd The-Oslo-Bergen-Tagger/ && cd bin/ && wget http://www.tekstlab.uio.no/mtag/linux64/mtag && chmod +x mtag
+RUN cd The-Oslo-Bergen-Tagger/bin && pwd && ls -la
+
+ADD . /app/user/
