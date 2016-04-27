@@ -89,6 +89,7 @@ RUN apt-get install -y --force-yes \
 ENV PYTHON_VERSION python-2.7.11
 RUN mkdir -p /app/.heroku/python /app/.profile.d
 WORKDIR /app/user
+RUN mkdir -p /app/user/temp/
 
 COPY ./init /usr/bin/init
 
