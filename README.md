@@ -19,6 +19,7 @@ Add an **instance** folder with a **config.py**, if you want to override some of
 - **SECRET_KEY**: This is a secret key that is used by Flask to sign cookies. It should be a random value
 - **BASIC_AUTH_USERNAME**: Username for the basic auth
 - **BASIC_AUTH_PASSWORD**: Password for the basic auth
+- **OBT_TYPE**: Type of Oslo-Bergen tagger (tag-nostat-bm.sh, tag-bm.sh, tag-nostat-nn.sh)
 
 ##### P.S.
 For activating basic auth, you need to set both BASIC_AUTH_USERNAME and BASIC_AUTH_PASSWORD
@@ -41,11 +42,44 @@ For activating basic auth, you need to set both BASIC_AUTH_USERNAME and BASIC_AU
 
      heroku create <heroku_app_name>
 
+##### Build the Docker image
+- Use Docker Compose
+```
+# It build a new image without using the cache
+docker-compose build --no-cache
+
+# Or you can use the cached image
+docker-compose build
+```
+
 ##### Local deployment
-     heroku docker:start
+- Create a symlink for Dockerfile.local to Dockerfile
+```
+ln -s Dockerfile.local Dockerfile
+```
+
+- Run the web instance with Docker Compose
+```
+docker-compose up web
+```
+- Check if it is running on your browser
+```
+$ open "http://$(docker-machine ip default):8080"
+```
 
 ##### Remote deployment
-     heroku docker:release [--app=<heroku_app_name>]
+- Build the image with Docker Compose
+```
+# It build a new image without using the cache
+docker-compose build --no-cache
+
+# Or you can use the cached image
+docker-compose build
+```
+- Run docker:release
+```
+heroku docker:release
+```
 
 # Usage
 How to use the **analyze** endpoint
