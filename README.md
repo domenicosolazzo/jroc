@@ -6,19 +6,19 @@ A REST API for tagging and entity extraction of documents in Norwegian bokmål a
 # INSTALLATION
      # Clone the repo
      git clone git@github.com:domenicosolazzo/jroc.git
-     
-- Install [Docker](https://www.docker.com/)
-- [Deploy](https://github.com/soldotno/jroc/blob/master/README.md#local-deployment) 
 
-     
+- Install [Docker](https://www.docker.com/)
+- [Deploy](https://github.com/soldotno/jroc/blob/master/README.md#local-deployment)
+
+
 #### Instance folder
 Add an **instance** folder with a **config.py**, if you want to override some of the configuration values in your local installation.
 
 # Environment variables
 - **DEBUG**[True|False]: Enable / Disable debugging for the Flask app (Default: False)
-- **SECRET_KEY**: This is a secret key that is used by Flask to sign cookies. It should be a random value 
+- **SECRET_KEY**: This is a secret key that is used by Flask to sign cookies. It should be a random value
 - **BASIC_AUTH_USERNAME**: Username for the basic auth
-- **BASIC_AUTH_PASSWORD**: Password for the basic auth 
+- **BASIC_AUTH_PASSWORD**: Password for the basic auth
 
 ##### P.S.
 For activating basic auth, you need to set both BASIC_AUTH_USERNAME and BASIC_AUTH_PASSWORD
@@ -26,13 +26,18 @@ For activating basic auth, you need to set both BASIC_AUTH_USERNAME and BASIC_AU
 # Deployment
 ## Heroku Deployment
 ### Heroku
-Install [Docker](https://www.docker.com/)
+- Install [Docker](https://www.docker.com/)
+- (Mac Only)
+  ```
+  # Run this command to make docker working on your terminal
+  eval "$(docker-machine env default)"
+  ```
 
-Install the Heroku plugin for Docker
+- Install the Heroku plugin for Docker
 
      heroku plugins:install heroku-docker
 
-Create your heroku app
+- Create your heroku app
 
      heroku create <heroku_app_name>
 
@@ -86,11 +91,11 @@ It will return all the entities for a given text
 #### Example
       {"data": [
         "Skriftsprog",
-        "Sivert", 
-        "Aasen", 
+        "Sivert",
+        "Aasen",
         ...
-        "USA", 
-        "Ivar Aasen"], 
+        "USA",
+        "Ivar Aasen"],
         "uri": "http://<your-app-domain>/tagger/entities"
       }
 
@@ -103,7 +108,7 @@ It will return all the entities for a given text
         { name:"Aasen", uri: "http://<your-app-domain>/entities/Aasen"},
         ...
         { name:"USA", uri: "http://<your-app-domain>/entities/USA"},
-        { name:"Ivar Aasen", uri: "http://<your-app-domain>/entities/Ivar_Aasen"}], 
+        { name:"Ivar Aasen", uri: "http://<your-app-domain>/entities/Ivar_Aasen"}],
         "uri": "http://<your-app-domain>/tagger/entities"
       }
 
@@ -214,10 +219,10 @@ It will return all the data from the obt tagger, entities and tags for a given t
 
 #### Example
       data: {
-        "properties_uri": "http://<your-app-domain>/entities/Norway/properties", 
-        "types_uri": "http://<your-app-domain>/entities/Norway/types", 
-        "uri": "http://<your-app-domain>/entities/Norway", 
-        "redirected_from": "http://<your-app-domain>/entities/Norway", 
+        "properties_uri": "http://<your-app-domain>/entities/Norway/properties",
+        "types_uri": "http://<your-app-domain>/entities/Norway/types",
+        "uri": "http://<your-app-domain>/entities/Norway",
+        "redirected_from": "http://<your-app-domain>/entities/Norway",
         "name": "Norway"
        }
 
@@ -262,11 +267,11 @@ It will return all the data from the obt tagger, entities and tags for a given t
 #### Example
       data: {
            "http://www.w3.org/2000/01/rdf-schema#label": {
-                "uri": "http://<your-app-domain>/entities/Norway/properties?name=http%3A//www.w3.org/2000/01/rdf-schema%23label", 
+                "uri": "http://<your-app-domain>/entities/Norway/properties?name=http%3A//www.w3.org/2000/01/rdf-schema%23label",
                 "name": "http://www.w3.org/2000/01/rdf-schema#label"
-           }, 
+           },
            "http://www.w3.org/2007/05/powder-s#describedby": {
-                "uri": "http://<your-app-domain>/entities/Norway/properties?name=http%3A//www.w3.org/2007/05/powder-s%23describedby", 
+                "uri": "http://<your-app-domain>/entities/Norway/properties?name=http%3A//www.w3.org/2007/05/powder-s%23describedby",
                 "name": "http://www.w3.org/2007/05/powder-s#describedby",
            },
            ...
@@ -275,32 +280,32 @@ It will return all the data from the obt tagger, entities and tags for a given t
       name: Norway,
       entity_uri: http://<your-app-domain>/entities/Norway,
       uri: http://<your-app-domain>/entities/Norway/properties
-     
+
 ### QueryString
 - **name**: It will extract the value for this given property.
-- **lang**: It is the country code. It will extract the value for a given property in a given language. Only used in combination with the **name** 
+- **lang**: It is the country code. It will extract the value for a given property in a given language. Only used in combination with the **name**
 
 #### Example
       uri: http://<your-app-domain>/entities/Norway/properties?name=http%3A//www.w3.org/2000/01/rdf-schema%23label
-     
+
       data: {
            "http://www.w3.org/2000/01/rdf-schema#label": [
-              "Norway", 
+              "Norway",
               "\u0627\u0644\u0646\u0631\u0648\u064a\u062c",  // النرويج
-              "Norwegen", 
-              "Noruega", 
+              "Norwegen",
+              "Noruega",
               "Norv\u00e8ge", // Norvège
-              "Norvegia", 
+              "Norvegia",
               "\u30ce\u30eb\u30a6\u30a7\u30fc", // ノルウェー
-              "Noorwegen", 
-              "Norwegia", 
-              "Noruega", 
+              "Noorwegen",
+              "Norwegia",
+              "Noruega",
               "\u041d\u043e\u0440\u0432\u0435\u0433\u0438\u044f", // Норвегия
               "\u632a\u5a01" // 挪威
            ]
-      }, 
-       "entity_uri": "http://<your-app-domain>/entities/Norway", 
-       "name": "Norway", 
+      },
+       "entity_uri": "http://<your-app-domain>/entities/Norway",
+       "name": "Norway",
        "uri": "http://<your-app-domain>/entities/Norway/properties?name=http%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema#label"
       }
 
