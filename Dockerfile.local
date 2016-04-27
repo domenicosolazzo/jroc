@@ -109,8 +109,19 @@ RUN echo "export INCLUDE_PATH=\"/app/.apt/usr/include:$INCLUDE_PATH\"" >> /app/.
 RUN echo "export CPATH=$INCLUDE_PATH" >> /app/.profile.d/python.sh
 RUN echo "export CPPPATH=$INCLUDE_PATH" >> /app/.profile.d/python.sh
 RUN echo "export PKG_CONFIG_PATH=\"/app/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:/app/.apt/usr/lib/i386-linux-gnu/pkgconfig:/app/.apt/usr/lib/pkgconfig:$PKG_CONFIG_PATH\"" >> /app/.profile.d/python.sh
-
 RUN echo "export OBT_TYPE=\"tag-nostat-bm.sh\"" >> /app/.profile.d/python.sh
+
+ONBUILD RUN echo 'export PATH=$HOME/.heroku/python/bin:$PATH PYTHONUNBUFFERED=true PYTHONHOME=/app/.heroku/python LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LIBRARY_PATH LD_LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LD_LIBRARY_PATH LANG=${LANG:-en_US.UTF-8} PYTHONHASHSEED=${PYTHONHASHSEED:-random} PYTHONPATH=${PYTHONPATH:-/app/user/}' > /app/.profile.d/python.sh
+ONBUILD RUN echo "export LC_ALL=\"en_US.UTF-8\"" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export LANG=\"en_US.UTF-8\"" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export PATH=\"/app/.apt/usr/bin:$PATH\"" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export LD_LIBRARY_PATH=\"/app/.apt/usr/lib/x86_64-linux-gnu:/app/.apt/usr/lib/i386-linux-gnu:/app/.apt/usr/lib:$LD_LIBRARY_PATH\"" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export LIBRARY_PATH=\"/app/.apt/usr/lib/x86_64-linux-gnu:/app/.apt/usr/lib/i386-linux-gnu:/app/.apt/usr/lib:$LIBRARY_PATH\"" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export INCLUDE_PATH=\"/app/.apt/usr/include:$INCLUDE_PATH\"" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export CPATH=$INCLUDE_PATH" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export CPPPATH=$INCLUDE_PATH" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export PKG_CONFIG_PATH=\"/app/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:/app/.apt/usr/lib/i386-linux-gnu/pkgconfig:/app/.apt/usr/lib/pkgconfig:$PKG_CONFIG_PATH\"" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export OBT_TYPE=\"tag-nostat-bm.sh\"" >> /app/.profile.d/python.sh
 RUN chmod +x /app/.profile.d/python.sh
 
 ADD requirements.txt /app/user/
