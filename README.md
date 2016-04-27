@@ -19,7 +19,18 @@ Add an **instance** folder with a **config.py**, if you want to override some of
 - **SECRET_KEY**: This is a secret key that is used by Flask to sign cookies. It should be a random value
 - **BASIC_AUTH_USERNAME**: Username for the basic auth
 - **BASIC_AUTH_PASSWORD**: Password for the basic auth
-- **OBT_TYPE**: Type of Oslo-Bergen tagger (tag-nostat-bm.sh, tag-bm.sh, tag-nostat-nn.sh)
+- **OBT_TYPE**: Type of Oslo-Bergen tagger. Check below for the possible values.
+```
+### Options for OBT_TYPE
+##### tag-bm.sh
+CG and statistical disambiguation, bokmål
+
+##### tag-nostat-bm.sh
+CG disambiguation only, bokmål
+
+##### tag-nostat-nn.sh
+CG disambiguation only, nynorsk
+```
 
 ##### P.S.
 For activating basic auth, you need to set both BASIC_AUTH_USERNAME and BASIC_AUTH_PASSWORD
@@ -34,13 +45,15 @@ For activating basic auth, you need to set both BASIC_AUTH_USERNAME and BASIC_AU
   eval "$(docker-machine env default)"
   ```
 
-- Install the Heroku plugin for Docker
-
-     heroku plugins:install heroku-docker
+- Install the Heroku plugin for Docker (Only the first time)
+```
+heroku plugins:install heroku-docker
+```
 
 - Create your heroku app
-
-     heroku create <heroku_app_name>
+```
+heroku create <heroku_app_name>
+```
 
 ##### Build the Docker image
 - Use Docker Compose
