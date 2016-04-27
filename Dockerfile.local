@@ -132,5 +132,3 @@ ENV LD_LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LD_LIBRARY_
 ENV LANG=${LANG:-en_US.UTF-8}
 ENV PYTHONHASHSEED=${PYTHONHASHSEED:-random}
 ENV PYTHONPATH=${PYTHONPATH:-/app/user/}
-
-EXPOSE PORT 8080
