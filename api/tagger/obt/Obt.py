@@ -105,14 +105,14 @@ class OBTManager(object):
     def findTags(self):
         obtData = self._outputData
         if not obtData:
-            obtData = self.analyzeText()
+            obtData = self.obtAnalyze()
         unique_tags = set([tag.get("word") for tag in obtData if tag.get("is_prop") == True and tag.get("is_subst") == True])
         return list(unique_tags)
 
     def findEntities(self):
         data = self._outputData
         if not data:
-            data = self.analyzeText()
+            data = self.obtAnalyze()
 
         entities = []
         last_entity = ""
@@ -126,17 +126,11 @@ class OBTManager(object):
                 entities.append(last_entity)
                 last_entity = ""
         entities = list(set(entities))
-        words = self.textAnalyze()
 
-        result = {
-            'entities': entities,
-            'words': words
-        }
-
-        return result
+        return entities
 
     def analyzeText(self):
-        data = self.analyzeText()
+        data = self.obtAnalyze()
 
         textAnalyze = {}
 
@@ -158,12 +152,12 @@ class OBTManager(object):
         textAnalyze['substs'] = substs
         textAnalyze['props'] = props
         textAnalyze['numbers'] = numbers
-        textAnalyze['adj'] = adj
+        textAnalyze['adj'] = adjs
         textAnalyze['conjs'] = conjs
         textAnalyze['unknowns'] = unknowns
         textAnalyze['dets'] = dets
         textAnalyze['inf_merks'] = inf_merks
         textAnalyze['sbus'] = sbus
-        textAnalyze['interjs'] = sbus
+        textAnalyze['interjs'] = interjs
 
         return textAnalyze
