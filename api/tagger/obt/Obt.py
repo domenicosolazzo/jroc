@@ -55,7 +55,7 @@ class OBTManager(object):
             "roman": is_roman
         }
 
-    def analyzeText(self):
+    def obtAnalyze(self):
         if self._outputData:
             return self._outputData
         currentDirectory = os.path.dirname(os.path.realpath(__file__))
@@ -86,7 +86,15 @@ class OBTManager(object):
                new_obj["is_verb"] = True if len([tag for tag in tagging if tag == 'verb']) > 0 else False
                new_obj["is_subst"] = True if len([tag for tag in tagging if tag == 'subst']) > 0 else False
                new_obj["is_prop"] = True if len([tag for tag in tagging if tag == 'prop']) > 0 else False
+               new_obj["is_adj"] = True if len([tag for tag in tagging if tag == 'adj']) > 0 else False
+               new_obj["is_conj"] = True if len([tag for tag in tagging if tag == 'konj']) > 0 else False
                new_obj["is_number"] = self.__isNumber(tagging)
+               new_obj["is_unknown"] = True if len([tag for tag in tagging if tag == 'ukjent']) > 0 else False
+               new_obj["is_det"] = True if len([tag for tag in tagging if tag == 'det']) > 0 else False
+               new_obj["is_inf_merke"] = True if len([tag for tag in tagging if tag == 'inf-merke']) > 0 else False
+               new_obj["is_sbu"] = True if len([tag for tag in tagging if tag == 'sub']) > 0 else False
+               new_obj["is_interj"] = True if len([tag for tag in tagging if tag == 'interj']) > 0 else False
+
         if self._deleteFiles:
             self.__deleteFile(self._filename)
             self.__deleteFile(output_filename)
@@ -118,4 +126,44 @@ class OBTManager(object):
                 entities.append(last_entity)
                 last_entity = ""
         entities = list(set(entities))
-        return entities
+        words = self.textAnalyze()
+
+        result = {
+            'entities': entities,
+            'words': words
+        }
+
+        return result
+
+    def analyzeText(self):
+        data = self.analyzeText()
+
+        textAnalyze = {}
+
+        verbs = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_verb") == True]))
+        substs = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_subst") == True]))
+        props = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_prop") == True]))
+        numbers = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_number") == True]))
+        adjs = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_adj") == True]))
+        conjs = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_conj") == True]))
+        unknowns = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_unknown") == True]))
+        dets = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_det") == True]))
+        inf_merks = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_inf_merke") == True]))
+        sbus = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_sbu") == True]))
+        interjs = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_interj") == True]))
+
+
+
+        textAnalyze['verbs'] = verbs
+        textAnalyze['substs'] = substs
+        textAnalyze['props'] = props
+        textAnalyze['numbers'] = numbers
+        textAnalyze['adj'] = adj
+        textAnalyze['conjs'] = conjs
+        textAnalyze['unknowns'] = unknowns
+        textAnalyze['dets'] = dets
+        textAnalyze['inf_merks'] = inf_merks
+        textAnalyze['sbus'] = sbus
+        textAnalyze['interjs'] = sbus
+
+        return textAnalyze

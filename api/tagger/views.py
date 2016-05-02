@@ -41,7 +41,7 @@ def taggerEntities():
 
     entities = obtManager.findEntities()
     entities = stopwordManager.filterStopWords(entities)
-    
+
     is_advanced = request.args.get("advanced")
     if is_advanced:
         temp = []
@@ -63,7 +63,8 @@ def taggerAnalyze():
     json_result = json.loads(request.data)
     obtManager = OBTManager(json_result)
 
-    obt_result = obtManager.analyzeText()
+    obt_result = obtManager.obtAnalyze()
+    text_analyze_result = obtManager.analyzeText()
     tags = obtManager.findTags()
     entities = obtManager.findEntities()
 
@@ -72,10 +73,12 @@ def taggerAnalyze():
 
     data = {}
     data["obt"] = obt_result
+    data["text_analyze"] = text_analyze_result
     data["tags"] = tags
     data["entities"] = entities
 
     result["data"] = data
+
     json_response = json.dumps(result)
 
     return Response(json_response, mimetype="application/json")
