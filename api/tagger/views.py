@@ -45,7 +45,7 @@ def taggerEntities():
 
     entities = obtManager.findEntities()
     if requestStopwords == True:
-        git entities = stopwordManager.filterStopWords(entities)
+        entities = stopwordManager.filterStopWords(entities)
 
     is_advanced = request.args.get("advanced")
     if is_advanced:
