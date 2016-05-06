@@ -15,7 +15,7 @@ def taggerMain():
 
 @tagger.route("/tags", methods=["POST"])
 def taggerTags():
-    requestStopwords = request.args.get('stopwords', True)
+    requestStopwords = True if request.args.get('stopwords') == 'true' else False
     tags = {}
 
     json_result = json.loads(request.data)
@@ -35,7 +35,8 @@ def taggerTags():
 
 @tagger.route("/entities", methods=["POST"])
 def taggerEntities():
-    requestStopwords = request.args.get('stopwords', True)
+
+    requestStopwords = True if request.args.get('stopwords') == 'true' else False
 
     data = request.data
     data = data.replace("'","\"")
@@ -65,9 +66,9 @@ def taggerEntities():
 
 @tagger.route("/analyze", methods=["POST"])
 def taggerAnalyze():
-    requestObt = request.args.get('obt', False)
-    requestEntities = request.args.get('entities', True)
-    requestTags = request.args.get('tags', True)
+    requestObt = True if request.args.get('obt') == 'true' else False
+    requestEntities = True if request.args.get('entities') == 'true' else False
+    requestTags = True if request.args.get('tags') == 'true' else False
 
     json_result = json.loads(request.data)
     obtManager = OBTManager(json_result)
