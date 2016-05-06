@@ -60,23 +60,31 @@ def taggerEntities():
 
 @tagger.route("/analyze", methods=["POST"])
 def taggerAnalyze():
+    requestObt = request.args.get('obt', False)
+    requestEntities = request.args.get('entities', True)
+    requestTags = request.args.get('tags', True)
+
     json_result = json.loads(request.data)
     obtManager = OBTManager(json_result)
-
-    obt_result = obtManager.obtAnalyze()
-    text_analyze_result = obtManager.analyzeText()
-    tags = obtManager.findTags()
-    entities = obtManager.findEntities()
 
     result = {}
     result["uri"] = "%s" % (request.base_url, )
 
     data = {}
-    data["obt"] = obt_result
-    data["text_analyze"] = text_analyze_result
-    data["tags"] = tags
-    data["entities"] = entities
+    if(requestObt == True):
+        obt_result = obtManager.obtAnalyze()
+        data["obt"] = obt_result
 
+    if(requestTags == True):
+        tags = obtManager.findTags()
+        data["tags"] = tags
+
+    if(requestEntities == True):
+        entities = obtManager.findEntities()
+        data["entities"] = entities
+
+    text_analyze_result = obtManager.analyzeText()
+    data["text_analyze"] = text_analyze_result
     result["data"] = data
 
     json_response = json.dumps(result)
