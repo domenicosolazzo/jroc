@@ -17,8 +17,9 @@ def taggerMain():
 def taggerTags():
     requestStopwords = True if request.args.get('stopwords') == 'true' else False
     tags = {}
-
-    json_result = json.loads(request.data)
+    data = request.data
+    data = data.replace("'","\"").replace("\n", "")
+    json_result = json.loads(data)
     obtManager = OBTManager(json_result)
     stopwordManager = StopwordManager()
 
@@ -39,7 +40,7 @@ def taggerEntities():
     requestStopwords = True if request.args.get('stopwords') == 'true' else False
 
     data = request.data
-    data = data.replace("'","\"")
+    data = data.replace("'","\"").replace("\n", "")
     json_result = json.loads(data)
     obtManager = OBTManager(json_result)
     stopwordManager = StopwordManager()
@@ -70,7 +71,9 @@ def taggerAnalyze():
     requestEntities = True if request.args.get('entities') == 'true' else False
     requestTags = True if request.args.get('tags') == 'true' else False
 
-    json_result = json.loads(request.data)
+    data = request.data
+    data = data.replace("'","\"").replace("\n", "")
+    json_result = json.loads(data)
     obtManager = OBTManager(json_result)
 
     result = {}
