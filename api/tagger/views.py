@@ -15,6 +15,7 @@ def taggerMain():
 
 @tagger.route("/tags", methods=["POST"])
 def taggerTags():
+    requestStopwords = request.args.get('stopwords', True)
     tags = {}
 
     json_result = json.loads(request.data)
@@ -22,7 +23,8 @@ def taggerTags():
     stopwordManager = StopwordManager()
 
     tags = obtManager.findTags()
-    tags = stopwordManager.filterStopWords(tags)
+    if requestStopwords == True:
+        tags = stopwordManager.filterStopWords(tags)
 
     data = {}
     data["uri"] = "%s" % (request.base_url, )
@@ -33,7 +35,7 @@ def taggerTags():
 
 @tagger.route("/entities", methods=["POST"])
 def taggerEntities():
-    requestObt = request.args.get('stopwords', True)
+    requestStopwords = request.args.get('stopwords', True)
 
     data = request.data
     data = data.replace("'","\"")
@@ -42,8 +44,8 @@ def taggerEntities():
     stopwordManager = StopwordManager()
 
     entities = obtManager.findEntities()
-    if stopwords == True:
-        entities = stopwordManager.filterStopWords(entities)
+    if requestStopwords == True:
+        git entities = stopwordManager.filterStopWords(entities)
 
     is_advanced = request.args.get("advanced")
     if is_advanced:
