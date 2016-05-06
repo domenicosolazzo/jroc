@@ -33,6 +33,8 @@ def taggerTags():
 
 @tagger.route("/entities", methods=["POST"])
 def taggerEntities():
+    requestObt = request.args.get('stopwords', True)
+
     data = request.data
     data = data.replace("'","\"")
     json_result = json.loads(data)
@@ -40,7 +42,8 @@ def taggerEntities():
     stopwordManager = StopwordManager()
 
     entities = obtManager.findEntities()
-    entities = stopwordManager.filterStopWords(entities)
+    if stopwords == True:
+        entities = stopwordManager.filterStopWords(entities)
 
     is_advanced = request.args.get("advanced")
     if is_advanced:
