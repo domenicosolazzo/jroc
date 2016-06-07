@@ -106,7 +106,7 @@ class OBTManager(object):
         obtData = self._outputData
         if not obtData:
             obtData = self.obtAnalyze()
-        unique_tags = set([tag.get("word") for tag in obtData if tag.get("is_prop") == True and tag.get("is_subst") == True])
+        unique_tags = set([tag.get("word") for tag in obtData])
         return list(unique_tags)
 
     def findEntities(self):
