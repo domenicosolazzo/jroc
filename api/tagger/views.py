@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from . import tagger
 from flask import request, Response
 from obt import OBTManager
@@ -18,7 +20,7 @@ def taggerTags():
     requestStopwords = True if request.args.get('stopwords') == 'true' else False
     tags = {}
     data = request.data
-    data = data.replace("'","\"").replace("\n", "")
+    data = data.replace("'","\'").replace("\n", "").replace("«", "").replace("»", "").replace("*", "")
     json_result = json.loads(data)
     obtManager = OBTManager(json_result)
     stopwordManager = StopwordManager()
@@ -41,7 +43,8 @@ def taggerEntities():
     requestStopwords = True if request.args.get('stopwords') == 'true' else False
 
     data = request.data
-    data = data.replace("'","\"").replace("\n", "")
+    data = data.replace("'","\'").replace("\n", "").replace("«", "").replace("»", "").replace("*", "")
+    print(data)
     json_result = json.loads(data)
     obtManager = OBTManager(json_result)
     stopwordManager = StopwordManager()
