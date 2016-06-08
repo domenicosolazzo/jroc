@@ -10,6 +10,9 @@ DEBUG=os.environ.get("DEBUG", False)
 # This should be a complex random value.
 SECRET_KEY=os.environ.get("SECRET_KEY", "youshouldchangethis")
 
+# Tag manager type: tag-nostat-bm.sh, tag-bm.sh, tag-nostat-nn.sh
+OBT_TYPE = os.environ.get('OBT_TYPE', 'tag-bm.sh')
+
 # If true, it will remove stopwords from the POS Tagger
 OBT_STOPWORDS_DISABLE=os.environ.get("OBT_STOPWORDS_DISABLE", False)
 # The filename with the stopwords for the POS TAGGER

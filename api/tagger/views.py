@@ -25,6 +25,7 @@ def taggerTags():
 
     tags = obtManager.findTags()
     if requestStopwords == True:
+        print("Enabling stopwords....")
         tags = stopwordManager.filterStopWords(tags)
 
     data = {}
