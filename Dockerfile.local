@@ -34,6 +34,8 @@ RUN echo "All done - enjoy the packages! If you just want all core tools, do: su
 
 # Cedar packages
 RUN apt-get update
+# Used this hack for fixing an issue with packages asking for input while setting up
+# More info: http://stackoverflow.com/questions/22957939/how-to-answer-an-apt-get-configuration-change-prompt-on-travis-ci-in-this-case
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" upgrade --force-yes
 RUN apt-get install -y --force-yes \
     autoconf \
