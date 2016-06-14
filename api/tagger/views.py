@@ -4,6 +4,8 @@ from . import tagger
 from flask import request, Response
 from obt import OBTManager
 from stopwords import StopwordManager
+from api.utils.input import DataCleaner
+
 import json
 
 @tagger.route("/")
@@ -17,44 +19,58 @@ def taggerMain():
 
 @tagger.route("/tags", methods=["POST"])
 def taggerTags():
-    requestStopwords = True if request.args.get('stopwords') == 'true' else False
-    tags = {}
+    shouldFilterStopwords = True if request.args.get('stopwords') == 'true' else False
+
     data = request.data
-    data = data.replace("'","\'").replace("\n", "").replace("«", "").replace("»", "").replace("*", "")
+
+    # Cleaning the input data
+    dataCleaner = DataCleaner()
+    data = dataCleaner.filterCharacters(data)
+
     json_result = json.loads(data)
+
+    # Oslo-Bergen Tagger
     obtManager = OBTManager(json_result)
-    stopwordManager = StopwordManager()
 
+    tags = {}
+
+    # Find the tags
     tags = obtManager.findTags()
-    if requestStopwords == True:
-        print("Enabling stopwords....")
+    if shouldFilterStopwords == True:
+        # Applying the stopwords
+        stopwordManager = StopwordManager()
         tags = stopwordManager.filterStopWords(tags)
+    result = {}
+    result["uri"] = "%s" % (request.base_url, )
+    result["data"] = tags
 
-    data = {}
-    data["uri"] = "%s" % (request.base_url, )
-    data["data"] = tags
-
-    json_response = json.dumps(data)
+    json_response = json.dumps(result)
     return Response(json_response, mimetype="application/json")
 
 @tagger.route("/entities", methods=["POST"])
 def taggerEntities():
-
-    requestStopwords = True if request.args.get('stopwords') == 'true' else False
+    shouldFilterStopwords = True if request.args.get('stopwords') == 'true' else False
+    showAdvancedResult = True if request.args.get("advanced") else False
 
     data = request.data
-    data = data.replace("'","\'").replace("\n", "").replace("«", "").replace("»", "").replace("*", "")
-    print(data)
+
+    # Cleaning the data in input
+    dataCleaner = DataCleaner()
+    data = dataCleaner.filterCharacters(data)
+
     json_result = json.loads(data)
+
+    # Oslo-Bergen Tagger
     obtManager = OBTManager(json_result)
-    stopwordManager = StopwordManager()
 
     entities = obtManager.findEntities()
-    if requestStopwords == True:
+    if shouldFilterStopwords == True:
+        # Applying the stopwords
+        stopwordManager = StopwordManager()
         entities = stopwordManager.filterStopWords(entities)
 
-    is_advanced = request.args.get("advanced")
-    if is_advanced:
+    if showAdvancedResult and len(entities) > 0:
+        # Advanced formatting for each entity
         temp = []
         for entity in entities:
             temp.append({
@@ -63,10 +79,10 @@ def taggerEntities():
             })
         entities = temp
 
-    data = {}
-    data["uri"] = "%s" % (request.base_url, )
-    data["data"] = entities
-    json_response = json.dumps(data)
+    result = {}
+    result["uri"] = "%s" % (request.base_url, )
+    result["data"] = entities
+    json_response = json.dumps(result)
     return Response(json_response, mimetype="application/json")
 
 @tagger.route("/analyze", methods=["POST"])
