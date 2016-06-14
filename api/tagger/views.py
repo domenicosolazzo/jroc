@@ -5,6 +5,7 @@ from flask import request, Response
 from obt import OBTManager
 from stopwords import StopwordManager
 from api.utils.input import DataCleaner
+from api.language.detector import LanguageDetector
 
 import json
 
@@ -20,6 +21,7 @@ def taggerMain():
 @tagger.route("/tags", methods=["POST"])
 def taggerTags():
     shouldFilterStopwords = True if request.args.get('stopwords') == 'true' else False
+    shouldShowLanguage = True if request.args.get('language') == 'true' else False
 
     data = request.data
 
@@ -28,6 +30,10 @@ def taggerTags():
     data = dataCleaner.filterCharacters(data)
 
     json_result = json.loads(data)
+
+    # Language Detection
+    text = json_result.get("data", None)
+    languageResult = LanguageDetector().classify(text)
 
     # Oslo-Bergen Tagger
     obtManager = OBTManager(json_result)
@@ -40,9 +46,13 @@ def taggerTags():
         # Applying the stopwords
         stopwordManager = StopwordManager()
         tags = stopwordManager.filterStopWords(tags)
+
     result = {}
     result["uri"] = "%s" % (request.base_url, )
     result["data"] = tags
+    result["meta"] = {}
+    if shouldShowLanguage == True:
+        result["meta"]["language"] = languageResult[0]
 
     json_response = json.dumps(result)
     return Response(json_response, mimetype="application/json")
@@ -50,6 +60,7 @@ def taggerTags():
 @tagger.route("/entities", methods=["POST"])
 def taggerEntities():
     shouldFilterStopwords = True if request.args.get('stopwords') == 'true' else False
+    shouldShowLanguage = True if request.args.get('language') == 'true' else False
     showAdvancedResult = True if request.args.get("advanced") else False
 
     data = request.data
@@ -59,6 +70,10 @@ def taggerEntities():
     data = dataCleaner.filterCharacters(data)
 
     json_result = json.loads(data)
+
+    # Language Detection
+    text = json_result.get("data", None)
+    languageResult = LanguageDetector().classify(text)
 
     # Oslo-Bergen Tagger
     obtManager = OBTManager(json_result)
@@ -82,6 +97,10 @@ def taggerEntities():
     result = {}
     result["uri"] = "%s" % (request.base_url, )
     result["data"] = entities
+    result["meta"] = {}
+    if shouldShowLanguage == True:
+        result["meta"]["language"] = languageResult[0]
+        
     json_response = json.dumps(result)
     return Response(json_response, mimetype="application/json")
 
