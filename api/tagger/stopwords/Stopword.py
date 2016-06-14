@@ -4,12 +4,13 @@ class StopwordManager(object):
     FILENAME_ENV_NAME = 'OBT_STOPWORDS_FILENAME'
     FILENAME = ''
 
-    def __init__(self, filename=None):
+    def __init__(self, filename=None, language="no"):
         if filename is not None:
             self.FILENAME = filename
         elif os.environ.get('OBT_STOPWORDS_FILENAME', None) is None:
             currentDirectory = os.path.dirname(os.path.realpath(__file__))
-            self.FILENAME = "%s/%s"  % (currentDirectory, "stopwords_list.txt")
+            # <current_directory>/stopwords_no.txt
+            self.FILENAME = "%s/data/%s%s.txt"  % (currentDirectory, "stopwords_", language)
         else:
             self.FILENAME = os.environ.get('OBT_STOPWORDS_FILENAME', None)
 
