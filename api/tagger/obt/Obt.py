@@ -114,7 +114,7 @@ class OBTManager(object):
         unique_tags = set(entities)
         return list(unique_tags)
 
-    def findEntities(self):
+    def findEntities(self, stopwords=[]):
         data = self._outputData
         if not data:
             data = self.obtAnalyze()
@@ -122,11 +122,15 @@ class OBTManager(object):
         entities = []
         last_entity = ""
         for entity in data:
+            word = entity.get("word")
+            if len(stopwords) > 0 and word in stopwords:
+                continue # Avoid this word
+
             if (entity.get("is_prop") == True and entity.get("is_subst") == True) or (entity.get("is_number").get('roman') == True):
                 if last_entity is "":
-                    last_entity = entity.get("word")
+                    last_entity = word
                 else:
-                    last_entity = "%s %s" % (last_entity, entity.get("word"))
+                    last_entity = "%s %s" % (last_entity, word)
             elif last_entity is not "":
                 entities.append(last_entity)
                 last_entity = ""
@@ -150,8 +154,6 @@ class OBTManager(object):
         inf_merks = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_inf_merke") == True]))
         sbus = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_sbu") == True]))
         interjs = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_interj") == True]))
-
-
 
         textAnalyze['verbs'] = verbs
         textAnalyze['substs'] = substs

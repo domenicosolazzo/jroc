@@ -78,11 +78,10 @@ def taggerEntities():
     # Oslo-Bergen Tagger
     obtManager = OBTManager(json_result)
 
-    entities = obtManager.findEntities()
-    if shouldFilterStopwords == True:
-        # Applying the stopwords
-        stopwordManager = StopwordManager()
-        entities = stopwordManager.filterStopWords(entities)
+    # Applying the stopwords
+    stopwordManager = StopwordManager()
+    stopwords = stopwordManager.getStopWords() if shouldFilterStopwords == True else []
+    entities = obtManager.findEntities(stopwords)
 
     if showAdvancedResult and len(entities) > 0:
         # Advanced formatting for each entity
@@ -100,7 +99,7 @@ def taggerEntities():
     result["meta"] = {}
     if shouldShowLanguage == True:
         result["meta"]["language"] = languageResult[0]
-        
+
     json_response = json.dumps(result)
     return Response(json_response, mimetype="application/json")
 
