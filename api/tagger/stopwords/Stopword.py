@@ -4,10 +4,11 @@ class StopwordManager(object):
     FILENAME_ENV_NAME = 'OBT_STOPWORDS_FILENAME'
     FILENAME = ''
     FILENAME_CUSTOM = "%s/data/stopwords_custom.txt" % (os.path.dirname(os.path.realpath(__file__)), )
-    AVAILABLE_LANGUAGES = ["da", "de", "en", "fi", "fr", "it", "no", "sv"]
+    AVAILABLE_LANGUAGES = ["da", "de", "en", "fi", "fr", "it", "nb", "no", "nn", "sv"]
 
     def __init__(self, filename=None, language="no"):
-        if language in AVAILABLE_LANGUAGES: # Check if the language is available
+        if language in self.AVAILABLE_LANGUAGES: # Check if the language is available
+            currentDirectory = "%s" % (os.path.dirname(os.path.realpath(__file__)), )
             self.FILENAME = "%s/data/%s%s.txt"  % (currentDirectory, "stopwords_", language)
 
         self.__initializeStopwords()
@@ -30,12 +31,13 @@ class StopwordManager(object):
         if self.FILENAME is None:
             raise Error("Error retrieving the stopword list. The filename is invalid or missing")
 
-        # Language stopwords
-        languageStopwords = self.__retrieveStopwords(self.FILENAME)
-        # Custom stopwords
+        languageStopwords = []
+        if self.FILENAME:
+            languageStopwords = self.__retrieveStopwords(self.FILENAME)
         customStopwords = self.__retrieveStopwords(self.FILENAME_CUSTOM)
-
-        self.stopwords = set(languageStopwords.extend(customStopwords))
+        # Extend the stopword list
+        languageStopwords.extend(customStopwords)
+        self.stopwords = set(languageStopwords)
 
     def getStopWords(self):
         """

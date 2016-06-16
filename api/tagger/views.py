@@ -34,6 +34,7 @@ def taggerTags():
     # Language Detection
     text = json_result.get("data", None)
     languageResult = LanguageDetector().classify(text)
+    language = languageResult[0]
 
     # Oslo-Bergen Tagger
     obtManager = OBTManager(json_result)
@@ -44,7 +45,7 @@ def taggerTags():
     tags = obtManager.findTags()
     if shouldFilterStopwords == True:
         # Applying the stopwords
-        stopwordManager = StopwordManager()
+        stopwordManager = StopwordManager(language=language)
         tags = stopwordManager.filterStopWords(tags)
 
     result = {}
@@ -74,14 +75,15 @@ def taggerEntities():
     # Language Detection
     text = json_result.get("data", None)
     languageResult = LanguageDetector().classify(text)
+    language = languageResult[0]
 
     # Oslo-Bergen Tagger
     obtManager = OBTManager(json_result)
 
     # Applying the stopwords
-    stopwordManager = StopwordManager()
+    stopwordManager = StopwordManager(language=language)
     stopwords = stopwordManager.getStopWords() if shouldFilterStopwords == True else []
-    entities = obtManager.findEntities(stopwords)
+    entities = obtManager.findEntities(stopwords=stopwords)
 
     if showAdvancedResult and len(entities) > 0:
         # Advanced formatting for each entity

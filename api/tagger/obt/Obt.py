@@ -123,7 +123,7 @@ class OBTManager(object):
         last_entity = ""
         for entity in data:
             word = entity.get("word")
-            if len(stopwords) > 0 and word in stopwords:
+            if len(stopwords) > 0 and word.lower() in stopwords:
                 continue # Avoid this word
 
             if (entity.get("is_prop") == True and entity.get("is_subst") == True) or (entity.get("is_number").get('roman') == True):
