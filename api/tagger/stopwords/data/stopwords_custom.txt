@@ -4,3 +4,8 @@
 
 publisert             | published
 sist                  | last
+morgen
+middag
+kveld
+artikkeltags
+superparet
