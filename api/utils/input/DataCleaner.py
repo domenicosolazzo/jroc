@@ -7,10 +7,10 @@ class DataCleaner(object):
     def filterCharacters(self, text=""):
         """
         Filter a set of characters from the original text.
-        Characters that will be filtered: ', \n, «, », *, –
+        Characters that will be filtered: ', \n, «, », *, –, -
         """
-        characters = ["'","\n","«", "»", "*", "–", "•"]
+        characters = ["'","\n","«", "»", "*", "–", "•", "-"]
         for character in characters:
-            emptyCharacter = ""
-            text = text.replace(character, emptyCharacter)
+            replacingCharacter = " "
+            text = text.replace(character, replacingCharacter)
         return text
