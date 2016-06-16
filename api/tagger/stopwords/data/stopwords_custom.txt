@@ -9,3 +9,4 @@ middag
 kveld
 artikkeltags
 superparet
+tilsammen
