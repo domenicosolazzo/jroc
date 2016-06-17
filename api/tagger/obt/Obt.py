@@ -124,9 +124,10 @@ class OBTManager(object):
         for entity in data:
             word = entity.get("word")
             if len(stopwords) > 0 and word.lower() in stopwords:
-                continue # Avoid this word
-
-            if (entity.get("is_prop") == True and entity.get("is_subst") == True) or (entity.get("is_number").get('roman') == True):
+                if last_entity is not "":
+                    entities.append(last_entity)
+                last_entity = ""
+            elif (entity.get("is_prop") == True and entity.get("is_subst") == True) or (entity.get("is_number").get('roman') == True) or word.lower() == "as":
                 if last_entity is "":
                     last_entity = word
                 else:
