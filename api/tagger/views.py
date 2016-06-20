@@ -69,6 +69,7 @@ def taggerEntities():
     # Cleaning the data in input
     dataCleaner = DataCleaner()
     data = dataCleaner.filterCharacters(data)
+    print("After cleaning data: %s" % (data,))
 
     json_result = json.loads(data)
 
