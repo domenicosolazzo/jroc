@@ -65,6 +65,14 @@ docker-compose build --no-cache
 docker-compose build
 ```
 
+While building a docker image, sometimes can happen that you are consuming all the space in your harddrive.
+In that case, run these commands before building the image again:
+```
+docker-machine rm default
+docker-machine create --driver virtualbox default
+eval "$(docker-machine env default)"
+```
+
 ##### Local deployment
 - Create a symlink for Dockerfile.local to Dockerfile
 ```
