@@ -10,7 +10,6 @@ class StopwordManager(object):
     AVAILABLE_LANGUAGES = ["da", "de", "en", "es", "fi", "fr", "it", "nb", "no", "nn", "sv"]
 
     def __init__(self, filename=None, language="no"):
-        print("language %s" % (language,))
         if not language in self.AVAILABLE_LANGUAGES:
             print("language %s" % (language,))
             raise Exception("The stopword for this language is not available")
@@ -48,6 +47,7 @@ class StopwordManager(object):
         customStopwords = self.__retrieveStopwords(self.FILENAME_CUSTOM)
         # Extend the stopword list
         languageStopwords.extend(customStopwords)
+
         self.stopwords = set(languageStopwords)
 
     def getStopWords(self):
