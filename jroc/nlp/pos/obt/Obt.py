@@ -10,12 +10,13 @@ class OBTManager(object):
     _filename = None
     _deleteFiles = True
 
-    def __init__(self, data, filename=None, deleteFiles=True):
-        self._filename = filename
-        self._deleteFiles = deleteFiles
-        if not self._filename:
-            self._filename = self.__saveContent(data)
+    def __init__(self, data):
+        assert(isinstance(data, str))
 
+        if not data:
+            raise ValueError("Data in input is empty or not valid")
+
+        self._filename = self.__saveContent(data)
         self._outputData = None
 
     def __deleteFile(self, filename):
@@ -26,21 +27,14 @@ class OBTManager(object):
             raise
 
     def __saveContent(self, data):
-        try:
-            if not isinstance(data, dict) or not 'data' in data.keys():
-                raise Exception("Invalid data in input")
+        assert(isinstance(data, str))
 
-            data = data.get('data')
-
-            currentDirectory = os.path.dirname(os.path.realpath(__file__))
-            filename = "%s/../../../tmp/TEXTFILE_%s" % (currentDirectory, int(time.time()), )
-            file = open(filename,'w+')
-            file.write(data.encode('utf8'))
-            file.close()
-            return filename
-
-        except:
-            raise
+        currentDirectory = os.path.dirname(os.path.realpath(__file__))
+        filename = "%s/../../../../tmp/TEXTFILE_%s" % (currentDirectory, int(time.time()), )
+        file = open(filename,'w+')
+        file.write(data.encode('utf8'))
+        file.close()
+        return filename
 
     def __isNumber(self, tagging):
         is_quantity =  True if len([tag for tag in tagging if tag == 'kvant']) > 0 else False
@@ -60,7 +54,7 @@ class OBTManager(object):
         currentDirectory = os.path.dirname(os.path.realpath(__file__))
         output_filename = "%s_OUTPUT" % (self._filename,)
         tagger_type = os.environ.get('OBT_TYPE', 'tag-nostat-bm.sh')
-        os.system('%s/../../../The-Oslo-Bergen-Tagger/%s %s > %s' % (currentDirectory, tagger_type, self._filename, output_filename))
+        os.system('%s/../../../../The-Oslo-Bergen-Tagger/%s %s > %s' % (currentDirectory, tagger_type, self._filename, output_filename))
         file_object = open(output_filename, 'r')
 
         text = file_object.read().decode('utf8')
