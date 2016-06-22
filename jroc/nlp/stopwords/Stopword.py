@@ -7,12 +7,18 @@ class StopwordManager(object):
     FILENAME_ENV_NAME = 'OBT_STOPWORDS_FILENAME'
     FILENAME = ''
     FILENAME_CUSTOM = "%s/data/stopwords_custom.txt" % (os.path.dirname(os.path.realpath(__file__)), )
-    AVAILABLE_LANGUAGES = ["da", "de", "en", "es", "fi", "fr", "it", "nb", "no", "nn", "sv"]
+    AVAILABLE_LANGUAGES = [
+        "da", "de",
+        "en", "es",
+        "fi", "fr",
+        "it", "nb",
+        "no", "nn",
+        "sv"
+    ]
 
     def __init__(self, filename=None, language="no"):
         if not language in self.AVAILABLE_LANGUAGES:
-            print("language %s" % (language,))
-            raise Exception("The stopword for this language is not available")
+            raise ValueError("The stopword for this language is not available")
 
         if language in self.AVAILABLE_LANGUAGES: # Check if the language is available
             currentDirectory = "%s" % (os.path.dirname(os.path.realpath(__file__)), )
