@@ -130,7 +130,9 @@ class StopwordsTestCase(unittest.TestCase):
         """
         Test when a not available language is given in input to the StopwordManager
         """
-        self.assertRaises(ValueError, StopwordManager, "not_valid_language")
+        language="not_valid_language"
+        filename=None
+        self.assertRaises(ValueError, StopwordManager, filename, language)
 
     def helper_readFilename(self, filename=''):
         stopwords = []
