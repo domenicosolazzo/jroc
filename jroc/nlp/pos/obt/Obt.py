@@ -4,39 +4,52 @@ import re
 import time
 
 class OBTManager(object):
+    """
+    This class takes care to analyze the text using the Oslo-Bergen Tagger
+    """
     REGEX = re.compile("<word>(?P<w>(.*?))</word>")
     REGEX2 = re.compile("\"<(?P<w>[\w+]*)>\"")
     _outputData = None
     _filename = None
+    _outputFilename = None
     _deleteFiles = True
 
     def __init__(self, data):
         assert(isinstance(data, str))
 
+        # Check if the data is not empty
         if not data:
             raise ValueError("Data in input is empty or not valid")
 
-        self._filename = self.__saveContent(data)
+        # Save the content in a temp file
+        self.__saveContent(data)
         self._outputData = None
 
     def __deleteFile(self, filename):
-        try:
-            os.remove(filename)
-            return True
-        except:
-            raise
+        if filename is not None:
+            try:
+                os.remove(filename)
+                return True
+            except:
+                raise
 
     def __saveContent(self, data):
+        """
+        Save the content in a temporary file
+        """
         assert(isinstance(data, str))
 
-        currentDirectory = os.path.dirname(os.path.realpath(__file__))
+        currentDirectory = os.path.dirname(os.path.realpath(__file__)) # Current directory
         filename = "%s/../../../../tmp/TEXTFILE_%s" % (currentDirectory, int(time.time()), )
         file = open(filename,'w+')
         file.write(data.encode('utf8'))
         file.close()
-        return filename
+        self._filename = filename
 
     def __isNumber(self, tagging):
+        """
+        Check if it is a number
+        """
         is_quantity =  True if len([tag for tag in tagging if tag == 'kvant']) > 0 else False
         is_ordinal = True if len([tag for tag in tagging if tag == '<ordenstall>']) > 0 else False
         is_roman = True if len([tag for tag in tagging if tag == '<romertall>']) > 0 else False
@@ -48,32 +61,52 @@ class OBTManager(object):
             "roman": is_roman
         }
 
-    def obtAnalyze(self):
-        if self._outputData:
-            return self._outputData
-        currentDirectory = os.path.dirname(os.path.realpath(__file__))
-        output_filename = "%s_OUTPUT" % (self._filename,)
-        tagger_type = os.environ.get('OBT_TYPE', 'tag-nostat-bm.sh')
-        os.system('%s/../../../../The-Oslo-Bergen-Tagger/%s %s > %s' % (currentDirectory, tagger_type, self._filename, output_filename))
-        file_object = open(output_filename, 'r')
+    def cleanUp(self):
+        """
+        Clean up the created files
+        """
+        self.__deleteFile(self._filename)
+        self.__deleteFile(self._outputFilename)
 
+    def obtAnalyze(self):
+        """
+        Analyze the text using the Oslo-Bergen tagger.
+        """
+        if self._outputData: # If the text has been already analyzed...
+            return self._outputData
+
+        # Current directory
+        currentDirectory = os.path.dirname(os.path.realpath(__file__))
+        # Output filename
+        output_filename = "%s_OUTPUT" % (self._filename,)
+        self._outputFilename = output_filename
+        # Get the type of tagger that you want to use with the Oslo-Bergen tagger
+        tagger_type = os.environ.get('OBT_TYPE', 'tag-nostat-bm.sh')
+        # Run the tagger
+        os.system('%s/../../../../The-Oslo-Bergen-Tagger/%s %s > %s' % (currentDirectory, tagger_type, self._filename, output_filename))
+
+        # Read the output file
+        file_object = open(output_filename, 'r')
         text = file_object.read().decode('utf8')
         text = text.split("\n")
+
+        # Parsing the result
         result = []
         new_obj = {}
         for word in text:
             if not word:
-               continue
+               continue # word is empty
+
             is_match = self.REGEX.match(word)
-            if self.REGEX.match(word):
+            if self.REGEX.match(word): # Check if the word matches the regex <word>(?P<w>(.*?))</word>
                 new_obj = {"word": is_match.groups(0)[0]}
                 result.append(new_obj)
-            elif self.REGEX2.match(word.lower()):
+            elif self.REGEX2.match(word.lower()): # Check if the word matches the regex <(?P<w>[\w+]*)>
                continue
             else:
                word = word.replace("\"", "").replace("\t", "")
                tagging = [w for w in word.split(" ") if w]
-
+               # Analyze the word
                new_obj["tagging"] = tagging
                new_obj["options"] = word
                new_obj["is_verb"] = True if len([tag for tag in tagging if tag == 'verb']) > 0 else False
@@ -88,14 +121,14 @@ class OBTManager(object):
                new_obj["is_sbu"] = True if len([tag for tag in tagging if tag == 'sub']) > 0 else False
                new_obj["is_interj"] = True if len([tag for tag in tagging if tag == 'interj']) > 0 else False
 
-        if self._deleteFiles:
-            self.__deleteFile(self._filename)
-            self.__deleteFile(output_filename)
-
         self._outputData = result
         return result
 
     def findTags(self):
+        """
+        Find the tags within the text
+        It takes all the words that are both "is_prop" and "is_subst"
+        """
         obtData = self._outputData
         if not obtData:
             obtData = self.obtAnalyze()
@@ -108,6 +141,9 @@ class OBTManager(object):
         return list(unique_tags)
 
     def findEntities(self, stopwords=[]):
+        """
+        Find the entities within the text
+        """
         data = self._outputData
         if not data:
             data = self.obtAnalyze()
@@ -133,8 +169,13 @@ class OBTManager(object):
         return entities
 
     def analyzeText(self):
+        """
+        Analyze the text
+        """
+        # Run the Oslo-Bergen tagger analysis
         data = self.obtAnalyze()
 
+        # Format the result returned from the Oslo-Bergen Tagger
         textAnalyze = {}
 
         verbs = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_verb") == True]))
