@@ -7,6 +7,9 @@ POS_TAGGERS = { "no" : OBTManager,
                 "other": None}
 
 class PosManager(object):
+    """
+    It select the right pos tagger based on the language
+    """
     __language = None
     __posTagger = None
     def __init__(self, language="en"):

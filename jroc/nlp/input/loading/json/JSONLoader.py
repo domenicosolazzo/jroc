@@ -16,6 +16,7 @@ class JSONLoader(object):
         If data does not exist, it will return an exception
         """
         data = self.jsonObj.get('data', None)
+        
         if data is None:
             raise Exception("Data key is not present in the input")
         return self.jsonObj.get('data', None)
