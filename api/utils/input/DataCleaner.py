@@ -18,7 +18,7 @@ class DataCleaner(object):
         character = "\""
         matches = text.split(character)
         # It should be a json in this format {"data": "<value>"}
-        if len(matches) <= 4:
+        if len(matches) <= 5:
             return text # Do not do anything
 
         replacedText = "%s\"%s\"%s" % ("\"".join(matches[0:3]), " ".join(matches[3:-1]), matches[-1])
