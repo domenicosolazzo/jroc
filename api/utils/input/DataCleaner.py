@@ -13,4 +13,14 @@ class DataCleaner(object):
         for character in characters:
             replacingCharacter = " "
             text = text.replace(character, replacingCharacter)
-        return text
+
+        # Check for double quotes inside the text.
+        character = "\""
+        matches = text.split(character)
+        # It should be a json in this format {"data": "<value>"}
+        if len(matches) <= 4:
+            return text # Do not do anything
+
+        replacedText = "%s\"%s\"%s" % ("\"".join(matches[0:3]), " ".join(matches[3:-1]), matches[-1])
+
+        return replacedText
