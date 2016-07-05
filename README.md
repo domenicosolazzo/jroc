@@ -47,7 +47,7 @@ For activating basic auth, you need to set both BASIC_AUTH_USERNAME and BASIC_AU
 
 - Install the Heroku plugin for Docker (Only the first time)
 ```
-heroku plugins:install heroku-docker
+heroku plugins:install heroku-container-tools
 ```
 
 - Create your heroku app
@@ -99,7 +99,7 @@ docker-compose build
 ```
 - Run docker:release
 ```
-heroku docker:release
+heroku container:release
 ```
 
 # Usage
