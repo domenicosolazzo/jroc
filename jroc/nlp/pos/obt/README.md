@@ -1,8 +1,8 @@
 # Oslo Bergen Tagger
-## Morfosyntaktisk taggsett
-|Tag	|Example  	| 
+## [Morfosyntaktisk taggsett](http://omilia.uio.no/obt/morfosyn.html)
+|Tag	|Example  	|
 |---	|---	      |
-| adj	  	|  	"< comme il faut>" "comme il faut" adj 	      | 
+| adj	  	|  	"< comme il faut>" "comme il faut" adj 	      |
 | adj < pres-part> 	|< kastende> kaste adj < pres-part>   	|
 | adj be ent pos 	| < pene> pen adj be ent pos  	      |
 | adj be ent pos < ordenstall>  	| < første> første adj be ent pos < ordenstall>	      |
