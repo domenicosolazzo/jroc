@@ -1,28 +1,20 @@
+import Task
+from datetime import datetime
 
-class BasicTask(object):
+class BasicTask(Task):
     """
     It defines a basic task for the pipeline
     """
-
-    # Input for the task
-    __input = None
-    # Output for the task
-    __output = None
-    # Start date for the task
-    __created = None
-    # End date for the task
-    __finished = None
-    # Failed: true if the task has failed
-    __failed = False
-
     # Kernel for the task
     __kernel = None
 
-    def __init__(self):
-        pass
 
-    def execute(self):
+    def __init__(self, input):
+        super(BasicTask, self).__init__(input)
+
+    def execute(self, input):
         """
         Execute a task
         """
-        raise Exception("Not implemented yet")
+        super(BasicTask, self).execute(input)
+        
