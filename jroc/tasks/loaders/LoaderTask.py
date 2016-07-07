@@ -12,11 +12,13 @@ class LoaderTask(BasicTask):
         """
         super(LoaderTask, self).execute(input)
 
+        output = None
         try:
             self.__kernel = JSONLoader(json_string=input)
-            jsonData = self.__kernel.getData()
-            self.finish(data=jsonData, failed=False, error=None)
+            output = self.__kernel.getData()
+            self.finish(data=output, failed=False, error=None)
         except:
-            self.finish(data=None, failed=True, error="Error loading the json string")
+            output = "Error loading the json string"
+            self.finish(data=None, failed=True, error=output)
 
-        return jsonData
+        return output
