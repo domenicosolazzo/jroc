@@ -20,6 +20,8 @@ class Task(object):
     __finished = None
     # Failed: true if the task has failed
     __failed = False
+    # Error: Last error in the task
+    __error = None
 
     def __init__(self, name, initial_task=False):
         if name == None or len(name) <= 0:
@@ -39,6 +41,9 @@ class Task(object):
         """
         self.__output = output
 
+    def setError(self, error):
+        self.__error = error
+
     def getName(self):
         """
         Get the name of the task
@@ -56,6 +61,8 @@ class Task(object):
         Check if it is an initial task
         """
         return __initial_task == True
+    def hasFailed(self):
+        return self.__failed == True
 
     def execute(self, input=None):
         """
@@ -67,6 +74,8 @@ class Task(object):
         self.__started = datetime.utcnow()
         return
 
-    def finish(self, failed=False)
+    def finish(self, data, failed=False, error=None)
         self.__failed = failed
         self.__finished = datetime.utcnow()
+        self.__error = error
+        self.__output = data

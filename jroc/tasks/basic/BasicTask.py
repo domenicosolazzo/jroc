@@ -9,12 +9,11 @@ class BasicTask(Task):
     __kernel = None
 
 
-    def __init__(self, input):
-        super(BasicTask, self).__init__(input)
+    def __init__(self, name, initial_task):
+        super(BasicTask, self).__init__(name, initial_task)
 
     def execute(self, input):
         """
         Execute a task
         """
         super(BasicTask, self).execute(input)
-        
