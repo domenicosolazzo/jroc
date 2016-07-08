@@ -1,4 +1,6 @@
+from . import Pipeline
 import Queue
+
 class BasicPipeline(Pipeline):
     # Task list
     __tasks = Queue.Queue()
