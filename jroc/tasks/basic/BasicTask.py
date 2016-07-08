@@ -1,14 +1,10 @@
-import Task
-from datetime import datetime
+from . import Task
 
 class BasicTask(Task):
     """
     It defines a basic task for the pipeline
     """
-    # Kernel for the task
-    __kernel = None
-
-
+    
     def __init__(self, name, initial_task):
         super(BasicTask, self).__init__(name, initial_task)
 

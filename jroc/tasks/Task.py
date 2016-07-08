@@ -1,3 +1,4 @@
+from datetime import datetime
 class Task(object):
     """
     Main Task class
@@ -44,6 +45,9 @@ class Task(object):
     def setError(self, error):
         self.__error = error
 
+    def getOutput(self):
+        return self.__output
+
     def getName(self):
         """
         Get the name of the task
@@ -60,7 +64,8 @@ class Task(object):
         """
         Check if it is an initial task
         """
-        return __initial_task == True
+        return self.__initial_task == True
+
     def hasFailed(self):
         return self.__failed == True
 
@@ -74,8 +79,8 @@ class Task(object):
         self.__started = datetime.utcnow()
         return
 
-    def finish(self, data, failed=False, error=None)
+    def finish(self, data, failed=False, error=None):
         self.__failed = failed
         self.__finished = datetime.utcnow()
-        self.__error = error
-        self.__output = data
+        self.setError(error)
+        self.setOutput(data)

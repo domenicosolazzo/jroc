@@ -1,5 +1,5 @@
-import BasicTask
-import JSONLoader
+from . import BasicTask
+from . import JSONLoader
 class LoaderTask(BasicTask):
     __kernel = None # Kernel for this loader
     def __init__(self, name, initial_task=False):
