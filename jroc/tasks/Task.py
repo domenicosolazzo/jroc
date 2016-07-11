@@ -25,10 +25,9 @@ class Task(object):
     __error = None
     # Metadata
     __metadata = {
-        output: None,
+        output: {'key': 'data'},
         input: None
     }
-
 
     def __init__(self, name, initial_task=False):
         if name == None or len(name) <= 0:
@@ -42,15 +41,26 @@ class Task(object):
         # Creation date
         self.__created = datetime.utcnow()
 
+    def setMetadataOutput(self, metadata):
+        """
+        Set metadata output
+        """
+        assert(metadata is not None)
+        assert(isinstance(metadata, dict))
+
+        self.__metadata["output"] = metadata
 
     def setOutput(self, output):
         """
         Set the output of a task
         """
-        outputKey = self.__metadata.get('output', {}).get('key', None)
+        outputKey = self.__metadata.get('output', {}).get('key', 'data')
         self.__output[outputKey] = output
 
     def setError(self, error):
+        """
+        Set the error
+        """
         self.__error = error
 
     def getOutput(self):
@@ -75,6 +85,9 @@ class Task(object):
         return self.__initial_task == True
 
     def hasFailed(self):
+        """
+        Check if the task has failed
+        """
         return self.__failed == True
 
     def execute(self, input=None):
@@ -88,6 +101,9 @@ class Task(object):
         return
 
     def finish(self, data, failed=False, error=None):
+        """
+        The task has finished
+        """
         self.__failed = failed
         self.__finished = datetime.utcnow()
         self.setError(error)

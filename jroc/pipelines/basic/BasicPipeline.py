@@ -10,34 +10,52 @@ class BasicPipeline(Pipeline):
         self.setName(name)
         self.setInput(input)
 
-    def addTask(self, task):
-        if not isinstance(task, BasicTask):
-            raise Exception("Wrong type of task. This pipeline accepts only BasicTask")
+    def addTask(self, taskInfo):
+        """
+        Add a task to the pipeline.
+        @taskinfo: A tuple containing the current task, and information about its input and output.
+        """
+        if not isinstance(taskInfo, tuple):
+            raise Exception("Wrong type of task. This pipeline accepts only a tuple. (Task instance, options)")
 
         self.__tasks.put(task)
 
     def runTask(self, task, input, metadataOutput):
+        """
+        Run the task given an input. It receives information where to store the output.
+        @task: The task
+        @input: Input for the task
+        @metadataOutput: Information about the task.
+        """
         task.setOutputMetadata(metadataOutput)
         taskResult =  task.execute()
         return taskResult
 
     def execute(self):
+        """
+        Execute the pipeline
+        """
         # Until the queue is empty
         while not self.__tasks.empty():
-            # Get the task
+            # Get the task tuple
             nextStep = self.__tasks.get()
 
+            # Get the task
             task = nextStep[0]
-            metadataIn = nextStep[1]["input"]
-            metadataOut = nextStep[1]["output"]
 
+            # Get the metadata for the task
+            metadata = nextStep[1]
+            metadataIn = metadata.get("input", {})
+            metadataOut = metadata.get("output", {})
+
+            # Fetch input data
             input = self.getInputData(metadataIn)
 
             # Get the output from the previous task
             output = self.runTask(task, input, metadataOut)
 
             # Set the output
-            outputKey = metadataOut.get('key', None)
+            outputKey = metadataOut.get('key', '%s-output' % task.getPrefix())
             outputData = output.get(outputKey, None)
             self.setOutput(outputKey, outputData)
 
@@ -52,9 +70,6 @@ class BasicPipeline(Pipeline):
         Blocks until the tasklist is empty
         """
         self.__tasks.join()
-
-    def getInputData(self, metadataIn):
-        pass
 
 
 
