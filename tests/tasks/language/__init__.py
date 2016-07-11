@@ -1,0 +1,1 @@
+from jroc.tasks.language.LanguageDetectorTask import LanguageDetectorTask
