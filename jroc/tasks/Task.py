@@ -35,6 +35,7 @@ class Task(object):
         self.__initial_task = initial_task
         # Creation date
         self.__created = datetime.utcnow()
+        
 
     def setOutput(self, output):
         """

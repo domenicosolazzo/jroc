@@ -10,7 +10,9 @@ class LoaderTask(BasicTask):
         """
         Execute a task
         """
+
         super(LoaderTask, self).execute(input)
+
 
         output = None
         try:
