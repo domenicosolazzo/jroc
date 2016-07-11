@@ -48,6 +48,28 @@ class Pipeline(object):
             return self.__output.get('current_output', None)
         return self.__output
 
+    def getInputData(self, metadata):
+        input = {}
+        if isinstance(metadata, list):
+            for item in metadata:
+                # Check source
+                source = item.get('source', None)
+
+                if source == 'internal-output':
+
+                    # Get Key
+                    mapTo = item.get('map-key', 'main')
+                    key = item.get('key', None)
+
+                    # Get Value
+                    value = self.__output.get(key, None)
+
+                    # set the input
+                    input[mapTo] = value
+                elif source == "main" # This is the main input
+                    input = self.__input
+        return input
+        
 
     def addTask(self, task):
         raise Exception("Not implemented yet")
