@@ -33,9 +33,6 @@ class LoaderTaskTestCase(unittest.TestCase):
         """
         Test the initialization of the LoaderTask
         """
-        name = "Loader Test Task"
-
-        self.task = LoaderTask(name)
         self.assertIsNotNone(self.task)
 
 

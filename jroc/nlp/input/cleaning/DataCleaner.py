@@ -28,13 +28,17 @@ class DataCleaner(object):
         # Check for double quotes inside the text.
         character = "\""
 
-        
+
         if (is_json_string == True): # Check if the string is a json string
             # It should be a json in this format {"data": "<value>"}
             matches = text.split(character)
             minimum_json_parts = 5 # '{"data": "abc"}'
             if len(matches) <= minimum_json_parts:
                 return text # Do not do anything
+            print(matches)
+            # Filter empty elements
+            matches = filter(None, matches)
+            print(matches)
             text = "%s\"%s\"%s" % ("\"".join(matches[0:3]), " ".join(matches[3:-1]), matches[-1])
         else:
             # Replace the character
