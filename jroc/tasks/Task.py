@@ -23,6 +23,12 @@ class Task(object):
     __failed = False
     # Error: Last error in the task
     __error = None
+    # Metadata
+    __metadata = {
+        output: None,
+        input: None
+    }
+
 
     def __init__(self, name, initial_task=False):
         if name == None or len(name) <= 0:
@@ -35,13 +41,14 @@ class Task(object):
         self.__initial_task = initial_task
         # Creation date
         self.__created = datetime.utcnow()
-        
+
 
     def setOutput(self, output):
         """
         Set the output of a task
         """
-        self.__output = output
+        outputKey = self.__metadata.get('output', {}).get('key', None)
+        self.__output[outputKey] = output
 
     def setError(self, error):
         self.__error = error
