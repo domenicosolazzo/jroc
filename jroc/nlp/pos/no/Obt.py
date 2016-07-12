@@ -201,5 +201,6 @@ class OBTManager(object):
         textAnalyze['inf_merks'] = inf_merks
         textAnalyze['sbus'] = sbus
         textAnalyze['interjs'] = interjs
+        textAnalyze["obt"] = data
 
         return textAnalyze
