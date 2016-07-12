@@ -107,6 +107,10 @@ heroku container:release
 ```
 virtualenv <env> && source <env>/bin/activate
 ```
+- Enviromental variables
+```
+export LANG="en_US.UTF-8"
+```
 
 - Install vislcg3 on your machine
   - [How to install it on MacOS](https://github.com/domenicosolazzo/jroc/wiki/How-to-install-the-vislcg3-(Mac-OSX))
