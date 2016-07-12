@@ -1,6 +1,6 @@
 from . import BasicTask
 
-class PosTagger(BasicTask):
+class PosTaggerTask(BasicTask):
 
     def __init__(self, name, initial_task=False):
         pass

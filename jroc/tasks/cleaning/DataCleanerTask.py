@@ -17,7 +17,7 @@ class DataCleanerTask(BasicTask):
 
     def __init__(self, name, initial_task=False):
         super(DataCleanerTask, self).__init__(name, initial_task)
-
+        
     def setFilterCharacters(self, shouldFilter=True, characters=None):
         """
         Set the DataCleanerTask to filter a certain set of characters
@@ -63,7 +63,6 @@ class DataCleanerTask(BasicTask):
         try:
             self.__kernel = DataCleaner()
             output = input
-            print("Character:%s!" % self.__replacementCharacter)
             if self.__filterCharacters:
                 output = self.__kernel.filterCharacters(characters=self.__charactersToFilter, replacement_character=self.__replacementCharacter, text=input)
 
@@ -74,4 +73,4 @@ class DataCleanerTask(BasicTask):
             output = "Error cleaning the string"
             self.finish(data=None, failed=True, error=output)
 
-        return output
+        #return self.getOutput()
