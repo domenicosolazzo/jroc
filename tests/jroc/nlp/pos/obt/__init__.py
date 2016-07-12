@@ -1,1 +1,1 @@
-from jroc.nlp.pos.obt.Obt import OBTManager
+from jroc.nlp.pos.no.Obt import OBTManager
