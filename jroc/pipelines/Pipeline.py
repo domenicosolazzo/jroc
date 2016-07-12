@@ -20,7 +20,7 @@ class Pipeline(object):
     __input = None
     # Output for the Pipeline
     __output = {
-        'current_output':None
+        'current-output':None
     }
 
     # Save to DB: True if you should save every step in the db
@@ -93,7 +93,7 @@ class Pipeline(object):
 
                     # set the input
                     input[mapTo] = value
-                elif source == "main" # This is the main input
+                elif source == "main": # This is the main input
                     input = self.__input
                 else:
                     raise Exception("Source input is unavailable for this task")

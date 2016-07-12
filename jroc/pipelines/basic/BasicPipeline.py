@@ -2,6 +2,9 @@ from . import Pipeline
 import Queue
 
 class BasicPipeline(Pipeline):
+    """
+    Basic pipeline with in-memory storage
+    """
     # Task list
     __tasks = Queue.Queue()
 
@@ -18,7 +21,7 @@ class BasicPipeline(Pipeline):
         if not isinstance(taskInfo, tuple):
             raise Exception("Wrong type of task. This pipeline accepts only a tuple. (Task instance, options)")
 
-        self.__tasks.put(task)
+        self.__tasks.put(taskInfo)
 
     def runTask(self, task, input, metadataOutput):
         """
@@ -27,9 +30,9 @@ class BasicPipeline(Pipeline):
         @input: Input for the task
         @metadataOutput: Information about the task.
         """
-        task.setOutputMetadata(metadataOutput)
-        taskResult =  task.execute()
-        return taskResult
+        task.setMetadataOutput(metadataOutput)
+        task.execute(input)
+        return task.getOutput()
 
     def execute(self):
         """
@@ -42,7 +45,6 @@ class BasicPipeline(Pipeline):
 
             # Get the task
             task = nextStep[0]
-
             # Get the metadata for the task
             metadata = nextStep[1]
             metadataIn = metadata.get("input", {})
@@ -53,16 +55,21 @@ class BasicPipeline(Pipeline):
 
             # Get the output from the previous task
             output = self.runTask(task, input, metadataOut)
+            if task.hasFailed():
+                raise Exception("Pipeline has failed. The current task returned an error: %s" % task.getName())
 
             # Set the output
             outputKey = metadataOut.get('key', '%s-output' % task.getPrefix())
             outputData = output.get(outputKey, None)
             self.setOutput(outputKey, outputData)
+            self.setOutput("current-output", outputData)
 
             # Set the task as done
             self.__tasks.task_done()
+
         # Return the result
-        return self.getOutput()
+        finalOutput = self.getOutput()
+        return finalOutput
 
 
     def wait(self):
@@ -70,48 +77,3 @@ class BasicPipeline(Pipeline):
         Blocks until the tasklist is empty
         """
         self.__tasks.join()
-
-
-
-"""
-pipeline = BasicPipeline()
-pipeline.addTask((DataCleanerTask, {
-                        input: { "source": "main" },
-                        output: { "key": "data-cleaner", "source": "output", "type": "text" }
-                    }))
-pipeline.addTask((
-        LoaderTask, {
-                        input: { "key":"data-cleaner", "source": "output" },
-                        output: { "key": "json-loader", "source": "output", "type": "json" }
-                    }))
-pipeline.addTask((
-        LanguageTask, {
-                        input: { "key":"json-loader", "source": "output" },
-                        output: { "key": "json-loader", "source": "output", "type": "json" }
-                    }))
-
-pipeline.addTask((
-        StopwordRetrievalTask, {
-                        input: { "key":"json-loader", "source": "output" },
-                        output: { "key": "stopwords", "source": "output", "type": "json" }
-                    }))
-
-pipeline.addTask((
-        PosTaggerTask, {
-                        input: { "key":"json-loader", "source": "output" },
-                        output: { "key": "pos-tagger-no", "source": "output", "type": "json" }
-                    }))
-
-pipeline.addTask((
-        NERPosOBT, {
-                        input: [{ "key":"pos-tagger-no", "source": "output" }, {"key":"stopwords", "source": "output", "map-key":"stopwords"}],
-                        output: { "key": "ner-obt", "source": "output", "type": "json" }
-                    }))
-
-pipeline.addTask(
-        FormatDataTask, {
-                        input: [{ "key":"ner-obt", "source": "output", "map-key": "ner" }, {"key":"language", "source": "output", "map-key":"language"}],
-                        output: { "key": "data", "source": "final", "type": "json" }
-                    }))
-)
-"""

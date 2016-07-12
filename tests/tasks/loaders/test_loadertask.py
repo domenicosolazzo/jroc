@@ -40,32 +40,29 @@ class LoaderTaskTestCase(unittest.TestCase):
         """
         Test that the LaoderTask is extracting data from the json
         """
-        input = '{"data": "this is data"}'
+        input = {"json": '{"data": "this is data"}'}
 
         actual = self.task.execute(input)
-        expected = "this is data"
+        expected = {"data": "this is data"}
         self.assertEquals(expected, actual)
 
     def test_task_execute_with_invalid_json_double_quotes(self):
         """
         Test the Loader Task with a json that contains unescaped double quotes
         """
-        input = '{"data": "This is invalid " because there is an unescaped double quote " "}'
+        input = {"json": '{"data": "This is invalid " because there is an unescaped double quote " "}'}
 
         expected = "Error loading the json string"
         actual = self.task.execute(input)
-        self.assertEquals(expected, actual)
         self.assertTrue(self.task.hasFailed())
 
     def test_task_execute_with_invalid_json_single_quotes(self):
         """
         Test the Loader Task with a json that contains unescaped single quotes
         """
-        input = '{"data": "This is invalid '
+        input = {"json": '{"data": "This is invalid '}
 
-        expected = "Error loading the json string"
         actual = self.task.execute(input)
-        self.assertEquals(expected, actual)
         self.assertTrue(self.task.hasFailed())
 
     def test_task_execute_with_invalid_json_invalid_data(self):
@@ -74,7 +71,5 @@ class LoaderTaskTestCase(unittest.TestCase):
         """
         input = '{"data": This is invalid }'
 
-        expected = "Error loading the json string"
         actual = self.task.execute(input)
-        self.assertEquals(expected, actual)
         self.assertTrue(self.task.hasFailed())

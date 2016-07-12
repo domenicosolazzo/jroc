@@ -109,7 +109,7 @@ class TaskTestCase(unittest.TestCase):
         name = "Test"
         self.task = Task(name=name)
         self.task.finish("Data", failed=False, error=None)
-        self.assertEqual("Data", self.task.getOutput())
+        self.assertEqual({"data":"Data"}, self.task.getOutput())
         self.assertTrue(True)
 
     def test_task_hasFailed(self):
@@ -130,12 +130,12 @@ class TaskTestCase(unittest.TestCase):
         Check if the task saves the output
         """
         name = "Test"
-        output = "Output"
+        output = 'Output'
         self.task = Task(name=name)
         self.task.setOutput(output)
 
         actual = self.task.getOutput()
-        expected = output
+        expected = {'data': output}
 
         self.assertEqual(actual, expected)
 

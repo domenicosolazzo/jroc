@@ -9,6 +9,7 @@ class LoaderTaskTestCase(unittest.TestCase):
 
     def setUp(self):
         self.task = DataCleanerTask(self.name)
+        #self.task.setMetadataOutput({'key':'data', 'source': 'internal-output', 'type':'json'})
 
     def tearDown(self):
         self.task = None
@@ -141,8 +142,9 @@ class LoaderTaskTestCase(unittest.TestCase):
         """
         input = '{"data": "Hello " World"}'
 
-        expected = '{"data": "Hello   World"}'
-        actual = self.task.execute(input)
+        expected = {'data':'{"data": "Hello   World"}'}
+        self.task.execute(input)
+        actual = self.task.getOutput()
 
         self.assertEquals(expected, actual)
 
@@ -153,9 +155,10 @@ class LoaderTaskTestCase(unittest.TestCase):
         input = 'This is" a string'
 
         self.task.setIsJson(isJsonString=False)
+        self.task.execute(input)
 
-        expected = "This is  a string"
-        actual = self.task.execute(input)
+        expected = {'data':"This is  a string"}
+        actual = self.task.getOutput()
 
         self.assertEquals(expected, actual)
 
@@ -166,9 +169,10 @@ class LoaderTaskTestCase(unittest.TestCase):
         input = "ABC'\n«»*–•-"
         self.task.setIsJson(False)
         self.task.setReplacementCharacter("")
+        self.task.execute(input)
 
-        expected = "ABC"
-        actual = self.task.execute(input)
+        expected = {'data':"ABC"}
+        actual = self.task.getOutput()
 
         self.assertEquals(expected, actual)
 
@@ -179,8 +183,11 @@ class LoaderTaskTestCase(unittest.TestCase):
         input = '{"data": "ABC«"»""}'
         self.task.setIsJson(True)
         self.task.setReplacementCharacter("")
+        self.task.execute(input)
 
-        expected = '{"data": "ABC"}'
-        actual = self.task.execute(input)
-
+        expected = {'data':'{"data": "ABC"}'}
+        actual = self.task.getOutput()
         self.assertEquals(expected, actual)
+
+if __name__ == '__main__':
+    unittest.main()

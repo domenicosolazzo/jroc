@@ -69,7 +69,7 @@ class LanguageDetectorTaskTestCase(unittest.TestCase):
         """
         Test the language detector task with an english text
         """
-        input = "This is english"
+        input = {"main": "This is english"}
         result = self.task.execute(input)
 
         actual = result.get('language', None)
@@ -81,7 +81,7 @@ class LanguageDetectorTaskTestCase(unittest.TestCase):
         Test the language detector task with an norwegian text
         """
 
-        input = "Ivar Aasen ble født på gården Åsen i Hovdebygda på Sunnmøre som sønn av småbrukeren Ivar Jonsson."
+        input = {"main": "Ivar Aasen ble født på gården Åsen i Hovdebygda på Sunnmøre som sønn av småbrukeren Ivar Jonsson."}
         result = self.task.execute(input)
 
         actual = result.get('language', None)
