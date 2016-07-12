@@ -1,4 +1,5 @@
 from . import BasicTask
+from . import PosManager
 
 class PosTaggerTask(BasicTask):
     __kernel = None # Kernel for this loader

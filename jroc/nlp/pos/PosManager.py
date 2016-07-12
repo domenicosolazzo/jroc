@@ -1,11 +1,13 @@
 from . import OBTManager
+from . import NTLKPosTagger
 
 # List of Pos tagger
 POS_TAGGERS = { "no" : OBTManager,
                 "nn" : OBTManager,
                 "nb" : OBTManager,
                 "da" : OBTManager,
-                "sv" : OBTManager
+                "sv" : OBTManager,
+                "en" : NTLKPosTagger,
                 "other": None}
 
 class PosManager(object):
