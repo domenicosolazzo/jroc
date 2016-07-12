@@ -22,7 +22,11 @@ class OBTManagerTestCase(unittest.TestCase):
         """
         text = "Det er norsk"
         self.obtManager = OBTManager(text)
-        self.assertTrue(self.obtManager._filename is not None)
+        print(self.obtManager._filename)
+        result = self.obtManager.obtAnalyze()
+
+        
+        self.assertTrue(result is not None)
 
 
 if __name__ == '__main__':

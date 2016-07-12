@@ -83,13 +83,16 @@ class OBTManager(object):
         # Get the type of tagger that you want to use with the Oslo-Bergen tagger
         tagger_type = os.environ.get('OBT_TYPE', 'tag-nostat-bm.sh')
         # Run the tagger
-        os.system('%s/../../../../The-Oslo-Bergen-Tagger/%s %s > %s' % (currentDirectory, tagger_type, self._filename, output_filename))
+        obtCmd = '%s/../../../../The-Oslo-Bergen-Tagger/%s %s > %s' % (currentDirectory, tagger_type, self._filename, output_filename)
+        print("obt cmd", obtCmd)
+        os.system(obtCmd)
+        print("PRINTTTTT")
 
         # Read the output file
         file_object = open(output_filename, 'r')
         text = file_object.read().decode('utf8')
         text = text.split("\n")
-
+        print("TEXT", text)
         # Parsing the result
         result = []
         new_obj = {}
@@ -120,7 +123,7 @@ class OBTManager(object):
                new_obj["is_inf_merke"] = True if len([tag for tag in tagging if tag == 'inf-merke']) > 0 else False
                new_obj["is_sbu"] = True if len([tag for tag in tagging if tag == 'sub']) > 0 else False
                new_obj["is_interj"] = True if len([tag for tag in tagging if tag == 'interj']) > 0 else False
-
+        print("RESULT", result)
         self._outputData = result
         return result
 
