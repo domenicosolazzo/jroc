@@ -1,3 +1,5 @@
+from . import OBTManager
+
 # List of Pos tagger
 POS_TAGGERS = { "no" : OBTManager,
                 "nn" : OBTManager,
