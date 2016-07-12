@@ -102,6 +102,20 @@ docker-compose build
 heroku container:release
 ```
 
+# Testing
+- Create your virtualenv
+```
+virtualenv <env> && source <env>/bin/activate
+```
+
+- Install vislcg3 on your machine
+  - [How to install it on MacOS](https://github.com/domenicosolazzo/jroc/wiki/How-to-install-the-vislcg3-(Mac-OSX))
+
+- Run the tests
+```
+nosetests --with-watch --with-isolation
+```
+
 # Usage
 How to use the **analyze** endpoint
 
