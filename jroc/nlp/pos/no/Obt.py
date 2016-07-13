@@ -2,6 +2,7 @@ import sys
 import os
 import re
 import time
+import codecs
 
 class OBTManager(object):
     """
@@ -15,6 +16,7 @@ class OBTManager(object):
     _deleteFiles = True
 
     def __init__(self, data):
+        print(type(data))
         assert(isinstance(data, str))
 
         # Check if the data is not empty
@@ -41,9 +43,12 @@ class OBTManager(object):
 
         currentDirectory = os.path.dirname(os.path.realpath(__file__)) # Current directory
         filename = "%s/../../../../tmp/TEXTFILE_%s" % (currentDirectory, int(time.time()), )
-        file = open(filename,'w+')
-        file.write(data.encode('utf8'))
-        file.close()
+        with codecs.open(filename, "w", encoding='utf-8') as file:
+            file.write(data.decode('utf8'))
+        #file = open(filename,'w+')
+        #print(type(data), data)
+
+        #file.close()
         self._filename = filename
 
     def __isNumber(self, tagging):

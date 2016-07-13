@@ -1,0 +1,54 @@
+<word>Ivar</word>
+"<ivar>"
+	"Ivar" subst prop mask
+<word>Aasen</word>
+"<aasen>"
+	"Aasen" subst prop <*sen> <*>
+<word>ble</word>
+"<ble>"
+	"bli" verb pret i2 tr5 a5 pa4/til pr1 pr2 <aux1/perf_part>
+<word>født</word>
+"<født>"
+	"føde" verb perf-part tr1 i1
+<word>på</word>
+"<på>"
+	"på" prep
+<word>gården</word>
+"<gården>"
+	"gård" subst appell mask be ent
+<word>Åsen</word>
+"<åsen>"
+	"Åsen" subst prop <*sen> <*>
+<word>i</word>
+"<i>"
+	"i" prep
+<word>Hovdebygda</word>
+"<hovdebygda>"
+	"Hovdebygda" subst prop <*>
+<word>på</word>
+"<på>"
+	"på" prep
+<word>Sunnmøre</word>
+"<sunnmøre>"
+	"Sunnmøre" subst prop <*>
+<word>som</word>
+"<som>"
+	"som" prep
+<word>sønn</word>
+"<sønn>"
+	"sønn" subst appell mask ub ent
+<word>av</word>
+"<av>"
+	"av" prep
+<word>småbrukeren</word>
+"<småbrukeren>"
+	"småbruker" subst appell mask be ent
+<word>Ivar</word>
+"<ivar>"
+	"Ivar" subst prop mask <*>
+<word>Jonsson</word>
+"<jonsson>"
+	"Jonsson" subst prop <*son> <*>
+<word>.</word>
+"<.>"
+	"$." clb <<< <punkt> <<<
