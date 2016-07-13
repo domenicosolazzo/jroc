@@ -22,7 +22,8 @@ class PosManager(object):
     def getPosInstance(self, data):
         taggerClass = POS_TAGGERS.get(self.__language, None)
         if taggerClass is None:
-            pass # Activate a default tagger
+
+            raise Exception("Pos tagger not available for this language: %s" % (self.__language, ) ) # Activate a default tagger
         else:
             tagger = taggerClass(data)
         return tagger
