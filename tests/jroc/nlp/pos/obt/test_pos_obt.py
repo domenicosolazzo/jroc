@@ -11,7 +11,6 @@ stopwordManagerNorwegian = StopwordManager(language="no")
 stopwordsNorwegian = stopwordManagerNorwegian.getStopWords()
 
 class OBTManagerTestCase(unittest.TestCase):
-    #### TODO: Dockerize these tests. They need to use OBT
     obtManager = None
     currentDirectory = currentDirectory = "%s" % (os.path.dirname(os.path.realpath(__file__)), )
     testTextsDirectory = "%s/../../../../data/text/" % (currentDirectory, )
