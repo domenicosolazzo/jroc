@@ -130,6 +130,9 @@ export LANG="en_US.UTF-8"
 - Run the tests
 ```
 nosetests --with-watch --with-isolation
+
+# With coverage
+nosetests --with-watch --with-isolation --with-coverage
 ```
 
 N.B.
