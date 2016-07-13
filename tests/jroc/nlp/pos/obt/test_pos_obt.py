@@ -33,16 +33,142 @@ class OBTManagerTestCase(unittest.TestCase):
 
         self.assertTrue(self.obtManager is not None)
 
-    def test_pos_obt_analyze(self):
+    def test_pos_obtAnalyze(self):
+        """
+        Check the obt analyze method of OBT
+
+        Expected result
+        [
+            {
+                'is_inf_merke': False,
+                'is_sbu': False,
+                'word': u'Det',
+                'is_verb': False,
+                'is_number': {'ordinal': False, 'is_number': False, 'roman': False, 'quantity': False},
+                'is_det': True,
+                'tagging': [u'det', u'pron', u'n\xf8yt', u'ent', u'pers', u'3'],
+                'is_conj': False,
+                'is_unknown': False,
+                'is_adj': False,
+                'is_interj': False,
+                'options': u'det pron n\xf8yt ent pers 3',
+                'is_subst': False,
+                'is_prop': False
+            },
+            ...
+        ]
+        """
+        result = self.obtManager.obtAnalyze()
+        print(result)
+        wordNumber = 3
+        self.assertTrue(result is not None)
+        self.assertTrue(len(result) == wordNumber) # sentence: Det er norsk
+        self.assertTrue(isinstance(result, list))
+
+        actualItem = result[0] # Word 'Det'
+        self.assertTrue('is_inf_merke' in actualItem)
+        self.assertFalse(actualItem.get('is_inf_merke'))
+
+        self.assertTrue('is_sbu' in actualItem)
+        self.assertFalse(actualItem.get('is_sbu'))
+
+        self.assertTrue('word' in actualItem)
+        self.assertEquals(u'Det', actualItem.get('word'))
+
+        self.assertTrue('is_verb' in actualItem)
+        self.assertFalse(actualItem.get('is_verb'))
+
+        self.assertTrue('is_number' in actualItem)
+        self.assertTrue(isinstance(actualItem.get('is_number'), dict))
+        self.assertTrue('ordinal' in actualItem.get('is_number'))
+        self.assertFalse(actualItem.get('is_number').get('ordinal'))
+        self.assertTrue('is_number' in actualItem.get('is_number'))
+        self.assertFalse(actualItem.get('is_number').get('is_number'))
+        self.assertTrue('roman' in actualItem.get('is_number'))
+        self.assertFalse(actualItem.get('is_number').get('roman'))
+        self.assertTrue('quantity' in actualItem.get('is_number'))
+        self.assertFalse(actualItem.get('is_number').get('quantity'))
+
+        self.assertTrue('is_det' in actualItem)
+        self.assertTrue(actualItem.get('is_det'))
+
+        self.assertTrue('tagging' in actualItem)
+        self.assertTrue(isinstance(actualItem.get('tagging'), list))
+        self.assertEquals([u'det', u'pron', u'n\xf8yt', u'ent', u'pers', u'3'], actualItem.get('tagging'))
+
+        self.assertTrue('is_conj' in actualItem)
+        self.assertFalse(actualItem.get('is_conj'))
+
+        self.assertTrue('is_unknown' in actualItem)
+        self.assertFalse(actualItem.get('is_unknown'))
+
+        self.assertTrue('is_adj' in actualItem)
+        self.assertFalse(actualItem.get('is_adj'))
+
+        self.assertTrue('is_interj' in actualItem)
+        self.assertFalse(actualItem.get('is_interj'))
+
+        self.assertTrue('options' in actualItem)
+        self.assertEquals(u'det pron n\xf8yt ent pers 3', actualItem.get('options'))
+
+        self.assertTrue('is_subst' in actualItem)
+        self.assertFalse(actualItem.get('is_subst'))
+
+        self.assertTrue('is_prop' in actualItem)
+        self.assertFalse(actualItem.get('is_prop'))
+
+    def test_pos_analyze(self):
         """
         Check the analyze method of OBT
         """
-        result = self.obtManager.obtAnalyze()
-
-        wordNumber = 3
-        self.assertTrue(len(result) == wordNumber) # sentence: Det er norsk
-        self.assertTrue(isinstance(result, list))
+        # Sentence: Det er norsk
+        """
+        Expected result:
+            {
+                'interjs': [],
+                'inf_merks': [],
+                'conjs': [],
+                'substs': [],
+                'unknowns': [],
+                'verbs': [u'er'],
+                'numbers': [],
+                'props': [],
+                'dets': [u'Det'],
+                'sbus': [],
+                'adj': [u'norsk'],
+                'obt': [
+                        { 'is_inf_merke': False, 'is_sbu': False, 'word': u'Det', 'is_verb': False, 'is_number': {'ordinal': False, 'is_number': False, 'roman': False, 'quantity': False}, 'is_det': True, 'tagging': [u'det', u'pron', u'n\xf8yt', u'ent', u'pers', u'3'], 'is_conj': False, 'is_unknown': False, 'is_adj': False, 'is_interj': False, 'options': u'det pron n\xf8yt ent pers 3', 'is_subst': False, 'is_prop': False},
+                        {'is_inf_merke': False, 'is_sbu': False, 'word': u'er', 'is_verb': True, 'is_number': {'ordinal': False, 'is_number': False, 'roman': False, 'quantity': False}, 'is_det': False, 'tagging': [u'v\xe6re', u'verb', u'pres', u'a5', u'pr1', u'pr2', u'<aux1/perf_part>'], 'is_conj': False, 'is_unknown': False, 'is_adj': False, 'is_interj': False, 'options': u'v\xe6re verb pres a5 pr1 pr2 <aux1/perf_part>', 'is_subst': False, 'is_prop': False},
+                        {'is_inf_merke': False, 'is_sbu': False, 'word': u'norsk', 'is_verb': False, 'is_number': {'ordinal': False, 'is_number': False, 'roman': False, 'quantity': False}, 'is_det': False, 'tagging': [u'norsk', u'adj', u'n\xf8yt', u'ub', u'ent', u'pos', u'<<<', u'<<<'], 'is_conj': False, 'is_unknown': False, 'is_adj': True, 'is_interj': False, 'options': u'norsk adj n\xf8yt ub ent pos <<< <<<', 'is_subst': False, 'is_prop': False}
+                       ]
+            }
+        """
+        result = self.obtManager.analyze()
+        print(result)
         self.assertTrue(result is not None)
+        self.assertTrue(isinstance(result, dict))
+        self.assertTrue('obt' in result)
+        self.assertTrue('verbs' in result)
+        self.assertTrue('substs' in result)
+        self.assertTrue('props' in result)
+        self.assertTrue('numbers' in result)
+        self.assertTrue('adj' in result)
+        self.assertTrue('conjs' in result)
+        self.assertTrue('unknowns' in result)
+        self.assertTrue('dets' in result)
+        self.assertTrue('inf_merks' in result)
+        self.assertTrue('sbus' in result)
+        self.assertTrue('interjs' in result)
+
+
+        self.assertTrue( len(result.get('verbs', [])) == 1 )
+        self.assertTrue( len(result.get('adj', [])) == 1 )
+        self.assertTrue( len(result.get('dets', [])) == 1 )
+
+        self.assertEquals('Det', result.get('dets', '')[0])
+        self.assertEquals('er', result.get('verbs', '')[0])
+        self.assertEquals('norsk', result.get('adj', '')[0])
+
 
     def test_pos_obt_entities(self):
         """
