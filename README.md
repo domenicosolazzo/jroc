@@ -107,6 +107,18 @@ heroku container:release
 ```
 virtualenv <env> && source <env>/bin/activate
 ```
+- Additional repositories
+Clone these repos in the main folder of the project
+  - [The-Oslo-Bergen-Tagger](git@github.com:domenicosolazzo/The-Oslo-Bergen-Tagger.git)
+  - [OBT-Stat](git@github.com:domenicosolazzo/OBT-Stat.git): You have to clone inside the one above.
+
+- MTag
+  - Copy the correct mtag file for your OS in The-Oslo-Bergen-Tagger/bin
+  ```
+  cp jroc/bin/<mtag-for-your-OS> The-Oslo-Bergen-Tagger/bin/mtag
+  chmod +x The-Oslo-Bergen-Tagger/bin/mtag
+  ```
+
 - Enviromental variables
 ```
 export LANG="en_US.UTF-8"
@@ -118,6 +130,13 @@ export LANG="en_US.UTF-8"
 - Run the tests
 ```
 nosetests --with-watch --with-isolation
+```
+
+N.B.
+If you get an IOError while running the tests, try to create a tmp folder in the root of the project.
+```
+Error Example
+IOError: [Errno 2] No such file or directory: <folder here>
 ```
 
 # Usage
