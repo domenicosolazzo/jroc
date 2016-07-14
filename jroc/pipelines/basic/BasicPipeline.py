@@ -101,6 +101,8 @@ class BasicPipeline(Pipeline):
             # All the pre-pipeline tasks have been executed. Pipeline is ready to start...
             #print("All the pre-pipeline tasks have been executed. Pipeline is ready to start...")
             pass
+        except:
+            raise
 
     def execute(self):
         """

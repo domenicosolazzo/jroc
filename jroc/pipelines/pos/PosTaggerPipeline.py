@@ -1,7 +1,4 @@
 from . import BasicPipeline
-from . import DataCleanerTask
-from . import LanguageDetectorTask
-from . import LoaderTask
 from . import StopwordRetrievalTask
 from . import PosTaggerTask
 from . import LanguageDetectionPipeline
