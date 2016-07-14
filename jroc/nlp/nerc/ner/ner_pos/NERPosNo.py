@@ -1,4 +1,3 @@
-
 class NERPosNo(object):
 
     def __init__(self):

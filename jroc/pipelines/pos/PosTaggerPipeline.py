@@ -12,13 +12,13 @@ class PosTaggerPipeline(BasicPipeline):
     PosTagger Pipeline
     """
     def __init__(self, input, name="PosTagger Pipeline"):
-
+        pass
         super(PosTaggerPipeline, self).__init__(input, name)
+        # Pipelines to be run before the current one
+        self.addPipelinesBefore([(LanguageDetectionPipeline, {"name":"Language Pipeline", "input":{"source":"main", "data":input}, "output":{"type": "merge"}}) ])
 
-        self.addTask(( DataCleanerTask(name="Data Cleaner"), { "input": [{ "source": "main"}], "output": { "key": "data-cleaner", "source":"internal-output", "type": "json"} } ))
-        self.addTask(( LoaderTask(name="Loader"), { "input": [{ "key":"data-cleaner", "source": "internal-output", "map-key":"json"}], "output": { "key": "json-loader", "source":"internal-output", "type": "json"} } ))
-        self.addTask(( LanguageDetectorTask(name="Language Detector"), { "input": [{ "key":"json-loader", "source": "internal-output", "map-key":"main"}], "output": { "key": "language", "source":"internal-output", "type": "json"} }))
-        self.addTask(( StopwordRetrievalTask(name="Stopword Retrieval"), {"input":[{"key": "language-pipeline", "source": "internal-output", "mapping": "import"}], "output":{"key":"stopwords", "source": "internal-output", "type": "json" } } ))
+        # Run these tasks
+        self.addTask(( StopwordRetrievalTask(name="Stopword Retrieval"), {"input":[{"key": "language", "source": "internal-output", "map-key": "language"}], "output":{"key":"stopwords", "source": "internal-output", "type": "json" } } ))
         self.addTask(( PosTaggerTask(name="Pos Tagger"), {"input":[
                                                                     { "key":"language", "source":"internal-output", "map-key": "language"},
                                                                     {"key": "json-loader", "source": "internal-output", "map-key": "data"}

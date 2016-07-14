@@ -46,10 +46,7 @@ class OBTManager(object):
             if isinstance(data, str):
                 data = data.decode('utf8')
             file.write(data)
-        #file = open(filename,'w+')
-        #print(type(data), data)
-
-        #file.close()
+            
         self._filename = filename
 
     def __isNumber(self, tagging):

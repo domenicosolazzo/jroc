@@ -31,6 +31,16 @@ class Pipeline(object):
     def __init__(self):
         # The id of the pipeline.
         self.__id = uuid.uuid4()
+        self.__name = None
+        self.__input = None
+        self.__output = {
+            'current-output':None
+        }
+        self.__saveToDB = False
+        # Pipeline type
+        self.__type = PipelineType.get('in-memory', 'in-memory')
+    def getName(self):
+        return self.__name
 
     def setType(self, type):
         """
@@ -55,6 +65,16 @@ class Pipeline(object):
         Set the output for the pipeline
         """
         self.__output[key] = output
+
+    def mergeOutput(self, externalOutput):
+        """
+        Merge the output with the current pipeline output
+        @externalOutput: Output that should be merged
+        """
+        assert(isinstance(externalOutput, dict))
+        c = self.__output.copy()
+        c.update(externalOutput)
+        self.__output = c
 
     def getOutput(self, current=False):
         """

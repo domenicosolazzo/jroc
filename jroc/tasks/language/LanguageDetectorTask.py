@@ -30,5 +30,4 @@ class LanguageDetectorTask(BasicTask):
             output = "Error detecting the language"
             self.finish(data=None, failed=True, error=output)
 
-        print("aaaaa", self.getOutput())
         return self.getOutput()

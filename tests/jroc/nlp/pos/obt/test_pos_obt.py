@@ -58,7 +58,6 @@ class OBTManagerTestCase(unittest.TestCase):
         ]
         """
         result = self.obtManager.obtAnalyze()
-        print(result)
         wordNumber = 3
         self.assertTrue(result is not None)
         self.assertTrue(len(result) == wordNumber) # sentence: Det er norsk
@@ -143,7 +142,6 @@ class OBTManagerTestCase(unittest.TestCase):
             }
         """
         result = self.obtManager.analyze()
-        print(result)
         self.assertTrue(result is not None)
         self.assertTrue(isinstance(result, dict))
         self.assertTrue('obt' in result)
@@ -214,7 +212,6 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/ivar_aasen.txt')
         self.obtManager = OBTManager(text.replace("-", " "))
         actual = self.obtManager.findEntities(stopwords=[])
-        print(actual)
         expectedEntities = [u'Rasmus Aarflots', u'Bibelen', u'\xabIvar\xbb', u'Aasen', u'Aarflot', u'Ivar Aasen', u'Sivert', u'Sunnm\xf8re', u'Ivar Jonsson', u'Ekset', u'\xc5sen', u'Iver Andreas', u'Ivar', u'Hovdebygda']
         expectedEntitiesCount = len(expectedEntities)
 
@@ -233,7 +230,6 @@ class OBTManagerTestCase(unittest.TestCase):
 
         expectedEntities = [u'Rasmus Aarflots', u'Bibelen', u'\xabIvar\xbb', u'Aasen', u'Aarflot', u'Ivar Aasen', u'Sivert', u'Sunnm\xf8re', u'Ivar Jonsson', u'Ekset', u'\xc5sen', u'Iver Andreas', u'Ivar', u'Hovdebygda']
 
-        print(actual)
         expectedEntitiesCount = len(expectedEntities)
 
         self.assertTrue(actual is not None)
@@ -249,7 +245,7 @@ class OBTManagerTestCase(unittest.TestCase):
         self.obtManager = OBTManager(text)
 
         actual = self.obtManager.findTags()
-        print(actual)
+
         expectedTags = [u'Iver', u'Bibelen', u'Andreas', u'Ivar', u'Aasen', u'Aarflot', u'\xabIvar\xbb', u'Sivert', u'Sunnm\xf8re', u'Aarflots', u'Ekset', u'\xc5sen', u'Hovdebygda', u'Rasmus', u'Jonsson']
         expectedTagsCount = len(expectedTags)
 
@@ -271,7 +267,6 @@ class OBTManagerTestCase(unittest.TestCase):
 
         actual = self.obtManager.findTags()
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
-        print(actual)
 
         self.assertTrue(actual is not None)
         self.assertTrue(isinstance(actual, list))
@@ -373,7 +368,6 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/article2.txt')
         self.obtManager = OBTManager(text)
         actual = self.obtManager.findEntities(stopwords=stopwordsNorwegian)
-        print(actual)
 
         expectedEntities = [u'Like You', u'Harrys', u'Berkshire', u'Dougie Poynter', u'The Revenant', u'Ellie', u'Westminster Abbey', u'Prns Harry', u'The Sun', u'Features-', u'Seogh\xf8r.',
         u'Commonwealth Day Observance Service', u'William', u'Audi Polo Challenge', u'Daily Mail', u'Joner', u'EKSEN', u'TONE', u'Ellie Goulding', u'Sunday Times', u'Audis Polo Challenge',
@@ -718,7 +712,7 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/article7.txt')
         self.obtManager = OBTManager(text)
         actual = self.obtManager.findEntities(stopwords=[])
-        print(actual)
+
         expectedEntities = [u'F\xf8reren', u'Rygge.', u'E6', u'Twitter', u'Aftenposten']
         expectedEntitiesCount = len(expectedEntities)
 
@@ -737,7 +731,6 @@ class OBTManagerTestCase(unittest.TestCase):
 
         expectedEntities = [u'F\xf8reren', u'Rygge.', u'E6', u'Twitter', u'Aftenposten']
 
-        print(actual)
         expectedEntitiesCount = len(expectedEntities)
 
         self.assertTrue(actual is not None)
@@ -753,7 +746,7 @@ class OBTManagerTestCase(unittest.TestCase):
         self.obtManager = OBTManager(text)
 
         actual = self.obtManager.findTags()
-        print(actual)
+
         expectedTags = [u'F\xf8reren', u'Rygge.', u'E6', u'Twitter', u'Aftenposten']
         expectedTagsCount = len(expectedTags)
 
@@ -775,7 +768,6 @@ class OBTManagerTestCase(unittest.TestCase):
 
         actual = self.obtManager.findTags()
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
-        print(actual)
 
         self.assertTrue(actual is not None)
         self.assertTrue(isinstance(actual, list))
@@ -1134,7 +1126,7 @@ class OBTManagerTestCase(unittest.TestCase):
         actual = self.obtManager.findEntities(stopwords=[])
         expectedEntities = [u'No', u'Stormskyene']
         expectedEntitiesCount = len(expectedEntities)
-        print(actual)
+
         self.assertTrue(actual is not None)
         self.assertTrue(isinstance(actual, list))
         self.assertEquals(expectedEntitiesCount, len(actual))

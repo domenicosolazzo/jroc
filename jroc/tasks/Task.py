@@ -29,7 +29,6 @@ class Task(object):
     __metadata = dict({'input':[{'key':'main'}], 'output': {'key': 'data'}})
 
     def __init__(self, name, initial_task=False):
-        print("metadata task", self.__metadata)
         if name == None or len(name) <= 0:
             raise Exception("Wrong task name!")
         # Set the name of the task
@@ -66,12 +65,9 @@ class Task(object):
         """
         Set the output of a task
         """
-        print("metadata-output", self.__metadata, output)
         outputKey = self.__metadata.get('output', {}).get('key', 'data')
-        print("key", outputKey)
         outputValue = output
         self.__output[outputKey] = outputValue
-        print("output", self.__output)
 
     def setError(self, error):
         """
