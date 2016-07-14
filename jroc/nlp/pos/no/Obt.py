@@ -16,8 +16,7 @@ class OBTManager(object):
     _deleteFiles = True
 
     def __init__(self, data):
-        print(type(data))
-        assert(isinstance(data, str))
+        #assert(isinstance(data, str))
 
         # Check if the data is not empty
         if not data:
@@ -39,12 +38,14 @@ class OBTManager(object):
         """
         Save the content in a temporary file
         """
-        assert(isinstance(data, str))
+        #assert(isinstance(data, str))
 
         currentDirectory = os.path.dirname(os.path.realpath(__file__)) # Current directory
         filename = "%s/../../../../tmp/TEXTFILE_%s" % (currentDirectory, int(time.time()), )
         with codecs.open(filename, "w", encoding='utf-8') as file:
-            file.write(data.decode('utf8'))
+            if isinstance(data, str):
+                data = data.decode('utf8')
+            file.write(data)
         #file = open(filename,'w+')
         #print(type(data), data)
 

@@ -28,11 +28,11 @@ class PosManager(object):
             tagger = taggerClass(data)
         return tagger
 
-    def analyze(self, inputData):
+    def analyze(self, input):
         """
         Analyze the text and return a PosResult
         """
-        data = inputData
+        data = input
         # Get the right instance of the pos tagger
         self.__posTagger = self.getPosInstance(data)
 

@@ -27,10 +27,11 @@ class PosTaggerTask(BasicTask):
             if inputText is None:
                 raise Exception("The text given in input is not valid. Please that input of this task! ")
 
-            output = self.__kernel.analyze()
+            output = self.__kernel.analyze(input=inputText)
 
             self.finish(data=output, failed=False, error=None)
         except:
+            raise
             output = "Error analyzing the text with the pos tagger"
             self.finish(data=None, failed=True, error=output)
 
