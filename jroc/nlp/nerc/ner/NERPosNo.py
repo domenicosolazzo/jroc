@@ -1,38 +1,37 @@
-
-class BasicNER(object):
+class NERPosNo(object):
     """
-    Basic Name Entity recognition
+    This class returns a set of entities from the output of the Norwegian POS Tagger (OBT)
     """
     def __init__(self):
         pass
 
-    def tags(self, posResult):
+    def findNER(self, textAnalysis, stopwords=[]):
         """
-        Find the tags within the text
-        It takes all the words that are both "is_prop" and "is_subst"
+        It returns entities from the text analysis performed by the POS Tagger (OBT)
+        @textAnalysis: The text analysis performed by OBT
+        @stopwords: List of stopwords.
         """
-        data = posResult.posTags()
-        for entity in data:
-            if (entity.get("is_prop") == True and entity.get("is_subst") == True):
-                entities.append(entity.get("word"))
+        assert(textAnalysis is not None)
+        assert(isinstance(textAnalysis, dict))
+        assert('obt' in textAnalysis)
 
-        unique_tags = set(entities)
-        return list(unique_tags)
+        if stopwords is None or isinstance(stopwords, dict):
+            stopwords = []
 
-    def entities(self, posResult):
-        """
-        Find the entities within the text
-        """
-        data = posResult.posTags()
+        data = textAnalysis.get('obt')
+
 
         entities = []
         last_entity = ""
         for entity in data:
+            # Retrieve the next word
             word = entity.get("word")
+            # If the word is a stopword, return the previous entity as entity.
             if len(stopwords) > 0 and word.lower() in stopwords:
                 if last_entity is not "":
                     entities.append(last_entity)
                 last_entity = ""
+            # If the word is_prop and is_subst, or it is a roman number, or it is as (used for companies)
             elif (entity.get("is_prop") == True and entity.get("is_subst") == True) or (entity.get("is_number").get('roman') == True) or word.lower() == "as":
                 if last_entity is "":
                     last_entity = word

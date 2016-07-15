@@ -205,6 +205,18 @@ class OBTManagerTestCase(unittest.TestCase):
     ###################### TESTING SEVERAL NORWEGIAN ARTICLES ########################################
     ##################################################################################################
     ##################################################################################################
+    def test_pos_article_ivar_aasen_analyze(self):
+        """
+        Test the analyze result returned for 'ivar_aasen.txt'
+        """
+        text = self.helper_readFilename('no/ivar_aasen.txt')
+        self.obtManager = OBTManager(text.replace("-", " "))
+        actual = self.obtManager.analyze()
+        
+        self.assertTrue(actual is not None)
+        self.assertTrue(isinstance(actual, dict))
+        self.assertTrue('obt' in actual)
+
     def test_pos_article_ivar_aasen_entities(self):
         """
         Test the entities returned for 'ivar_aasen.txt'
@@ -219,6 +231,7 @@ class OBTManagerTestCase(unittest.TestCase):
         self.assertTrue(isinstance(actual, list))
         self.assertEquals(expectedEntitiesCount, len(actual))
         self.assertEquals(expectedEntities, actual)
+
 
     def test_pos_article_ivar_aasen_entities_with_norwegian_with_stopwords(self):
         """
