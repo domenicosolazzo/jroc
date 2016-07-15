@@ -20,6 +20,7 @@ class StopwordsTestCase(unittest.TestCase):
         self.stopwordManager = StopwordManager(language="no")
         expected = self.helper_readFilename("stopwords_no.txt")
         actual = self.stopwordManager.getLanguageStopwords()
+
         self.assertEqual(expected, actual)
 
     def test_english_stopwords(self):

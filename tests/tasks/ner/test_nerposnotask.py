@@ -1,6 +1,8 @@
-from . import NERPosNo
+
+from . import NERPosNoTask
 import unittest
 import os
+
 # Text analysis
 text_analysis = {
                     'interjs': [u'familieoverhodet'],
@@ -200,66 +202,57 @@ stopwords = [u'vart', u'over', u'skal', u'ikkje', u'deires', u'hennes', u'dere',
             u'selv', u'sin', u'hvis', u'siden', u'eitt', u'ogs\xe5', u'kva', u'dette', u'kan', u'kvi', u'hoe',
             u'superparet', u'hans', u'kvarhelst', u'da', u'medan', u'man', u'somme', u'i', u'no', u'b\xe5e', u'si',
             u'so', u'noka', u'mange']
-class NERPosNoTestCase(unittest.TestCase):
-    nerposno = None
-    currentDirectory = currentDirectory = "%s" % (os.path.dirname(os.path.realpath(__file__)), )
-    testTextsDirectory = "%s/../../../data/text/" % (currentDirectory, )
+
+class NERPosNoTaskTestCase(unittest.TestCase):
+    task = None
+    name = "NER Pos Tagger Test Task"
 
     def setUp(self):
-        self.nerposno = NERPosNo()
+        self.task = NERPosNoTask(self.name)
 
     def tearDown(self):
-        self.nerposno = None
+        self.task = None
 
-    def test__nerposno_text_analysis_is_none(self):
+    def test_task_initialization_fails_if_name_is_None(self):
         """
-        Check if the text analysis input is none
+        Test that a task throws an exception if the name is None
         """
-        input = None
-        self.assertRaises(Exception, self.nerposno.findNER, input)
+        name = None
 
-    def test__nerposno_text_analysis_is_not_dict(self):
-        """
-        Check if the text analysis input is not a dict
-        """
-        input = "String"
-        self.assertRaises(Exception, self.nerposno.findNER, input)
+        self.assertRaises(Exception, NERPosNoTask, name)
 
-        input = 1
-        self.assertRaises(Exception, self.nerposno.findNER, input)
-
-        input = True
-        self.assertRaises(Exception, self.nerposno.findNER, input)
-
-    def test__nerposno_text_analysis_without_required_key(self):
+    def test_task_initialization_fails_if_name_is_empty(self):
         """
-        Check if the text analysis contains the key 'obt'
+        Test that a task throws an exception if the name is empty
+        """
+        name = ""
+
+        self.assertRaises(Exception, NERPosNoTask, name)
+
+    def test_task_initialization_with_valid_name(self):
+        """
+        Test the initialization of the NERPosNoTask
+        """
+        self.assertIsNotNone(self.task)
+
+    def test_task_execute_with_input_without_main_key(self):
+        """
+        Test that the NERPosNoTask fails if a requested key is missing (pos-no)
         """
         input = {}
-        self.assertRaises(Exception, self.nerposno.findNER, input)
+        self.task.execute(input)
+        self.assertTrue(self.task.hasFailed())
 
-    def test__nerposno_text_analysis_without_stopwords(self):
+    def test_task_execute_with_valid_json(self):
         """
-        Check findNER with a valid text analysis and no stopwords
+        Test that the NERPosNoTask is extracting data from the json
         """
-        input = text_analysis
-        stopwords = []
-        actual = self.nerposno.findNER(input, stopwords)
-        expected = [u'Rasmus Aarflots', u'Bibelen', u'\xabIvar\xbb', u'Aasen', u'Aarflot',
-                    u'Ivar Aasen', u'Sivert', u'Sunnm\xf8re', u'Ivar Jonsson', u'Ekset', u'\xc5sen',
-                    u'Iver Andreas', u'Ivar', u'Hovdebygda']
+        input = {"pos-no": text_analysis, "stopwords":stopwords}
 
-        self.assertEquals(actual, expected)
+        self.task.execute(input)
 
-    def test__nerposno_text_analysis_with_stopwords(self):
-        """
-        Check findNER with a valid text analysis and  stopwords
-        """
-        input = text_analysis
-
-        actual = self.nerposno.findNER(input, stopwords)
-        expected = [u'Rasmus Aarflots', u'Bibelen', u'\xabIvar\xbb', u'Aasen', u'Aarflot',
-                    u'Ivar Aasen', u'Sivert', u'Sunnm\xf8re', u'Ivar Jonsson', u'Ekset', u'\xc5sen',
-                    u'Iver Andreas', u'Ivar', u'Hovdebygda']
-
-        self.assertEquals(actual, expected)
+        actual = self.task.getOutput()
+        expected = {'data': [ u'Rasmus Aarflots', u'Bibelen', u'\xabIvar\xbb', u'Aasen', u'Aarflot',
+                                  u'Ivar Aasen', u'Sivert', u'Sunnm\xf8re', u'Ivar Jonsson', u'Ekset', u'\xc5sen',
+                                  u'Iver Andreas', u'Ivar', u'Hovdebygda']}
+        self.assertEquals(expected, actual)
