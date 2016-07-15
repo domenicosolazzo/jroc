@@ -13,7 +13,7 @@ class Queries(object):
     # Fetch all the properties of a given resource
     QUERY_PROPERTIES = """
             SELECT DISTINCT ?property  WHERE {
-                <http://dbpedia.org/resource/%s> ?property ?propValue .
+                <http://dbpedia.org/resource/Cristiano_Ronaldo> ?property ?propValue .
             }
     """
 

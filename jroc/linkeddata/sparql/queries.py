@@ -38,20 +38,24 @@ class Queries(object):
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX foaf: <http://xmlns.com/foaf/0.1/>
             PREFIX dbo: <http://dbpedia.org/ontology/>
-
+            PREFIX dc: <http://purl.org/dc/elements/1.1/>
+            PREFIX : <http://dbpedia.org/resource/>
+            PREFIX dbpedia2: <http://dbpedia.org/property/>
+            PREFIX dbpedia: <http://dbpedia.org/>
             SELECT DISTINCT ?syn WHERE {
-                {   ?disPage dbpedia-owl:wikiPageDisambiguates <http://dbpedia.org/resource/%s> .
-                    ?disPage dbpedia-owl:wikiPageDisambiguates ?syn .
+                {   ?disPage dbpedia:wikiPageDisambiguates <http://dbpedia.org/resource/%s> .
+                    ?disPage dbpedia:wikiPageDisambiguates ?syn .
                 }
                 UNION
                 {
-                    <http://dbpedia.org/resource/%s> dbpedia-owl:wikiPageDisambiguates ?syn .
+                    <http://dbpedia.org/resource/%s> dbpedia:wikiPageDisambiguates ?syn .
                 }
             }
     """
     # Fetch the thumbnail of a given resource
     QUERY_THUMBNAIL = """
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
             SELECT ?thumbnail
             WHERE {
               <http://dbpedia.org/resource/%s> dbpedia-owl:thumbnail ?thumbnail .
@@ -93,10 +97,9 @@ class Queries(object):
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             SELECT ?comment, ?label, ?abstract, ?name
             WHERE {
-              <http://dbpedia.org/resource/%s>  rdfs:label ?label; rdfs:comment ?comment; dbpedia-owl:abstract ?abstract; foaf:name ?name .
+              <http://dbpedia.org/resource/%s>  rdfs:label ?label; rdfs:comment ?comment; foaf:name ?name .
               FILTER(langMatches(lang(?name), "EN"))
               FILTER(langMatches(lang(?comment), "EN"))
-              FILTER(langMatches(lang(?abstract), "EN"))
               FILTER(langMatches(lang(?label), "EN"))
             }
             LIMIT 5

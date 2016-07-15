@@ -11,6 +11,7 @@ class SPARQLAdapter(object):
 
     def __prepareAndExecute(self, query, parameters):
         query = query % parameters
+        print("QUERY", query)
         result = self.__executeQuery(query)
         return result
 

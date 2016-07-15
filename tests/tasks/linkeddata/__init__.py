@@ -1,0 +1,2 @@
+from jroc.tasks.sparql.dbpedia.EntityAnnotationTask import EntityAnnotationTask
+from test_entity_annotation_task import EntityAnnotationTaskTestCase
