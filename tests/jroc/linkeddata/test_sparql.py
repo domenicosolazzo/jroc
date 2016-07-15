@@ -75,3 +75,34 @@ class SPARQLAdapterTestCase(unittest.TestCase):
         self.assertTrue('type' in actual)
         print(type(actual.get(type)))
         self.assertTrue(isinstance(actual.get('type'), list))
+
+    def test_sparql_get_entity_type(self):
+        """
+        Test get entity type
+        """
+        input = "Cristiano_Ronaldo"
+        actual = self.sparql.getEntityType(input)
+        self.assertIsNotNone(actual)
+        self.assertTrue(isinstance(actual, dict))
+        self.assertTrue('types' in actual)
+        self.assertTrue('entity_detection' in actual)
+        self.assertTrue('is_person' in actual.get('entity_detection', {}))
+        self.assertTrue(actual.get('entity_detection').get('is_person'))
+
+    def test_sparql_get_entity_type(self):
+        """
+        Test get entity type
+        """
+        input = "Cristiano_Ronaldo"
+        actual = self.sparql.entityExtraction(input, advancedSearch=True)
+        self.assertIsNotNone(actual)
+        self.assertTrue(isinstance(actual, dict))
+        self.assertTrue('info' in actual)
+        self.assertTrue('synomyms' in actual)
+        self.assertTrue('properties' in actual)
+        self.assertTrue('thumbnail' in actual)
+        self.assertTrue('types' in actual)
+        self.assertTrue('type' in actual)
+        self.assertTrue('name' in actual)
+        self.assertTrue('entityName' in actual)
+        self.assertTrue('entityType' in actual)
