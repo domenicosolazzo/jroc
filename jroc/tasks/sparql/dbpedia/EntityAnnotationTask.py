@@ -25,7 +25,7 @@ class EntityAnnotationTask(BasicTask):
 
             self.__kernel = SPARQLAdapter()
 
-            output = [{"entity": word, "metadata": self.__kernel.getProperties(word, fetchValues=True)} for word in data]
+            output = [{"entity": word, "metadata": self.__kernel.entityExtraction(word, advancedSearch=True)} for word in data]
             self.finish(data=output, failed=False, error=None)
         except:
             raise
