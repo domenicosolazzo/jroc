@@ -45,4 +45,17 @@ class NERPipelineTestCase(unittest.TestCase):
 
         actual = self.pipeline.getOutput()
         self.assertTrue('entities-annotated' in actual)
-        self.assertTrue(isinstance(actual.get('entities-annotated'), dict))
+        self.assertTrue(isinstance(actual.get('entities-annotated'), list))
+
+    def test_pipeline_execute_with_characters_to_be_removed(self):
+        """
+        Test the execution of the ner pipeline with an input with characters that should be removed
+        """
+        input = '{"data":"Ivar Aasen ble født " "  "på gården Åsen i Hovdebygda på Sunnmøre som sønn av småbrukeren Ivar Jonsson."}'
+        self.pipeline = NERPipeline(input=input, name=self.name, withEntityAnnotation=False)
+        self.pipeline.execute()
+
+        actual = self.pipeline.getOutput()
+        expected = [u'Sunnm\xf8re', u'\xc5sen', u'Ivar Aasen', u'Ivar Jonsson', u'Hovdebygda']
+        self.assertTrue('entities' in actual)
+        self.assertEqual(expected, actual.get('entities'))
