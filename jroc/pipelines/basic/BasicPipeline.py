@@ -131,7 +131,6 @@ class BasicPipeline(Pipeline):
                 output = self.runTask(task, input, metadataOut)
                 # Set the task as done
                 self.__tasks.task_done()
-                print("OUTPUT %s" % task.getName(), output)
                 if task.hasFailed():
                     raise Exception("Pipeline has failed. The current task returned an error: %s" % task.getName())
 
