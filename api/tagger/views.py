@@ -6,6 +6,7 @@ from obt import OBTManager
 from stopwords import StopwordManager
 from api.utils.input import DataCleaner
 from api.language.detector import LanguageDetector
+from jroc.pipelines.ner.NERPipeline import NERPipeline
 
 import json
 
@@ -62,29 +63,19 @@ def taggerTags():
 def taggerEntities():
     shouldFilterStopwords = True if request.args.get('stopwords') == 'true' else False
     shouldShowLanguage = True if request.args.get('language') == 'true' else False
-    showAdvancedResult = True if request.args.get("advanced") else False
+    showAdvancedResult = True if request.args.get("advanced") == 'true' else False
+    showAnnotation = True if request.args.get("annotation") == 'true' else False
+
 
     data = request.data
+    pipeline = NERPipeline(input=data, name="NER Pipeline", withEntityAnnotation=showAnnotation)
+    pipeline.execute()
+    output = pipeline.getOutput()
 
-    # Cleaning the data in input
-    dataCleaner = DataCleaner()
-    data = dataCleaner.filterCharacters(data)
-    print("After cleaning data: %s" % (data,))
+    language = output.get('language', None)
+    entities = output.get('entities', [])
 
-    json_result = json.loads(data)
 
-    # Language Detection
-    text = json_result.get("data", None)
-    languageResult = LanguageDetector().classify(text)
-    language = languageResult[0]
-
-    # Oslo-Bergen Tagger
-    obtManager = OBTManager(json_result)
-
-    # Applying the stopwords
-    stopwordManager = StopwordManager(language=language)
-    stopwords = stopwordManager.getStopWords() if shouldFilterStopwords == True else []
-    entities = obtManager.findEntities(stopwords=stopwords)
 
     if showAdvancedResult and len(entities) > 0:
         # Advanced formatting for each entity
@@ -99,9 +90,15 @@ def taggerEntities():
     result = {}
     result["uri"] = "%s" % (request.base_url, )
     result["data"] = entities
+    result["data"]
     result["meta"] = {}
+
     if shouldShowLanguage == True:
         result["meta"]["language"] = languageResult[0]
+    if showAnnotation == True:
+        entities_annotated = output.get('entities-annotated', [])
+        result["meta"]["annotation"] = entities_annotated
+
 
     json_response = json.dumps(result)
     return Response(json_response, mimetype="application/json")

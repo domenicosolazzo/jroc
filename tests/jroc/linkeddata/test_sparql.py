@@ -73,7 +73,6 @@ class SPARQLAdapterTestCase(unittest.TestCase):
         self.assertIsNotNone(actual)
         self.assertTrue(isinstance(actual, dict))
         self.assertTrue('type' in actual)
-        print(type(actual.get(type)))
         self.assertTrue(isinstance(actual.get('type'), list))
 
     def test_sparql_get_entity_type(self):

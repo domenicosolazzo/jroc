@@ -28,7 +28,6 @@ class PosTaggerTask(BasicTask):
                 raise Exception("The text given in input is not valid. Please that input of this task! ")
 
             output = self.__kernel.analyze(input=inputText)
-            print("POS", output)
             self.finish(data=output, failed=False, error=None)
         except:
             raise

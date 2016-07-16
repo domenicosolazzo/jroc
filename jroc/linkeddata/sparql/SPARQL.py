@@ -5,7 +5,6 @@ from queries import Queries
 class SPARQLAdapter(object):
 
     def __init__(self):
-        print("Initializing the SPARQL Adapter")
         self.sparql = SPARQLWrapper("http://dbpedia.org/sparql")
         self.queries = Queries()
 

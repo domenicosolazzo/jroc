@@ -10,7 +10,6 @@ class StopwordFilteringTask(BasicTask):
         self.__kernel = StopwordManager(language=language)
 
     def execute(self, input):
-        print(input)
         try:
             super(StopwordFilteringTask, self).execute(input)
             assert(isinstance(input, dict))
