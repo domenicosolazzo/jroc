@@ -2,11 +2,8 @@
 
 from . import tagger
 from flask import request, Response
-from obt import OBTManager
-from stopwords import StopwordManager
-from api.utils.input import DataCleaner
-from api.language.detector import LanguageDetector
 from jroc.pipelines.ner.NERPipeline import NERPipeline
+from jroc.pipelines.pos.PosTaggerPipeline import PosTaggerPipeline
 
 import json
 
@@ -26,28 +23,11 @@ def taggerTags():
 
     data = request.data
 
-    # Cleaning the input data
-    dataCleaner = DataCleaner()
-    data = dataCleaner.filterCharacters(data)
+    pipeline = PosTaggerPipeline(input=data, name="PosTagger Pipeline")
+    pipeline.execute()
+    output = pipeline.getOutput()
 
-    json_result = json.loads(data)
-
-    # Language Detection
-    text = json_result.get("data", None)
-    languageResult = LanguageDetector().classify(text)
-    language = languageResult[0]
-
-    # Oslo-Bergen Tagger
-    obtManager = OBTManager(json_result)
-
-    tags = {}
-
-    # Find the tags
-    tags = obtManager.findTags()
-    if shouldFilterStopwords == True:
-        # Applying the stopwords
-        stopwordManager = StopwordManager(language=language)
-        tags = stopwordManager.filterStopWords(tags)
+    tags = output.get('tags', [])
 
     result = {}
     result["uri"] = "%s" % (request.base_url, )

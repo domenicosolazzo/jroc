@@ -190,7 +190,8 @@ class OBTManagerTestCase(unittest.TestCase):
         """
         text = "Ivar Aasen ble født på gården Åsen i Hovdebygda på Sunnmøre som sønn av småbrukeren Ivar Jonsson."
         self.obtManager = OBTManager(text)
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
 
         expectedEntities = [u'Ivar', u'Aasen', u'Sunnm\xf8re', u'\xc5sen', u'Hovdebygda', u'Jonsson']
         expectedEntitiesCount = len(expectedEntities)
@@ -212,7 +213,7 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/ivar_aasen.txt')
         self.obtManager = OBTManager(text.replace("-", " "))
         actual = self.obtManager.analyze()
-        
+
         self.assertTrue(actual is not None)
         self.assertTrue(isinstance(actual, dict))
         self.assertTrue('obt' in actual)
@@ -257,7 +258,9 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/ivar_aasen.txt')
         self.obtManager = OBTManager(text)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
 
         expectedTags = [u'Iver', u'Bibelen', u'Andreas', u'Ivar', u'Aasen', u'Aarflot', u'\xabIvar\xbb', u'Sivert', u'Sunnm\xf8re', u'Aarflots', u'Ekset', u'\xc5sen', u'Hovdebygda', u'Rasmus', u'Jonsson']
         expectedTagsCount = len(expectedTags)
@@ -278,7 +281,9 @@ class OBTManagerTestCase(unittest.TestCase):
 
         expectedTagsCount = len(expectedTags)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
 
         self.assertTrue(actual is not None)
@@ -327,7 +332,9 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/article1.txt')
         self.obtManager = OBTManager(text)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         expectedTags = [u'Lars', u'Her', u'Stensvold.', u'Rauma', u'Nettbuss', u'Stensvold', u'Dagrunn', u'Lastebileigarforbundet', u'Vegdirektoratet', u'Dykkarar', u'Dersom',
                         u'Krakeli', u'Hardeland', u'VG', u'Stengde', u'Det', u'Noreg', u'Ein', u'NRK', u'Vi', u'Eg', u'Statens', u'E136']
         expectedTagsCount = len(expectedTags)
@@ -347,7 +354,9 @@ class OBTManagerTestCase(unittest.TestCase):
         expectedTags = [u'Lars', u'Stensvold.', u'Rauma', u'Nettbuss', u'Stensvold', u'Dagrunn', u'Lastebileigarforbundet', u'Vegdirektoratet', u'Dykkarar', u'Krakeli', u'Hardeland', u'VG', u'Stengde', u'Noreg', u'NRK', u'Statens', u'E136']
         expectedTagsCount = len(expectedTags)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
 
         self.assertTrue(actual is not None)
@@ -401,7 +410,9 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/article2.txt')
         self.obtManager = OBTManager(text)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         expectedTags = [u'Harrys', u'Berkshire', u'Sun', u'Abbey', u'Westminster', u'Ellie', u'Jeg', u'Tom', u'Mail', u'You', u'Poynter', u'Features-', u'Service', u'Di', u'Park',
                         u'William', u'Dougie', u'Goulding', u'Could', u'Me', u'Joner', u'EKSEN', u'TONE', u'Like', u'Anything', u'Audis', u'Revenant', u'Challenge', u'Mirror', u'Daily', u'Times',
                         u'Westminister', u'Goudling', u'Harry', u'Scanpix', u'The', u'Prns', u'Leonardo', u'Xposure-', u'Commonwealth', u'Observance', u'Features', u'Suns', u'Seogh\xf8r.',
@@ -426,7 +437,9 @@ class OBTManagerTestCase(unittest.TestCase):
                         u'Caprio', u'Sunday', u'Day', u'Ellies', u'Hardy', u'London', u'Coworth', u'Polo', u'NTB', u'Kate', u'Audi']
         expectedTagsCount = len(expectedTags)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
 
         self.assertTrue(actual is not None)
@@ -474,7 +487,9 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/article3.txt')
         self.obtManager = OBTManager(text)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         expectedTags = [u'Nyheter', u'Brussel', u'EFTA', u'Dette', u'Grunnlovens', u'Norge', u'EFTAs', u'Grunnlov', u'ESA', u'EU', u'Mani', u'Hussaini', u'Finanstilsynet', u'Arbeiderpartiets', u'EUs']
         expectedTagsCount = len(expectedTags)
 
@@ -493,7 +508,9 @@ class OBTManagerTestCase(unittest.TestCase):
         expectedTags = [u'Nyheter', u'Brussel', u'EFTA', u'Grunnlovens', u'Norge', u'EFTAs', u'Grunnlov', u'ESA', u'EU', u'Mani', u'Hussaini', u'Finanstilsynet', u'Arbeiderpartiets', u'EUs']
         expectedTagsCount = len(expectedTags)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
 
         self.assertTrue(actual is not None)
@@ -539,7 +556,9 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/article4.txt')
         self.obtManager = OBTManager(text)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         expectedTags = [u'Ordf\xf8rer', u'L\xd8VLANDValgdeltagelsen', u'Flekkefjord', u'Sigbj\xf8rnsen', u'Jan', u'Valgdeltagelse']
         expectedTagsCount = len(expectedTags)
 
@@ -558,7 +577,9 @@ class OBTManagerTestCase(unittest.TestCase):
         expectedTags = [u'Ordf\xf8rer', u'L\xd8VLANDValgdeltagelsen', u'Flekkefjord', u'Sigbj\xf8rnsen', u'Jan', u'Valgdeltagelse']
         expectedTagsCount = len(expectedTags)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
 
         self.assertTrue(actual is not None)
@@ -605,7 +626,9 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/article5.txt')
         self.obtManager = OBTManager(text)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         expectedTags = [u'Box', u'Live24', u'Drammen', u'\xc5pningshelgen', u'Rekom', u'The', u'Engene']
         expectedTagsCount = len(expectedTags)
 
@@ -624,7 +647,9 @@ class OBTManagerTestCase(unittest.TestCase):
         expectedTags = [u'Box', u'Live24', u'Drammen', u'\xc5pningshelgen', u'Rekom', u'The', u'Engene']
         expectedTagsCount = len(expectedTags)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
 
         self.assertTrue(actual is not None)
@@ -682,7 +707,9 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/article6.txt')
         self.obtManager = OBTManager(text)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         expectedTags = [u'Nani', u'Santos', u'Tyskland', u'Ricardo', u'Under', u'Tsjekkia', u'Infantino', u'FINALEEKSTASE', u'Nederland', u'Luiz', u'Hvilken', u'Luis', u'Island', u'Ronaldo', u'Zlatans', u'Ronaldos',
                         u'Albania', u'England', u'Hellas', u'S.', u'For', u'Simao', u'Paulo', u'\xd8sterrike', u'Italia', u'Ekspert-tipset', u'Wembley', u'Spania', u'VG+', u'Supermannen', u'Armenia', u'Pimenta', u'Kongsvingers', u'Ghana',
                         u'Norge', u'Felipe', u'AFP', u'Bulgaria', u'Sanchez', u'Portugal', u'Sanches', u'Zidane', u'Scolari', u'Carvalho', u'Zin\xe9dine', u'Gianni', u'Jo\xe3o', u'VGs', u'DELEBEKK', u'Alves', u'Pepe', u'Jeg', u'Portugals',
@@ -710,7 +737,9 @@ class OBTManagerTestCase(unittest.TestCase):
 
         expectedTagsCount = len(expectedTags)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
 
         self.assertTrue(actual is not None)
@@ -758,8 +787,8 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/article7.txt')
         self.obtManager = OBTManager(text)
 
-        actual = self.obtManager.findTags()
-
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
         expectedTags = [u'F\xf8reren', u'Rygge.', u'E6', u'Twitter', u'Aftenposten']
         expectedTagsCount = len(expectedTags)
 
@@ -779,7 +808,9 @@ class OBTManagerTestCase(unittest.TestCase):
 
         expectedTagsCount = len(expectedTags)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
 
         self.assertTrue(actual is not None)
@@ -827,7 +858,9 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/article8.txt')
         self.obtManager = OBTManager(text)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
 
         expectedTags = [u'Helseindustrien', u'Helse', u'Omsorg21-melding', u'NHO', u'Economics', u'Menon', u'Helsen\xe6ringen', u'Norge', u'Vestlandet,-', u'Lesarbrev']
         expectedTagsCount = len(expectedTags)
@@ -848,7 +881,9 @@ class OBTManagerTestCase(unittest.TestCase):
 
         expectedTagsCount = len(expectedTags)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
 
         self.assertTrue(actual is not None)
@@ -896,7 +931,9 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/article9.txt')
         self.obtManager = OBTManager(text)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         expectedTags = [u'Sveits', u'Ars\xe8ne', u'Romania', u'Han', u'Bundesliga', u'Borussia', u'Ramseys', u'Arsenal', u'Kasper', u'Granit', u'Xhakas', u'Wikestad', u'Vi', u'Xhaka',
                         u'23-\xe5ringen', u'M\xf6nchengladbach', u'Wenger.']
         expectedTagsCount = len(expectedTags)
@@ -917,7 +954,9 @@ class OBTManagerTestCase(unittest.TestCase):
 
         expectedTagsCount = len(expectedTags)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
 
         self.assertTrue(actual is not None)
@@ -965,7 +1004,9 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/article10.txt')
         self.obtManager = OBTManager(text)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
 
         expectedTags = [u'NRK', u'Politioverbetjent', u'Stein', u'VG', u'Det', u'Oslo', u'Bredli', u'Mirmotahari', u'Hege', u'Olav', u'Pharos', u'Metlid', u'Bj\xf8lseth', u'Lien', u'VGs', u'Grete']
         expectedTagsCount = len(expectedTags)
@@ -986,7 +1027,9 @@ class OBTManagerTestCase(unittest.TestCase):
 
         expectedTagsCount = len(expectedTags)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
 
         self.assertTrue(actual is not None)
@@ -1033,7 +1076,9 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/article11.txt')
         self.obtManager = OBTManager(text)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
 
         expectedTags = [u'Hotell', u'H\xf8nefoss', u'S\xe6tre', u'Carl', u'Service', u'Carlsen.', u'Finn', u'Bryggeri', u'Jan', u'Ove', u'Otto', u'G\xe5rdene', u'Knut', u'Unni', u'Solberg']
         expectedTagsCount = len(expectedTags)
@@ -1053,7 +1098,9 @@ class OBTManagerTestCase(unittest.TestCase):
         expectedTags = [u'Hotell', u'H\xf8nefoss', u'S\xe6tre', u'Carl', u'Service', u'Carlsen.', u'Finn', u'Bryggeri', u'Jan', u'Ove', u'Otto', u'G\xe5rdene', u'Knut', u'Unni', u'Solberg']
         expectedTagsCount = len(expectedTags)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
 
         self.assertTrue(actual is not None)
@@ -1100,7 +1147,8 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('no/article12.txt')
         self.obtManager = OBTManager(text)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
 
         expectedTags = [u'600,-8', u'400,-10', u'200,-9', u'500,-5', u'Statistisk', u'200,-3', u'900,-6', u'900,-2', u'700,-4', u'Frifagbevegelse.', u'700,-7']
         expectedTagsCount = len(expectedTags)
@@ -1121,7 +1169,9 @@ class OBTManagerTestCase(unittest.TestCase):
 
         expectedTagsCount = len(expectedTags)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
 
         self.assertTrue(actual is not None)
@@ -1169,7 +1219,8 @@ class OBTManagerTestCase(unittest.TestCase):
         text = self.helper_readFilename('nn/article1.txt')
         self.obtManager = OBTManager(text)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
 
         expectedTags = [u'No', u'Stormskyene']
         expectedTagsCount = len(expectedTags)
@@ -1189,7 +1240,9 @@ class OBTManagerTestCase(unittest.TestCase):
         expectedTags = [u'Stormskyene']
         expectedTagsCount = len(expectedTags)
 
-        actual = self.obtManager.findTags()
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
         actual = [tag for tag in actual if not tag.lower() in stopwordsNorwegian]
 
         self.assertTrue(actual is not None)

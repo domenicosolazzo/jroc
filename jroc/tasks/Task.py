@@ -1,3 +1,4 @@
+import sys
 from datetime import datetime
 from collections import defaultdict
 
@@ -24,7 +25,10 @@ class Task(object):
     # Failed: true if the task has failed
     __failed = False
     # Error: Last error in the task
-    __error = None
+    __error = {
+        'error': None,
+        'error-stack': {}
+    }
     # Metadata
     __metadata = dict({'input':[{'key':'main'}], 'output': {'key': 'data'}})
 
@@ -43,6 +47,11 @@ class Task(object):
         self.__metadata = dict({'input':[{'key':'main'}], 'output': {'key': 'data'}})
         # output
         self.__output = dict({})
+        # error
+        self.__error = {
+            'error': None,
+            'error-stack': {}
+        }
 
 
     def setMetadataOutput(self, metadata):
@@ -73,7 +82,19 @@ class Task(object):
         """
         Set the error
         """
-        self.__error = error
+        self.__error['error'] = error
+
+        exctype, value = sys.exc_info()[:2]
+        self.__error['error-stack'] = {
+            'error-type':  exctype,
+            'error-value':  value
+        }
+
+    def getError(self):
+        """
+        Get the error
+        """
+        return self.__error
 
     def getOutput(self):
         return self.__output

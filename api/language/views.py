@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+from . import language
 from flask import request, Response
 from jroc.pipelines.language.LanguageDetectionPipeline import LanguageDetectionPipeline
 import json
@@ -13,9 +15,9 @@ def languageDetection():
 
     output = pipeline.getOutput()
 
-    language = output.get('language', None)
+    languageDetection = output.get('language', None)
     result = {}
-    result["language"] = language
+    result["language"] = languageDetection
 
     json_response = json.dumps(result)
     return Response(json_response, mimetype="application/json")

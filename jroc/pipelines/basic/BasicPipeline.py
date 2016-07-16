@@ -132,6 +132,7 @@ class BasicPipeline(Pipeline):
                 # Set the task as done
                 self.__tasks.task_done()
                 if task.hasFailed():
+                    print("ERROR", task.getError())
                     raise Exception("Pipeline has failed. The current task returned an error: %s" % task.getName())
 
                 # Set the output

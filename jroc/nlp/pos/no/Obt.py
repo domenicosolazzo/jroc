@@ -15,16 +15,17 @@ class OBTManager(object):
     _outputFilename = None
     _deleteFiles = True
 
-    def __init__(self, data):
+    def __init__(self, data=None):
         #assert(isinstance(data, str))
 
-        # Check if the data is not empty
-        if not data:
-            raise ValueError("Data in input is empty or not valid")
-
-        # Save the content in a temp file
-        self.__saveContent(data)
         self._outputData = None
+        # Check if the data is not empty
+        if data is not None and (isinstance(data, str) or isinstance(data, unicode)):
+            print("DATA", data)
+            # Save the content in a temp file
+            self.__saveContent(data)
+
+
 
     def __deleteFile(self, filename):
         if filename is not None:
@@ -128,14 +129,17 @@ class OBTManager(object):
         self._outputData = result
         return result
 
-    def findTags(self):
+    def findTags(self, text_analysis=None):
         """
         Find the tags within the text
         It takes all the words that are both "is_prop" and "is_subst"
         """
-        obtData = self._outputData
-        if not obtData:
-            obtData = self.obtAnalyze()
+        if text_analysis is None or not isinstance(text_analysis, dict) or not 'obt' in text_analysis:
+            raise Exception("The text analysis is not available")
+
+        # Obt text analysis
+        obtData = text_analysis.get('obt', [])
+
         entities = []
         for entity in obtData:
             if (entity.get("is_prop") == True and entity.get("is_subst") == True):

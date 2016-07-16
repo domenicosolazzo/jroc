@@ -1,6 +1,6 @@
 from . import BasicPipeline
 from . import StopwordRetrievalTask
-from . import PosTaggerTask
+from . import PosTaggerTask, PosTaggerTagsTask
 from . import LanguageDetectionPipeline
 from collections import defaultdict
 
@@ -22,6 +22,10 @@ class PosTaggerPipeline(BasicPipeline):
                                                                   ],
                                                           "output": {"key":"pos", "source": "internal-output", "type": "json" }
                                                           } ))
+        self.addTask((PosTaggerTagsTask(name="Pos Tagger Tags Task"), {
+                                                                        "input":[{"key": "pos", "source":"internal-output", "type": "json", "map-key": "pos"}, {"key": "language", "source": "internal-output", "map-key": "language"}],
+                                                                        "output": {"key": "tags", "source": "internal-output", "type": "json"}
+                                                                        }))
 
 
 

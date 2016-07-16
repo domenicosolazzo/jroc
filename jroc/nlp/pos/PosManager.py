@@ -7,7 +7,7 @@ POS_TAGGERS = { "no" : OBTManager,
                 "nb" : OBTManager,
                 "da" : OBTManager,
                 "sv" : OBTManager,
-                "en" : NTLKPosTagger,
+                "en" : OBTManager,
                 "other": None}
 
 class PosManager(object):
@@ -21,6 +21,7 @@ class PosManager(object):
 
     def getPosInstance(self, data):
         taggerClass = POS_TAGGERS.get(self.__language, None)
+        print("CLASS", taggerClass)
         if taggerClass is None:
 
             raise Exception("Pos tagger not available for this language: %s" % (self.__language, ) ) # Activate a default tagger
@@ -38,5 +39,20 @@ class PosManager(object):
 
         # Analyze the data and return a PosResult
         posResult = self.__posTagger.analyze()
+
+        return posResult
+
+    def findTags(self, input):
+        """
+        Find tags from a previously calculated text analysis
+        """
+        data = input
+        # Get the right instance of the pos tagger
+        self.__posTagger = self.getPosInstance(data)
+
+        # Analyze the data and return a PosResult
+        print("input", input)
+        print("aaaa", dir(self.__posTagger), type(self.__posTagger))
+        posResult = self.__posTagger.findTags(text_analysis=data)
 
         return posResult

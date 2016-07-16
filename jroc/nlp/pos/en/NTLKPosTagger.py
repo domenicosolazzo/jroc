@@ -5,3 +5,6 @@ class NTLKPosTagger(object):
 
     def analyze(self, input):
         return {"ntlk-tagger": []}
+
+    def findTags(self, text_analysis=None):
+        return []
