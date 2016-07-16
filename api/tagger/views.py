@@ -75,8 +75,6 @@ def taggerEntities():
     language = output.get('language', None)
     entities = output.get('entities', [])
 
-
-
     if showAdvancedResult and len(entities) > 0:
         # Advanced formatting for each entity
         temp = []
