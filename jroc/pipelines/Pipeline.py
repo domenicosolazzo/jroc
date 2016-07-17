@@ -115,6 +115,12 @@ class Pipeline(object):
                     input[mapTo] = value
                 elif source == "main": # This is the main input
                     input = self.__input
+                elif source == "external-input":
+                    data = item.get('data', None)
+                    if data is None:
+                        raise Exception("The external data is not present. Check the configuration of this pipeline")
+
+                    input = data
                 else:
                     raise Exception("Source input is unavailable for this task")
         return input

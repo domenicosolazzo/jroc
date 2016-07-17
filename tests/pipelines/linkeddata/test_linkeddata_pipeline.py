@@ -19,7 +19,10 @@ class LinkedDataEntityPipelineTestCase(unittest.TestCase):
         Test the execution of the LinkedData Entity Pipeline
         """
         input = "Asti"
-        self.pipeline = LinkedDataEntityPipeline(input=input,name=self.name, withTypesAnnotation=True, withThumbnailAnnotation=True, withPropertiesAnnotation=True, withPropertyValuesAnnotation=True)
+        self.pipeline = LinkedDataEntityPipeline(input=input, name=self.name,
+                                                withTypesAnnotation=True, withThumbnailAnnotation=False,
+                                                withPropertiesAnnotation=False, withPropertyValuesAnnotation=False,
+                                                withEntityAnnotation=False)
         self.pipeline.execute()
 
         output = self.pipeline.getOutput()

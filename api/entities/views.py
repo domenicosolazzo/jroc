@@ -1,6 +1,6 @@
 from . import entities
 from flask import request, Response, jsonify
-from linkeddata.SPARQL import SPARQLAdapter
+from jroc.pipelines.linkeddata.LinkedDataEntityPipeline import LinkedDataEntityPipeline
 from werkzeug.exceptions import HTTPException
 import urllib2
 import json
@@ -22,8 +22,11 @@ def main():
 def entityMain(entity_name):
     basic_url = "%s" % (request.base_url)
     entity = {}
-    sparqlAdapter = SPARQLAdapter()
-    uniqueUri = sparqlAdapter.getUniqueURI(entity_name).get('uri')
+    pipeline = LinkedDataEntityPipeline(entity_name, name="LinkedData Pipeline")
+    pipeline.execute()
+    output = pipeline.getOutput()
+
+    uniqueUri = output.get('entity-uri', {}).get('uri', None)
     entityName = entity_name
 
     if uniqueUri:
@@ -44,8 +47,11 @@ def entityMain(entity_name):
 
 @entities.route("/<entity_name>/types")
 def entityTypes(entity_name):
-    sparqlAdapter = SPARQLAdapter()
-    result = sparqlAdapter.getEntityType(entity_name)
+    pipeline = LinkedDataEntityPipeline(entity_name, name="LinkedData Pipeline", withTypesAnnotation=True)
+    pipeline.execute()
+    output = pipeline.getOutput()
+
+    result = output.get('entity-types', None)
 
     entity = {}
     entity["name"] = entity_name
@@ -62,7 +68,33 @@ def entityProperties(entity_name):
     entity["uri"] = "%s" % (request.url)
     entity["entity_uri"] = "%sentities/%s" % (request.url_root, entity_name,)
 
-    sparqlAdapter = SPARQLAdapter()
+    if request.args.get('name'):
+        propertyName = request.args.get('name')
+        lang = request.args.get('lang') if request.args.get('lang') else None
+        pipeline = LinkedDataEntityPipeline(entity_name, name="LinkedData Pipeline", withPropertyAnnotation=(True, [(urllib2.unquote(propertyName).decode('utf8'), lang)]))
+        pipeline.execute()
+        output = pipeline.getOutput()
+        result = output.get('entity-property', {})
+        print(result)
+        if len(result) > 0:
+            result = result.get('properties')
+        entity["data"] = result
+    else:
+        pipeline = LinkedDataEntityPipeline(entity_name, name="LinkedData Pipeline", withPropertiesAnnotation=True)
+        pipeline.execute()
+        output = pipeline.getOutput()
+
+        entityProperties = output.get('entity-properties', None)
+        properties = entityProperties.get("properties", [])
+        result = {}
+        for propertyName in properties.keys():
+            prop = {'uri': "", "name": propertyName}
+            if not propertyName in result:
+                result[propertyName] = prop
+            prop["uri"] = "%s?name=%s" % (request.base_url, urllib2.quote(propertyName))
+            result[propertyName] = prop
+        entity["data"] = result
+    """
     if request.args.get('name'):
         propertyName = request.args.get('name')
         lang = request.args.get('lang') if request.args.get('lang') else None
@@ -81,6 +113,8 @@ def entityProperties(entity_name):
             prop["uri"] = "%s?name=%s" % (request.base_url, urllib2.quote(propertyName))
             result[propertyName] = prop
         entity["data"] = result
+    """
+    #entity["data"] = properties
 
     json_response = json.dumps(entity)
     return Response(json_response, mimetype="application/json")

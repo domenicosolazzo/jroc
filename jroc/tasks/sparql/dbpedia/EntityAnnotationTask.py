@@ -16,6 +16,7 @@ class EntityAnnotationTask(BasicTask):
 
         output = None
         try:
+            print("input",input)
             assert(isinstance(input, dict))
             super(EntityAnnotationTask, self).execute(input)
 
@@ -99,9 +100,12 @@ class EntityAnnotationPropertiesTask(BasicTask):
 
     __inputKey = 'entity_name' # Expected input key
     __withPropertyValues = True
-    def __init__(self, name, initial_task=False, withPropertyValues=True):
+    __requestedProperties = []
+
+    def __init__(self, name, initial_task=False, withPropertyValues=True, properties=[]):
         super(EntityAnnotationPropertiesTask, self).__init__(name, initial_task)
         self.__withPropertyValues = withPropertyValues
+        self.__requestedProperties = properties
 
 
     def execute(self, input):
@@ -118,7 +122,17 @@ class EntityAnnotationPropertiesTask(BasicTask):
                 raise Exception("Impossible to retrieve the properties of a given entity. Please that input of this task! ")
 
             self.__kernel = SPARQLAdapter()
-            output = self.__kernel.getProperties(data, fetchValues=self.__withPropertyValues)
+            output = None
+            if not self.__requestedProperties is None and len(self.__requestedProperties) > 0:
+                print("aaaa", self.__requestedProperties)
+                output = {
+                    # Property[0] => Property name
+                    # Property[1] => Language
+                    'properties': [self.__kernel.getProperty(data, property[0], property[1]) for property in self.__requestedProperties]
+                }
+
+            else:
+                output = self.__kernel.getProperties(data, fetchValues=self.__withPropertyValues)
             self.finish(data=output, failed=False, error=None)
         except:
             output = "Error retrieving the properties of a given entity"
