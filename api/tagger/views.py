@@ -46,7 +46,6 @@ def taggerEntities():
     showAdvancedResult = True if request.args.get("advanced") == 'true' else False
     showAnnotation = True if request.args.get("annotation") == 'true' else False
 
-
     data = request.data
     pipeline = NERPipeline(input=data, name="NER Pipeline", withEntityAnnotation=showAnnotation)
     pipeline.execute()

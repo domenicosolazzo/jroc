@@ -1,0 +1,3 @@
+from jroc.pipelines.basic.BasicPipeline import BasicPipeline
+from jroc.tasks.sparql.dbpedia.EntityAnnotationTask import EntityAnnotationTask, EntityAnnotationURITask, EntityAnnotationTypesTask, EntityAnnotationThumbnailTask, EntityAnnotationPropertiesTask
+from jroc.pipelines.linkeddata.LinkedDataEntityPipeline import LinkedDataEntityPipeline

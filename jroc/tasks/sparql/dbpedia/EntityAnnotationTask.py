@@ -28,8 +28,131 @@ class EntityAnnotationTask(BasicTask):
             output = [{"entity": word, "metadata": self.__kernel.entityExtraction(word, advancedSearch=True)} for word in data]
             self.finish(data=output, failed=False, error=None)
         except:
-            raise
             output = "Error loading the json string"
+            self.finish(data=None, failed=True, error=output)
+
+        return self.getOutput()
+
+class EntityAnnotationURITask(BasicTask):
+    __kernel = None # Kernel for this loader
+
+    __inputKey = 'entity_name' # Expected input key
+    def __init__(self, name, initial_task=False):
+        super(EntityAnnotationURITask, self).__init__(name, initial_task)
+
+
+    def execute(self, input):
+        """
+        Execute a task
+        """
+
+        output = None
+        try:
+            super(EntityAnnotationURITask, self).execute(input)
+
+            data = input
+            if data is None:
+                raise Exception("Impossible to retrieve the URI of a given entity. Please that input of this task! ")
+
+            self.__kernel = SPARQLAdapter()
+            output = self.__kernel.getUniqueURI(data)
+            self.finish(data=output, failed=False, error=None)
+        except:
+            output = "Error retrieving the URI of a given entity"
+            self.finish(data=None, failed=True, error=output)
+
+        return self.getOutput()
+
+class EntityAnnotationTypesTask(BasicTask):
+    __kernel = None # Kernel for this loader
+
+    __inputKey = 'entity_name' # Expected input key
+    def __init__(self, name, initial_task=False):
+        super(EntityAnnotationTypesTask, self).__init__(name, initial_task)
+
+
+    def execute(self, input):
+        """
+        Execute a task
+        """
+
+        output = None
+        try:
+            super(EntityAnnotationTypesTask, self).execute(input)
+
+            data = input
+            if data is None:
+                raise Exception("Impossible to retrieve the types of a given entity. Please that input of this task! ")
+
+            self.__kernel = SPARQLAdapter()
+            output = self.__kernel.getEntityType(data)
+            self.finish(data=output, failed=False, error=None)
+        except:
+            output = "Error retrieving the types of a given entity"
+            self.finish(data=None, failed=True, error=output)
+
+        return self.getOutput()
+
+
+class EntityAnnotationPropertiesTask(BasicTask):
+    __kernel = None # Kernel for this loader
+
+    __inputKey = 'entity_name' # Expected input key
+    __withPropertyValues = True
+    def __init__(self, name, initial_task=False, withPropertyValues=True):
+        super(EntityAnnotationPropertiesTask, self).__init__(name, initial_task)
+        self.__withPropertyValues = withPropertyValues
+
+
+    def execute(self, input):
+        """
+        Execute a task
+        """
+
+        output = None
+        try:
+            super(EntityAnnotationPropertiesTask, self).execute(input)
+
+            data = input
+            if data is None:
+                raise Exception("Impossible to retrieve the properties of a given entity. Please that input of this task! ")
+
+            self.__kernel = SPARQLAdapter()
+            output = self.__kernel.getProperties(data, fetchValues=self.__withPropertyValues)
+            self.finish(data=output, failed=False, error=None)
+        except:
+            output = "Error retrieving the properties of a given entity"
+            self.finish(data=None, failed=True, error=output)
+
+        return self.getOutput()
+
+class EntityAnnotationThumbnailTask(BasicTask):
+    __kernel = None # Kernel for this loader
+
+    __inputKey = 'entity_name' # Expected input key
+
+    def __init__(self, name, initial_task=False):
+        super(EntityAnnotationThumbnailTask, self).__init__(name, initial_task)
+
+
+    def execute(self, input):
+        """
+        Execute a task
+        """
+
+        output = None
+        try:
+            super(EntityAnnotationThumbnailTask, self).execute(input)
+
+            data = input
+            if data is None:
+                raise Exception("Impossible to retrieve the thumbnail of a given entity. Please that input of this task! ")
+
+            self.__kernel = SPARQLAdapter()
+            output = self.__kernel.getThumbnail(data)
+            self.finish(data=output, failed=False, error=None)
+        except:
+            output = "Error retrieving the thumbnail of a given entity"
             self.finish(data=None, failed=True, error=output)
 
         return self.getOutput()
