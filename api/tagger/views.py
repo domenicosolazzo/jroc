@@ -82,19 +82,24 @@ def taggerEntities():
 
 @tagger.route("/analyze", methods=["POST"])
 def taggerAnalyze():
-    requestObt = True if request.args.get('obt') == 'true' else False
-    requestEntities = True if request.args.get('entities') == 'true' else False
-    requestTags = True if request.args.get('tags') == 'true' else False
-
     data = request.data
     data = data.replace("'","\"").replace("\n", "")
     json_result = json.loads(data)
-    obtManager = OBTManager(json_result)
 
     result = {}
     result["uri"] = "%s" % (request.base_url, )
 
+    pipeline = NERPipeline(input=data, name="NER Pipeline")
+    pipeline.execute()
+    output = pipeline.getOutput()
+
+
     data = {}
+    data["language"] = output.get('language', None)
+    data["entities"] = output.get('entities', [])
+    data["tags"] = output.get('tags', [])
+    data["text_analyze"]  = output.get('pos', None)
+    """
     if(requestObt == True):
         obt_result = obtManager.obtAnalyze()
         data["obt"] = obt_result
@@ -106,9 +111,7 @@ def taggerAnalyze():
     if(requestEntities == True):
         entities = obtManager.findEntities()
         data["entities"] = entities
-
-    text_analyze_result = obtManager.analyzeText()
-    data["text_analyze"] = text_analyze_result
+    """
     result["data"] = data
 
     json_response = json.dumps(result)

@@ -80,15 +80,19 @@ def entityProperties(entity_name):
             result = result.get('properties')
         entity["data"] = result
     else:
-        pipeline = LinkedDataEntityPipeline(entity_name, name="LinkedData Pipeline", withPropertiesAnnotation=True)
+        fetchValues = True if request.args.get('fetch', None) else False
+        pipeline = LinkedDataEntityPipeline(entity_name, name="LinkedData Pipeline", withPropertiesAnnotation=True, withPropertyValuesAnnotation=fetchValues)
         pipeline.execute()
         output = pipeline.getOutput()
+
 
         entityProperties = output.get('entity-properties', None)
         properties = entityProperties.get("properties", [])
         result = {}
         for propertyName in properties.keys():
             prop = {'uri': "", "name": propertyName}
+            if fetchValues == True:
+                prop["values"] = properties[propertyName]
             if not propertyName in result:
                 result[propertyName] = prop
             prop["uri"] = "%s?name=%s" % (request.base_url, urllib2.quote(propertyName))
