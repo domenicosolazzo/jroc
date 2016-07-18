@@ -6,7 +6,7 @@ from collections import defaultdict
 
 class LanguageDetectionPipeline(BasicPipeline):
     """
-    Language Detection Pipeline
+    Language Detection Pipeline: It retrieves the language of a text from a json string
     """
     def __init__(self, input, name="Language Detection Pipeline"):
 

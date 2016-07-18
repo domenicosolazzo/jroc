@@ -6,7 +6,10 @@ from collections import defaultdict
 
 class NERPipeline(BasicPipeline):
     """
-    NERPipeline Pipeline
+    NERPipeline Pipeline: It retrieves entities inside a given text.
+
+    Entity annotation: If withEntityAnnotation is True, it will retrieve information for each retrieved entity from a SPARQL endpoint.
+    It could take some time to perform this step.
     """
     # Use entity annotation
     __withEntityAnnotation = False
