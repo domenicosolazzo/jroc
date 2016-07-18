@@ -2,6 +2,9 @@ from . import BasicTask
 from . import PosManager
 
 class PosTaggerTask(BasicTask):
+    """
+    PosTaggerTask: Part-of-Speech task 
+    """
     __kernel = None # Kernel for this loader
 
     __inputKey = 'data' # Expected input key

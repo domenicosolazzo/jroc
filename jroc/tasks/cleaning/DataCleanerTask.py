@@ -3,6 +3,9 @@ from . import BasicTask
 from . import DataCleaner
 
 class DataCleanerTask(BasicTask):
+    """
+    DataCleanerTask: Cleanup a text from a list of characters
+    """
     __kernel = None # Kernel for this loader
     # The data cleaner task will filter a given set of characters
     __filterCharacters = True
@@ -17,7 +20,7 @@ class DataCleanerTask(BasicTask):
 
     def __init__(self, name, initial_task=False):
         super(DataCleanerTask, self).__init__(name, initial_task)
-        
+
     def setFilterCharacters(self, shouldFilter=True, characters=None):
         """
         Set the DataCleanerTask to filter a certain set of characters

@@ -2,6 +2,9 @@ from . import BasicTask
 from . import StopwordManager
 
 class StopwordFilteringTask(BasicTask):
+    """
+    StopwordFilteringTask: Filter a input using a given set of stopwords
+    """
     __kernel = None # Kernel for this loader
 
     __inputKey = 'data' # Expected input key
@@ -26,6 +29,9 @@ class StopwordFilteringTask(BasicTask):
         return self.getOutput()
 
 class StopwordRetrievalTask(BasicTask):
+    """
+    StopwordRetrievalTask: Retrieve the stopwords for a given language
+    """
     __kernel = None # Kernel for this loader
 
     __inputKey = 'data' # Expected input key

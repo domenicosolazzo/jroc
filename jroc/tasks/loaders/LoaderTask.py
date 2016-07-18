@@ -2,6 +2,9 @@ from . import BasicTask
 from . import JSONLoader
 
 class LoaderTask(BasicTask):
+    """
+    LoaderTask: It loads data from a json string
+    """
     __kernel = None # Kernel for this loader
 
     __inputKey = 'json' # Expected input key
@@ -25,7 +28,7 @@ class LoaderTask(BasicTask):
 
             self.__kernel = JSONLoader(json_string=inputText)
             output = self.__kernel.getData()
-            
+
             self.finish(data=output, failed=False, error=None)
         except:
             output = "Error loading the json string"

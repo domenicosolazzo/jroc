@@ -2,6 +2,9 @@ from . import BasicTask
 from . import NERPosNo
 
 class NERPosNoTask(BasicTask):
+    """
+    NERPosNoTask: Name Entity retrieval task
+    """
     __kernel = None # Kernel for this loader
     __inputKey = 'pos-no' # Expected input key.
 

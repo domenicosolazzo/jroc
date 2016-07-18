@@ -2,6 +2,9 @@ from . import BasicTask
 from . import LanguageDetector
 
 class LanguageDetectorTask(BasicTask):
+    """
+    LanguageDetectorTask: It detects the language of a text.
+    """
     __kernel = None # Kernel for this loader
     __inputKey = 'main' # Expected input key
 

@@ -2,6 +2,9 @@ from . import BasicTask
 from . import SPARQLAdapter
 
 class EntityAnnotationTask(BasicTask):
+    """
+    EntityAnnotationTask: Annotate a list of entities with information from a SPARQL Endpoint
+    """
     __kernel = None # Kernel for this loader
 
     __inputKey = 'entities' # Expected input key
