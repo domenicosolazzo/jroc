@@ -1,4 +1,5 @@
 import uuid
+from datetime import datetime
 """
 Pipeline types
 In-Memory: The pipeline will be executed sequentially in-memory
@@ -22,6 +23,11 @@ class Pipeline(object):
     __output = {
         'current-output':None
     }
+    # Check if the pipeline has failed
+    __failed = False
+
+    # Error
+    __error = {}
 
     # Save to DB: True if you should save every step in the db
     __saveToDB = False
@@ -36,10 +42,26 @@ class Pipeline(object):
         self.__output = {
             'current-output':None
         }
+        self.__failed = False
+        # Created date for the task
+        __created = datetime.utcnow()
+        # Started date for the task
+        __started = datetime.utcnow()
+        # End date for the task
+        __finished = datetime.utcnow()
+        # Error
+        self.__error = {
+            'error': None,
+            'error-stack': {}
+        }
         self.__saveToDB = False
         # Pipeline type
         self.__type = PipelineType.get('in-memory', 'in-memory')
+
     def getName(self):
+        """
+        Get the name of the pipeline
+        """
         return self.__name
 
     def setType(self, type):
@@ -66,6 +88,35 @@ class Pipeline(object):
         """
         self.__output[key] = output
 
+    def setError(self, message):
+        """
+        Set the error message. Moreover, retrieve information about the last execption in the pipeline
+        @message: error message
+        """
+        exctype, value = sys.exc_info()[:2]
+        self.__error["error"] = message
+        self.__error['error-stack'] = {
+            'error-type':  exctype,
+            'error-value':  value
+        }
+
+    def hasFailed(self):
+        """
+        Check if the pipeline has failed
+        """
+        self.__failed = True
+
+    def finish(self, message="", hasFailed=False):
+        """
+        Set that the pipeline has finished.
+        @message: Additional message.
+        @hasFailed: Set if the pipeline has failed
+        """
+        if hasFailed == True:
+            self.hasFailed()
+            self.setError(message=message)
+        self.__finished = datetime.utcnow()
+
     def mergeOutput(self, externalOutput):
         """
         Merge the output with the current pipeline output
@@ -86,7 +137,11 @@ class Pipeline(object):
 
     def getInputData(self, metadata):
         """
-        It returns the input object based on the metadata in input
+        It returns the input object based on the metadata in input.
+        Available input data:
+        - Main: main input for the pipeline
+        - external-input: You can set an external input for each item.
+        - internal-output: The input is based on a given key of the internal output calculated during processing
         """
         assert(metadata is not None) # Metdata cannot be null
         assert(isinstance(metadata, list))  # Check that that we have a list in input
@@ -101,7 +156,9 @@ class Pipeline(object):
                     raise Exception("Task input source cannot be null. Check the configuration of this pipeline.")
 
                 if source == 'internal-output':
-
+                    """
+                    internal-output: Input is based on a given key of the internal calculated output.
+                    """
                     # Get Key
                     mapTo = item.get('map-key', 'main') # It will take key from 'map-key', otherwise it has 'main' as value
                     key = item.get('key', None)
@@ -114,8 +171,14 @@ class Pipeline(object):
                     # set the input
                     input[mapTo] = value
                 elif source == "main": # This is the main input
+                    """
+                    Main: This is the main input for the pipeline
+                    """
                     input = self.__input
                 elif source == "external-input":
+                    """
+                    External input: You can set an external input for a given input
+                    """
                     data = item.get('data', None)
                     if data is None:
                         raise Exception("The external data is not present. Check the configuration of this pipeline")
@@ -130,10 +193,10 @@ class Pipeline(object):
         """
         Add a task to the pipeline
         """
-        raise Exception("Not implemented yet")
+        pass
 
     def execute(self):
         """
         Execute the pipeline
         """
-        raise Exception("Not implemented yet")
+        self.__started = datetime.utcnow()

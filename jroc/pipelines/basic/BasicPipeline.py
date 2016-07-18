@@ -102,14 +102,18 @@ class BasicPipeline(Pipeline):
             #print("All the pre-pipeline tasks have been executed. Pipeline is ready to start...")
             pass
         except:
-            raise
+            self.finished(message="Error executing the pre-pipeline tasks", hasFailed=True)
+            return False
+        return True
 
     def execute(self):
         """
         Execute the pipeline
         """
         # Run pre-pipeline
-        self.__before_execute()
+        resultBefore = self.__before_execute()
+        if resultBefore == False:
+            return
 
         # Until the queue is empty
         isTasksEmpty = self.__tasks.empty()
@@ -132,7 +136,6 @@ class BasicPipeline(Pipeline):
                 # Set the task as done
                 self.__tasks.task_done()
                 if task.hasFailed():
-                    print("ERROR", task.getError())
                     raise Exception("Pipeline has failed. The current task returned an error: %s" % task.getName())
 
                 # Set the output
@@ -146,9 +149,13 @@ class BasicPipeline(Pipeline):
                 # All the tasks  for the pipeline have been executed
                 #print("All the tasks  for the pipeline have been executed")
                 isTasksEmpty = True
-                pass
+            except:
+                self.finish(message="Error executing the pipeline", hasFailed=True)
+                return
+
 
         # Return the result
+        self.finish(message="All good", hasFailed=False)
         finalOutput = self.getOutput()
         return finalOutput
 

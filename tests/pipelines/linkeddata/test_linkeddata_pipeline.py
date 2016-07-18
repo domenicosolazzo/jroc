@@ -20,11 +20,15 @@ class LinkedDataEntityPipelineTestCase(unittest.TestCase):
         """
         input = "Asti"
         self.pipeline = LinkedDataEntityPipeline(input=input, name=self.name,
-                                                withTypesAnnotation=True, withThumbnailAnnotation=False,
-                                                withPropertiesAnnotation=False, withPropertyValuesAnnotation=False,
+                                                withTypesAnnotation=True, withThumbnailAnnotation=True,
+                                                withPropertiesAnnotation=True, withPropertyValuesAnnotation=False,
                                                 withEntityAnnotation=False)
         self.pipeline.execute()
 
         output = self.pipeline.getOutput()
-        print("LINKEDDATA", output)
-        self.assertFalse(True)
+        self.assertIsNotNone(output)
+        print(output)
+        self.assertTrue('entity-uri' in output)
+        self.assertTrue('entity-types' in output)
+        self.assertTrue('entity-properties' in output)
+        self.assertTrue('entity-thumbnail' in output)

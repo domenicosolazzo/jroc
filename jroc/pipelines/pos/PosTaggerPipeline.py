@@ -6,7 +6,7 @@ from collections import defaultdict
 
 class PosTaggerPipeline(BasicPipeline):
     """
-    PosTagger Pipeline
+    PosTagger Pipeline: it calculates the language of the text and extracts important information about text, such as tags.
     """
     def __init__(self, input, name="PosTagger Pipeline"):
         pass
