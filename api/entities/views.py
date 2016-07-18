@@ -98,27 +98,6 @@ def entityProperties(entity_name):
             prop["uri"] = "%s?name=%s" % (request.base_url, urllib2.quote(propertyName))
             result[propertyName] = prop
         entity["data"] = result
-    """
-    if request.args.get('name'):
-        propertyName = request.args.get('name')
-        lang = request.args.get('lang') if request.args.get('lang') else None
-        result = sparqlAdapter.getProperty(entity_name, urllib2.unquote(propertyName).decode('utf8'), lang)
-        if len(result) > 0:
-            result = result.get('properties')
-        entity["data"] = result
-    else:
-        sparqlResult = sparqlAdapter.getProperties(entity_name)
-        properties = sparqlResult.get("properties") if "properties" in sparqlResult else []
-        result = {}
-        for propertyName in properties.keys():
-            prop = {'uri': "", "name": propertyName}
-            if not propertyName in result:
-                result[propertyName] = prop
-            prop["uri"] = "%s?name=%s" % (request.base_url, urllib2.quote(propertyName))
-            result[propertyName] = prop
-        entity["data"] = result
-    """
-    #entity["data"] = properties
 
     json_response = json.dumps(entity)
     return Response(json_response, mimetype="application/json")
