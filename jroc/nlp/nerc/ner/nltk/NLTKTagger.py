@@ -2,16 +2,13 @@
 import nltk
 import os
 from . import NERFinder
-from nltk.tag import StanfordNERTagger
+from nltk import pos_tag
 from nltk.tokenize import word_tokenize
 
-class StanfordTagger(object):
+class NLTKTagger(object):
     """
-    Wrapper for the Stanford NER Tagger
+    Wrapper for the NLTK NER Tagger
     """
-    __currentDirectory = os.path.dirname(os.path.realpath(__file__)) # Current directory
-    __classifier = "%s/dist/classifiers/english.all.3class.distsim.crf.ser.gz"
-    __stanfordJar = "%s/dist/stanford-ner.jar"
 
     def __init__(self, language="en"):
         self.__stanfordJar = "%s/dist/stanford-ner.jar" % self.__currentDirectory
@@ -19,7 +16,7 @@ class StanfordTagger(object):
         self.__tagger = StanfordNERTagger( self.__classifier,
                                            self.__stanfordJar,
                                            encoding="utf-8")
-        self.__namedEntitiesFinder = NERFinder(language=language)
+        self.__namedEntitiesFinder = NamedEntitiesFinder(language=language)
 
     def __tags(self, raw_text):
         """
@@ -29,10 +26,9 @@ class StanfordTagger(object):
         if isinstance(raw_text, str):
             # Decode to utf-8
             raw_text = raw_text.decode('utf-8')
-        # Tokenize the string
-        token_text = word_tokenize(raw_text)
-        # Retrieve the named entities from the tokens
-        ne_tags = self.__tagger.tag(token_text)
+
+        tagged_words = nltk.pos_tag(token_text)
+        ne_tags = nltk.ne_chunk(tagged_words)
         return(ne_tags)
 
     def getEntities(self, raw_text):
