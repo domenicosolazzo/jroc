@@ -72,6 +72,27 @@ class StanfordNERTaggerTestCase(unittest.TestCase):
 
         self.assertEqual(expected, actual)
 
+    def test_nertagger_returns_stanford_ne_spanish_text(self):
+        """
+        Test for checking if the tagger returns named entities from the stanford tree with Spanish Text
+        """
+        text = self.helper_readFilename('es/article1.txt')
+        ne_entities = self.tagger.tags(raw_text=text)
+        bio_tags = self.tagger.bio_tagger(ne_entities)
+        stanford_tree = self.tagger.stanford_tree(bio_tags)
+
+        actual = self.tagger.stanford_ne(stanford_tree)
+        expected = [(u'House', u'ORGANIZATION'), (u'John Boehner', u'PERSON'),
+                        (u'Keystone Pipeline', u'ORGANIZATION'), (u'Obama', u'PERSON'),
+                        (u'Republican House', u'ORGANIZATION'), (u'John Boehner', u'PERSON'),
+                        (u'Keystone Pipeline', u'ORGANIZATION'), (u'Boehner', u'PERSON'),
+                        (u'America', u'LOCATION'), (u'United States', u'LOCATION'), (u'Keystone Pipeline', u'ORGANIZATION'),
+                        (u'Boehner', u'PERSON'), (u'State Department', u'ORGANIZATION'), (u'GOP', u'ORGANIZATION'),
+                        (u'Obama', u'PERSON'), (u'White House', u'ORGANIZATION')]
+        print(actual)
+
+        self.assertEqual(expected, actual)
+
 
 
 
