@@ -7,11 +7,6 @@ from nltk.chunk import conlltags2tree
 from nltk.tree import Tree
 from nltk import pos_tag
 
-CLASSIFIERS_MODELS = {
-    'en': ['english.all.3class.distsim.crf.ser.gz'],
-    'es': ['stanford-spanish-corenlp-2015-10-14-models.jar'],
-    'de': []
-}
 class StanfordTagger(object):
     """
     Wrapper for the Stanford NER Tagger
@@ -20,16 +15,9 @@ class StanfordTagger(object):
     __classifier = "%s/dist/classifiers/english.all.3class.distsim.crf.ser.gz"
     __stanfordJar = "%s/dist/stanford-ner.jar"
 
-    def __init__(self, language='en'):
+    def __init__(self):
         self.__stanfordJar = "%s/dist/stanford-ner.jar" % self.__currentDirectory
-        classifierByLanguage = CLASSIFIERS_MODELS.get(language, None)
-        if classifierByLanguage is None:
-            raise Exception("Language is not available")
-        if not isinstance(classifierByLanguage, list) or len(classifierByLanguage) <= 0:
-            raise Exception("The classifier model have an invalid format")
-
-        classifier = classifierByLanguage[0]
-        self.__classifier = "%s/dist/classifiers/%s" % (self.__currentDirectory, classifier)
+        self.__classifier = "%s/dist/classifiers/english.all.3class.distsim.crf.ser.gz" % (self.__currentDirectory,)
         self.__tagger = StanfordNERTagger( self.__classifier,
                                            self.__stanfordJar,
                                            encoding="utf-8")
@@ -46,6 +34,7 @@ class StanfordTagger(object):
         token_text = word_tokenize(raw_text)
         # Retrieve the named entities from the tokens
         ne_tags = self.__tagger.tag(token_text)
+        print(ne_tags)
         return(ne_tags)
 
     def bio_tagger(self, ne_tagged):
