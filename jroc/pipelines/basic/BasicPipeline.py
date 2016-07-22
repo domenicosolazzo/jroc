@@ -102,7 +102,7 @@ class BasicPipeline(Pipeline):
             #print("All the pre-pipeline tasks have been executed. Pipeline is ready to start...")
             pass
         except:
-            self.finished(message="Error executing the pre-pipeline tasks", hasFailed=True)
+            self.finish(message="Error executing the pre-pipeline tasks", hasFailed=True)
             return False
         return True
 
