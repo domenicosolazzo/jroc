@@ -29,6 +29,7 @@ class StanfordNERTaggerTestCase(unittest.TestCase):
                         (u'America', u'LOCATION'), (u'United States', u'LOCATION'), (u'Keystone Pipeline', u'ORGANIZATION'),
                         (u'Boehner', u'PERSON'), (u'State Department', u'ORGANIZATION'), (u'GOP', u'ORGANIZATION'),
                         (u'Obama', u'PERSON'), (u'White House', u'ORGANIZATION')]
+        
         self.assertEqual(expected, actual)
 
     def test_nertagger_returns_stanford_ne_spanish_text(self):

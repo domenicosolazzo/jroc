@@ -11,12 +11,8 @@ class NLTKTagger(object):
     """
 
     def __init__(self, language="en"):
-        self.__stanfordJar = "%s/dist/stanford-ner.jar" % self.__currentDirectory
-        self.__classifier = "%s/dist/classifiers/english.all.3class.distsim.crf.ser.gz" % (self.__currentDirectory,)
-        self.__tagger = StanfordNERTagger( self.__classifier,
-                                           self.__stanfordJar,
-                                           encoding="utf-8")
-        self.__namedEntitiesFinder = NamedEntitiesFinder(language=language)
+        self.__tagger = nltk.pos_tag
+        self.__namedEntitiesFinder = NERFinder(language=language)
 
     def __tags(self, raw_text):
         """
@@ -27,14 +23,24 @@ class NLTKTagger(object):
             # Decode to utf-8
             raw_text = raw_text.decode('utf-8')
 
-        tagged_words = nltk.pos_tag(token_text)
-        ne_tags = nltk.ne_chunk(tagged_words)
+        # Tokenize the string
+        token_text = word_tokenize(raw_text)
+
+        ne_tags = self.__tagger(token_text)
         return(ne_tags)
+
+    def __generate_tree(self, tags):
+        """
+        Tranform a list of tags in a tree
+        """
+        ne_tree = nltk.ne_chunk(tags)
+        return ne_tree
 
     def getEntities(self, raw_text):
         """
         Get the entities from a raw text
         """
         ne_entities = self.__tags(raw_text=raw_text)
-        entities = self.__namedEntitiesFinder.getEntities(ne_entities)
+        nlkt_tree = self.__generate_tree(ne_entities)
+        entities = self.__namedEntitiesFinder.getEntities(nlkt_tree)
         return entities
