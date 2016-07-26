@@ -58,7 +58,6 @@ class StanfordTaggerTaskTestCase(unittest.TestCase):
         self.task.execute(input)
 
         actual = self.task.getOutput()
-        print("ACTUAL", actual, self.task.hasFailed(), self.task.getError())
         expected = {'data': [(u'House', u'ORGANIZATION'), (u'Senate', u'ORGANIZATION'),
                             (u'GOP', u'ORGANIZATION'), (u'John Mc', u'PERSON'), (u'Cain', u'PERSON'),
                             (u'Ariz.', u'LOCATION'), (u'Iraq', u'LOCATION'), (u'Syria', u'LOCATION'),
@@ -140,7 +139,23 @@ class StanfordTaggerTaskTestCase(unittest.TestCase):
                             (u'Joner', u'PERSON')]}
         self.assertEquals(expected, actual)
 
+    def test_task_execute_with_valid_json_norwegian_article13(self):
+        """
+        Test that the StanfordTaggerTask is extracting data from the json (article13.txt)
+        """
+        text = self.helper_readFilename("no/article13.txt")
+        input = {"data": text}
 
+        self.task.execute(input)
+
+        actual = self.task.getOutput()
+        expected = {'data': [(u'Krev', u'PERSON'), (u'Forsvaret', u'ORGANIZATION'),
+                             (u'Stortinget', u'LOCATION'), (u'Den', u'PERSON'),
+                             (u'Cecilie Reppen', u'PERSON'), (u'Ho', u'PERSON'),
+                             (u'Viktig', u'PERSON'), (u'Cecilie', u'PERSON'),
+                             (u'Forsvarssjef H\xe5kon Bruun-Hanssen', u'PERSON'),
+                             (u'Forsvaret', u'ORGANIZATION'), (u'Reppen', u'PERSON')]}
+        self.assertEquals(expected, actual)
 
     def helper_readFilename(self, filename=''):
         stopwords = []
