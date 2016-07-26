@@ -17,29 +17,21 @@ class NLTKStopwords(object):
             raise ValueError("The stopword for this language is not available")
 
         self.__language = language.lower()
-
         self.__initializeStopwords()
 
     def __initializeStopwords(self):
         """
-        Parse the stoplist file and return a list of stopwords
+        Initialize the stopwords for a given language
         """
         language = self.AVAILABLE_LANGUAGES[self.__language]
         # Ge the stopwords for this language
         self.stopwords = list(set(stopwords.words(language)))
 
-    def getStopWords(self):
+    def getStopwords(self):
         """
         It returns a new list of words
         """
     	return self.stopwords
-
-    def getLanguageStopwords(self):
-        """
-        It returns the language stopwords
-        """
-        return self.stopwords
-
 
     def filterStopWords(self, to_filter=[]):
         """
@@ -47,7 +39,7 @@ class NLTKStopwords(object):
         It returns a new list of words
 
         Arguments:
-        to_filter - A list of words to be filtered (default=[])
+        :to_filter:  A list of words to be filtered (default=[])
         """
         assert isinstance(to_filter, (list, tuple))
         if len(to_filter) <= 0:
