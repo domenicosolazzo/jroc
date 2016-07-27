@@ -112,6 +112,7 @@ RUN echo "export CPATH=$INCLUDE_PATH" >> /app/.profile.d/python.sh
 RUN echo "export CPPPATH=$INCLUDE_PATH" >> /app/.profile.d/python.sh
 RUN echo "export PKG_CONFIG_PATH=\"/app/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:/app/.apt/usr/lib/i386-linux-gnu/pkgconfig:/app/.apt/usr/lib/pkgconfig:$PKG_CONFIG_PATH\"" >> /app/.profile.d/python.sh
 RUN echo "export OBT_TYPE=\"tag-nostat-bm.sh\"" >> /app/.profile.d/python.sh
+RUN echo "export NLTK_DATA=\"/app/user/data/nltk\"" >> /app/.profile.d/python.sh
 
 ONBUILD RUN echo 'export PATH=$HOME/.heroku/python/bin:$PATH PYTHONUNBUFFERED=true PYTHONHOME=/app/.heroku/python LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LIBRARY_PATH LD_LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LD_LIBRARY_PATH LANG=${LANG:-en_US.UTF-8} PYTHONHASHSEED=${PYTHONHASHSEED:-random} PYTHONPATH=${PYTHONPATH:-/app/user/}' > /app/.profile.d/python.sh
 ONBUILD RUN echo "export LC_ALL=\"en_US.UTF-8\"" >> /app/.profile.d/python.sh
@@ -124,12 +125,15 @@ ONBUILD RUN echo "export CPATH=$INCLUDE_PATH" >> /app/.profile.d/python.sh
 ONBUILD RUN echo "export CPPPATH=$INCLUDE_PATH" >> /app/.profile.d/python.sh
 ONBUILD RUN echo "export PKG_CONFIG_PATH=\"/app/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:/app/.apt/usr/lib/i386-linux-gnu/pkgconfig:/app/.apt/usr/lib/pkgconfig:$PKG_CONFIG_PATH\"" >> /app/.profile.d/python.sh
 ONBUILD RUN echo "export OBT_TYPE=\"tag-nostat-bm.sh\"" >> /app/.profile.d/python.sh
+ONBUILD RUN echo "export NLTK_DATA=\"/app/user/data/nltk\"" >> /app/.profile.d/python.sh
+
 RUN chmod +x /app/.profile.d/python.sh
 
 ADD requirements.txt /app/user/
 RUN /app/.heroku/python/bin/pip install -r requirements.txt
 ADD . /app/user/
 
+# OBT
 RUN echo "Cloning Oslo-Bergen-Tagger...."
 RUN git clone https://github.com/domenicosolazzo/The-Oslo-Bergen-Tagger.git
 RUN cd The-Oslo-Bergen-Tagger/ && git clone https://github.com/domenicosolazzo/OBT-Stat.git
@@ -145,3 +149,4 @@ ENV LD_LIBRARY_PATH=/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LD_LIBRARY_
 ENV LANG=${LANG:-en_US.UTF-8}
 ENV PYTHONHASHSEED=${PYTHONHASHSEED:-random}
 ENV PYTHONPATH=${PYTHONPATH:-/app/user/}
+ENV NLTK_DATA=/app/user/data/nltk
