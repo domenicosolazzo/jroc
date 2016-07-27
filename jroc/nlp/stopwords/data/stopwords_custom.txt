@@ -10,3 +10,4 @@ kveld
 artikkeltags
 superparet
 tilsammen
+dersom                | if
