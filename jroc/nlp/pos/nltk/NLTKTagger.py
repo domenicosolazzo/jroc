@@ -37,11 +37,28 @@ WP	wh-pronoun	who, what
 WP$	possessive wh-pronoun	whose
 WRB	wh-abverb	where, when
 """
-
+from TaggerStorageAdapter import TaggerStorageAdapter
 class NLTKTagger(object):
 
-    def __init__(self):
-        pass
+    __storage = None
+    def __init__(self, model=None, modelFileName=None, language="en"):
+        self.__language = language
+        if not model is None: # Use a different trained model
+            self.__storage = TaggerStorageAdapter(model=model)
+        elif not fileName is None: # Use a trained model from a separate file
+            self.__storage = TaggerStorageAdapter(fileName=modelFileName)
+        else: # Use the default trained model (classifier)
+            self.__storage = TaggerStorageAdapter()
+
 
     def getTags(self, text):
-        pass
+        """
+        It returns the POS tags for a given text
+        """
+        # Retrieve the tagger from the storage
+        tagger = self.__storage.getTagger()
+
+        # Tag the text
+        tags = tagger.tag(text)
+
+        return tags
