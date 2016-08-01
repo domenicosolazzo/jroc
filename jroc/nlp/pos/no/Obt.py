@@ -64,6 +64,16 @@ class OBTManager(object):
             "ordinal": is_ordinal,
             "roman": is_roman
         }
+    def __getUniversalTag(self, taggingInfo):
+        """
+        Get the universal tag that can used between multiple taggers
+        Based on this page: http://www.tekstlab.uio.no/obt-ny/morfosyn.html
+        """
+        if taggingInfo['is_prop'] == True and taggingInfo['is_subst'] == True:
+            return 'NNP'
+        elif taggingInfo['is_subst']:
+            return 'NN'
+        elif taggingInfo['is_verb'] == True
 
     def cleanUp(self):
         """
@@ -125,6 +135,8 @@ class OBTManager(object):
                new_obj["is_inf_merke"] = True if len([tag for tag in tagging if tag == 'inf-merke']) > 0 else False
                new_obj["is_sbu"] = True if len([tag for tag in tagging if tag == 'sub']) > 0 else False
                new_obj["is_interj"] = True if len([tag for tag in tagging if tag == 'interj']) > 0 else False
+               new_obj["is_adv"] = True if len([tag for tag in tagging if tag == 'adv']) > 0 else False
+               new_obj["is_nnp"] = True if new_obj["is_subst"] == True and new_obj["is_prop"] == True else False
 
         self._outputData = result
         return result
@@ -197,18 +209,20 @@ class OBTManager(object):
         inf_merks = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_inf_merke") == True]))
         sbus = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_sbu") == True]))
         interjs = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_interj") == True]))
+        advs = list(set([unicode(tag.get("word")) for tag in data  if tag.get("is_adv") == True]))
 
-        textAnalyze['verbs'] = verbs
-        textAnalyze['substs'] = substs
-        textAnalyze['props'] = props
-        textAnalyze['numbers'] = numbers
-        textAnalyze['adj'] = adjs
-        textAnalyze['conjs'] = conjs
-        textAnalyze['unknowns'] = unknowns
-        textAnalyze['dets'] = dets
-        textAnalyze['inf_merks'] = inf_merks
-        textAnalyze['sbus'] = sbus
-        textAnalyze['interjs'] = interjs
+        textAnalyze['VB'] = verbs
+        textAnalyze['NN'] = substs
+        textAnalyze['NNP'] = props
+        textAnalyze['CD'] = numbers
+        textAnalyze['JJ'] = adjs
+        textAnalyze['CC'] = conjs
+        #textAnalyze['unknowns'] = unknowns
+        textAnalyze['DT'] = dets
+        #textAnalyze['inf_merks'] = inf_merks
+        #textAnalyze['sbus'] = sbus
+        #textAnalyze['interjs'] = interjs
+        text_analyze['RB'] = advs
         textAnalyze["obt"] = data
 
         return textAnalyze
