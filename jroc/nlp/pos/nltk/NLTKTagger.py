@@ -37,10 +37,11 @@ WP	wh-pronoun	who, what
 WP$	possessive wh-pronoun	whose
 WRB	wh-abverb	where, when
 """
+
 class NLTKTagger(object):
+
     def __init__(self):
         pass
 
     def getTags(self, text):
         pass
-        

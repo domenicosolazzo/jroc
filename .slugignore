@@ -1,9 +1,7 @@
 /tests
 /data
 /data/nltk
-/The-Oslo-Bergen-Tagger
 /tmp/T*
-/bin/mtag*
 *.jar
 *.zip
 /jroc/nlp/nerc/ner/stanford/dist/*
