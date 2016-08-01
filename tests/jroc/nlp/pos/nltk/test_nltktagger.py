@@ -29,9 +29,25 @@ class TaggerStorageAdapterTestCase(unittest.TestCase):
         text = text.decode('utf-8').split()
         result = self.tagger.getTags(text)
         expected = (u'Congress\u2019s', u'NNP')
-        self.assertTrue(isinstance(result, list))
-        self.assertTrue(len(result) > 0)
-        self.assertEqual(expected, result[0])
+        self.assertTrue(isinstance(result, dict))
+        self.assertTrue('pos' in result)
+        self.assertEqual(expected, result['pos'][0])
+
+    def test_pos_result_keys(self):
+        """
+        Test that all the expected keys are returned as results
+        """
+        text = self.helper_readFilename("en/article1.txt")
+        text = text.decode('utf-8').split()
+        result = self.tagger.getTags(text)
+        expected = ['pos', 'indexed', 'JJ', 'VB', 'NN', 'NNP', 'RB', 'common']
+        self.assertTrue(isinstance(result, dict))
+        for key in expected:
+            self.assertTrue(key in result)
+
+    #TODO: Add more test with several language and articles
+
+
 
     def helper_readFilename(self, filename=''):
         stopwords = []
