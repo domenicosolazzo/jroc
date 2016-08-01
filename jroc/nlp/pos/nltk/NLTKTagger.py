@@ -37,11 +37,14 @@ WP	wh-pronoun	who, what
 WP$	possessive wh-pronoun	whose
 WRB	wh-abverb	where, when
 """
+from collections import defaultdict
 from TaggerStorageAdapter import TaggerStorageAdapter
+import nltk
+import itertools
 class NLTKTagger(object):
 
     __storage = None
-    def __init__(self, model=None, modelFileName=None, language="en"):
+    def __init__(self, model=None, modelFileName=None, fileName=None, language="en"):
         self.__language = language
         if not model is None: # Use a different trained model
             self.__storage = TaggerStorageAdapter(model=model)
@@ -55,10 +58,42 @@ class NLTKTagger(object):
         """
         It returns the POS tags for a given text
         """
+
+
         # Retrieve the tagger from the storage
         tagger = self.__storage.getTagger()
 
         # Tag the text
-        tags = tagger.tag(text)
+        pos = tagger.tag(text)
 
-        return tags
+        # Result
+        results = defaultdict(list)
+        indexedPos = nltk.Index((value, key) for (key, value) in pos)
+        results['pos'] = pos
+        results['indexed'] = indexedPos
+
+        results['JJ'].extend(itertools.chain.from_iterable([indexedPos[val] for val in indexedPos if val == 'JJ' or val == 'JJS' or val == 'JJR']))
+        results['VB'].extend(itertools.chain.from_iterable([indexedPos[val]for val in indexedPos if val == 'VB' or
+                                                                                                            val == 'VBD' or
+                                                                                                            val == 'VBG' or
+                                                                                                            val == 'VBN' or
+                                                                                                            val == 'VBP' or
+                                                                                                            val == 'VBZ']))
+        results['NN'].extend(itertools.chain.from_iterable(sorted([indexedPos[val] for val in indexedPos if val == 'NN' or
+                                                                                                            val == 'NNS'])))
+        results['NNP'].extend(itertools.chain.from_iterable([indexedPos[val] for val in indexedPos if val == 'NNP' or
+                                                                                                            val == 'NNPS']))
+        results['RB'].extend(itertools.chain.from_iterable([indexedPos[val] for val in indexedPos if val == 'RB' or
+                                                                                                            val == 'RBR' or
+                                                                                                            val == 'RBS']))
+        results['common'] = self.__commonWords(pos, number=100)
+                                                                                                   
+        return results
+
+    def __commonWords(self, pos,  number=100):
+        """
+        Find common words in the text.
+        """
+        vocab = nltk.FreqDist(pos)
+        common = [word[0] for (word, _) in vocab.most_common(100) if word[1] == 'NN' or word[1] == 'NNS'  or word[1] == 'NNP'  or word[1] == 'NNPS']
+        return common

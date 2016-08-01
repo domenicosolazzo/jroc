@@ -9,7 +9,9 @@ from pickle import dump, load
 import os
 
 MODELS = dict([
+    # Affix-Unigram-Bigram-Trigram model
     ('aubt', "%s/../../../../data/nltk/taggers/%s" % (os.path.dirname(os.path.realpath(__file__)),"treebank_aubt.pickle")),
+    # Naive-Bayes Classifier-based model
     ('classifier', "%s/../../../../data/nltk/taggers/%s" % (os.path.dirname(os.path.realpath(__file__)),"treebank_NaiveBayes.pickle"))
 ])
 class TaggerStorageAdapter(object):
