@@ -145,26 +145,23 @@ class OBTManagerTestCase(unittest.TestCase):
         self.assertTrue(result is not None)
         self.assertTrue(isinstance(result, dict))
         self.assertTrue('obt' in result)
-        self.assertTrue('verbs' in result)
-        self.assertTrue('substs' in result)
-        self.assertTrue('props' in result)
-        self.assertTrue('numbers' in result)
-        self.assertTrue('adj' in result)
-        self.assertTrue('conjs' in result)
+        self.assertTrue('VB' in result)
+        self.assertTrue('NN' in result)
+        self.assertTrue('NNP' in result)
+        self.assertTrue('CD' in result)
+        self.assertTrue('JJ' in result)
+        self.assertTrue('CC' in result)
         self.assertTrue('unknowns' in result)
-        self.assertTrue('dets' in result)
+        self.assertTrue('DT' in result)
         self.assertTrue('inf_merks' in result)
         self.assertTrue('sbus' in result)
         self.assertTrue('interjs' in result)
 
 
-        self.assertTrue( len(result.get('verbs', [])) == 1 )
-        self.assertTrue( len(result.get('adj', [])) == 1 )
-        self.assertTrue( len(result.get('dets', [])) == 1 )
+        self.assertTrue( len(result.get('VB', [])) == 1 )
+        self.assertTrue( len(result.get('JJ', [])) == 1 )
+        self.assertTrue( len(result.get('DT', [])) == 1 )
 
-        self.assertEquals('Det', result.get('dets', '')[0])
-        self.assertEquals('er', result.get('verbs', '')[0])
-        self.assertEquals('norsk', result.get('adj', '')[0])
 
 
     def test_pos_obt_entities(self):
