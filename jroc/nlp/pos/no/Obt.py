@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys
 import os
 import re
@@ -69,11 +70,91 @@ class OBTManager(object):
         Get the universal tag that can used between multiple taggers
         Based on this page: http://www.tekstlab.uio.no/obt-ny/morfosyn.html
         """
-        if taggingInfo['is_prop'] == True and taggingInfo['is_subst'] == True:
+        RBS_TAGGING = set('adj komp <adv>'.split())
+        RBR_TAGGING = set('adj sup <adv>'.split())
+        JJS_TAGGING = set('adj sup'.split())
+        JJR_TAGGING = set('adj komp'.split())
+        WP_TAGGING = set('pron hum sp'.split()) # Hva, Hvem
+        WDT_TAGGING = set('det sp'.split()) # WH-Determiner: Hvilken, Hvilket, Hvilke
+        WPP_TAGGING = set('pron poss hum sp'.split()) # possessive wh-pronoun: Hvis
+        VBP_TAGGING = set('verb pres'.split()) # Verb present
+        VBD_TAGGING = set('verb pret'.split()) # Verb Preteritum
+        VBN_TAGGING = set('verb perf-part'.split()) # Verb past participle
+        # VBG
+        VBG_TAGGING = set('adj <pres-part>'.split())
+        VBG_TAGGING_2 = set('adj <perf-part>'.split())
+
+        PRP_TAGGING = set('pron pers hum nom'.split())
+        # VBG: adj <pres-part>, adj <perf-part>
+        PRPP_TAGGING = set('det poss'.split())
+        PRPP_TAGGING_2 = set('pron poss'.split())
+
+        NNP_TAGGING = set('subst appell nøyt ub be ent fl fork'.split())
+        NNP_TAGGING_2 = set('subst appell mask ub be ent fork'.split())
+        NNP_TAGGING_3 = set('subst appell fork'.split())
+
+        NNS_TAGGING = set('subst fl'.split())
+
+        obtWordTagging = set(taggingInfo['options'].split()) if taggingInfo is not None and len(taggingInfo) > 0 else set([])
+        word = taggingInfo['word'].lower() if taggingInfo['word'] is not None and len(taggingInfo) > 0 else ""
+        if set(obtWordTagging).issubset(WP_TAGGING):
+            return 'WP'
+        elif WDT_TAGGING.issubset(obtWordTagging):
+            return 'WDT'
+        elif WPP_TAGGING.issubset(obtWordTagging):
+            return 'WP$'
+        elif RBS_TAGGING.issubset(obtWordTagging):
+            return 'RBS'
+        elif RBR_TAGGING.issubset(obtWordTagging):
+            return 'RBR'
+        elif JJS_TAGGING.issubset(obtWordTagging):
+            return 'JJS'
+        elif JJR_TAGGING.issubset(obtWordTagging):
+            return 'JJR'
+        elif VBP_TAGGING.issubset(obtWordTagging):
+            return 'VBT'
+        elif VBD_TAGGING.issubset(obtWordTagging):
+            return 'VBD'
+        elif VBN_TAGGING.issubset(obtWordTagging):
+            return 'VBN'
+        elif VBG_TAGGING.issubset(obtWordTagging) or VBG_TAGGING_2.issubset(obtWordTagging):
+            return 'VBG'
+        elif PRP_TAGGING.issubset(obtWordTagging):
+            return 'PRP'
+        elif PRPP_TAGGING.issubset(obtWordTagging) or PRPP_TAGGING_2.issubset(obtWordTagging):
+            return 'PRP$'
+        elif NNP_TAGGING.issubset(obtWordTagging) or NNP_TAGGING_2.issubset(obtWordTagging) or NNP_TAGGING_3.issubset(obtWordTagging):
             return 'NNP'
-        elif taggingInfo['is_subst']:
+        elif word == u'når' or word == 'hvor':
+            return 'WRB'
+        elif word == u'til':
+            return 'TO'
+        elif taggingInfo['is_prop'] == True and taggingInfo['is_subst'] == True:
+            return 'NNP'
+        elif NNS_TAGGING.issubset(obtWordTagging):
+            return 'NNS'
+        elif taggingInfo['is_subst'] == True:
             return 'NN'
-        elif taggingInfo['is_verb'] == True
+        elif taggingInfo['is_interj'] == True:
+            return 'UH'
+        elif taggingInfo['is_prep'] == True:
+            return 'IN'
+        elif taggingInfo['is_verb'] == True:
+            return 'VB'
+        elif taggingInfo['is_adj'] == True:
+            return 'JJ'
+        elif taggingInfo['is_adv'] == True:
+            return 'RB'
+        elif taggingInfo['is_konj'] == True:
+            return 'CC'
+        elif taggingInfo['is_det'] == True:
+            return 'DT'
+        elif taggingInfo['is_pron'] == True:
+            return 'PRP'
+        elif taggingInfo['is_number']['is_number'] == True:
+            return 'CD'
+        else:
+            return 'UKN'
 
     def cleanUp(self):
         """
@@ -136,7 +217,14 @@ class OBTManager(object):
                new_obj["is_sbu"] = True if len([tag for tag in tagging if tag == 'sub']) > 0 else False
                new_obj["is_interj"] = True if len([tag for tag in tagging if tag == 'interj']) > 0 else False
                new_obj["is_adv"] = True if len([tag for tag in tagging if tag == 'adv']) > 0 else False
-               new_obj["is_nnp"] = True if new_obj["is_subst"] == True and new_obj["is_prop"] == True else False
+               new_obj["is_konj"] = True if len([tag for tag in tagging if tag == 'konj']) > 0 else False
+               new_obj["is_prep"] = True if len([tag for tag in tagging if tag == 'prep']) > 0 else False
+               new_obj["is_pron"] = True if len([tag for tag in tagging if tag == 'pron']) > 0 else False
+
+               tag = self.__getUniversalTag(new_obj)
+
+               new_obj['tag'] = tag
+               new_obj['tagged_word'] = (new_obj.get('word',''), tag)
 
         self._outputData = result
         return result
@@ -217,12 +305,12 @@ class OBTManager(object):
         textAnalyze['CD'] = numbers
         textAnalyze['JJ'] = adjs
         textAnalyze['CC'] = conjs
-        #textAnalyze['unknowns'] = unknowns
+        textAnalyze['unknowns'] = unknowns
         textAnalyze['DT'] = dets
-        #textAnalyze['inf_merks'] = inf_merks
-        #textAnalyze['sbus'] = sbus
-        #textAnalyze['interjs'] = interjs
-        text_analyze['RB'] = advs
+        textAnalyze['inf_merks'] = inf_merks
+        textAnalyze['sbus'] = sbus
+        textAnalyze['interjs'] = interjs
+        textAnalyze['RB'] = advs
         textAnalyze["obt"] = data
 
         return textAnalyze

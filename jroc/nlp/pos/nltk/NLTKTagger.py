@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 POS tag list:
 
@@ -87,7 +88,7 @@ class NLTKTagger(object):
                                                                                                             val == 'RBR' or
                                                                                                             val == 'RBS']))
         results['common'] = self.__commonWords(pos, number=100)
-                                                                                                   
+
         return results
 
     def __commonWords(self, pos,  number=100):
