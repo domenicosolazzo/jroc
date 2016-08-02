@@ -8,7 +8,7 @@ POS_TAGGERS = { "no" : OBTManager,
                 "nb" : OBTManager,
                 "da" : OBTManager,
                 "sv" : OBTManager,
-                "en" : OBTManager,
+                "en" : NTLKPosTagger,
                 "other": None}
 
 class PosManager(object):
@@ -62,8 +62,6 @@ class PosManager(object):
         self.__posTagger = self.getPosInstance(data)
 
         # Analyze the data and return a PosResult
-        print("input", input)
-        print("aaaa", dir(self.__posTagger), type(self.__posTagger))
         posResult = self.__posTagger.findTags(text_analysis=data)
 
         return posResult
