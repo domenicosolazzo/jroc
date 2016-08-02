@@ -70,10 +70,13 @@ class OBTManager(object):
         Get the universal tag that can used between multiple taggers
         Based on this page: http://www.tekstlab.uio.no/obt-ny/morfosyn.html
         """
+        # Adverbs
         RBS_TAGGING = set('adj komp <adv>'.split())
         RBR_TAGGING = set('adj sup <adv>'.split())
+        # Adjectives
         JJS_TAGGING = set('adj sup'.split())
         JJR_TAGGING = set('adj komp'.split())
+        # WH-Determiners
         WP_TAGGING = set('pron hum sp'.split()) # Hva, Hvem
         WDT_TAGGING = set('det sp'.split()) # WH-Determiner: Hvilken, Hvilket, Hvilke
         WPP_TAGGING = set('pron poss hum sp'.split()) # possessive wh-pronoun: Hvis
@@ -84,11 +87,13 @@ class OBTManager(object):
         VBG_TAGGING = set('adj <pres-part>'.split())
         VBG_TAGGING_2 = set('adj <perf-part>'.split())
 
+        # Pronoum
         PRP_TAGGING = set('pron pers hum nom'.split())
         # VBG: adj <pres-part>, adj <perf-part>
         PRPP_TAGGING = set('det poss'.split())
         PRPP_TAGGING_2 = set('pron poss'.split())
 
+        # NNP
         NNP_TAGGING = set('subst appell nøyt ub be ent fl fork'.split())
         NNP_TAGGING_2 = set('subst appell mask ub be ent fork'.split())
         NNP_TAGGING_3 = set('subst appell fork'.split())
