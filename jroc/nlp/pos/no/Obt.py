@@ -65,6 +65,7 @@ class OBTManager(object):
             "ordinal": is_ordinal,
             "roman": is_roman
         }
+
     def __getUniversalTag(self, taggingInfo):
         """
         Get the universal tag that can used between multiple taggers
@@ -317,5 +318,6 @@ class OBTManager(object):
         textAnalyze['interjs'] = interjs
         textAnalyze['RB'] = advs
         textAnalyze["obt"] = data
+        textAnalyze["pos"] = [entity["tagged_word"] for entity in data]
 
         return textAnalyze

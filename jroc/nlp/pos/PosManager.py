@@ -1,5 +1,6 @@
 from . import OBTManager
 from . import NTLKPosTagger
+import nltk
 
 # List of Pos tagger
 POS_TAGGERS = { "no" : OBTManager,
@@ -18,6 +19,14 @@ class PosManager(object):
     __posTagger = None
     def __init__(self, language="en"):
         self.__language = language
+
+    def __commonWords(self, pos,  number=100):
+        """
+        Find common words in the text.
+        """
+        vocab = nltk.FreqDist(pos)
+        common = [word[0] for (word, _) in vocab.most_common(100) if word[1] == 'NN' or word[1] == 'NNS'  or word[1] == 'NNP'  or word[1] == 'NNPS']
+        return common
 
     def getPosInstance(self, data):
         taggerClass = POS_TAGGERS.get(self.__language, None)
@@ -39,8 +48,10 @@ class PosManager(object):
 
         # Analyze the data and return a PosResult
         posResult = self.__posTagger.analyze()
+        posResult['common_words'] = self.__commonWords(posResult['pos'])
 
         return posResult
+
 
     def findTags(self, input):
         """

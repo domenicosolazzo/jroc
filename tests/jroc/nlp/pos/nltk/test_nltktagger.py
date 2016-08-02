@@ -27,7 +27,7 @@ class TaggerStorageAdapterTestCase(unittest.TestCase):
         """
         text = self.helper_readFilename("en/article1.txt")
         text = text.decode('utf-8').split()
-        result = self.tagger.getTags(text)
+        result = self.tagger.analyze(text)
         expected = (u'Congress\u2019s', u'NNP')
         self.assertTrue(isinstance(result, dict))
         self.assertTrue('pos' in result)
@@ -39,7 +39,7 @@ class TaggerStorageAdapterTestCase(unittest.TestCase):
         """
         text = self.helper_readFilename("en/article1.txt")
         text = text.decode('utf-8').split()
-        result = self.tagger.getTags(text)
+        result = self.tagger.analyze(text)
         expected = ['pos', 'indexed', 'JJ', 'VB', 'NN', 'NNP', 'RB', 'common']
         self.assertTrue(isinstance(result, dict))
         for key in expected:

@@ -71,13 +71,27 @@ class StanfordTagger(object):
         ne_tree = conlltags2tree(conlltags)
         return ne_tree
 
+    def __getEntities(self, taggedWords):
+        """
+        It returns the entities from a list of tagged words (NER or POS) after generating the syntax tree
+        """
+        bio_tagged = self.__bio_tagger(taggedWords)
+        stanford_tree = self.__generate_tree(bio_tagged=bio_tagged)
+
+        entities = self.__namedEntitiesFinder.getEntities(stanford_tree)
+        return entities
+
+    def getEntitiesByTags(self, pos_tagged_words):
+        """
+        Get entities from a list of word tagged with POS Tags.
+        """
+        entities = self.__getEntities(taggedWords=pos_tagged_words)
+        return entities
+
     def getEntities(self, raw_text):
         """
         Get the entities from a raw text
         """
         ne_entities = self.__tags(raw_text=raw_text)
-        bio_tagged = self.__bio_tagger(ne_entities)
-        stanford_tree = self.__generate_tree(bio_tagged=bio_tagged)
-
-        entities = self.__namedEntitiesFinder.getEntities(stanford_tree)
+        entities = self.__getEntities(taggedWords=ne_entities)
         return entities

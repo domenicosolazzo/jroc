@@ -21,7 +21,7 @@ class NLTKTaggerTestCase(unittest.TestCase):
         """
         text = self.helper_readFilename('en/article2.txt')
         actual = self.tagger.getEntities(raw_text=text)
-        print(actual)
+        
         expected = [(u'House', 'ORGANIZATION'), (u'John Boehner', 'PERSON'),
                     (u'Keystone Pipeline', 'PERSON'), (u'Obama', 'ORGANIZATION'),
                     (u'Republican', 'ORGANIZATION'), (u'House', 'ORGANIZATION'),

@@ -36,6 +36,12 @@ class NLTKTagger(object):
         ne_tree = nltk.ne_chunk(tags)
         return ne_tree
 
+    def getEntitiesByTags(self, tags):
+        ne_entities = tags
+        nlkt_tree = self.__generate_tree(ne_entities)
+        entities = self.__namedEntitiesFinder.getEntities(nlkt_tree)
+        return entities
+
     def getEntities(self, raw_text):
         """
         Get the entities from a raw text

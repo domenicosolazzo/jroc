@@ -55,7 +55,7 @@ class NLTKTagger(object):
             self.__storage = TaggerStorageAdapter()
 
 
-    def getTags(self, text):
+    def analyze(self, text):
         """
         It returns the POS tags for a given text
         """
