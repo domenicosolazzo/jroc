@@ -147,11 +147,13 @@ class Pipeline(object):
         assert(isinstance(metadata, list))  # Check that that we have a list in input
         assert(len(metadata) > 0) # Check the there is at least one input
 
-        input = {}
+        input = dict([('metadata', {})])
         if isinstance(metadata, list):
             for item in metadata:
                 # Check source
                 source = item.get('source', None)
+                key = item.get('key', None)
+                mapTo = item.get('map-key', 'main') # It will take key from 'map-key', otherwise it has 'main' as value
                 if source is None:
                     raise Exception("Task input source cannot be null. Check the configuration of this pipeline.")
 
@@ -159,9 +161,6 @@ class Pipeline(object):
                     """
                     internal-output: Input is based on a given key of the internal calculated output.
                     """
-                    # Get Key
-                    mapTo = item.get('map-key', 'main') # It will take key from 'map-key', otherwise it has 'main' as value
-                    key = item.get('key', None)
                     if key is None:
                         raise Exception("The input key for this task is null. Check the configuration of this pipeline")
 
@@ -186,6 +185,11 @@ class Pipeline(object):
                     input = data
                 else:
                     raise Exception("Source input is unavailable for this task")
+
+                # Check if there is metadata for this item
+                itemMetadata = item.get('metadata', None)
+                if not itemMetadata is None:
+                    input['metadata'][mapTo] = itemMetadata
         return input
 
 
