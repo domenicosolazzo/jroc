@@ -24,7 +24,7 @@ class RegexTagger(object):
             tags = item.get('tags', [])
             tags.extend(additional_tags)
             pattern_tags = ";".join(tags)
-            entity = item.get('entity', '')
+            entity = r'%s' % item.get('entity', '')
             patterns.append((re.compile(entity,re.IGNORECASE), pattern_tags))
 
         self.tagger = nltk.RegexpTagger(patterns)
