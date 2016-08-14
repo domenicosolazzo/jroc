@@ -1,2 +1,2 @@
-from jroc.nlp.pos.nltk.TaggerStorageAdapter import TaggerStorageAdapter
-from jroc.nlp.pos.nltk.NLTKTagger import NLTKTagger
+from jroc.nlp.pos.nltktagger.TaggerStorageAdapter import TaggerStorageAdapter
+from jroc.nlp.pos.nltktagger.NLTKTagger import NLTKTagger

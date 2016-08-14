@@ -22,7 +22,6 @@ class OBTManager(object):
         self._outputData = None
         # Check if the data is not empty
         if data is not None and (isinstance(data, str) or isinstance(data, unicode)):
-            print("DATA", data)
             # Save the content in a temp file
             self.__saveContent(data)
 

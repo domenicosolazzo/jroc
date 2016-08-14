@@ -25,12 +25,12 @@ class PosManager(object):
         Find common words in the text.
         """
         vocab = nltk.FreqDist(pos)
+
         common = [word[0] for (word, _) in vocab.most_common(100) if word[1] == 'NN' or word[1] == 'NNS'  or word[1] == 'NNP'  or word[1] == 'NNPS']
         return common
 
     def getPosInstance(self, data):
         taggerClass = POS_TAGGERS.get(self.__language, None)
-        print("CLASS", taggerClass)
         if taggerClass is None:
 
             raise Exception("Pos tagger not available for this language: %s" % (self.__language, ) ) # Activate a default tagger

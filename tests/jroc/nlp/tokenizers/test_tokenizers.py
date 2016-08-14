@@ -65,16 +65,17 @@ class NLTKTokenizerTestCase(unittest.TestCase):
         Test the word tokenizer
         """
         text = self.helper_readFilename("en/article1.txt")
+        sentences = self.tokenizer.tokenizeText(text)
         expected = [ u'Congress\u2019s', u'national', u'security', u'leadership', u'is', u'facing', u'its',
                      u'biggest', u'shakeup', u'in', u'years', u'as', u'some', u'of', u'its', u'longest', u'-',
                      u'serving', u'and', u'most', u'influential', u'members', u'retire', u',', u'seek', u'other',
                      u'offices', u'or', u'risk', u'losing', u'their', u'seats', u'in', u'tough', u'reelections', u'.']
 
         actual = self.tokenizer.tokenizeSentence(sentences[0])
-        print(actual)
+
         self.assertTrue(isinstance(actual, list))
         self.assertTrue(len(actual) > 0)
-        self.assertEqual(expected, actual[0])
+        self.assertEqual(expected, actual)
 
 
     def helper_readFilename(self, filename=''):

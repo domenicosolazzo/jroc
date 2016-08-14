@@ -22,6 +22,5 @@ class EntityAnnotationPropertiesTaskTestCase(unittest.TestCase):
         self.task.execute(data)
         actual = self.task.getOutput()
         self.assertTrue('data' in actual)
-        print(actual)
         data = actual.get('data')
         self.assertTrue('properties' in data)

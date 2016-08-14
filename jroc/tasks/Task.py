@@ -85,6 +85,7 @@ class Task(object):
         self.__error['error'] = error
 
         exctype, value = sys.exc_info()[:2]
+
         self.__error['error-stack'] = {
             'error-type':  exctype,
             'error-value':  value

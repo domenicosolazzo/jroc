@@ -62,7 +62,6 @@ class WordTokenizerTaskTestCase(unittest.TestCase):
 
         expected = {'data': [['This', 'is', 'a', 'sentence', '.']]}
         actual = self.task.execute(input)
-        #print(actual)
 
         self.assertEqual(expected, actual)
 

@@ -27,7 +27,7 @@ class NERPipelineTestCase(unittest.TestCase):
         Test the execution of the ner pipeline with a valid text. No Entity Annotation
         """
         input = '{"data":"Ivar Aasen ble født på gården Åsen i Hovdebygda på Sunnmøre som sønn av småbrukeren Ivar Jonsson."}'
-        self.pipeline = NERPipeline(input=input, name=self.name, withEntityAnnotation=False)
+        self.pipeline = NERPipeline(input=input, name=self.name, withEntityAnnotation=True)
         self.pipeline.execute()
 
         actual = self.pipeline.getOutput()
@@ -52,7 +52,7 @@ class NERPipelineTestCase(unittest.TestCase):
         Test the execution of the ner pipeline with an input with characters that should be removed
         """
         input = '{"data":"Ivar Aasen ble født " "  "på gården Åsen i Hovdebygda på Sunnmøre som sønn av småbrukeren Ivar Jonsson."}'
-        self.pipeline = NERPipeline(input=input, name=self.name, withEntityAnnotation=False)
+        self.pipeline = NERPipeline(input=input, name=self.name, withEntityAnnotation=True)
         self.pipeline.execute()
 
         actual = self.pipeline.getOutput()

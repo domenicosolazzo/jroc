@@ -3,7 +3,7 @@ from . import PosManager
 
 class PosTaggerTask(BasicTask):
     """
-    PosTaggerTask: Part-of-Speech task 
+    PosTaggerTask: Part-of-Speech task
     """
     __kernel = None # Kernel for this loader
 
@@ -31,6 +31,7 @@ class PosTaggerTask(BasicTask):
                 raise Exception("The text given in input is not valid. Please that input of this task! ")
 
             output = self.__kernel.analyze(input=inputText)
+
             self.finish(data=output, failed=False, error=None)
         except:
             output = "Error analyzing the text with the pos tagger"
@@ -63,7 +64,6 @@ class PosTaggerTagsTask(BasicTask):
             if textAnalysis is None:
                 raise Exception("The input for PosTagger Tags Task was not available. Please that input of this task! ")
 
-            print("text", dir(self.__kernel))
             tags = self.__kernel.findTags(input=textAnalysis)
 
             output = [tag for tag in tags if not tag in stopwords]

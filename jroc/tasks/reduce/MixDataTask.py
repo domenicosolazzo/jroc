@@ -33,23 +33,19 @@ class MixDataTask(BasicTask):
 
             # Get the input keys
             inputKeys = [key for key in input.keys() if not key == 'metadata']
-            print('keys', inputKeys)
             # Get metadata
             metadata = input.get('metadata', None)
-            print('metadata', metadata)
             if metadata is None:
                 raise Exception("Impossible to execute this task. Metadata is missing")
 
             temp = []
             for key in inputKeys:
                 data = input.get(key, None)
-                print('item %s' % key, data)
                 if data is None:
                     continue
 
                 # Get metadata for this key
                 keyMetadata = metadata.get(key, None)
-                print('metadata', keyMetadata)
                 if keyMetadata is None:
                     continue
 
@@ -58,7 +54,6 @@ class MixDataTask(BasicTask):
 
                 typeInput = keyMetadata.get('type', None)
                 itemType = keyMetadata.get('item-type', 'string')
-                print(typeInput, itemType)
                 if typeInput == 'list':
                     if itemType == 'tuple':
                         tupleIndex = keyMetadata.get('index', 0)

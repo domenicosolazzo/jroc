@@ -20,7 +20,6 @@ class WordnetTask(BasicTask):
             assert(isinstance(input, dict))
 
             data = input.get(self.__inputKey, None)
-            print(data)
             if data is None:
                 raise Exception("Error retrieving the input for this task. Task: %s" % self.getName())
 

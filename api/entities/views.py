@@ -75,7 +75,6 @@ def entityProperties(entity_name):
         pipeline.execute()
         output = pipeline.getOutput()
         result = output.get('entity-property', {})
-        print(result)
         if len(result) > 0:
             result = result.get('properties')
         entity["data"] = result

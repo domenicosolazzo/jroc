@@ -21,7 +21,6 @@ class StanfordNERTaggerTestCase(unittest.TestCase):
         """
         text = self.helper_readFilename('en/article2.txt')
         actual = self.tagger.getEntities(raw_text=text)
-        print(actual)
         expected = [(u'House', u'ORGANIZATION'), (u'John Boehner', u'PERSON'),
                         (u'Keystone Pipeline', u'ORGANIZATION'), (u'Obama', u'PERSON'),
                         (u'Republican House', u'ORGANIZATION'), (u'John Boehner', u'PERSON'),
@@ -29,7 +28,7 @@ class StanfordNERTaggerTestCase(unittest.TestCase):
                         (u'America', u'LOCATION'), (u'United States', u'LOCATION'), (u'Keystone Pipeline', u'ORGANIZATION'),
                         (u'Boehner', u'PERSON'), (u'State Department', u'ORGANIZATION'), (u'GOP', u'ORGANIZATION'),
                         (u'Obama', u'PERSON'), (u'White House', u'ORGANIZATION')]
-        
+
         self.assertEqual(expected, actual)
 
     def test_nertagger_returns_stanford_ne_spanish_text(self):
@@ -65,7 +64,6 @@ class StanfordNERTaggerTestCase(unittest.TestCase):
         """
         text = self.helper_readFilename('es/article1.txt')
         actual = self.tagger.getEntities(raw_text=text)
-        print(actual)
         expected = [
                     (u'Andr\xe9 Gomes', u'PERSON'), (u'Barcelona', u'ORGANIZATION'),
                     (u'Ivan Rakitic', u'PERSON'), (u'Miquel Sors', u'PERSON'),

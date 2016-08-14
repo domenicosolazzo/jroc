@@ -62,7 +62,6 @@ class StopwordsTestCase(unittest.TestCase):
                     u'which', u'you', u'shan', u'needn', u'haven', u'after', u'most', u'such', u'why',
                     u'a', u'off', u'i', u'm', u'yours', u'so', u'y', u'the', u'having', u'once']
         actual = self.stopwordManager.getStopwords()
-        print(actual)
         self.assertEqual(expected, actual)
 
     def test_danish_stopwords(self):

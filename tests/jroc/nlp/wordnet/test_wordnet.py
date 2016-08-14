@@ -22,7 +22,6 @@ class WordnetManagerTestCase(unittest.TestCase):
                             'en': [ u'auto', u'automobile', u'cable_car', u'car', u'elevator_car',
                                     u'gondola', u'machine', u'motorcar', u'railcar', u'railroad_car', u'railway_car']}}}
         actual = self.wordnetManager.getSynonyms([word])
-        print(actual)
         self.assertEqual(expected, actual)
 
     def test_initialize_wordnet_returns_synonyms_multiple_words(self):
@@ -65,7 +64,6 @@ class WordnetManagerTestCase(unittest.TestCase):
                             'en': [u'auto', u'automobile', u'car', u'machine', u'motorcar'],
                             'no': [u'bil', u'karet', u'slede', u'vogn', u'\xf8se']}}}
         actual = self.wordnetManager.getSynonyms(words, language_code="no")
-        print(actual)
 
         self.assertEqual(expected, actual)
 
@@ -87,7 +85,6 @@ class WordnetManagerTestCase(unittest.TestCase):
                                         u'sign', u'sign_of_the_zodiac', u'square', u'star_sign'],
                                 'it': [u'casa', u'casa_astrologica', u'segno', u'segno_zodiacale']}}}
         actual = self.wordnetManager.getSynonyms(words, language_code="it")
-        print(actual)
 
         self.assertEqual(expected, actual)
 
@@ -248,7 +245,6 @@ class WordnetManagerTestCase(unittest.TestCase):
                                         u'sedan', u'taxi', u'vogn']},
                         'language': 'no'}}
         actual = self.wordnetManager.getHyponyms(words, language_code="no")
-        print(actual)
         self.assertEqual(expected, actual)
 
     def test_initialize_wordnet_returns_hyponyms_italian(self):
@@ -295,7 +291,6 @@ class WordnetManagerTestCase(unittest.TestCase):
                                     'en': [u'automotive_vehicle', u'compartment', u'motor_vehicle', u'wheeled_vehicle']},
                      'language': 'en'}}
         actual = self.wordnetManager.getHypernyms([word])
-        print(actual)
 
         self.assertEqual(expected, actual)
 
@@ -310,7 +305,6 @@ class WordnetManagerTestCase(unittest.TestCase):
                                 'no': []},
                         'language': 'no'}}
         actual = self.wordnetManager.getHypernyms([word], language_code="no")
-        print(actual)
 
         self.assertEqual(expected, actual)
 
@@ -325,6 +319,5 @@ class WordnetManagerTestCase(unittest.TestCase):
                                 'it': [u'motore', u'motoveicolo', u'veicolo_a_motore']},
                         'language': 'it'}}
         actual = self.wordnetManager.getHypernyms([word], language_code="it")
-        print(actual)
 
         self.assertEqual(expected, actual)

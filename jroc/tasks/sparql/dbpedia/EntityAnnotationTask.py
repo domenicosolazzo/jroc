@@ -16,23 +16,19 @@ class EntityAnnotationTask(BasicTask):
         """
         Execute a task
         """
-
         output = None
         try:
-            print("input",input)
             assert(isinstance(input, dict))
             super(EntityAnnotationTask, self).execute(input)
-
             data = input.get(self.__inputKey, None)
             if data is None or not isinstance(data, list):
                 raise Exception("Impossible to parse these entities. Please that input of this task! ")
-
             self.__kernel = SPARQLAdapter()
 
             output = [{"entity": word, "metadata": self.__kernel.entityExtraction(word, advancedSearch=True)} for word in data]
             self.finish(data=output, failed=False, error=None)
         except:
-            output = "Error loading the json string"
+            output = "Error annotating the entities"
             self.finish(data=None, failed=True, error=output)
 
         return self.getOutput()
@@ -49,7 +45,6 @@ class EntityAnnotationURITask(BasicTask):
         """
         Execute a task
         """
-
         output = None
         try:
             super(EntityAnnotationURITask, self).execute(input)
@@ -79,7 +74,6 @@ class EntityAnnotationTypesTask(BasicTask):
         """
         Execute a task
         """
-
         output = None
         try:
             super(EntityAnnotationTypesTask, self).execute(input)
@@ -127,7 +121,6 @@ class EntityAnnotationPropertiesTask(BasicTask):
             self.__kernel = SPARQLAdapter()
             output = None
             if not self.__requestedProperties is None and len(self.__requestedProperties) > 0:
-                print("aaaa", self.__requestedProperties)
                 output = {
                     # Property[0] => Property name
                     # Property[1] => Language

@@ -99,7 +99,6 @@ class BasicPipeline(Pipeline):
 
         except Queue.Empty:
             # All the pre-pipeline tasks have been executed. Pipeline is ready to start...
-            #print("All the pre-pipeline tasks have been executed. Pipeline is ready to start...")
             pass
         except:
             self.finish(message="Error executing the pre-pipeline tasks", hasFailed=True)
@@ -131,6 +130,7 @@ class BasicPipeline(Pipeline):
 
                 # Fetch input data
                 input = self.getInputData(metadataIn)
+
                 # Get the output from the previous task
                 output = self.runTask(task, input, metadataOut)
                 # Set the task as done
@@ -147,7 +147,6 @@ class BasicPipeline(Pipeline):
 
             except Queue.Empty:
                 # All the tasks  for the pipeline have been executed
-                #print("All the tasks  for the pipeline have been executed")
                 isTasksEmpty = True
             except:
                 self.finish(message="Error executing the pipeline", hasFailed=True)
