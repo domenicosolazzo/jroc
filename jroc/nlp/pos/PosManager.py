@@ -1,5 +1,5 @@
 from . import OBTManager
-from . import NTLKPosTagger
+from . import NLTKTagger
 import nltk
 
 # List of Pos tagger
@@ -8,7 +8,7 @@ POS_TAGGERS = { "no" : OBTManager,
                 "nb" : OBTManager,
                 "da" : OBTManager,
                 "sv" : OBTManager,
-                "en" : NTLKPosTagger,
+                "en" : NLTKTagger,
                 "other": None}
 
 class PosManager(object):
