@@ -1,5 +1,4 @@
 from . import BasicTask
-from . import RegexTagger
 
 class RegexTaggerMixerTask(BasicTask):
     """
@@ -8,8 +7,8 @@ class RegexTaggerMixerTask(BasicTask):
     __kernel = None # Kernel for this loader
     __inputKey = 'data' # Expected input key.
 
-    def __init__(self, name, data, initial_task=False, optionals={}):
-        super(RegexTaggerTask, self).__init__(name, initial_task)
+    def __init__(self, name, initial_task=False):
+        super(RegexTaggerMixerTask, self).__init__(name, initial_task)
         self.__kernel = None
 
 
@@ -20,7 +19,7 @@ class RegexTaggerMixerTask(BasicTask):
         output = None
         try:
             assert(isinstance(input, dict))
-            super(RegexTaggerTask, self).execute(input)
+            super(RegexTaggerMixerTask, self).execute(input)
 
             # Retrieve the text analysis
             data = input.get(self.__inputKey, None)
@@ -29,7 +28,7 @@ class RegexTaggerMixerTask(BasicTask):
                 raise Exception("The input for RegexTaggerMixerTask was not available. Please that input of this task! ")
 
             # Retrieve the keys
-            result = {}
+            temp = {}
             keys = data.keys()
             for key in keys:
                 taggerData = data.get(key)
@@ -37,10 +36,16 @@ class RegexTaggerMixerTask(BasicTask):
                     continue # Ignore this data
                 entity = taggerData.get('entity')
                 tags = taggerData.get('tags', [])
-                if entity in result:
-                    result[entity].extend(tags)
+                if entity in temp:
+                    temp[entity].extend(tags)
                 else:
-                    result[entity] = tags
+                    temp[entity] = tags
+
+            result = []
+            for key in temp.keys():
+                keyTags = temp.get(key,[])
+                keyTags = [tag.upper() for tag in keyTags]
+                result.append({"entity": key.title(), "tags": list(set(keyTags))})
 
             output = result
 
