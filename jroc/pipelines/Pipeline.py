@@ -179,11 +179,24 @@ class Pipeline(object):
                     """
                     External input: You can set an external input for a given input
                     """
+
                     data = item.get('data', None)
                     if data is None:
                         raise Exception("The external data is not present. Check the configuration of this pipeline")
 
                     input = data
+                elif source == "remote-json":
+                    """
+                    It retrieves a json from a remote source
+                    """
+                    remoteSource = item.get('remote_source', None)
+                    if remoteSource is None:
+                        raise Exception("The remote source is invalid. Check the configuration of this pipeline")
+                    r = requests.get(remoteSource)
+                    if r.status_code != 200:
+                        raise Exception("Error retrieving the data from the remote source. Status code: %d" % r.status_code)
+                    json = r.json()
+                    input[mapTo] = json
                 else:
                     raise Exception("Source input is unavailable for this task")
 
