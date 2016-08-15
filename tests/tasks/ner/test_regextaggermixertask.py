@@ -38,30 +38,44 @@ class RegexTaggerMixerTaskTestCase(unittest.TestCase):
         """
         self.assertIsNotNone(self.task)
 
-    def test_task_execute_with_input_without_main_key(self):
-        """
-        Test that the RegexTaggerTask fails if a requested key is missing (pos-no)
-        """
-        input = {}
-        self.task.execute(input)
-        self.assertTrue(self.task.hasFailed())
 
-    def test_task_execute_with_valid_json(self):
+    def test_task_execute_with_valid_input(self):
         """
-        Test that the RegexTaggerTask is extracting data from the json
+        Test that the RegexTaggerMixerTask is extracting data from the json
         """
         text = """
         This is Moody javascript in Tokyo and PL/SQL in C# and Transact-SQL
         """
-        input = {"data": {
-            "tagger1":{"entity": "Javascript", "tags":["Language"]},
-            "tagger2":{"entity": "Javascript", "tags":["Programming Language"]}
-        }}
+        input = {
+            "tagger1":[{"entity": "Javascript", "tags":["Language"]}],
+            "tagger2":[{"entity": "Javascript", "tags":["Programming Language"]}]
+        }
         self.task = RegexTaggerMixerTask(self.name)
         self.task.execute(input)
 
         actual = self.task.getOutput()
         expected = {'data': [{'entity': 'Javascript', 'tags': ['LANGUAGE', 'PROGRAMMING LANGUAGE']}]}
+        self.assertEquals(expected, actual)
+
+    def test_task_execute_with_valid_input_with_several_keys(self):
+        """
+        Test that the RegexTaggerMixerTask is mixing data from several taggers; There are multiple keys
+        """
+        text = """
+        This is Moody javascript in Tokyo and PL/SQL in C# and Transact-SQL
+        """
+        input = {
+            "tagger1":[{"entity": "Javascript", "tags":["Language"]}],
+            "tagger2":[{"entity": "Javascript", "tags":["Programming Language"]}, {"entity":"SQL", "tags":["Databases"]}]
+        }
+        self.task = RegexTaggerMixerTask(self.name)
+        self.task.execute(input)
+
+        actual = self.task.getOutput()
+        expected = {'data': [
+            {'tags': ['LANGUAGE', 'PROGRAMMING LANGUAGE'], 'entity': 'Javascript'},
+            {'tags': ['DATABASES'], 'entity': 'Sql'}
+        ]}
         self.assertEquals(expected, actual)
 
     def helper_readFilename(self, filename=''):
