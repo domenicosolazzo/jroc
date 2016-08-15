@@ -4,33 +4,37 @@ import re
 
 class RegexTagger(object):
     __regex_sentence = r'((?<=[^\w\s])\w(?=[^\w\s])|(\w+#)|((\w*)(-|/)(SQL))|(\W))+'
-    def __init__(self, json, regex_sentence=None, gaps=True):
+    def __init__(self, json, optionals={}):
         """
         RegexTagger
         """
-        patterns = [(re.compile(r'Moody\'s',re.IGNORECASE), 'ORGANIZATION'),
-            (re.compile(r'(Javascript|Java|C#|Python|(.*SQL))',re.IGNORECASE), 'LANGUAGE'),
-            (re.compile(r'(tokyo|japan)',re.IGNORECASE), 'LOCATION'),
-            (re.compile(r'(monday|tuesday|wednesday|thursday|friday|saturday|sunday)',re.IGNORECASE), 'DATE')]
-
+        self.__gaps = True
         if not 'entities' in json:
             raise Exception("The entities' file for the RegexTagger is invalid")
         # Take the additional tags
         additional_tags = json.get('additional_tags', [])
-
-        entities = json.get('entities', [])
+        jsonEntities = []
+        jsonEntities = json.get('entities', [])
         patterns=[]
-        for item in entities:
+        for item in jsonEntities:
+            tags = []
+
             tags = item.get('tags', [])
-            tags.extend(additional_tags)
+            if len(additional_tags) > 0:
+                tags.extend(additional_tags)
+            tags = list(set(tags))
+            tags = [tag.upper() for tag in tags]
+
             pattern_tags = ";".join(tags)
             entity = r'%s' % item.get('entity', '')
-            patterns.append((re.compile(entity,re.IGNORECASE), pattern_tags))
+            patterns.append( (re.compile( entity, re.IGNORECASE ), pattern_tags) )
 
         self.tagger = nltk.RegexpTagger(patterns)
-        if not regex_sentence is None:
-            self.__regex_sentence = regex_sentence
-        self.__gaps = gaps
+        if 'regex_sentence' in optionals:
+            self.__regex_sentence = optionals.get('regex_sentence', self.__regex_sentence)
+        if 'gaps' in optionals:
+            self.__gaps = optionals.get('gaps', True)
+
         self.__tokenizer = RegexpTokenizer(self.__regex_sentence, gaps=self.__gaps)
 
     def getEntities(self, text):
