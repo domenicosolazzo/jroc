@@ -4,6 +4,7 @@ import os
 import re
 import time
 import codecs
+import subprocess
 
 class OBTManager(object):
     """
@@ -23,7 +24,8 @@ class OBTManager(object):
         # Check if the data is not empty
         if data is not None and (isinstance(data, str) or isinstance(data, unicode)):
             # Save the content in a temp file
-            self.__saveContent(data)
+            #self.__saveContent(data)
+            self.__data = data
 
 
 
@@ -39,7 +41,7 @@ class OBTManager(object):
         """
         Save the content in a temporary file
         """
-        #assert(isinstance(data, str))
+        assert(isinstance(data, str))
 
         currentDirectory = os.path.dirname(os.path.realpath(__file__)) # Current directory
         filename = "%s/../../../../tmp/TEXTFILE_%s" % (currentDirectory, int(time.time()), )
@@ -178,19 +180,30 @@ class OBTManager(object):
         # Current directory
         currentDirectory = os.path.dirname(os.path.realpath(__file__))
         # Output filename
-        output_filename = "%s_OUTPUT" % (self._filename,)
-        self._outputFilename = output_filename
+        #output_filename = "%s_OUTPUT" % (self._filename,)
+        #self._outputFilename = output_filename
         # Get the type of tagger that you want to use with the Oslo-Bergen tagger
         tagger_type = os.environ.get('OBT_TYPE', 'tag-nostat-bm.sh')
         # Run the tagger
-        obtCmd = '%s/../../../../The-Oslo-Bergen-Tagger/%s %s > %s' % (currentDirectory, tagger_type, self._filename, output_filename)
+        #obtCmd = '%s/../../../../The-Oslo-Bergen-Tagger/%s %s > %s' % (currentDirectory, tagger_type, self._filename, output_filename)
+        obtCmd = '%s/../../../../The-Oslo-Bergen-Tagger/%s ' % (currentDirectory, tagger_type)
 
-        os.system(obtCmd)
+        #os.system(obtCmd)
 
         # Read the output file
-        file_object = open(output_filename, 'r')
-        text = file_object.read().decode('utf8')
+        #file_object = open(output_filename, 'r')
+        #text = file_object.read().decode('utf8')
+
+
+        p1 = subprocess.Popen([echo, self.__data], stdout=subprocess.PIPE)
+        p2 = subprocess.Popen([obtCmd], stdin=p1.stdout, stdout=subprocess.PIPE)
+        p1.stdout.close()
+        output,err = p2.communicate()
+        print("OUTPUT", output)
+        raise Exception("FUCK YOU")
+        text = output
         text = text.split("\n")
+
         # Parsing the result
         result = []
         new_obj = {}

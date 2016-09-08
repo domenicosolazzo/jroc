@@ -71,11 +71,12 @@ def taggerEntities():
     result["meta"] = {}
 
     if shouldShowLanguage == True:
-        result["meta"]["language"] = languageResult[0]
+        result["meta"]["language"] = language
     if showAnnotation == True:
         entities_annotated = output.get('entities-annotated', [])
         result["meta"]["annotation"] = entities_annotated
 
+    print("result", pipeline.getError())
 
     json_response = json.dumps(result)
     return Response(json_response, mimetype="application/json")

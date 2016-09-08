@@ -100,6 +100,8 @@ class Pipeline(object):
             'error-type':  exctype,
             'error-value':  value
         }
+    def getError(self):
+        return self.__error
 
     def hasFailed(self):
         """
