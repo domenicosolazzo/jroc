@@ -101,6 +101,12 @@ class Pipeline(object):
             'error-value':  value
         }
 
+    def getError(self):
+        """
+        Get the last error in the pipeline
+        """
+        return self.__error
+
     def hasFailed(self):
         """
         Check if the pipeline has failed

@@ -63,7 +63,7 @@ def taggerEntities():
                 "uri": "%sentities/%s"  % (request.url_root, entity.replace(" ", "_"))
             })
         entities = temp
-        
+
 
     result = {}
     result["uri"] = "%s" % (request.base_url, )
@@ -72,7 +72,7 @@ def taggerEntities():
     result["meta"] = {}
 
     if shouldShowLanguage == True:
-        result["meta"]["language"] = languageResult[0]
+        result["meta"]["language"] = language
     if showAnnotation == True:
         entities_annotated = output.get('entities-annotated', [])
         result["meta"]["annotation"] = entities_annotated
@@ -83,38 +83,49 @@ def taggerEntities():
 
 @tagger.route("/analyze", methods=["POST"])
 def taggerAnalyze():
+    shouldFilterStopwords = True if request.args.get('stopwords') == 'true' else False
+    shouldShowLanguage = True if request.args.get('language') == 'true' else False
+    showAdvancedResult = True if request.args.get("advanced") == 'true' else False
+    showAnnotation = True if request.args.get("annotation") == 'true' else False
+    rawOutput = True if request.args.get("raw") == 'true' else False
+
     data = request.data
-    data = data.replace("'","\"").replace("\n", "")
-    json_result = json.loads(data)
-
-    result = {}
-    result["uri"] = "%s" % (request.base_url, )
-
-    pipeline = NERPipeline(input=data, name="NER Pipeline")
+    pipeline = NERPipeline(input=data, name="NER Pipeline", withEntityAnnotation=showAnnotation)
     pipeline.execute()
     output = pipeline.getOutput()
 
+    if (rawOutput == True):
+        json_response = json.dumps(output)
+        return Response(json_response, mimetype="application/json")
+        
+    language = output.get('language', None)
+    print("output", output)
+    print("language", language)
+    entities = output.get('entities', [])
 
-    data = {}
-    data["language"] = output.get('language', None)
-    data["entities"] = output.get('entities', [])
-    data["tags"] = output.get('tags', [])
-    data["text_analyze"]  = output.get('pos', None)
-    """
-    if(requestObt == True):
-        obt_result = obtManager.obtAnalyze()
-        data["obt"] = obt_result
+    if showAdvancedResult and len(entities) > 0:
+        # Advanced formatting for each entity
+        temp = []
+        for entity in entities:
+            temp.append({
+                "name": entity,
+                "uri": "%sentities/%s"  % (request.url_root, entity.replace(" ", "_"))
+            })
+        entities = temp
 
-    if(requestTags == True):
-        tags = obtManager.findTags()
-        data["tags"] = tags
 
-    if(requestEntities == True):
-        entities = obtManager.findEntities()
-        data["entities"] = entities
-    """
-    result["data"] = data
+    result = {}
+    result["uri"] = "%s" % (request.base_url, )
+    result["data"] = entities
+    result["data"]
+    result["meta"] = {}
+
+    if shouldShowLanguage == True:
+        result["meta"]["language"] = language
+    if showAnnotation == True:
+        entities_annotated = output.get('entities-annotated', [])
+        result["meta"]["annotation"] = entities_annotated
+
 
     json_response = json.dumps(result)
-
     return Response(json_response, mimetype="application/json")

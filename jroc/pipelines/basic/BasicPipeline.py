@@ -123,6 +123,7 @@ class BasicPipeline(Pipeline):
 
                 # Get the task
                 task = nextStep[0]
+                print("TAsk", task.getName())
                 # Get the metadata for the task
                 metadata = nextStep[1]
                 metadataIn = metadata.get("input", {})
@@ -136,6 +137,9 @@ class BasicPipeline(Pipeline):
                 # Set the task as done
                 self.__tasks.task_done()
                 if task.hasFailed():
+                    self.finish(message=task.getError(), hasFailed=True)
+                    print("task error", task.getError())
+                    return
                     raise Exception("Pipeline has failed. The current task returned an error: %s" % task.getName())
 
                 # Set the output

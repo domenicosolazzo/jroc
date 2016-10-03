@@ -10,12 +10,15 @@ class StopwordFilteringTask(BasicTask):
     __inputKey = 'data' # Expected input key
     def __init__(self, name, initial_task=False, language="en"):
         super(StopwordFilteringTask, self).__init__(name, initial_task)
-        self.__kernel = StopwordManager(language=language)
+
 
     def execute(self, input):
         try:
             super(StopwordFilteringTask, self).execute(input)
             assert(isinstance(input, dict))
+
+            language = input.get('language', 'en')
+            self.__kernel = StopwordManager(language=language)
 
             data = input.get(self.__inputKey, None)
             if data is None:
@@ -38,11 +41,19 @@ class StopwordRetrievalTask(BasicTask):
 
     def __init__(self, name, initial_task=False, language="en"):
         super(StopwordRetrievalTask, self).__init__(name, initial_task)
-        self.__kernel = StopwordManager(language=language)
 
     def execute(self, input=None):
         try:
+            assert(isinstance(input, dict))
+            super(StopwordRetrievalTask, self).execute(input)
+
+            # Retrieve the language
+            language = input.get('language', 'en')
+            self.__kernel = StopwordManager(language=language)
+
             stopwords = self.__kernel.getStopWords()
+            print("Stopwords", stopwords)
+
             if stopwords is not None:
                 stopwords = list(stopwords)
             self.finish(data=stopwords, failed=False, error=None)

@@ -32,6 +32,7 @@ class TaggerTagsTask(BasicTask):
                 raise Exception("The input for TaggerTagsTask was not available. Please that input of this task! ")
 
             posTags = text_analysis.get('pos', None)
+            
             if posTags is None:
                 raise Exception("The text analysis does not contain POS information for this task. Please check the input of this task")
 

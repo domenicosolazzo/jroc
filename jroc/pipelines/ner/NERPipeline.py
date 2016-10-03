@@ -1,5 +1,6 @@
 from . import BasicPipeline
 from . import NERPosNoTask
+from . import TaggerTagsTask
 from . import EntityAnnotationTask
 from . import PosTaggerPipeline
 from collections import defaultdict
@@ -24,7 +25,10 @@ class NERPipeline(BasicPipeline):
 
         # Run these tasks
         self.addTask(( NERPosNoTask(name="NER Task"), {"input":[{"key": "pos", "source": "internal-output", "map-key": "pos-no"}], "output":{"key":"entities", "source": "internal-output", "type": "json" } } ))
-        
+        self.addTask(( TaggerTagsTask(name="NER Stanford Task"), {"input":[{"key": "pos", "source": "internal-output", "map-key": "pos"}], "output":{"key":"entities2", "source": "internal-output", "type": "json" } } ))
+
+
+
         if self.__withEntityAnnotation == True:
             # Add the entity annotation task
             self.addTask(( EntityAnnotationTask(name="LinkedData TASK"), {  "input":[{ "key":"entities", "source":"internal-output", "map-key": "entities"}],
