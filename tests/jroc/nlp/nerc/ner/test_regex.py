@@ -37,9 +37,19 @@ class RegexTaggerTestCase(unittest.TestCase):
         }
         self.regexTagger = RegexTagger(json)
 
-        expected = [{'tags': ['LANGUAGE'], 'entity': 'javascript'}, {'tags': ['LOCATION'], 'entity': 'Tokyo'}, {'tags': ['LANGUAGE'], 'entity': 'PL/SQL'}, {'tags': ['LANGUAGE'], 'entity': 'SQL'}, {'tags': ['LANGUAGE'], 'entity': 'C#'}, {'tags': ['LANGUAGE'], 'entity': 'Transact-SQL'}, {'tags': ['LANGUAGE'], 'entity': 'SQL'}]
+        expected = [
+            {'entity': 'javascript', 'tags': ['LANGUAGE']},
+            {'entity': 'Tokyo', 'tags': ['LOCATION']},
+            {'entity': 'PL/SQL', 'tags': ['LANGUAGE']},
+            {'entity': 'SQL', 'tags': ['LANGUAGE']},
+            {'entity': 'C#', 'tags': ['LANGUAGE']},
+            {'entity': 'Transact-SQL', 'tags': ['LANGUAGE']},
+            {'entity': 'SQL', 'tags': ['LANGUAGE']}
+        ]
         actual = self.regexTagger.getEntities(text)
-        self.assertEqual(expected, actual)
+        self.assertEqual(len(expected), len(actual))
+        [self.assertDictEqual(res, expected[index]) for (index, res) in enumerate(actual)]
+        #self.assertDictEqual(expected, actual)
 
     def test_regextagger_text_additional_tags(self):
         """
@@ -63,9 +73,12 @@ class RegexTaggerTestCase(unittest.TestCase):
         }
         self.regexTagger = RegexTagger(json)
 
-        expected = [{'tags': ['LANGUAGE','TEST'], 'entity': 'javascript'}, {'tags': ['LOCATION', 'TEST'], 'entity': 'Tokyo'}, {'tags': ['LANGUAGE','TEST'], 'entity': 'PL/SQL'}, {'tags': ['LANGUAGE','TEST'], 'entity': 'SQL'}, {'tags': ['LANGUAGE','TEST'], 'entity': 'C#'}, {'tags': ['LANGUAGE','TEST'], 'entity': 'Transact-SQL'}, {'tags': ['LANGUAGE','TEST'], 'entity': 'SQL'}]
+        expected = [
+            {'tags': ['LANGUAGE','TEST'], 'entity': 'javascript'},
+            {'tags': ['LOCATION', 'TEST'], 'entity': 'Tokyo'}, {'tags': ['LANGUAGE','TEST'], 'entity': 'PL/SQL'}, {'tags': ['LANGUAGE','TEST'], 'entity': 'SQL'}, {'tags': ['LANGUAGE','TEST'], 'entity': 'C#'}, {'tags': ['LANGUAGE','TEST'], 'entity': 'Transact-SQL'}, {'tags': ['LANGUAGE','TEST'], 'entity': 'SQL'}]
         actual = self.regexTagger.getEntities(text)
-        self.assertEqual(expected, actual)
+        self.assertEqual(len(expected), len(actual))
+        [self.assertDictEqual(res, expected[index]) for (index, res) in enumerate(actual)]
 
     def helper_readFilename(self, filename=''):
         stopwords = []
