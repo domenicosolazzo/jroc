@@ -63,6 +63,7 @@ def taggerEntities():
                 "uri": "%sentities/%s"  % (request.url_root, entity.replace(" ", "_"))
             })
         entities = temp
+        
 
     result = {}
     result["uri"] = "%s" % (request.base_url, )
