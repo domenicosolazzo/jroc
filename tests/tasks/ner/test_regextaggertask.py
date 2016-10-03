@@ -71,13 +71,13 @@ class RegexTaggerTaskTestCase(unittest.TestCase):
         self.task.execute(input)
 
         actual = self.task.getOutput()
-        expected = {'data': [{'entity': 'javascript', 'tags': ['TEST1', 'LANGUAGE']},
-           {'entity': 'Tokyo', 'tags': ['TEST1', 'LOCATION']},
-           {'entity': 'PL/SQL', 'tags': ['TEST1', 'LANGUAGE']},
-           {'entity': 'SQL', 'tags': ['TEST1', 'LANGUAGE']},
-           {'entity': 'C#', 'tags': ['TEST1', 'LANGUAGE']},
-           {'entity': 'Transact-SQL', 'tags': ['TEST1', 'LANGUAGE']},
-           {'entity': 'SQL', 'tags': ['TEST1', 'LANGUAGE']}]}
+        expected = {'data': [{'entity': 'javascript', 'tags': sorted(['TEST1', 'LANGUAGE'])},
+           {'entity': 'Tokyo', 'tags': sorted(['TEST1', 'LOCATION'])},
+           {'entity': 'PL/SQL', 'tags': sorted(['TEST1', 'LANGUAGE'])},
+           {'entity': 'SQL', 'tags': sorted(['TEST1', 'LANGUAGE'])},
+           {'entity': 'C#', 'tags': sorted(['TEST1', 'LANGUAGE'])},
+           {'entity': 'Transact-SQL', 'tags': sorted(['TEST1', 'LANGUAGE'])},
+           {'entity': 'SQL', 'tags': sorted(['TEST1', 'LANGUAGE'])}]}
         self.assertEquals(expected, actual)
 
 
