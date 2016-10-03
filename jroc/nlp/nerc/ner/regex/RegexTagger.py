@@ -52,6 +52,6 @@ class RegexTagger(object):
         for line in segmented_lines:
             words = self.__tokenizer.tokenize(line)
             tags = self.tagger.tag(words)
-            entities = [ dict([("entity", w[0]), ("tags", w[1].split(";"))]) for w in tags if not w[1] is None ]
+            entities = [ dict([("entity", w[0]), ("tags", sorted(w[1].split(";")))]) for w in tags if not w[1] is None ]
 
             return entities
