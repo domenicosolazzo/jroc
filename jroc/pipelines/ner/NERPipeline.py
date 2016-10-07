@@ -15,7 +15,7 @@ class NERPipeline(BasicPipeline):
     # Use entity annotation
     __withEntityAnnotation = False
 
-    def __init__(self, input, name="PosTagger Pipeline", withEntityAnnotation=False):
+    def __init__(self, input, name="NER Pipeline", withEntityAnnotation=False):
         assert(isinstance(withEntityAnnotation, bool))
         super(NERPipeline, self).__init__(input, name)
         self.__withEntityAnnotation = withEntityAnnotation

@@ -11,6 +11,7 @@ class RegexTaggerTask(BasicTask):
     __dataAvailable = False
 
     def __init__(self, name, data=None, initial_task=False, optionals={}):
+        print("data", data)
         if data is not None:
             self.__dataAvailable = True
             self.__kernel = RegexTagger(json=data, optionals=optionals)
@@ -37,7 +38,7 @@ class RegexTaggerTask(BasicTask):
                     optionals["regex_sentence"] = regexSentence
 
                 self.__kernel = RegexTagger(json=patterns, optionals=optionals)
-    
+
             # Retrieve the text analysis
             raw_text = input.get(self.__inputKey, None)
 

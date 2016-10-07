@@ -131,16 +131,17 @@ class BasicPipeline(Pipeline):
 
                 # Fetch input data
                 input = self.getInputData(metadataIn)
-
                 # Get the output from the previous task
                 output = self.runTask(task, input, metadataOut)
                 # Set the task as done
                 self.__tasks.task_done()
                 if task.hasFailed():
-                    self.finish(message=task.getError(), hasFailed=True)
-                    print("task error", task.getError())
+                    taskError = task.getError()
+                    self.finish(message=taskError, hasFailed=True)
+                    self.setOutput("current-error", taskError)
+                    print("Task Error:", task.getName(), taskError)
                     return
-                    raise Exception("Pipeline has failed. The current task returned an error: %s" % task.getName())
+                    #raise Exception("Pipeline has failed. The current task returned an error: %s" % task.getName())
 
                 # Set the output
                 outputKey = metadataOut.get('key', '%s-output' % task.getPrefix())
@@ -153,7 +154,10 @@ class BasicPipeline(Pipeline):
                 # All the tasks  for the pipeline have been executed
                 isTasksEmpty = True
             except:
+                pipelineError = self.getError()
                 self.finish(message="Error executing the pipeline", hasFailed=True)
+                self.setOutput("current-error", pipelineError)
+                print("Pipeline Error:", pipelineError)
                 return
 
 

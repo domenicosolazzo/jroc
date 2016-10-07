@@ -1,6 +1,7 @@
 import uuid
 from datetime import datetime
 import sys
+import requests
 """
 Pipeline types
 In-Memory: The pipeline will be executed sequentially in-memory
@@ -157,10 +158,12 @@ class Pipeline(object):
         input = dict([('metadata', {})])
         if isinstance(metadata, list):
             for item in metadata:
+
                 # Check source
                 source = item.get('source', None)
                 key = item.get('key', None)
                 mapTo = item.get('map-key', 'main') # It will take key from 'map-key', otherwise it has 'main' as value
+
                 if source is None:
                     raise Exception("Task input source cannot be null. Check the configuration of this pipeline.")
 
