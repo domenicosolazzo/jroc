@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 from nltk.corpus import stopwords
 
@@ -15,7 +16,6 @@ class NLTKStopwords(object):
     def __init__(self, filename=None, language="no"):
         if not language in self.AVAILABLE_LANGUAGES:
             raise ValueError("The stopword for this language is not available")
-
         self.__language = language.lower()
         self.__initializeStopwords()
 
