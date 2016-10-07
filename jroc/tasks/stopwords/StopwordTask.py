@@ -6,10 +6,12 @@ class StopwordFilteringTask(BasicTask):
     StopwordFilteringTask: Filter a input using a given set of stopwords
     """
     __kernel = None # Kernel for this loader
-
+    __language = "en"
     __inputKey = 'data' # Expected input key
-    def __init__(self, name, initial_task=False, language="en"):
+    def __init__(self, name, initial_task=False, language=None):
         super(StopwordFilteringTask, self).__init__(name, initial_task)
+        if language is not None:
+            self.__language = language
 
 
     def execute(self, input):
@@ -17,8 +19,11 @@ class StopwordFilteringTask(BasicTask):
             super(StopwordFilteringTask, self).execute(input)
             assert(isinstance(input, dict))
 
-            language = input.get('language', 'en')
-            self.__kernel = StopwordManager(language=language)
+            language = input.get('language', None)
+            if language is not None:
+                self.__language = language
+
+            self.__kernel = StopwordManager(language=self.__language)
 
             data = input.get(self.__inputKey, None)
             if data is None:
@@ -36,20 +41,27 @@ class StopwordRetrievalTask(BasicTask):
     StopwordRetrievalTask: Retrieve the stopwords for a given language
     """
     __kernel = None # Kernel for this loader
-
+    __language = None # Language
     __inputKey = 'data' # Expected input key
 
-    def __init__(self, name, initial_task=False, language="en"):
+    def __init__(self, name, initial_task=False, language=None):
         super(StopwordRetrievalTask, self).__init__(name, initial_task)
+        if language is not None:
+            self.__language = language
 
     def execute(self, input=None):
         try:
-            assert(isinstance(input, dict))
+            if input is None:
+                input = {}
+                
             super(StopwordRetrievalTask, self).execute(input)
 
             # Retrieve the language
-            language = input.get('language', 'en')
-            self.__kernel = StopwordManager(language=language)
+            language = input.get('language', None)
+            if language is not None:
+                self.__language = language
+
+            self.__kernel = StopwordManager(language=self.__language)
 
             stopwords = self.__kernel.getStopWords()
             print("Stopwords", stopwords)

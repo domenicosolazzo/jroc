@@ -52,5 +52,6 @@ class StopwordFilteringTaskTestCase(unittest.TestCase):
 
         expected = {"data": ["Oslo", "venter"]}
         actual = self.task.execute(input)
+        print("actual",actual);
 
         self.assertEqual(expected, actual)

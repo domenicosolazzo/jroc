@@ -29,7 +29,10 @@ class StopwordRetrievalTaskTestCase(unittest.TestCase):
         """
         Test retrieve english stopwords
         """
+        self.task = StopwordRetrievalTask(name="Stopword filtering task", language="en")
         actual = self.task.execute()
+        print("aaaa")
+
         self.assertTrue(isinstance(actual, dict))
         self.assertIsNotNone(actual)
 
