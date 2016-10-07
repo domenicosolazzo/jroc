@@ -24,8 +24,7 @@ class EntityAnnotationTask(BasicTask):
             if data is None or not isinstance(data, list):
                 raise Exception("Impossible to parse these entities. Please that input of this task! ")
             self.__kernel = SPARQLAdapter()
-
-            output = [{"entity": word, "metadata": self.__kernel.entityExtraction(word, advancedSearch=True)} for word in data]
+            output = [{"entity": word, "metadata": self.__kernel.entityExtraction(word, advancedSearch=False)} for word in data]
             self.finish(data=output, failed=False, error=None)
         except:
             output = "Error annotating the entities"
