@@ -15,7 +15,7 @@ class NERPipeline(BasicPipeline):
     # Use entity annotation
     __withEntityAnnotation = False
 
-    def __init__(self, input, name="PosTagger Pipeline", withEntityAnnotation=True):
+    def __init__(self, input, name="PosTagger Pipeline", withEntityAnnotation=False):
         assert(isinstance(withEntityAnnotation, bool))
         super(NERPipeline, self).__init__(input, name)
         self.__withEntityAnnotation = withEntityAnnotation
@@ -30,7 +30,8 @@ class NERPipeline(BasicPipeline):
 
 
         if self.__withEntityAnnotation == True:
-            # Add the entity annotation task
+            # Add the entity annotation task.
+            # ISSUE when this pipeline is running from the api. It works from unittests
             self.addTask(( EntityAnnotationTask(name="LinkedData TASK"), {  "input":[{ "key":"entities", "source":"internal-output", "map-key": "entities"}],
                                                                         "output": {"key":"entities-annotated", "source": "internal-output", "type": "json" }
                                                                       }))

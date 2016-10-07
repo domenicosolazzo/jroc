@@ -44,15 +44,20 @@ def taggerEntities():
     shouldFilterStopwords = True if request.args.get('stopwords') == 'true' else False
     shouldShowLanguage = True if request.args.get('language') == 'true' else False
     showAdvancedResult = True if request.args.get("advanced") == 'true' else False
-    showAnnotation = True if request.args.get("annotation") == 'true' else False
+    showCommonWords = True if request.args.get("common") == 'true' else False
+
+    result = {}
+    result["uri"] = "%s" % (request.base_url, )
+    result["meta"] = {}
+    result["data"] = {}
 
     data = request.data
-    pipeline = NERPipeline(input=data, name="NER Pipeline", withEntityAnnotation=showAnnotation)
+    pipeline = NERPipeline(input=data, name="NER Pipeline", withEntityAnnotation=False)
     pipeline.execute()
     output = pipeline.getOutput()
 
     language = output.get('language', None)
-    entities = output.get('entities', [])
+    entities = output.get('entities-stanford', [])
 
     if showAdvancedResult and len(entities) > 0:
         # Advanced formatting for each entity
@@ -63,20 +68,14 @@ def taggerEntities():
                 "uri": "%sentities/%s"  % (request.url_root, entity.replace(" ", "_"))
             })
         entities = temp
-
-
-    result = {}
-    result["uri"] = "%s" % (request.base_url, )
     result["data"] = entities
-    result["data"]
-    result["meta"] = {}
+
+    if showCommonWords == True:
+        pos = output.get("pos", [])
+        result["meta"]["common_words"] = output.get("common_words", [])
 
     if shouldShowLanguage == True:
         result["meta"]["language"] = language
-    if showAnnotation == True:
-        entities_annotated = output.get('entities-annotated', [])
-        result["meta"]["annotation"] = entities_annotated
-
 
     json_response = json.dumps(result)
     return Response(json_response, mimetype="application/json")
@@ -86,22 +85,27 @@ def taggerAnalyze():
     shouldFilterStopwords = True if request.args.get('stopwords') == 'true' else False
     shouldShowLanguage = True if request.args.get('language') == 'true' else False
     showAdvancedResult = True if request.args.get("advanced") == 'true' else False
-    showAnnotation = True if request.args.get("annotation") == 'true' else False
+    showCommonWords = True if request.args.get("common") == 'true' else False
     rawOutput = True if request.args.get("raw") == 'true' else False
 
+    result = {}
+    result["uri"] = "%s" % (request.base_url, )
+    result["data"] = {}
+    result["meta"] = {}
+
     data = request.data
-    pipeline = NERPipeline(input=data, name="NER Pipeline", withEntityAnnotation=showAnnotation)
+    pipeline = NERPipeline(input=data, name="NER Pipeline", withEntityAnnotation=False)
+
     pipeline.execute()
     output = pipeline.getOutput()
 
     if (rawOutput == True):
         json_response = json.dumps(output)
         return Response(json_response, mimetype="application/json")
-        
+
     language = output.get('language', None)
-    print("output", output)
-    print("language", language)
-    entities = output.get('entities', [])
+    entities = output.get('entities-stanford', [])
+
 
     if showAdvancedResult and len(entities) > 0:
         # Advanced formatting for each entity
@@ -112,19 +116,15 @@ def taggerAnalyze():
                 "uri": "%sentities/%s"  % (request.url_root, entity.replace(" ", "_"))
             })
         entities = temp
-
-
-    result = {}
-    result["uri"] = "%s" % (request.base_url, )
     result["data"] = entities
-    result["data"]
-    result["meta"] = {}
+
+    if showCommonWords == True:
+        pos = output.get("pos", [])
+        result["meta"]["common_words"] = pos.get("common_words", [])
+
 
     if shouldShowLanguage == True:
         result["meta"]["language"] = language
-    if showAnnotation == True:
-        entities_annotated = output.get('entities-annotated', [])
-        result["meta"]["annotation"] = entities_annotated
 
 
     json_response = json.dumps(result)
