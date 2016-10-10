@@ -28,12 +28,10 @@ class RegexTaggerMixerTask(BasicTask):
             for key in keys:
                 taggerData = input.get(key, None)
                 # The data should be a list
-                print("t", key, taggerData)
                 if taggerData is None or not isinstance(taggerData, list):
                     continue # Ignore this data
 
                 for taggerDataItem in taggerData:
-                    print("item", taggerDataItem)
                     if not 'entity' in taggerDataItem or not 'tags' in taggerDataItem:
                         continue # Ignore this data
 
@@ -43,13 +41,11 @@ class RegexTaggerMixerTask(BasicTask):
                         temp[entity].extend(tags)
                     else:
                         temp[entity] = tags
-            print("temp", temp)
             result = []
             for key in temp.keys():
                 keyTags = temp.get(key,[])
                 keyTags = [tag.upper() for tag in keyTags]
                 result.append({"entity": key.title(), "tags": list(set(keyTags))})
-            print("result", result)
             output = result
 
             self.finish(data=output, failed=False, error=None)

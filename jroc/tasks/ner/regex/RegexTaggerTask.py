@@ -11,7 +11,6 @@ class RegexTaggerTask(BasicTask):
     __dataAvailable = False
 
     def __init__(self, name, data=None, initial_task=False, optionals={}):
-        print("data", data)
         if data is not None:
             self.__dataAvailable = True
             self.__kernel = RegexTagger(json=data, optionals=optionals)

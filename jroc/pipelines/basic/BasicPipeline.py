@@ -123,7 +123,7 @@ class BasicPipeline(Pipeline):
 
                 # Get the task
                 task = nextStep[0]
-                print("TAsk", task.getName())
+
                 # Get the metadata for the task
                 metadata = nextStep[1]
                 metadataIn = metadata.get("input", {})
@@ -140,8 +140,8 @@ class BasicPipeline(Pipeline):
                     self.finish(message=taskError, hasFailed=True)
                     self.setOutput("current-error", taskError)
                     print("Task Error:", task.getName(), taskError)
-                    return
-                    #raise Exception("Pipeline has failed. The current task returned an error: %s" % task.getName())
+                    raise Exception("Pipeline has failed. The task %s returned an error! Error: %s" % (task.getName(), taskError))
+
 
                 # Set the output
                 outputKey = metadataOut.get('key', '%s-output' % task.getPrefix())
@@ -155,7 +155,7 @@ class BasicPipeline(Pipeline):
                 isTasksEmpty = True
             except:
                 pipelineError = self.getError()
-                self.finish(message="Error executing the pipeline", hasFailed=True)
+                self.finish(message="Pipeline has stopped. Error: %s" % pipelineError, hasFailed=True)
                 self.setOutput("current-error", pipelineError)
                 print("Pipeline Error:", pipelineError)
                 return
