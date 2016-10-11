@@ -11,7 +11,7 @@ class StanfordTagger(object):
     """
     __classifier = ""
     __stanfordJar = ""
-    def __init__(self):
+    def __init__(self, data=None):
         self.__tagger = StanfordNERTagger(self.__classifier, self.__stanfordJar, encoding="utf-8")
 
     def tags(self, raw_text):

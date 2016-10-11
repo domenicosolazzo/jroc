@@ -24,8 +24,8 @@ class NERPipeline(BasicPipeline):
         self.addPipelinesBefore([(PosTaggerPipeline, {"name":"Pos Tagger Pipeline", "input":{"source":"main", "data":input}, "output":{"type": "merge"}}) ])
 
         # Run these tasks
-        self.addTask(( NERPosNoTask(name="NER Task"), {"input":[{"key": "pos", "source": "internal-output", "map-key": "pos-no"}], "output":{"key":"entities", "source": "internal-output", "type": "json" } } ))
-        self.addTask(( TaggerTagsTask(name="NER Stanford Task"), {"input":[{"key": "pos", "source": "internal-output", "map-key": "data"}], "output":{"key":"entities-stanford", "source": "internal-output", "type": "json" } } ))
+        #self.addTask(( NERPosNoTask(name="NER Task"), {"input":[{"key": "pos", "source": "internal-output", "map-key": "pos-no"}], "output":{"key":"entities", "source": "internal-output", "type": "json" } } ))
+        self.addTask(( TaggerTagsTask(name="NER Stanford Task"), {"input":[{"key": "pos", "source": "internal-output", "map-key": "data"}], "output":{"key":"entities", "source": "internal-output", "type": "json" } } ))
 
 
 

@@ -32,7 +32,7 @@ class TaggerTagsTask(BasicTask):
                 raise Exception("The input for TaggerTagsTask was not available. Please that input of this task! ")
 
             posTags = text_analysis.get('pos', None)
-            
+
             if posTags is None:
                 raise Exception("The text analysis does not contain POS information for this task. Please check the input of this task")
 
@@ -42,8 +42,8 @@ class TaggerTagsTask(BasicTask):
 
             # It returns the part of the text tagged with NNP and NNPS
             tags = [ tag for tag in tagsResult if tag[1] == 'NNP' or tag[1] == 'NNPS' ]
-            tags = dict(tags).keys()
 
+            tags = dict(tags).keys()
             if not stopwords is None and isinstance(stopwords, list):
                 # Returns all the tags that are not in the stopword
                 tags = [ tag for tag in tags if not tag in stopwords ]

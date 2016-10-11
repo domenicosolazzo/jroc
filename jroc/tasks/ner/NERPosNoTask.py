@@ -25,6 +25,12 @@ class NERPosNoTask(BasicTask):
             # Retrieve the stopwords
             stopwordKey = 'stopwords'
             stopwords = input.get(stopwordKey, [])
+            textAnalysis = input.get(self.__inputKey, None)
+
+            if not isinstance(stopwords, list) or textAnalysis is None:
+                self.finish(data=None, failed=False, error=None)
+                return self.getOutput()
+                
             if not isinstance(stopwords, list):
                 raise Exception("The retrieved stopwords have an invalid format.")
 

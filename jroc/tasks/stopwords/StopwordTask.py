@@ -53,7 +53,7 @@ class StopwordRetrievalTask(BasicTask):
         try:
             if input is None:
                 input = {}
-                
+
             super(StopwordRetrievalTask, self).execute(input)
 
             # Retrieve the language
@@ -64,7 +64,6 @@ class StopwordRetrievalTask(BasicTask):
             self.__kernel = StopwordManager(language=self.__language)
 
             stopwords = self.__kernel.getStopWords()
-            print("Stopwords", stopwords)
 
             if stopwords is not None:
                 stopwords = list(stopwords)

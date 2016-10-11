@@ -53,6 +53,11 @@ class PosTaggerTagsTask(BasicTask):
             assert(isinstance(input, dict))
             super(PosTaggerTagsTask, self).execute(input)
 
+            languageKey = 'language'
+            if languageKey in input:
+                self.__language = input.get(languageKey, "no")
+                self.__kernel = PosManager(language=self.__language)
+                
             # Retrieve the stopwords
             stopwordKey = 'stopwords'
             stopwords = input.get(stopwordKey, [])

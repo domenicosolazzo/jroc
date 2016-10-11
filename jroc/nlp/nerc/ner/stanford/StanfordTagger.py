@@ -77,7 +77,7 @@ class StanfordTagger(object):
         """
         bio_tagged = self.__bio_tagger(taggedWords)
         stanford_tree = self.__generate_tree(bio_tagged=bio_tagged)
-
+        
         entities = self.__namedEntitiesFinder.getEntities(stanford_tree)
         return entities
 

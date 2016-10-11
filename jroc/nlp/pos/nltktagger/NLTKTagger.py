@@ -45,7 +45,7 @@ import itertools
 class NLTKTagger(object):
 
     __storage = None
-    def __init__(self, model=None, modelFileName=None, fileName=None, language="en"):
+    def __init__(self, model=None, modelFileName=None, fileName=None, language="en", data=None):
         self.__language = language
         if not model is None: # Use a different trained model
             self.__storage = TaggerStorageAdapter(model=model)
@@ -65,6 +65,8 @@ class NLTKTagger(object):
         tagger = self.__storage.getTagger()
 
         # Tag the text
+        text = nltk.word_tokenize(text)
+        print("text", text);
         pos = tagger.tag(text)
 
         # Result
@@ -90,6 +92,19 @@ class NLTKTagger(object):
         results['common'] = self.__commonWords(pos, number=100)
 
         return results
+
+
+    def findTags(self, text_analysis=None):
+        """
+        Find the tags within the text
+        It takes all the words that are both "NNP"
+        """
+        if text_analysis is None or  not isinstance(text_analysis, dict):
+            return None
+
+        result = text_analysis.get('NNP', {})
+        return result
+
 
     def __commonWords(self, pos,  number=100):
         """

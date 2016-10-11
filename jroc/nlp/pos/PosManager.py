@@ -29,13 +29,12 @@ class PosManager(object):
         common = [word[0] for (word, _) in vocab.most_common(100) if word[1] == 'NN' or word[1] == 'NNS'  or word[1] == 'NNP'  or word[1] == 'NNPS']
         return common
 
-    def getPosInstance(self, data):
+    def getPosInstance(self, data=None):
         taggerClass = POS_TAGGERS.get(self.__language, None)
         if taggerClass is None:
-
             raise Exception("Pos tagger not available for this language: %s" % (self.__language, ) ) # Activate a default tagger
         else:
-            tagger = taggerClass(data)
+            tagger = taggerClass(data=data)
         return tagger
 
     def analyze(self, input):
@@ -44,10 +43,12 @@ class PosManager(object):
         """
         data = input
         # Get the right instance of the pos tagger
-        self.__posTagger = self.getPosInstance(data)
+        print("INPUT", input)
+        self.__posTagger = self.getPosInstance()
 
         # Analyze the data and return a PosResult
-        posResult = self.__posTagger.analyze()
+        posResult = self.__posTagger.analyze(data)
+
         posResult['common_words'] = self.__commonWords(posResult['pos'])
 
         return posResult

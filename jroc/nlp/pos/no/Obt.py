@@ -21,11 +21,17 @@ class OBTManager(object):
 
         self._outputData = None
         # Check if the data is not empty
+        self.__validateContent(data)
+
+
+    def __validateContent(self, data):
+        # Check if the data is not empty
         if data is not None and (isinstance(data, str) or isinstance(data, unicode)):
             # Save the content in a temp file
             self.__saveContent(data)
+            return True
 
-
+        return False
 
     def __deleteFile(self, filename):
         if filename is not None:
@@ -281,10 +287,12 @@ class OBTManager(object):
 
         return entities
 
-    def analyze(self):
+    def analyze(self, text=None):
         """
         Analyze the text
         """
+        self.__validateContent(text)
+
         # Run the Oslo-Bergen tagger analysis
         data = self.obtAnalyze()
 

@@ -104,7 +104,7 @@ def taggerAnalyze():
         return Response(json_response, mimetype="application/json")
 
     language = output.get('language', None)
-    entities = output.get('entities-stanford', [])
+    entities = output.get('entities', [])
 
 
     if showAdvancedResult and len(entities) > 0:
