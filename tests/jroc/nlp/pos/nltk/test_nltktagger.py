@@ -26,7 +26,7 @@ class TaggerStorageAdapterTestCase(unittest.TestCase):
         Test the classifier tagger with an english text
         """
         text = self.helper_readFilename("en/article1.txt")
-        text = text.decode('utf-8').split()
+        text = text.decode('utf-8')
         result = self.tagger.analyze(text)
         expected = (u'Congress\u2019s', u'NNP')
         self.assertTrue(isinstance(result, dict))
@@ -38,7 +38,7 @@ class TaggerStorageAdapterTestCase(unittest.TestCase):
         Test that all the expected keys are returned as results
         """
         text = self.helper_readFilename("en/article1.txt")
-        text = text.decode('utf-8').split()
+        text = text.decode('utf-8')
         result = self.tagger.analyze(text)
         expected = ['pos', 'indexed', 'JJ', 'VB', 'NN', 'NNP', 'RB', 'common']
         self.assertTrue(isinstance(result, dict))

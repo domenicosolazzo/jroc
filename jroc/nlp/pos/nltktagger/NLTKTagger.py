@@ -66,7 +66,6 @@ class NLTKTagger(object):
 
         # Tag the text
         text = nltk.word_tokenize(text)
-        print("text", text);
         pos = tagger.tag(text)
 
         # Result

@@ -27,17 +27,18 @@ class NERPosNoTask(BasicTask):
             stopwords = input.get(stopwordKey, [])
             textAnalysis = input.get(self.__inputKey, None)
 
-            if not isinstance(stopwords, list) or textAnalysis is None:
-                self.finish(data=None, failed=False, error=None)
-                return self.getOutput()
-                
-            if not isinstance(stopwords, list):
-                raise Exception("The retrieved stopwords have an invalid format.")
-
             # Retrieve the text analysis
             textAnalysis = input.get(self.__inputKey, None)
             if textAnalysis is None:
                 raise Exception("The input for NERPosNo was not available. Please that input of this task! ")
+
+            if not isinstance(stopwords, list):
+                raise Exception("The retrieved stopwords have an invalid format.")
+
+            if not isinstance(stopwords, list) or textAnalysis is None:
+                self.finish(data=None, failed=False, error=None)
+                return self.getOutput()
+                    
 
             output = self.__kernel.findNER(textAnalysis=textAnalysis, stopwords=stopwords)
 

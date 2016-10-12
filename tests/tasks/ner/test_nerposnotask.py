@@ -241,6 +241,7 @@ class NERPosNoTaskTestCase(unittest.TestCase):
         """
         input = {}
         self.task.execute(input)
+        print(input, self.task.getOutput())
         self.assertTrue(self.task.hasFailed())
 
     def test_task_execute_with_valid_json(self):
