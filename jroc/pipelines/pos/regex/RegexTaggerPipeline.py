@@ -16,13 +16,24 @@ class RegexTaggerPipeline(BasicPipeline):
         # Run these tasks
         self.addTask(( RegexTaggerTask(name="Regex Tagger"), {"input":[
                                                                 {"key": "json-loader", "source": "internal-output", "map-key": "data"},
-                                                                {"key": "patterns", "source":"remote-json", "map-key": "patterns", "remote_source": "https://gist.githubusercontent.com/domenicosolazzo/670cad541808f6960f161fa4e47dc59a/raw/d4f79cf6e2050f3d1b934cbfaae5b40bb73db969/Json"}
+                                                                {   "key": "patterns",
+                                                                    "source":"remote-json",
+                                                                    "map-key": "patterns",
+                                                                    "remote_source": "https://gist.githubusercontent.com/domenicosolazzo/670cad541808f6960f161fa4e47dc59a/raw/d4f79cf6e2050f3d1b934cbfaae5b40bb73db969/Json"}
                                                             ],
                                                             "output": {"key":"regex", "source": "internal-output", "type": "json" }
                                                           } ))
         self.addTask(( RegexTaggerTask(name="Regex2 Tagger"), {"input":[
-                                                                {"key": "json-loader", "source": "internal-output", "map-key": "data"},
-                                                                {"key": "patterns", "source":"remote-json", "map-key": "patterns", "remote_source": "https://gist.githubusercontent.com/domenicosolazzo/a8dbbd953b70364a7c491c134dc96056/raw/18623f09f3627716f701abd09eec9bb2219e34db/JSON2"}
+                                                                {
+                                                                    "key": "json-loader",
+                                                                    "source": "internal-output",
+                                                                    "map-key": "data"
+                                                                },
+                                                                {
+                                                                    "key": "patterns",
+                                                                    "source":"remote-json",
+                                                                    "map-key": "patterns",
+                                                                    "remote_source": "https://gist.githubusercontent.com/domenicosolazzo/a8dbbd953b70364a7c491c134dc96056/raw/18623f09f3627716f701abd09eec9bb2219e34db/JSON2"}
                                                             ],
                                                             "output": {"key":"regex2", "source": "internal-output", "type": "json" }
                                                           } ))
