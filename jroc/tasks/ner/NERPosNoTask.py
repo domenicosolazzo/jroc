@@ -4,6 +4,7 @@ from . import NERPosNo
 class NERPosNoTask(BasicTask):
     """
     NERPosNoTask: Name Entity retrieval task
+    TODO: to be deprecated!
     """
     __kernel = None # Kernel for this loader
     __inputKey = 'pos-no' # Expected input key.
@@ -38,7 +39,7 @@ class NERPosNoTask(BasicTask):
             if not isinstance(stopwords, list) or textAnalysis is None:
                 self.finish(data=None, failed=False, error=None)
                 return self.getOutput()
-                    
+
 
             output = self.__kernel.findNER(textAnalysis=textAnalysis, stopwords=stopwords)
 

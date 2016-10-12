@@ -1,6 +1,7 @@
 class NERPosNo(object):
     """
     This class returns a set of entities from the output of the Norwegian POS Tagger (OBT)
+    TODO: To be deprecated
     """
     def __init__(self):
         pass
