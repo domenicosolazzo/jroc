@@ -26,7 +26,7 @@ class PosManager(object):
         """
         vocab = nltk.FreqDist(pos)
 
-        common = [word[0] for (word, _) in vocab.most_common(100) if word[1] == 'NN' or word[1] == 'NNS'  or word[1] == 'NNP'  or word[1] == 'NNPS']
+        common = [(word[0], index) for (word, index) in vocab.most_common(100) if word[1] == 'NN' or word[1] == 'NNS'  or word[1] == 'NNP'  or word[1] == 'NNPS']
         return common
 
     def getPosInstance(self, data=None):
