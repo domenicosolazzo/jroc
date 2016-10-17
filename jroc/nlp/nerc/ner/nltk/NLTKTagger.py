@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-import nltk
 import os
 from . import NERFinder
-from nltk import pos_tag
-from nltk.tokenize import word_tokenize
 
 class NLTKTagger(object):
     """
@@ -11,7 +8,8 @@ class NLTKTagger(object):
     """
 
     def __init__(self, language="en"):
-        self.__tagger = nltk.pos_tag
+        from nltk import pos_tag
+        self.__tagger = pos_tag
         self.__namedEntitiesFinder = NERFinder(language=language)
 
     def __tags(self, raw_text):
@@ -19,6 +17,8 @@ class NLTKTagger(object):
         Return the named entities tokens given a raw text
         :raw_text: Raw text
         """
+        from nltk.tokenize import word_tokenize
+        
         if isinstance(raw_text, str):
             # Decode to utf-8
             raw_text = raw_text.decode('utf-8')
@@ -33,7 +33,9 @@ class NLTKTagger(object):
         """
         Tranform a list of tags in a tree
         """
-        ne_tree = nltk.ne_chunk(tags)
+        from nltk import ne_chunk
+
+        ne_tree = ne_chunk(tags)
         return ne_tree
 
     def getEntitiesByTags(self, tags):

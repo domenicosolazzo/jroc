@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-import nltk
 import os
-from nltk.tree import Tree
 
 class NERFinder(object):
     """
@@ -22,6 +20,8 @@ class NERFinder(object):
         Parse named entities from the Tree
         :ne_tree: Named entities tree
         """
+        from nltk.tree import Tree
+
         ne = []
     	for subtree in ne_tree:
     		if type(subtree) == Tree: # If subtree is a noun chunk, i.e. NE != "O"

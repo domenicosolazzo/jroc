@@ -40,8 +40,8 @@ WRB	wh-abverb	where, when
 """
 from collections import defaultdict
 from TaggerStorageAdapter import TaggerStorageAdapter
-import nltk
 import itertools
+
 class NLTKTagger(object):
 
     __storage = None
@@ -59,18 +59,18 @@ class NLTKTagger(object):
         """
         It returns the POS tags for a given text
         """
-
+        from nltk import word_tokenize, Index
 
         # Retrieve the tagger from the storage
         tagger = self.__storage.getTagger()
 
         # Tag the text
-        text = nltk.word_tokenize(text)
+        text = word_tokenize(text)
         pos = tagger.tag(text)
 
         # Result
         results = defaultdict(list)
-        indexedPos = nltk.Index((value, key) for (key, value) in pos)
+        indexedPos = Index((value, key) for (key, value) in pos)
         results['pos'] = pos
         results['indexed'] = indexedPos
 
@@ -109,6 +109,8 @@ class NLTKTagger(object):
         """
         Find common words in the text.
         """
-        vocab = nltk.FreqDist(pos)
+        from nltk import FreqDist
+
+        vocab = FreqDist(pos)
         common = [word[0] for (word, _) in vocab.most_common(100) if word[1] == 'NN' or word[1] == 'NNS'  or word[1] == 'NNP'  or word[1] == 'NNPS']
         return common

@@ -1,6 +1,5 @@
 from . import OBTManager
 from . import NLTKTagger
-import nltk
 
 # List of Pos tagger
 POS_TAGGERS = { "no" : OBTManager,
@@ -24,7 +23,9 @@ class PosManager(object):
         """
         Find common words in the text.
         """
-        vocab = nltk.FreqDist(pos)
+        from nltk import FreqDist
+
+        vocab = FreqDist(pos)
 
         common = [(word[0], index) for (word, index) in vocab.most_common(100) if word[1] == 'NN' or word[1] == 'NNS'  or word[1] == 'NNP'  or word[1] == 'NNPS']
         return common

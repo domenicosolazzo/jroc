@@ -1,5 +1,3 @@
-import nltk
-from nltk.tokenize import RegexpTokenizer
 import re
 
 class RegexTagger(object):
@@ -15,6 +13,9 @@ class RegexTagger(object):
         """
         Initialize the RegexTagger
         """
+        from nltk import RegexpTagger
+        from nltk.tokenize import RegexpTokenizer
+
         json = data
         self.__gaps = True
         if not 'entities' in json:
@@ -48,6 +49,8 @@ class RegexTagger(object):
 
 
     def getEntities(self, text):
+        from nltk import sent_tokenize
+        
         segmented_lines=nltk.sent_tokenize(text)
         for line in segmented_lines:
             words = self.__tokenizer.tokenize(line)

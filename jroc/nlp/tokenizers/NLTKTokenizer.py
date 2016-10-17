@@ -1,5 +1,5 @@
-from nltk.tokenize import sent_tokenize, word_tokenize
-import nltk.data
+
+
 AVAILABLE_LANGUAGES = dict([
     ('cs', 'czech'), ('da', 'danish'), ('nl', 'dutch'), ('en', 'english'), ('et', 'estonian'),
     ('fi', 'finnish'),('fr', 'french'), ('de', 'german'), ('el', 'greek'), ('it', 'italian'),
@@ -19,6 +19,8 @@ class NLTKTokenizer(object):
         """
         Load the tokenizer for a given language. Default is English
         """
+        import nltk.data
+
         languagePicklePath = "tokenizers/punkt/%s.pickle" % AVAILABLE_LANGUAGES.get(language_code, "en")
         tokenizer = nltk.data.load(languagePicklePath)
         return tokenizer
@@ -35,4 +37,6 @@ class NLTKTokenizer(object):
         """
         Tokenize a sentence in words
         """
+        from nltk.tokenize import sent_tokenize, word_tokenize
+
         return word_tokenize(sentence)
