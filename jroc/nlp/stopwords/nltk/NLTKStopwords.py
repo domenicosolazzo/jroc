@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import os
-from nltk.corpus import stopwords
 
 class NLTKStopwords(object):
     """
@@ -23,6 +22,8 @@ class NLTKStopwords(object):
         """
         Initialize the stopwords for a given language
         """
+        from nltk.corpus import stopwords
+        
         language = self.AVAILABLE_LANGUAGES[self.__language]
         # Ge the stopwords for this language
         self.stopwords = list(set(stopwords.words(language)))

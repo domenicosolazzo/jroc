@@ -33,7 +33,7 @@ class LinkedDataEntityPipeline(BasicPipeline):
 
         # Run these tasks
         self.addTask(( EntityAnnotationURITask(name="LinkedData - Entity URI Task") , {"input":[{"key": "pos", "source": "main", "map-key": "entity_name"}], "output": {"key":"entity-uri", "source": "internal-output", "type": "json" }}))
-
+        """
         # Entity types annotation
         if self.__withTypesAnnotation == True:
             self.addTask(( EntityAnnotationTypesTask(name="LinkedData - Entity Types Task") , {"input":[{"key": "pos", "source": "main", "map-key": "entity_name"}], "output": {"key":"entity-types", "source": "internal-output", "type": "json" }}))
@@ -53,7 +53,7 @@ class LinkedDataEntityPipeline(BasicPipeline):
         # Entity annotation
         if self.__withEntityAnnotation == True:
             self.addTask(( EntityAnnotationTask(name="LinkedData - Entity Task") , {"input":[{"key": "entities", "source": "external-input", "map-key": "entities", "data":{"entities":[input]}}], "output": {"key":"entities-annotated", "source": "internal-output", "type": "json" }}))
-
+        """
 
     def execute(self):
         super(LinkedDataEntityPipeline, self).execute()

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from nltk.corpus import wordnet as wn
 import itertools
 """
 Languages           | ShortCode     | Wordnet
@@ -108,6 +107,8 @@ class WordnetManager(object):
         """
         It returns the synsets given both word and language code
         """
+        from nltk.corpus import wordnet as wn
+
         synsets = wn.synsets(word, lang=wordNetCode)
         return synsets
 

@@ -2,10 +2,6 @@
 import nltk
 import os
 from . import NERFinder
-from nltk.tag import StanfordNERTagger
-from nltk.tokenize import word_tokenize
-from nltk import pos_tag
-from nltk.chunk import conlltags2tree
 
 class StanfordTagger(object):
     """
@@ -16,6 +12,8 @@ class StanfordTagger(object):
     __stanfordJar = "%s/dist/stanford-ner.jar"
 
     def __init__(self, language="en"):
+        from nltk.tag import StanfordNERTagger
+
         self.__stanfordJar = "%s/dist/stanford-ner.jar" % self.__currentDirectory
         self.__classifier = "%s/dist/classifiers/english.all.3class.distsim.crf.ser.gz" % (self.__currentDirectory,)
         self.__tagger = StanfordNERTagger( self.__classifier,
@@ -28,6 +26,8 @@ class StanfordTagger(object):
         Return the named entities tokens given a raw text
         :raw_text: Raw text
         """
+        from nltk.tokenize import word_tokenize
+
         if isinstance(raw_text, str):
             # Decode to utf-8
             raw_text = raw_text.decode('utf-8')
@@ -64,6 +64,10 @@ class StanfordTagger(object):
         """
         Tranform a list of tags in a tree
         """
+        from nltk import pos_tag
+        from nltk.chunk import conlltags2tree
+
+
         tokens, ne_tags = zip(*bio_tagged)
         pos_tags = [pos for token, pos in pos_tag(tokens)]
 
@@ -77,7 +81,7 @@ class StanfordTagger(object):
         """
         bio_tagged = self.__bio_tagger(taggedWords)
         stanford_tree = self.__generate_tree(bio_tagged=bio_tagged)
-        
+
         entities = self.__namedEntitiesFinder.getEntities(stanford_tree)
         return entities
 
