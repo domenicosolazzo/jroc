@@ -1176,6 +1176,88 @@ class OBTManagerTestCase(unittest.TestCase):
         self.assertEquals(expectedTagsCount, len(actual))
         self.assertEquals(expectedTags, actual)
 
+    def test_pos_article14_entities(self):
+        """
+        Test the entities returned for 'article14.txt'
+        """
+        text = self.helper_readFilename('no/article14.txt')
+        self.obtManager = OBTManager(text)
+        actual = sorted(self.obtManager.findEntities(stopwords=[]))
+        expectedEntities = sorted([u'Magnor Glassverk', u'Selvbl\xe5s', u'"Turistfelle"',
+                                    u'\xabNumber 1 Christmas Attraction on TripAdvisor"', u'Yelp', u'L\xf8iten Lys AS',
+                                    u'Oslo', u'Hadeland', u'Taxfree', u'Hadeland Glassverk'])
+
+        expectedEntitiesCount = len(expectedEntities)
+
+        self.assertTrue(actual is not None)
+        self.assertTrue(isinstance(actual, list))
+        self.assertEquals(expectedEntitiesCount, len(actual))
+        self.assertEquals(expectedEntities, actual)
+
+    def test_pos_article14_entities_with_norwegian_with_stopwords(self):
+        """
+        Test the entities returned for 'article14.txt' after filtering the norwegian stopwords
+        """
+        text = self.helper_readFilename('no/article14.txt')
+        self.obtManager = OBTManager(text)
+        actual = sorted(self.obtManager.findEntities(stopwords=stopwordsNorwegian))
+
+        expectedEntities = sorted([u'Magnor Glassverk', u'Selvbl\xe5s',
+                                    u'"Turistfelle"', u'\xabNumber 1 Christmas Attraction on TripAdvisor"',
+                                    u'Yelp', u'L\xf8iten Lys AS', u'Oslo', u'Hadeland',
+                                    u'Taxfree', u'Hadeland Glassverk'])
+        expectedEntitiesCount = len(expectedEntities)
+
+        self.assertTrue(actual is not None)
+        self.assertTrue(isinstance(actual, list))
+        self.assertEquals(expectedEntitiesCount, len(actual))
+        self.assertEquals(expectedEntities, actual)
+
+    def test_pos_article14_tags(self):
+        """
+        Test the tags returned for 'article14.txt'
+        """
+        text = self.helper_readFilename('no/article14.txt')
+        self.obtManager = OBTManager(text)
+
+        textAnalysis = self.obtManager.analyze()
+        actual = sorted(self.obtManager.findTags(text_analysis=textAnalysis))
+
+        expectedTags = sorted([u'Magnor', u'Selvbl\xe5s', u'"Turistfelle"',
+                                u'\xabNumber 1 Christmas Attraction on TripAdvisor"',
+                                u'Yelp', u'Lys', u'Oslo', u'Glassverk', u'L\xf8iten',
+                                u'Hadeland', u'Taxfree'])
+
+        expectedTagsCount = len(expectedTags)
+
+        self.assertTrue(actual is not None)
+        self.assertTrue(isinstance(actual, list))
+        self.assertEquals(expectedTagsCount, len(actual))
+        self.assertEquals(expectedTags, actual)
+
+    def test_pos_article14_tags_with_stopwords(self):
+        """
+        Test the tags returned for 'article14.txt' after filtering the norwegian stopwords
+        """
+        text = self.helper_readFilename('no/article14.txt')
+        self.obtManager = OBTManager(text)
+
+        expectedTags = sorted([u'Magnor', u'Selvbl\xe5s', u'"Turistfelle"',
+                        u'\xabNumber 1 Christmas Attraction on TripAdvisor"', u'Yelp', u'Lys', u'Oslo', u'Glassverk',
+                        u'L\xf8iten', u'Hadeland', u'Taxfree'])
+        expectedTagsCount = len(expectedTags)
+
+        textAnalysis = self.obtManager.analyze()
+        actual = self.obtManager.findTags(text_analysis=textAnalysis)
+
+        actual = sorted([tag for tag in actual if not tag.lower() in stopwordsNorwegian])
+
+        self.assertTrue(actual is not None)
+        self.assertTrue(isinstance(actual, list))
+        self.assertEquals(expectedTagsCount, len(actual))
+        self.assertEquals(expectedTags, actual)
+
+
     ##### Ny norsk #####
     def test_pos_article1_nn_entities(self):
         """
