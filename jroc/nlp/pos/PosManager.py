@@ -44,7 +44,6 @@ class PosManager(object):
         """
         data = input
         # Get the right instance of the pos tagger
-        print("INPUT", input)
         self.__posTagger = self.getPosInstance()
 
         # Analyze the data and return a PosResult
