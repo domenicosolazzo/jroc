@@ -16,32 +16,9 @@ def nerDetection():
 
     output = pipeline.getOutput()
 
-    entities = output.get('entities', [])
-    stanford = output.get('entities-stanford', [])
-    result = {}
-    result['entities'] = entities
-    result['entities-stanford'] = stanford
-    from sets import Set
-    stanford_set = Set([entity[0] for index, entity in enumerate(stanford)])
-    entities_set = Set(entities)
-
-    difference = entities_set.difference_update(stanford_set)
-
-    if len(stanford) > 0:
-        temp = {}
-        temp['OTHERS'] = list(entities_set)
-        for index, entity in enumerate(stanford):
-            entityType = entity[1]
-            entityName = entity[0]
-            if entityType in temp:
-                if not entityName in temp[entityType]:
-                    temp[entityType].append(entityName)
-            else:
-                temp[entityType] = [entityName]
-
-        result['entities-by-type'] = temp
+    entities = output.get('entities-formatted', [])
 
     #result["language"] = languageDetection
 
-    json_response = json.dumps(result)
+    json_response = json.dumps(entities)
     return Response(json_response, mimetype="application/json")
