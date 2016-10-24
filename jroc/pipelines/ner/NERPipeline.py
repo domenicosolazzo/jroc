@@ -2,6 +2,7 @@ from . import BasicPipeline
 from . import NERPosNoTask
 from . import TaggerTagsTask
 from . import EntityAnnotationTask
+from . import StanfordTaggerTask
 from . import PosTaggerPipeline
 from collections import defaultdict
 
@@ -25,9 +26,8 @@ class NERPipeline(BasicPipeline):
 
         # Run these tasks
         #self.addTask(( NERPosNoTask(name="NER Task"), {"input":[{"key": "pos", "source": "internal-output", "map-key": "pos-no"}], "output":{"key":"entities", "source": "internal-output", "type": "json" } } ))
-        self.addTask(( TaggerTagsTask(name="NER Stanford Task"), {"input":[{"key": "pos", "source": "internal-output", "map-key": "data"}], "output":{"key":"entities", "source": "internal-output", "type": "json" } } ))
-
-
+        self.addTask(( TaggerTagsTask(name="NER Task"), {"input":[{"key": "pos", "source": "internal-output", "map-key": "data"}], "output":{"key":"entities", "source": "internal-output", "type": "json" } } ))
+        self.addTask(( StanfordTaggerTask(name="NER Task"), {"input":[{"key": "json-loader", "source": "internal-output", "map-key": "data"}], "output":{"key":"entities-stanford", "source": "internal-output", "type": "json" } } ))
 
         if self.__withEntityAnnotation == True:
             # Add the entity annotation task.
