@@ -55,9 +55,9 @@ def taggerEntities():
     pipeline = NERPipeline(input=data, name="NER Pipeline", withEntityAnnotation=False)
     pipeline.execute()
     output = pipeline.getOutput()
-
+    ""
     language = output.get('language', None)
-    entities = output.get('entities-stanford', [])
+    entities = output.get('entities', [])
 
     if showAdvancedResult and len(entities) > 0:
         # Advanced formatting for each entity
@@ -72,7 +72,7 @@ def taggerEntities():
 
     if showCommonWords == True:
         pos = output.get("pos", [])
-        result["meta"]["common_words"] = output.get("common_words", [])
+        result["meta"]["common_words"] = output.get('pos', {}).get("common_words", [])
 
     if shouldShowLanguage == True:
         result["meta"]["language"] = language

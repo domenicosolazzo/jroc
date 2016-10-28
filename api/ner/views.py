@@ -11,7 +11,7 @@ def nerDetection():
     data = request.data
 
     # Loading a language pipeline
-    pipeline = NERPipeline(input=data, name="NER Detection pipeline")
+    pipeline = NERPipeline(input=data, name="NER Detection pipeline", withStanfordTagging=True, withNERFormatting=True)
     pipeline.execute()
 
     output = pipeline.getOutput()
