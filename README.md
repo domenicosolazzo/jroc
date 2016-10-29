@@ -1,6 +1,7 @@
 # JRoc
 ### We ain't afraid of Randy with his candy. You Know What Am I Sayin'?
-A REST API for tagging and entity extraction of documents in Norwegian bokmål and nynorsk.
+A REST API for tagging and entity extraction of documents.
+It can extract entity information in several languages like Norwegian, English and Spanish.
 
 
 # INSTALLATION
