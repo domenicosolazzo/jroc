@@ -1,0 +1,15 @@
+# .coveragerc to control coverage.py
+[run]
+branch = False
+
+source =
+    api/
+    jroc/
+
+omit =
+    tests/
+
+[report]
+
+[html]
+directory = htmlcov

@@ -1,0 +1,1 @@
+from jroc.tasks.sparql.dbpedia.EntityAnnotationTask import EntityAnnotationTask, EntityAnnotationURITask, EntityAnnotationTypesTask, EntityAnnotationPropertiesTask, EntityAnnotationThumbnailTask

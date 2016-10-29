@@ -1,0 +1,7 @@
+/tests
+/data
+/data/nltk
+/tmp/T*
+*.jar
+*.zip
+/jroc/nlp/nerc/ner/stanford/dist/*

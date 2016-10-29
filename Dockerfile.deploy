@@ -12,6 +12,7 @@ ENV CPATH $INCLUDE_PATH
 ENV CPPPATH $INCLUDE_PATH
 ENV PKG_CONFIG_PATH /app/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:/app/.apt/usr/lib/i386-linux-gnu/pkgconfig:/app/.apt/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 ENV OBT_TYPE tag-nostat-bm.sh
+ENV NLTK_DATA /app/user/data/nltk
 
 
 RUN useradd -d /app -m app
@@ -119,6 +120,7 @@ RUN echo 'export PYTHONHASHSEED=${PYTHONHASHSEED:-random}'  >> /app/.profile.d/p
 RUN echo 'export PYTHONHOME=/app/.heroku/python'  >> /app/.profile.d/python.sh
 RUN echo 'export PYTHONUNBUFFERED=true'  >> /app/.profile.d/python.sh
 RUN echo "export OBT_TYPE=\"tag-nostat-bm.sh\"" >> /app/.profile.d/python.sh
+RUN echo "export NLTK_DATA=\"/app/user/data/nltk\"" >> /app/.profile.d/python.sh
 
 RUN chmod +x /app/.profile.d/python.sh
 
@@ -133,4 +135,5 @@ RUN echo "Retrieving the tagger..."
 RUN cd The-Oslo-Bergen-Tagger/ && cd bin/ && wget http://www.tekstlab.uio.no/mtag/linux64/mtag && chmod +x mtag
 RUN cd The-Oslo-Bergen-Tagger/bin && pwd && ls -la
 
+RUN echo "Copying files into the container"
 ADD . /app/user/

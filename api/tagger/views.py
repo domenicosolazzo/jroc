@@ -2,10 +2,8 @@
 
 from . import tagger
 from flask import request, Response
-from obt import OBTManager
-from stopwords import StopwordManager
-from api.utils.input import DataCleaner
-from api.language.detector import LanguageDetector
+from jroc.pipelines.ner.NERPipeline import NERPipeline
+from jroc.pipelines.pos.PosTaggerPipeline import PosTaggerPipeline
 
 import json
 
@@ -25,28 +23,11 @@ def taggerTags():
 
     data = request.data
 
-    # Cleaning the input data
-    dataCleaner = DataCleaner()
-    data = dataCleaner.filterCharacters(data)
+    pipeline = PosTaggerPipeline(input=data, name="PosTagger Pipeline")
+    pipeline.execute()
+    output = pipeline.getOutput()
 
-    json_result = json.loads(data)
-
-    # Language Detection
-    text = json_result.get("data", None)
-    languageResult = LanguageDetector().classify(text)
-    language = languageResult[0]
-
-    # Oslo-Bergen Tagger
-    obtManager = OBTManager(json_result)
-
-    tags = {}
-
-    # Find the tags
-    tags = obtManager.findTags()
-    if shouldFilterStopwords == True:
-        # Applying the stopwords
-        stopwordManager = StopwordManager(language=language)
-        tags = stopwordManager.filterStopWords(tags)
+    tags = output.get('tags', [])
 
     result = {}
     result["uri"] = "%s" % (request.base_url, )
@@ -62,28 +43,21 @@ def taggerTags():
 def taggerEntities():
     shouldFilterStopwords = True if request.args.get('stopwords') == 'true' else False
     shouldShowLanguage = True if request.args.get('language') == 'true' else False
-    showAdvancedResult = True if request.args.get("advanced") else False
+    showAdvancedResult = True if request.args.get("advanced") == 'true' else False
+    showCommonWords = True if request.args.get("common") == 'true' else False
+
+    result = {}
+    result["uri"] = "%s" % (request.base_url, )
+    result["meta"] = {}
+    result["data"] = {}
 
     data = request.data
-
-    # Cleaning the data in input
-    dataCleaner = DataCleaner()
-    data = dataCleaner.filterCharacters(data)
-
-    json_result = json.loads(data)
-
-    # Language Detection
-    text = json_result.get("data", None)
-    languageResult = LanguageDetector().classify(text)
-    language = languageResult[0]
-
-    # Oslo-Bergen Tagger
-    obtManager = OBTManager(json_result)
-
-    # Applying the stopwords
-    stopwordManager = StopwordManager(language=language)
-    stopwords = stopwordManager.getStopWords() if shouldFilterStopwords == True else []
-    entities = obtManager.findEntities(stopwords=stopwords)
+    pipeline = NERPipeline(input=data, name="NER Pipeline", withEntityAnnotation=False)
+    pipeline.execute()
+    output = pipeline.getOutput()
+    ""
+    language = output.get('language', None)
+    entities = output.get('entities', [])
 
     if showAdvancedResult and len(entities) > 0:
         # Advanced formatting for each entity
@@ -94,48 +68,64 @@ def taggerEntities():
                 "uri": "%sentities/%s"  % (request.url_root, entity.replace(" ", "_"))
             })
         entities = temp
-
-    result = {}
-    result["uri"] = "%s" % (request.base_url, )
     result["data"] = entities
-    result["meta"] = {}
+
+    if showCommonWords == True:
+        pos = output.get("pos", [])
+        result["meta"]["common_words"] = output.get('pos', {}).get("common_words", [])
+
     if shouldShowLanguage == True:
-        result["meta"]["language"] = languageResult[0]
+        result["meta"]["language"] = language
 
     json_response = json.dumps(result)
     return Response(json_response, mimetype="application/json")
 
 @tagger.route("/analyze", methods=["POST"])
 def taggerAnalyze():
-    requestObt = True if request.args.get('obt') == 'true' else False
-    requestEntities = True if request.args.get('entities') == 'true' else False
-    requestTags = True if request.args.get('tags') == 'true' else False
-
-    data = request.data
-    data = data.replace("'","\"").replace("\n", "")
-    json_result = json.loads(data)
-    obtManager = OBTManager(json_result)
+    shouldFilterStopwords = True if request.args.get('stopwords') == 'true' else False
+    shouldShowLanguage = True if request.args.get('language') == 'true' else False
+    showAdvancedResult = True if request.args.get("advanced") == 'true' else False
+    showCommonWords = True if request.args.get("common") == 'true' else False
+    rawOutput = True if request.args.get("raw") == 'true' else False
 
     result = {}
     result["uri"] = "%s" % (request.base_url, )
+    result["data"] = {}
+    result["meta"] = {}
 
-    data = {}
-    if(requestObt == True):
-        obt_result = obtManager.obtAnalyze()
-        data["obt"] = obt_result
+    data = request.data
+    pipeline = NERPipeline(input=data, name="NER Pipeline", withEntityAnnotation=False)
 
-    if(requestTags == True):
-        tags = obtManager.findTags()
-        data["tags"] = tags
+    pipeline.execute()
+    output = pipeline.getOutput()
 
-    if(requestEntities == True):
-        entities = obtManager.findEntities()
-        data["entities"] = entities
+    if (rawOutput == True):
+        json_response = json.dumps(output)
+        return Response(json_response, mimetype="application/json")
 
-    text_analyze_result = obtManager.analyzeText()
-    data["text_analyze"] = text_analyze_result
-    result["data"] = data
+    language = output.get('language', None)
+    entities = output.get('entities', [])
+
+
+    if showAdvancedResult and len(entities) > 0:
+        # Advanced formatting for each entity
+        temp = []
+        for entity in entities:
+            temp.append({
+                "name": entity,
+                "uri": "%sentities/%s"  % (request.url_root, entity.replace(" ", "_"))
+            })
+        entities = temp
+    result["data"] = entities
+
+    if showCommonWords == True:
+        pos = output.get("pos", [])
+        result["meta"]["common_words"] = pos.get("common_words", [])
+
+
+    if shouldShowLanguage == True:
+        result["meta"]["language"] = language
+
 
     json_response = json.dumps(result)
-
     return Response(json_response, mimetype="application/json")

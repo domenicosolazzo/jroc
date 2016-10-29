@@ -1,0 +1,1 @@
+from SPARQL import SPARQLAdapter

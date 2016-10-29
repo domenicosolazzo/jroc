@@ -1,0 +1,1 @@
+from jroc.pipelines.language.LanguageDetectionPipeline import LanguageDetectionPipeline
