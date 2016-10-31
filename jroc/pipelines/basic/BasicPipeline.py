@@ -1,5 +1,6 @@
 from . import Pipeline
 import Queue
+import json
 
 class BasicPipeline(Pipeline):
     """
@@ -12,7 +13,9 @@ class BasicPipeline(Pipeline):
         "post": Queue.Queue()
     }
 
-    def __init__(self, input, name="Basic pipeline"):
+    __jsonPipelineConfiguration = None
+
+    def __init__(self, input, name="Basic pipeline", jsonConfig=None):
         super(BasicPipeline, self).__init__()
         self.__tasks = Queue.Queue()
         self.__pipelines = {
@@ -21,6 +24,59 @@ class BasicPipeline(Pipeline):
         }
         self.setName(name)
         self.setInput(input)
+
+    def isValidJSON(self, jsonConfig):
+        """
+        It checks if it is a valid JSON config
+        """
+        try:
+            is_valid = json.loads(jsonConfig)
+            return True
+        except:
+            return False
+
+    def generatePipelineConfiguration(self, jsonConfig):
+        """
+        Validate the configuration.
+        """
+        is_valid = self.isValidJSON(jsonConfig)
+        if not is_valid:
+            raise Exception("The configuration is not a valid JSON file.")
+
+        if not hasattr(jsonConfig, 'tasks'):
+            raise Exception("The configuration is not valid: missing the task key")
+
+        list_of_tasks = jsonConfig.get('tasks', [])
+
+        ## Grab tasks and order them by order
+        from operator import itemgetter
+        orderedJsonTask = sorted(list_of_tasks, key=itemgetter('order'))
+
+        ## Take task
+        taskList = []
+        for jsonTask in orderedJsonTask:
+            if not hasattr(jsonTask, 'id'):
+                raise Exception("The configuration is not valid: the task has not an ID!. Task Order: %s"  % jsonTask.get('order', None))
+            if not hasattr(jsonTask, 'name'):
+                raise Exception("The configuration is not valid: A task has no name. Task Id: %s, Task Order: %s" % (jsonTask.get('id', None), jsonTask.get('order', None)))
+
+            taskName = jsonTask.get('name', None)
+            taskDescription = jsonTask.get('description', '')
+            ## - Get the right input
+            taskInput = jsonTask.get('input', [])
+            ## - Get their output
+            taskOutput = jsonTask.get('output', None)
+
+            ## - Get the right task class
+            # Lookup name with valid Task
+            from jroc.tasks.finder.TaskFinder import TaskFinder
+            task = TaskFinder.lookup(taskName, taskDescription, taskInput, taskOutput)
+
+            # Adding the task to the end of the list
+            taskList.append(task)
+
+        for task in taskList:
+            task.addTask(task)
 
     def addTask(self, taskInfo):
         """
