@@ -1,4 +1,5 @@
 from . import Pipeline
+from . import TaskFinder
 import Queue
 import json
 
@@ -69,7 +70,6 @@ class BasicPipeline(Pipeline):
 
             ## - Get the right task class
             # Lookup name with valid Task
-            from jroc.tasks.finder.TaskFinder import TaskFinder
             task = TaskFinder.lookup(taskName, taskDescription, taskInput, taskOutput)
 
             # Adding the task to the end of the list

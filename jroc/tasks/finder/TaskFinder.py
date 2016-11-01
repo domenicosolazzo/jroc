@@ -19,3 +19,6 @@ class TaskFinder(object):
             raise Exception("Error retrieving the correct task. The task name is not valid. Task Name: %s" % taskName)
 
         return (TaskEntity(name=description), taskInput, taskOutput)
+
+    def getAvailableTasks(self):
+        return AVAILABLE_TASKS
