@@ -5,25 +5,31 @@ class NLTKStopwords(object):
     """
     StopwordManager takes care to import the stopwords for a given language and filters a collection of strings.
     """
-    AVAILABLE_LANGUAGES = dict(zip(['da', 'nl','en', 'fi', 'fr', 'de', 'hu', 'it','no', 'pt','ru','es','sv','tr'], stopwords.fileids()))
-    AVAILABLE_LANGUAGES['da']= 'danish'
-    AVAILABLE_LANGUAGES['nb']='norwegian'
-    AVAILABLE_LANGUAGES['nn']='norwegian'
-    AVAILABLE_LANGUAGES['se']='swedish'
-
+    AVAILABLE_LANGUAGES = []
 
     def __init__(self, filename=None, language="no"):
-        if not language in self.AVAILABLE_LANGUAGES:
-            raise ValueError("The stopword for this language is not available")
         self.__language = language.lower()
         self.__initializeStopwords()
+
+    def __getAvailableLanguages(self, stopwordCorpus):
+        AVAILABLE_LANGUAGES = dict(zip(['da', 'nl','en', 'fi', 'fr', 'de', 'hu', 'it','no', 'pt','ru','es','sv','tr'], stopwordCorpus.fileids()))
+        AVAILABLE_LANGUAGES['da']= 'danish'
+        AVAILABLE_LANGUAGES['nb']='norwegian'
+        AVAILABLE_LANGUAGES['nn']='norwegian'
+        AVAILABLE_LANGUAGES['se']='swedish'
+
 
     def __initializeStopwords(self):
         """
         Initialize the stopwords for a given language
         """
         from nltk.corpus import stopwords
-        
+
+        self.__getAvailableLanguages(stopwords)
+
+        if not self.__language in self.AVAILABLE_LANGUAGES:
+            raise ValueError("The stopword for this language is not available")
+
         language = self.AVAILABLE_LANGUAGES[self.__language]
         # Ge the stopwords for this language
         self.stopwords = list(set(stopwords.words(language)))

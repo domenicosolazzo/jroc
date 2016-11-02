@@ -39,7 +39,7 @@ class RegexTagger(object):
             entity = r'%s' % item.get('entity', '')
             patterns.append( (re.compile( entity, re.IGNORECASE ), pattern_tags) )
 
-        self.tagger = nltk.RegexpTagger(patterns)
+        self.tagger = RegexpTagger(patterns)
         if 'regex_sentence' in optionals:
             self.__regex_sentence = optionals.get('regex_sentence', self.__regex_sentence)
         if 'gaps' in optionals:
@@ -50,8 +50,8 @@ class RegexTagger(object):
 
     def getEntities(self, text):
         from nltk import sent_tokenize
-        
-        segmented_lines=nltk.sent_tokenize(text)
+
+        segmented_lines=sent_tokenize(text)
         for line in segmented_lines:
             words = self.__tokenizer.tokenize(line)
             tags = self.tagger.tag(words)
