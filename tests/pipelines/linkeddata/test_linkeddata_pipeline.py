@@ -27,7 +27,6 @@ class LinkedDataEntityPipelineTestCase(unittest.TestCase):
 
         output = self.pipeline.getOutput()
         self.assertIsNotNone(output)
-        print(output)
         self.assertTrue('entity-uri' in output)
         self.assertTrue('entity-types' in output)
         self.assertTrue('entity-properties' in output)

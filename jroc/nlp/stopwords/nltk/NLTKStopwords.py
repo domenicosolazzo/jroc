@@ -12,11 +12,11 @@ class NLTKStopwords(object):
         self.__initializeStopwords()
 
     def __getAvailableLanguages(self, stopwordCorpus):
-        AVAILABLE_LANGUAGES = dict(zip(['da', 'nl','en', 'fi', 'fr', 'de', 'hu', 'it','no', 'pt','ru','es','sv','tr'], stopwordCorpus.fileids()))
-        AVAILABLE_LANGUAGES['da']= 'danish'
-        AVAILABLE_LANGUAGES['nb']='norwegian'
-        AVAILABLE_LANGUAGES['nn']='norwegian'
-        AVAILABLE_LANGUAGES['se']='swedish'
+        self.AVAILABLE_LANGUAGES = dict(zip(['da', 'nl','en', 'fi', 'fr', 'de', 'hu', 'it', 'kz', 'no', 'pt','ru','es','sv','tr'], stopwordCorpus.fileids()))
+        self.AVAILABLE_LANGUAGES['da']= 'danish'
+        self.AVAILABLE_LANGUAGES['nb']='norwegian'
+        self.AVAILABLE_LANGUAGES['nn']='norwegian'
+        self.AVAILABLE_LANGUAGES['se']='swedish'
 
 
     def __initializeStopwords(self):
@@ -28,7 +28,8 @@ class NLTKStopwords(object):
         self.__getAvailableLanguages(stopwords)
 
         if not self.__language in self.AVAILABLE_LANGUAGES:
-            raise ValueError("The stopword for this language is not available")
+            print(self.AVAILABLE_LANGUAGES)
+            raise ValueError("The stopword for this language is not available. Requested language: %s " % self.__language)
 
         language = self.AVAILABLE_LANGUAGES[self.__language]
         # Ge the stopwords for this language

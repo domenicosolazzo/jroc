@@ -87,21 +87,24 @@ class StopwordsTestCase(unittest.TestCase):
         Test the stopwords for the german language
         """
         self.stopwordManager = StopwordManager(language="de")
-        expected = [u'aber', u'alle', u'allem', u'allen', u'aller', u'alles', u'als', u'also', u'am', u'an', u'ander', u'andere', u'anderem', u'anderen', u'anderer', u'anderes',
-                    u'anderm', u'andern', u'anderr', u'anders', u'auch', u'auf', u'aus', u'bei', u'bin', u'bis', u'bist', u'da', u'damit', u'dann', u'das', u'dasselbe', u'dazu',
-                    u'da\xdf', u'dein', u'deine', u'deinem', u'deinen', u'deiner', u'deines', u'dem', u'demselben', u'den', u'denn', u'denselben', u'der', u'derer', u'derselbe',
-                    u'derselben', u'des', u'desselben', u'dessen', u'dich', u'die', u'dies', u'diese', u'dieselbe', u'dieselben', u'diesem', u'diesen', u'dieser', u'dieses',
-                    u'dir', u'doch', u'dort', u'du', u'durch', u'ein', u'eine', u'einem', u'einen', u'einer', u'eines', u'einig', u'einige', u'einigem', u'einigen', u'einiger',
-                    u'einiges', u'einmal', u'er', u'es', u'etwas', u'euch', u'euer', u'eure', u'eurem', u'euren', u'eurer', u'eures', u'f\xfcr', u'gegen', u'gewesen', u'hab',
-                    u'habe', u'haben', u'hat', u'hatte', u'hatten', u'hier', u'hin', u'hinter', u'ich', u'ihm', u'ihn', u'ihnen', u'ihr', u'ihre', u'ihrem', u'ihren', u'ihrer',
-                    u'ihres', u'im', u'in', u'indem', u'ins', u'ist', u'jede', u'jedem', u'jeden', u'jeder', u'jedes', u'jene', u'jenem', u'jenen', u'jener', u'jenes', u'jetzt',
-                    u'kann', u'kein', u'keine', u'keinem', u'keinen', u'keiner', u'keines', u'k\xf6nnen', u'k\xf6nnte', u'machen', u'man', u'manche', u'manchem', u'manchen',
-                    u'mancher', u'manches', u'mein', u'meine', u'meinem', u'meinen', u'meiner', u'meines', u'mich', u'mir', u'mit', u'muss', u'musste', u'nach', u'nicht',
-                    u'nichts', u'noch', u'nun', u'nur', u'ob', u'oder', u'ohne', u'sehr', u'sein', u'seine', u'seinem', u'seinen', u'seiner', u'seines', u'selbst', u'sich',
-                    u'sie', u'sind', u'so', u'solche', u'solchem', u'solchen', u'solcher', u'solches', u'soll', u'sollte', u'sondern', u'sonst', u'um', u'und', u'uns', u'unse',
-                    u'unsem', u'unsen', u'unser', u'unses', u'unter', u'viel', u'vom', u'von', u'vor', u'war', u'waren', u'warst', u'was', u'weg', u'weil', u'weiter', u'welche',
-                    u'welchem', u'welchen', u'welcher', u'welches', u'wenn', u'werde', u'werden', u'wie', u'wieder', u'will', u'wir', u'wird', u'wirst', u'wo', u'wollen', u'wollte',
-                    u'w\xe4hrend', u'w\xfcrde', u'w\xfcrden', u'zu', u'zum', u'zur', u'zwar', u'zwischen', u'\xfcber']
+        expected = [u'andere', u'unseres', u'anderm', u'andern', u'das', u'w\xfcrde', u'w\xe4hrend', u'sollte', u'selbst', u'anderr', u'anders',
+            u'einer', u'wollte', u'unserem', u'als', u'unseren', u'alle', u'dessen', u'dazu', u'auf', u'dich', u'hab', u'sondern', u'demselben',
+            u'aus', u'einige', u'derselbe', u'sonst', u'hatte', u'hat', u'bin', u'musste', u'waren', u'mein', u'deine', u'ihnen', u'deinem',
+            u'deinen', u'deines', u'deiner', u'einmal', u'ich', u'dasselbe', u'du', u'bis', u'hin', u'wenn', u'viel', u'war', u'keiner', u'keines',
+            u'die', u'warst', u'wird', u'w\xfcrden', u'haben', u'weil', u'nichts', u'ihn', u'keinen', u'dir', u'wir', u'kann', u'solcher', u'nur',
+            u'hinter', u'manche', u'solchen', u'es', u'er', u'will', u'ohne', u'f\xfcr', u'und', u'meinen', u'diesem', u'diesen', u'meinem',
+            u'meiner', u'meines', u'dieser', u'dieses', u'indem', u'werde', u'dein', u'jede', u'denselben', u'wollen', u'dort', u'soll',
+            u'jeden', u'jedem', u'diese', u'wo', u'seine', u'wirst', u'auch', u'jenen', u'keinem', u'jedes', u'jeder', u'habe', u'weiter',
+            u'zur', u'uns', u'hatten', u'welcher', u'bist', u'werden', u'ob', u'ist', u'k\xf6nnte', u'ander', u'hier', u'einig', u'da\xdf',
+            u'zum', u'solches', u'wie', u'aber', u'eines', u'ihr', u'nach', u'gewesen', u'desselben', u'damit', u'eine', u'ihm', u'einen',
+            u'wieder', u'einem', u'jene', u'sind', u'jenem', u'welches', u'eurem', u'einiger', u'einiges', u'oder', u'weg', u'einigem',
+            u'einigen', u'euer', u'dieselbe', u'was', u'von', u'jenes', u'jener', u'durch', u'unsere', u'mich', u'muss', u'ins', u'solchem',
+             u'nun', u'bei', u'welchem', u'der', u'des', u'nicht', u'um', u'dann', u'dem', u'den', u'welchen', u'sein', u'ein', u'ihre', u'seinem',
+             u'seinen', u'keine', u'alles', u'aller', u'noch', u'vom', u'unter', u'gegen', u'am', u'an', u'\xfcber', u'im', u'zwischen', u'vor',
+             u'in', u'allen', u'allem', u'welche', u'seiner', u'seines', u'anderer', u'anderes', u'euch', u'manchem', u'derer', u'manchen',
+             u'k\xf6nnen', u'also', u'manches', u'mancher', u'dieselben', u'sich', u'sie', u'zu', u'so', u'mir', u'anderen', u'mit', u'anderem',
+             u'eurer', u'eures', u'zwar', u'dies', u'sehr', u'jetzt', u'etwas', u'derselben', u'eure', u'euren', u'da', u'solche', u'man',
+             u'ihrem', u'kein', u'ihren', u'meine', u'doch', u'machen', u'denn', u'unser', u'ihres', u'ihrer']
         actual = self.stopwordManager.getStopwords()
         self.assertEqual(sorted(expected), sorted(actual))
 
