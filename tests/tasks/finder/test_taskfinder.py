@@ -242,6 +242,57 @@ class TaskFinderTestCase(unittest.TestCase):
         task = available_tasks.get(taskName, None)
         self.assertIsNotNone(taskName)
 
+    def test_taskfinder_taskname_is_None(self):
+        """
+        Check if the task name is None
+        """
+        taskName = None
+        self.assertRaises(Exception, self.taskFinder.lookup, taskName)
+
+    def test_taskfinder_taskname_is_empty(self):
+        """
+        Check if the task name is empty
+        """
+        taskName = ""
+        self.assertRaises(Exception, self.taskFinder.lookup, taskName)
+
+    def test_taskfinder_task_description_is_None(self):
+        """
+        Check if the task description is None
+        """
+        taskName = "BASIC"
+        taskDescription = None
+        self.assertRaises(Exception, self.taskFinder.lookup, taskName, taskDescription)
+
+    def test_taskfinder_task_description_is_empty(self):
+        """
+        Check if the task description is empty
+        """
+        taskName = "BASIC"
+        taskDescription = ""
+        self.assertRaises(Exception, self.taskFinder.lookup, taskName, taskDescription)
+
+    def test_taskfinder_task_input_is_None(self):
+        """
+        Check if the task input is None
+        """
+        taskName = "BASIC"
+        taskDescription = "This is a description"
+        taskInput = None
+        self.assertRaises(Exception, self.taskFinder.lookup, taskName, taskDescription, taskInput)
+
+    def test_taskfinder_task_output_is_empty(self):
+        """
+        Check if the task output is empty
+        """
+        taskName = "BASIC"
+        taskDescription = ""
+        taskInput = [{"key": "pos", "source": "internal-output", "map-key": "data"}]
+        taskOutput = None
+        self.assertRaises(Exception, self.taskFinder.lookup, taskName, taskDescription, taskInput, taskOutput)
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
