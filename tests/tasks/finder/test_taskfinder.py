@@ -281,15 +281,86 @@ class TaskFinderTestCase(unittest.TestCase):
         taskInput = None
         self.assertRaises(Exception, self.taskFinder.lookup, taskName, taskDescription, taskInput)
 
+    def test_taskfinder_task_input_is_empty(self):
+        """
+        Check if the task input is empty
+        """
+        taskName = "BASIC"
+        taskDescription = "This is a description"
+        taskInput = []
+        self.assertRaises(Exception, self.taskFinder.lookup, taskName, taskDescription, taskInput)
+
+    def test_taskfinder_task_input_is_not_array(self):
+        """
+        Check if the task input is not an array
+        """
+        taskName = "BASIC"
+        taskDescription = "This is a description"
+        taskInput = 1234
+        self.assertRaises(Exception, self.taskFinder.lookup, taskName, taskDescription, taskInput)
+
+    def test_taskfinder_task_input_has_invalid_values(self):
+        """
+        Check if the task input has invalid values
+        """
+        taskName = "BASIC"
+        taskDescription = "This is a description"
+        taskInput = [1]
+        self.assertRaises(Exception, self.taskFinder.lookup, taskName, taskDescription, taskInput)
+
+    def test_taskfinder_task_input_has_invalid_keys(self):
+        """
+        Check if the task input has invalid keys
+        """
+        taskName = "BASIC"
+        taskDescription = "This is a description"
+        taskInput = [{'a':1, 'b':2, 'c':3}]
+        self.assertRaises(Exception, self.taskFinder.lookup, taskName, taskDescription, taskInput)
+
+    def test_taskfinder_task_input_has_missing_keys(self):
+        """
+        Check if the task input has missing keys. Expected key, source, map-key
+        """
+        taskName = "BASIC"
+        taskDescription = "This is a description"
+        taskInput = [{'key':'abc', 'source':'internal-json'}]
+
+        self.assertRaises(Exception, self.taskFinder.lookup, taskName, taskDescription, taskInput)
+
+
     def test_taskfinder_task_output_is_empty(self):
         """
         Check if the task output is empty
         """
         taskName = "BASIC"
-        taskDescription = ""
+        taskDescription = "This is a description"
         taskInput = [{"key": "pos", "source": "internal-output", "map-key": "data"}]
         taskOutput = None
         self.assertRaises(Exception, self.taskFinder.lookup, taskName, taskDescription, taskInput, taskOutput)
+
+    def test_taskfinder_invalid_task_name(self):
+        """
+        Check if the task finder raises an exception if the task name does not match a task in the system
+        """
+        taskName = "not existing"
+        taskDescription = "This is a description"
+        taskInput = [{"key": "pos", "source": "internal-output", "map-key": "data"}]
+        taskOutput = {'type': 'merge'}
+
+        self.assertRaises(Exception, self.taskFinder.lookup, taskName, taskDescription, taskInput, taskOutput)
+
+    def test_taskfinder_valid_task(self):
+        """
+        Check if the task finder can retrieve a task given a task name
+        """
+        taskName = "basic"
+        taskDescription = "This is a description"
+        taskInput = [{"key": "pos", "source": "internal-output", "map-key": "data"}]
+        taskOutput = {'type': 'merge'}
+
+        self.taskFinder.lookup(taskName, taskDescription, taskInput, taskOutput)
+
+
 
 
 
