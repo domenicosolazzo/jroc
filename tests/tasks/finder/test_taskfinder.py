@@ -360,10 +360,5 @@ class TaskFinderTestCase(unittest.TestCase):
 
         self.taskFinder.lookup(taskName, taskDescription, taskInput, taskOutput)
 
-
-
-
-
-
 if __name__ == '__main__':
     unittest.main()
