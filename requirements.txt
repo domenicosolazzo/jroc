@@ -1,7 +1,7 @@
 argh==0.26.2
 Flask==0.10.1
 Flask-BasicAuth==0.2.0
-gunicorn==19.3.0
+gunicorn==19.5.0
 html5lib==0.99999
 isodate==0.5.1
 itsdangerous==0.24
@@ -16,7 +16,7 @@ pathtools==0.1.2
 pyparsing==2.0.3
 PyYAML==3.11
 rdflib==4.2.0
-requests==2.11.0
+requests==2.20.0
 six==1.9.0
 SPARQLWrapper==1.6.4
 watchdog==0.8.3
