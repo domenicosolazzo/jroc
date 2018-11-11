@@ -1,5 +1,5 @@
 argh==0.26.2
-Flask==0.10.1
+Flask==0.12.3
 Flask-BasicAuth==0.2.0
 gunicorn==19.5.0
 html5lib==0.99999
