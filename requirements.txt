@@ -2,7 +2,7 @@ argh==0.26.2
 Flask>=1.0.0
 Flask-BasicAuth==0.2.0
 gunicorn==19.5.0
-html5lib==0.99999
+html5lib==0.999999999
 isodate==0.5.1
 itsdangerous==0.24
 Jinja2>=2.11.3
